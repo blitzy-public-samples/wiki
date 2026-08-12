@@ -1,9 +1,9 @@
 [submodule "mediawiki-skins-Vector"]
 	path = mediawiki-skins-Vector
-	url = https://github.com/wikimedia/mediawiki-skins-Vector
+	url = https://github.com/blitzy-public-samples/mediawiki-skins-Vector
 [submodule "mediawiki"]
 	path = mediawiki
-	url = https://github.com/wikimedia/mediawiki
+	url = https://github.com/blitzy-public-samples/mediawiki
 [submodule "mediawiki-vendor"]
 	path = mediawiki-vendor
-	url = https://github.com/wikimedia/mediawiki-vendor
+	url = https://github.com/blitzy-public-samples/mediawiki-vendor
