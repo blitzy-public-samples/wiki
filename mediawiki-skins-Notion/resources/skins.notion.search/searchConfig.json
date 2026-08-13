@@ -1,0 +1,11 @@
+{
+	"@doc": "This file describes the configuration for Notion Search, including empty search recommendations.",
+	"NotionTypeahead": {
+		"apiUrl": "",
+		"recommendationApiUrl": "",
+		"options": {
+			"showThumbnail": true,
+			"showDescription": true
+		}
+	}
+}

@@ -1,0 +1,92 @@
+{{!
+	Notion skin: the button primitive.
+
+	Every button in the skin's chrome is rendered through this one partial -- the sticky
+	header's icon buttons, its wider labelled buttons and its leading button, the collapsed
+	search toggle, the add-topic button on a talk page, and any menu entry whose component
+	asked to be drawn as a button rather than as a link -- so a change made here reaches all
+	of them at once. It includes exactly one other partial, the sibling Icon.
+
+	Data dictionary supplied by NotionComponentButton::getTemplateData():
+	string|null href target of the button. A truthy value makes the element an anchor with an
+		href, a falsy one a button element; nothing else in the skin selects between the two.
+		The component pairs a truthy href with the Codex fake-button classes, so the anchor is
+		styled as a button while staying a real link -- followable, middle-clickable and fully
+		functional with scripts disabled. It is never a div carrying a button role: the
+		element itself is what carries keyboard operability and semantics.
+	string class the COMPLETE, pre-composed Codex class list, for example
+		`cdx-button cdx-button--weight-quiet cdx-button--icon-only notion-search-toggle`.
+		Emitted verbatim: this partial neither appends a class of its own nor filters one out.
+		Repeating the Codex base class here would emit it twice, and adding a `notion-`
+		prefixed class here would impose it on every button in the skin. Weight, action and
+		icon-only decisions consequently live in NotionComponentButton.php and the appearance
+		in resources/skins.notion.styles/components/Button.less, which resolves Notion design
+		tokens; a button that looks wrong is fixed in one of those two files, never here.
+	string|null id value of the `id` attribute. A falsy value omits the attribute rather than
+		emitting an empty one.
+	{key, value}[] array-attributes any further attributes, as a list of records rather than a
+		map so that a Mustache section can iterate it. This is the accessibility and
+		instrumentation channel -- `aria-` attributes, `title`, `tabindex`, `data-event-name`
+		-- and every record is emitted faithfully, because the sticky header duplicates
+		controls that assistive technology can already reach elsewhere and depends on a
+		`tabindex` of -1 arriving here to keep those duplicates out of the tab order (T290201).
+		The component has already dropped null values and the `id`, `class` and `href` keys,
+		each of which is emitted from its own key below, so this loop cannot produce a
+		duplicate attribute.
+	string|null icon icon-pack name such as `search`, `appearance` or
+		`speechBubbleAdd-progressive`, painted by the Icon partial. The enclosing section makes
+		the current context the name itself, which is the calling convention Icon.mustache
+		documents, and a falsy icon renders nothing at all -- that is how a label-only button
+		is expressed.
+	string label the button's text. It is ALWAYS wrapped in a span, including on an icon-only
+		button: the Codex icon-only modifier is what visually hides that span, and keeping it
+		is what leaves the control with an accessible name. Do not make it conditional.
+
+	Two behaviours that belong to the CALLER rather than to this partial, both inherited
+	unchanged from the reference implementation it mirrors and both confirmed against the
+	compiler rather than assumed:
+
+	A falsy value is not the same as an absent key. The template engine resolves a name it
+	cannot find in the current data by walking out to the enclosing context, so rendering this
+	partial inside a context that happens to carry one of the names above lets that outer value
+	through: a list item with an id lends its id to the button nested in it, producing two
+	elements with the same id, and an outer href would go further and turn the button element
+	into an anchor. The remedy is to pass explicit values from the view model, or not to nest
+	the button inside a context carrying those names -- never to weaken the guards below, which
+	are what keep empty attributes out of the markup.
+
+	The element takes HTML's default button type, which is submit. Nothing in this skin's
+	chrome puts a button inside a form, so that default is inert here; a caller that does must
+	pass an explicit type through the attributes channel, which keeps this partial usable for
+	a genuine submit control as well.
+
+	The opening and the closing tag are each split across a matching pair of `href` sections,
+	one plain and one inverted, so the two lines must always be edited together: an anchor
+	opened against a button closed is invalid markup that no assertion about the data would
+	ever reveal. The comments interleaved below swallow the newline and indentation between
+	the parts of this inline element, keeping stray whitespace out of the markup at call sites
+	that embed it in a list item or beside another control.
+
+	Every interpolation is escaped -- this partial emits no raw HTML and contains no
+	triple-brace expression -- and no colour, size, spacing or inline style appears here.
+
+	Two authoring hazards, both verified against the compiler rather than assumed:
+
+	A Mustache comment ends at the first closing delimiter it meets, so tag syntax is
+	described in prose above rather than written out literally. Spelling one out here would
+	truncate this comment, leave the remainder to be parsed as markup, and -- because the
+	compiler raises on a fault instead of degrading -- take every page rendered by this skin
+	down with an unclosed-token error.
+
+	The markup below therefore also begins on the same line as this comment's closing
+	delimiter, with no newline between them. A comment occupying whole lines of its own is
+	stripped together with its trailing newline only while the file is the template being
+	rendered; once the file is pulled in as a partial in an inline position -- which is how
+	the menu list item embeds a button inside its list item -- that newline survives and
+	becomes a stray text node ahead of the element. Keeping the two on one line makes the
+	rendered markup identical in every context and under both the PHP and the JavaScript
+	Mustache engine, so a snapshot taken in a unit test still describes the real page.
+}}{{#href}}<a href="{{.}}"{{/href}}{{^href}}<button{{/href}} class="{{class}}"{{#id}} id="{{.}}"{{/id}}{{#array-attributes}} {{key}}="{{value}}"{{/array-attributes}}>{{!
+	}}{{#icon}}{{>Icon}}{{/icon}}{{!
+	}}<span>{{label}}</span>
+{{#href}}</a>{{/href}}{{^href}}</button>{{/href}}

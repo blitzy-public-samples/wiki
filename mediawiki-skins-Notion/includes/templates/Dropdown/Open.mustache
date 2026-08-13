@@ -1,0 +1,87 @@
+{{!
+	Dropdown/Open: the opening half of this skin's checkbox-hack dropdown. It emits the toggle
+	(an invisible checkbox), the visual button (a label) and the opening tag of the panel; the
+	panel's contents come from the caller and both open tags are closed by Dropdown/Close.
+	Its eight callers are MainMenuDropdown, UserLinks (appearance), UserLinksDropdown,
+	PageToolbar (page tools), PageTitlebar and StickyHeader (table of contents), Variants and
+	LanguageDropdown -- six wrap it in their payload section, two enter it with the payload
+	already as the current context, so every key below resolves against the current context and
+	no caller-specific key is ever read.
+
+	Data dictionary supplied by NotionComponentDropdown::getTemplateData(), which returns exactly
+	the first nine keys:
+	string id REQUIRED, unique per page. Emitted as the wrapper id and as the stem of the derived
+		<id>-checkbox and <id>-label ids, the label's `for` target and the `ui.dropdown-` event
+		name, so all five stay in sync from a single value.
+	string label REQUIRED, already localised. The visible button text, and the checkbox's
+		accessible name whenever `aria-label` is absent.
+	string label-class default empty. Appended to the label's class; this is where the Codex
+		button composition (cdx-button, --fake-button, --weight-quiet and, for icon-only
+		toggles, --icon-only) arrives pre-composed from PHP. No cdx-* class is written here --
+		the stylesheet keys the chevron off :not( .cdx-button--icon-only ).
+	string|null icon default null. An icon NAME, not markup: the section below makes it the
+		current context for Icon.mustache. A falsy icon renders no icon markup at all.
+	string class default empty. Appended to the wrapper's class -- emptyPortlet,
+		notion-user-menu, mw-portlet-lang-icon-only and the like.
+	string html-tooltip default empty. A pre-rendered ATTRIBUTE fragment for the wrapper.
+	string checkbox-class default empty. Appended to the checkbox's class and passed through
+		untouched: Extension:ULS binds its click handler to mw-interlanguage-selector, so
+		rewriting it would break language selection.
+	string html-notion-menu-label-attributes default empty. Pre-rendered ATTRIBUTE fragment for
+		the label, for example tabindex="-1" inside the sticky header.
+	string html-notion-menu-checkbox-attributes default empty. The same, for the checkbox.
+	string aria-label OPTIONAL, supplied only by NotionComponentVariants; it replaces the
+		label-derived accessible name, which is why both branches below are live.
+	string aria-description OPTIONAL, supplied only by NotionComponentLanguageDropdown.
+	string html-user-language-attributes comes from core's SkinMustache rather than from the
+		component and is found by walking the parent context. Emitted on the wrapper.
+
+	Every empty-by-default key is read through a section so an absent value contributes nothing:
+	no trailing space inside a class attribute and no stray space where an attribute fragment was
+	expected. Those three fragments and core's attributes are the only unescaped values here;
+	everything else is escaped.
+
+	The order input, label, panel is a runtime contract rather than a preference. The stylesheet
+	reveals the panel with .notion-dropdown-checkbox:checked ~ .notion-dropdown-content, a
+	general sibling combinator that cannot match a panel placed before the checkbox, and the
+	invisible full-size checkbox has to sit beside the label inside this wrapper for a click on
+	the button to toggle it. resources/skins.notion.js builds the same three children in the same
+	order when it turns a portlet into a dropdown. Reordering them breaks disclosure only once
+	JavaScript is unavailable, so nothing would report it.
+
+	No dimension, colour, spacing or inline style appears here: the entire popover appearance --
+	surface radius, hairline border, subtle elevation and menu row height -- belongs to
+	resources/skins.notion.styles/components/Dropdown.less, which resolves Notion design tokens.
+}}
+{{! this template must be used with Dropdown/Close to avoid unclosed HTML tags }}
+<div id="{{id}}" class="notion-dropdown{{#class}} {{.}}{{/class}}" {{{html-tooltip}}} {{{html-user-language-attributes}}}>
+	{{!
+		Dropdown menus use the checkbox hack and require `input` and `label` elements.
+		The `label` element functions as the "visual" button and is hidden from screenreader users (T325026)
+		while the `input` element is the actual semantic button for toggling the dropdown.
+		The `input` element will always have an `aria-label`, which will usually match the
+		text inside the `label` element, unless an alternative label is provided via the `#aria-label`
+		mustache template data.
+	}}
+	<input {{!
+		}}type="checkbox" {{!
+		}}id="{{id}}-checkbox" {{!
+		}}role="button" {{!
+		}}aria-haspopup="true" {{!
+		}}data-event-name="ui.dropdown-{{id}}" {{!
+		}}class="notion-dropdown-checkbox{{#checkbox-class}} {{.}}{{/checkbox-class}}" {{!
+		}}{{#aria-label}}aria-label="{{.}}"{{/aria-label}} {{!
+		}}{{^aria-label}}aria-label="{{label}}"{{/aria-label}} {{!
+		}}{{#aria-description}}aria-description="{{.}}"{{/aria-description}} {{!
+		}}{{#html-notion-menu-checkbox-attributes}} {{{.}}}{{/html-notion-menu-checkbox-attributes}}>
+	<label {{!
+		}}id="{{id}}-label" {{!
+		}}for="{{id}}-checkbox" {{!
+		}}class="notion-dropdown-label{{#label-class}} {{.}}{{/label-class}}" {{!
+		}}aria-hidden="true" {{!
+		}}{{#html-notion-menu-label-attributes}} {{{.}}}{{/html-notion-menu-label-attributes}}>{{!
+		}}{{#icon}}{{>Icon}}{{/icon}}{{!
+		}}<span class="notion-dropdown-label-text">{{label}}</span>
+	</label>
+	<div class="notion-dropdown-content">
+

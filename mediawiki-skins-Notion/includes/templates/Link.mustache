@@ -1,0 +1,70 @@
+{{!
+	Notion skin: the link primitive.
+
+	Renders one anchor of skin chrome - a main-menu entry, a namespace or action tab, a
+	dropdown row, a footer place, a user-menu item. It is the plain half of a menu item:
+	MenuListItem.mustache renders Button.mustache from the positive data-button section
+	and this partial from the inverted one, so a record carrying button styling never
+	arrives here. The only partial it includes in turn is Icon.mustache.
+
+	@typedef object attribute
+	@prop string key the attribute name, for example href, class, title, accesskey, rel,
+		id, or any aria- or data- name core chose to emit for this link
+	@prop string value the attribute value, which arrives UNESCAPED from core and is
+		therefore escaped here with a double-brace expression
+
+	attribute[] array-attributes every attribute of the anchor, expanded one record at a
+		time. Both href and class arrive this way, which is exactly why neither is written
+		literally below: core assembled the class list before the data reached the skin,
+		and a repeated class attribute would be discarded by the HTML parser rather than
+		merged. An empty list is normal and yields a bare anchor.
+	string|null icon optional Codex icon name for the leading glyph. A falsy value renders
+		nothing at all - that is how a label-only link is expressed - and a truthy one is
+		handed straight to Icon.mustache, which reads the name as the current context and
+		so needs no key of its own.
+	string text the link label, which also arrives unescaped from core and is escaped
+		below.
+
+	Where this data comes from, which is worth reading before renaming any key. These are
+	core's own portlet link records, built by
+	MediaWiki\Skin\Components\SkinComponentLink::makeLink() and delivered to the skin as
+	data-portlets.*.array-items[].array-links[]. NotionComponentMenu passes each record
+	through untouched apart from overriding icon and, where a menu asks for button
+	styling, swapping the whole record for a data-button one; it never rewrites a record
+	into the shape NotionComponentLink returns. That class emits a pre-serialised
+	html-attributes string alongside a separate href and has no call site in the rendering
+	path - it exists for parity with Vector and for unit-test coverage - so interpolating
+	html-attributes here would render nothing on a real page while silently dropping the
+	href. This partial is deliberately written against the core record shape, exactly as
+	mediawiki-skins-Vector/includes/templates/Link.mustache is.
+
+	DO NOT REMOVE data-mw-interface, and do not make it conditional. Core's own client
+	modules test for its PRESENCE, not its value, to decide that a link is trusted skin
+	chrome rather than user-generated content: mediawiki.page.watch.ajax matches
+	.mw-watchlink a[data-mw-interface] to upgrade the watchstar into an AJAX toggle,
+	mediawiki.misc-authed-curate matches the patrol and rollback links the same way, and
+	mediawiki.page.ready's selectorLogoutLink matches #pt-logout a[data-mw-interface].
+	Every anchor this partial renders is chrome, so the attribute is emitted
+	unconditionally and without a value; where core additionally supplies it through
+	array-attributes - it does for the logout and watch links - the repetition is inert,
+	because presence is all any of those selectors tests.
+
+	Appearance is owned entirely by the stylesheet. This partial writes no class of its
+	own, not even a notion- one, and no inline style: anchors are styled by
+	resources/skins.notion.styles/links.less, which applies the Codex link mixins through
+	the deliberately low-specificity selector a:where( :not( [role='button'] ) ) so that
+	gadgets, user styles and extensions can still override them. The gap between glyph and
+	label belongs to components/Icon.less, and that is why the four tags below are joined
+	by empty comments: a real newline between them would collapse to a text space inside
+	this inline element and add whitespace no stylesheet asked for.
+
+	For the same reason the closing delimiter of this comment is glued to the anchor rather
+	than left on a line of its own. Please do not tidy that up. A comment is only stripped
+	together with its line when it stands alone on that line of OUTPUT, and this partial is
+	rendered mid-line - MenuListItem.mustache invokes it inside a list item - so a newline
+	between the delimiter and the anchor is not standalone and survives into the page as a
+	stray text node the reference skin does not emit.
+}}<a data-mw-interface {{#array-attributes}} {{key}}="{{value}}"{{/array-attributes}}>{{!
+	}}{{#icon}}{{>Icon}}{{/icon}}{{!
+	}}<span>{{text}}</span>{{!
+}}</a>
