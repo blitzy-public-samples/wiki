@@ -1,0 +1,18 @@
+# Dependency trees (never committed)
+/node_modules/
+/vendor/
+
+# Populated environment file (only .env.example is committed)
+/.env
+
+# Tool caches and transient reports
+/.eslintcache
+/.stylelintcache
+/.phpunit.result.cache
+/test-results/
+/playwright-report/
+/.playwright/
+/.cache/
+
+# NOTE: screenshots/ and screenshots/audits/ are committed deliverables and
+# must NOT be ignored here.

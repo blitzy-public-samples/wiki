@@ -1,0 +1,31 @@
+{
+	"name": "blitzy-skin",
+	"version": "0.1.0",
+	"description": "Blitzy skin for MediaWiki - verification and quality toolchain",
+	"private": true,
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"lint": "npm run lint:js && npm run lint:styles && npm run lint:i18n",
+		"lint:js": "eslint --max-warnings 0 --ext .js,.ts .",
+		"lint:styles": "stylelint --allow-empty-input \"resources/**/*.less\" \"skinStyles/**/*.less\"",
+		"lint:i18n": "banana-checker i18n/",
+		"test:qunit": "karma start karma.conf.js --single-run",
+		"test:playwright": "playwright test"
+	},
+	"devDependencies": {
+		"@axe-core/playwright": "4.13.0",
+		"@playwright/test": "1.62.1",
+		"@wikimedia/mw-node-qunit": "7.10.0",
+		"eslint": "8.57.1",
+		"eslint-config-wikimedia": "0.32.5",
+		"grunt-banana-checker": "0.13.0",
+		"karma": "6.4.1",
+		"karma-chrome-launcher": "3.1.0",
+		"karma-coverage": "2.2.1",
+		"karma-qunit": "4.2.0",
+		"playwright": "1.62.1",
+		"qunit": "2.26.0",
+		"stylelint": "17.6.0",
+		"stylelint-config-wikimedia": "0.19.3"
+	}
+}
