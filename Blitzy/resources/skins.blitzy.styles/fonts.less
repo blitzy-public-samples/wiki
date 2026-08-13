@@ -1,0 +1,201 @@
+/**
+ * Blitzy self-hosted web fonts -- the four font-face rules behind the three typeface
+ * stacks the Blitzy design language names.
+ *
+ * A CONVENTION THIS FILE FOLLOWS DELIBERATELY, AND THE ONE EDIT THAT WOULD BREAK IT.
+ * No construct a verification sweep looks for is written below in its literal spelling. The
+ * stylesheet import directive, the data-URI embed annotation, the media block and the CSS
+ * asset-reference function are all described in words instead, and the only literal
+ * occurrences of any of them in this file are the four real declarations at the bottom.
+ * The sweeps are plain greps -- for the count of face rules, for any external origin, for
+ * any import directive, for any embed annotation, and for asset references not pointing at
+ * the sibling font directory -- so a literal spelling anywhere in this commentary would
+ * raise a false positive indistinguishable from a real finding without first stripping
+ * comments. `../skins.blitzy.tokens/tokens.less` adopts the same convention for the same
+ * reason. Keep it: describe these constructs in prose, never spell them.
+ *
+ * This file declares the faces. It does not apply them: the stacks that consume these
+ * family names are `@blitzy-font-family-base`, `@blitzy-font-family-display` and
+ * `@blitzy-font-family-monospace` in `../skins.blitzy.tokens/tokens.less`, and they reach
+ * unmodified core and extension stylesheets through the three `@font-family-*` assignments
+ * in `../mediawiki.less/blitzy/mediawiki.skin.variables.less`. That indirection is what
+ * puts Blitzy typography on the edit form, the diff, the page history and
+ * `Special:Preferences` with not one core stylesheet edited.
+ *
+ * The three family strings below are consequently a contract with those two files and are
+ * matched character for character: `'Inter'`, `'Space Grotesk'`, `'Fira Code'`. A
+ * one-character divergence raises no error of any kind -- the affected surfaces quietly
+ * fall back to their generic family and the failure surfaces only as a fidelity assertion
+ * on computed `font-family` -- so the names are cross-checked against both files rather
+ * than assumed.
+ *
+ * FOUR BLOCKS, AND FOUR IS THE WHOLE SET: Inter regular, Inter semibold, Space Grotesk
+ * bold, Fira Code regular. No italic, no further weight, no second script subset and no
+ * fallback face. Each consuming stack ends in a generic CSS family, so every surface
+ * degrades predictably if a face fails to load, and no host-resolved platform stack is
+ * involved anywhere.
+ *
+ * == EVERY FACE IS A STATIC INSTANCE, NEVER A VARIABLE FONT ==
+ *
+ * Measured, not assumed: none of the four binaries carries an `fvar`, `gvar`, `avar`,
+ * `cvar` or `STAT` table, which is exactly what separates a static instance from a
+ * variable font. This is a hard requirement of deterministic capture, not a preference. A
+ * variable font is rasterised from an interpolated instance and renders measurably
+ * differently between environments, which would defeat byte-identical screenshots
+ * outright; static single-weight instances render near-identically. The same choice keeps
+ * the payload comfortable -- the four latin subsets total 78 004 bytes against a 120 KB
+ * ceiling. If any face is ever replaced, re-verify the absence of those tables and
+ * re-measure the total before committing the replacement.
+ *
+ * == NO EXTERNAL ORIGIN, AT BUILD TIME OR AT RUN TIME ==
+ *
+ * All four faces are self-hosted under `../fonts/` and every `src` below is a relative
+ * path. There is no font host, no URL scheme, no scheme-relative reference and no
+ * stylesheet import directive anywhere in this file, and none may be added: a single
+ * foreign-origin subresource fails the whole verification run. This file is the primary
+ * enforcement site for that rule, because the four references below are the only asset
+ * references any stylesheet in the package makes.
+ *
+ * == WHY `../fonts/` RESOLVES, AND WHY IT ONLY RESOLVES FROM THIS DIRECTORY ==
+ *
+ * Two platform behaviours combine. ResourceLoader compiles Less with `relativeUrls`
+ * disabled, so an asset reference is passed through exactly as authored rather than
+ * rewritten against the importing file. `FileModule::processStyle()` then remaps every such
+ * reference against `dirname()` of the *registered entry-point file* -- here
+ * `resources/skins.blitzy.styles/skin.less` -- appending a short content hash as a query
+ * string. Every asset reference in the module therefore resolves relative to
+ * `resources/skins.blitzy.styles/`, which is this file's own directory, so `../fonts/`
+ * lands on `resources/fonts/`. The corollary is that the same string would resolve
+ * identically -- and so wrongly -- if it were written in `components/`, which is one
+ * reason every asset reference in this package is confined to this file.
+ *
+ * Those paths are load-bearing beyond rendering: an unresolvable local reference is
+ * collected into `missingLocalFileRefs` and asserted by a core structure test, so a typo
+ * or a rename here fails MediaWiki's own suite and not merely the visuals.
+ *
+ * == NEVER ADD THE DATA-URI EMBED ANNOTATION ==
+ *
+ * The remap step runs with data-URI embedding enabled, but it only inlines a reference when
+ * the embed annotation comment immediately precedes it. Doing that to these four files
+ * would base64 roughly 78 KB of font data into the stylesheet -- blowing the gzipped CSS
+ * budget on its own, defeating font caching, and re-downloading every face on any
+ * stylesheet change. The minifier's own documentation discourages the mechanism. There is
+ * no case for it here, and its absence from this file is asserted.
+ *
+ * == THIS FILE MUST BE IMPORTED AT TOP LEVEL ==
+ *
+ * A font-face rule is media-independent, so `skin.less` imports this file outside both of
+ * its media blocks and no media wrapper appears below. Wrapping these rules in a screen
+ * media block would leave the print stylesheet with no faces at all and the printed page in
+ * a system font -- the concrete failure mode this note exists to prevent.
+ *
+ * == `font-style` AND `font-display` ARE EXPLICIT ON EVERY BLOCK, AND THE VALUES ARE FIXED ==
+ *
+ * `font-style: normal` is stated rather than left to default because there is no italic
+ * instance of any of these families in the package. All four binaries measure an italic
+ * angle of zero, so declaring the style keeps a browser from treating an italic request as
+ * satisfiable by these faces and synthesising a sheared oblique from them.
+ *
+ * `font-display: swap` renders the fallback family immediately and swaps the real face in on
+ * arrival, so text is readable throughout the load. The two plausible alternatives are both
+ * wrong here and neither may be substituted. Blocking hides the text for an initial period,
+ * which costs readability on the very surfaces the accessibility gate audits and can leave a
+ * capture racing an invisible-text window. Optional lets the browser decline the face
+ * altogether on a slow connection, so the same page could capture in Inter on one run and in
+ * a system font on the next -- byte-identity lost for a reason no diff would explain. If a
+ * capture ever proves unstable, the fix belongs in the capture harness's font-readiness
+ * wait, not in weakening this descriptor.
+ *
+ * == THE `unicode-range` VALUES ==
+ *
+ * Every file is a latin subset by design, and the identical range below was derived from
+ * the character coverage the four binaries actually contain, then verified to be a strict
+ * superset of all four. The direction matters: a range narrower than a file's coverage
+ * pushes glyphs the face really has onto a fallback family, which is both visually wrong
+ * and non-deterministic across environments, whereas a superset only gates the download
+ * and leaves ordinary per-glyph fallback intact. It is declared explicitly rather than
+ * left implicit so that the subset is documented and so a page with no matching character
+ * -- an article in a non-latin script, say -- skips the download entirely.
+ *
+ * The range is deliberately identical on all four blocks: uniform gating is what stops one
+ * family falling back where a sibling does not. Change all four together or none.
+ *
+ * It also deliberately widens the conventional latin subset in one place. That convention
+ * carries only `U+2191` and `U+2193`, but these faces ship the full `U+2190-2193` run and
+ * MediaWiki renders those arrows constantly -- the right arrow in section-link edit
+ * summaries and on redirect pages, the left arrow in navigation affordances. Narrowing to
+ * the conventional pair would fall every one of them back to a system font.
+ *
+ * == A NOTE ON THE NUMERIC `font-weight` NOTATION ==
+ *
+ * `.stylelintrc.json` scopes `font-weight-notation` to `numeric` for this one file, which
+ * is why `400` and `700` appear here rather than `normal` and `bold`. The project standard
+ * prefers the keywords in ordinary rules and that remains correct there; in a font-face
+ * rule the numeric axis is the only workable notation, because the range descriptor on the
+ * semibold face cannot be expressed in keywords -- see its own comment.
+ * The rule is still enforced here, only inverted, so writing a keyword below is a lint
+ * error rather than a silent inconsistency. Do not switch the rule off, and do not add an
+ * inline suppression: the build treats a suppression, needless or otherwise, as a failure.
+ *
+ * @see ../skins.blitzy.tokens/tokens.less for the three stacks that name these families
+ * @see ../mediawiki.less/blitzy/mediawiki.skin.variables.less for the core-variable overrides
+ * @see ../fonts/ for the four woff2 binaries
+ */
+
+/* Body prose, navigation and interface text at the normal weight. */
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url( ../fonts/Inter-Regular.latin.woff2 ) format( 'woff2' );
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/*
+ * ONE STATIC SEMIBOLD FILE DECLARED OVER THE 600-700 RANGE, AND THE RANGE IS DELIBERATE.
+ * A range descriptor is not a variable font: this is a single static instance of weight
+ * 600 answering to both ends of the range.
+ *
+ * Blitzy asks for 600 directly -- the navigation links, both call-to-action labels, the
+ * announcement action label, the bold heading-coloured inline-link treatment, and the
+ * header rows of the infobox and wikitable treatments. Core independently asks for 700
+ * through its own bold weight, on surfaces this skin never templates. Declaring the range
+ * answers both from this one real face. Narrowing it to `600` would leave a request for
+ * 700 resolved by the font-matching algorithm's fallback ordering, which is engine
+ * behaviour rather than a stated intent and precisely the kind of variance deterministic
+ * capture must not depend on.
+ *
+ * Do not "tidy" `700` into `bold` here. Measured in Chrome: `600 bold` parses as invalid
+ * and the descriptor is dropped entirely, silently defaulting this face to weight 400,
+ * where it would collide with the regular face above and render body prose semibold. The
+ * two-value form is numeric-only in practice.
+ */
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 600 700;
+	font-display: swap;
+	src: url( ../fonts/Inter-SemiBold.latin.woff2 ) format( 'woff2' );
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Display and hero type, and the content headings. Bold is the only weight specified. */
+@font-face {
+	font-family: 'Space Grotesk';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url( ../fonts/SpaceGrotesk-Bold.latin.woff2 ) format( 'woff2' );
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Code, diff rows and the wikitext edit surfaces. */
+@font-face {
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url( ../fonts/FiraCode-Regular.latin.woff2 ) format( 'woff2' );
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

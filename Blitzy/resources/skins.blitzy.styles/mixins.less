@@ -1,0 +1,470 @@
+//
+// == Blitzy design language -- shared Less mixins ==
+//
+// The nine shared visual definitions of the Blitzy skin. Each one is the single place a
+// recurring treatment is described, so a card, a pill, a brand-tinted header row, a
+// monospace block, a focus ring, the two call-to-action shapes, the active-tab underline
+// and the horizontal scroll container each have one definition rather than one per
+// consumer.
+//
+// -- WHY THIS FILE EXISTS AT ALL, WHICH IS A RULE AND NOT A CONVENIENCE --
+//
+// The skinStyles rule (R7) forbids any core-owned module selector from appearing inside
+// `resources/skins.blitzy.styles/`. Four treatments straddle that line -- the diff, the
+// edit form, the search results and the message box -- because each has Blitzy-authored
+// wrapper chrome on this side and core-owned selectors (`.diff*`, `#wpTextbox1`,
+// `.editOptions`, `.mw-search-result`, `.cdx-message`) that may only be written inside the
+// paired `../../skinStyles/*.less` file. Those two sides must nevertheless render the
+// same geometry. The mixins below are the mechanism by which they share one definition:
+// the component file calls them, and so does the skinStyles file, by relative import.
+//   That is also why this file DEFINES NO SELECTOR OF ITS OWN. It is a library, not a
+//   stylesheet. Every name below is a mixin; nothing here targets an element.
+//
+// -- MANDATE: THIS FILE EMITS ZERO CSS. READ THIS BEFORE ADDING ANYTHING --
+//
+// This file is imported by thirteen separate compilation units:
+//   * `skin.less`, the entry point of the `skins.blitzy.styles` module; and
+//   * all twelve `../../skinStyles/*.less` files, each of which is compiled into a
+//     DIFFERENT core module's payload (`mediawiki.action.edit`, `mediawiki.diff.styles`,
+//     `mediawiki.pager.styles`, `ooui`, `codex` and the rest).
+// Anything this file emits is therefore emitted thirteen times, once per payload. That
+// would inflate every one of them, break the 60KB gzipped article-page CSS budget that
+// `../../tools/perf-baseline.js` measures, and eat into the 18.0 kB cap
+// `../../bundlesize.config.json` sets for `skins.blitzy.styles`.
+//
+// The mechanism that guarantees zero output is the EMPTY-PAREN MIXIN FORM. Measured with
+// the Less compiler rather than assumed: a ruleset declared `.name() { ... }` is a mixin
+// and produces nothing until it is called, while a ruleset declared `.name { ... }` is a
+// selector and is always emitted. Every definition below consequently carries
+// parentheses, including those that take no argument.
+//   So: no top-level declaration, no top-level selector, no `@media` block, no
+//   `@font-face`, no `:root` block, no custom-property assignment. Compiling this file on
+//   its own must produce an empty stylesheet, and that is asserted rather than trusted.
+//
+// -- WHY EVERY COMMENT HERE IS A `//` LINE COMMENT, WHICH IS ALSO LOAD-BEARING --
+//
+// Less strips `//` line comments and PRESERVES `/* ... */` block comments verbatim into
+// its output. Measured on this toolchain: a probe file containing one four-line block
+// comment, one line comment, one mixin and one selector compiled to output carrying the
+// block comment in full and not a character of the line comment. A block comment here
+// would therefore be copied into all thirteen payloads enumerated above -- the same
+// output multiplication the mandate exists to prevent, just spelled with prose instead of
+// properties. `../skins.blitzy.tokens/tokens.less` records the identical measurement for
+// the identical reason, and core's own `mediawiki.skin.defaults.less` uses line comments
+// throughout while sitting in exactly this position. Do not convert any comment in this
+// file to block form.
+//   The one exception the package reserves is a `/* @noflip */` annotation, which must be
+//   a block comment to survive as far as the direction-flipping stage. No mixin below
+//   needs one -- see the flip-safety note in the next section -- so none appears here.
+//
+// -- NO COLOUR LITERAL MAY APPEAR IN THIS FILE --
+//
+// `../../.stylelintrc.json` denies hex literals, named colours and the `rgb()`/`rgba()`/
+// `hsl()`/`hsla()` function family across the whole package, and grants exactly one
+// `overrides` exemption: `resources/skins.blitzy.tokens/tokens.less`. That is a DIFFERENT
+// directory. This file has no exemption of any kind, so every colour a mixin emits
+// arrives either as a mixin parameter or as a named variable.
+//   Each colour parameter below defaults to a CORE variable rather than to a raw
+//   `@blitzy-*` token, and that choice is deliberate rather than stylistic.
+//   `../mediawiki.less/blitzy/mediawiki.skin.variables.less` remaps the core colour names
+//   to the form `var( --core-name, <blitzy token> )`, and
+//   `../skins.blitzy.tokens/customProperties.less` republishes those custom properties
+//   under `html.skin-theme-clientpref-night` and under
+//   `@media ( prefers-color-scheme: dark ) html.skin-theme-clientpref-os`. A core-variable
+//   default is therefore mode-aware and follows the page into night mode; a raw
+//   `@blitzy-*` hex would compile to a fixed light-mode colour, survive review, and then
+//   fail the blocking dark-mode contrast gate (R10) on the five dark captures. Pass a raw
+//   token only where the value must not vary by mode.
+//   CONSEQUENCE, AND THE EASIEST WAY TO BREAK THIS FILE: a `var()`-valued Less variable is
+//   an opaque string to Less. It cannot be handed to `fade()`, `darken()`, `lighten()` or
+//   `mix()`, and it cannot appear in a media-query condition. A mixin that needs either
+//   must take the raw token as a parameter instead. Nothing below does.
+//
+// -- FLIP SAFETY (R6) --
+//
+// Every property emitted below is non-directional in the inline axis: `background-color`,
+// `color`, `font-*`, `line-height`, `border-radius` applied to all four corners, the
+// `border` and `outline` shorthands, `outline-offset`, `min-height`, `max-width`,
+// `overflow-x`, the flex properties, and `box-shadow` whose horizontal offset is `0`.
+// The direction-flipping stage rewrites physical inline properties and horizontal
+// offsets; none of those is produced here. No `@noflip` annotation is needed, and the two
+// genuinely directional treatments in the design -- the hatnote's trailing-corner-only
+// radius and the leading border marking the active table-of-contents section -- stay in
+// the component files that own them, where their exceptions belong.
+//   If a future mixin must emit a per-side value, prefer core's `.margin-inline()` or
+//   `.padding-inline()`, which emit both the physical and the logical longhands and carry
+//   their own internal lint exemption.
+//
+// -- NO `@media` BLOCK MAY APPEAR IN THIS FILE --
+//
+// `skin.less` supplies the `@media screen` and `@media print` wrappers, so a media query
+// emitted from a mixin body would nest inside whichever wrapper the caller happens to sit
+// in and mean something different at each call site. Where output must be
+// viewport-conditional, the caller places the query around the call and the mixin stays
+// unconditional. `.blitzy-mixin-scroll-container()` is the worked example.
+//
+// @see ../skins.blitzy.tokens/tokens.less for every `@blitzy-*` value referenced below
+// @see ../mediawiki.less/blitzy/mediawiki.skin.variables.less for the core-name remapping
+// @see ../../skinStyles/ for the twelve core-module overrides that consume these mixins
+//
+
+// Resolves to `../mediawiki.less/blitzy/mediawiki.skin.variables.less`, because
+// `skin.json` registers that directory as `SkinLessImportPaths.blitzy` and ResourceLoader
+// puts it at the head of the Less import path. That file imports core's
+// `mediawiki.skin.defaults.less` first and `../../skins.blitzy.tokens/tokens.less` second,
+// so this single bare import supplies BOTH the full core variable API and the entire
+// `@blitzy-*` token surface. Do not also import `tokens.less` -- it is already in scope --
+// and never import `customProperties.less`, which is the separate `skins.blitzy.tokens`
+// module's registered entry point and would duplicate the whole palette into this module.
+@import 'mediawiki.skin.variables.less';
+
+// Core's public mixin library: `.margin-inline()`, `.padding-inline()`,
+// `.mixin-screen-reader-text()` and the rest. Bare, never a relative path into
+// `mediawiki/` -- that would breach core immutability (R1) and would break the moment the
+// package is bind-mounted at `$IP/skins/Blitzy`.
+//   IT LOOKS UNUSED. IT IS NOT -- DO NOT DELETE IT. No mixin BODY below calls a core
+//   mixin, so a quick read suggests this import is dead. Its purpose is RE-EXPORT: this
+//   file is a library, and importing it must put core's mixin vocabulary in scope for all
+//   thirteen importers. That is how a consumer reaches `.mixin-screen-reader-text()`, the
+//   one approved visually-hidden helper that R10 forbids this file from redefining, and
+//   `.margin-inline()` / `.padding-inline()`, the flip-aware longhand emitters R6 prefers.
+//   Verified rather than assumed: a probe importing ONLY this file successfully called all
+//   three and received the expected declarations.
+//   Both imported files are definition-only, so re-importing them from `skin.less` and
+//   from each `skinStyles/*.less` costs nothing: Less imports a given path once per
+//   compilation unit, definitions emit no CSS, and the measured contribution of this whole
+//   file to every one of the thirteen payloads is 0 bytes.
+@import 'mediawiki.mixins.less';
+
+//
+// Card surface: the white panel with a hairline border, the card radius and the single
+// soft shadow of the design language.
+//
+// Consumed by `components/Cards.less` (card grid and the lavender-band panel),
+// `components/Infobox.less`, `components/TableOfContents.less` (the sticky card shares
+// infobox chrome) and `../../skinStyles/mediawiki.special.search.styles.less`, where the
+// search results are a single-column card list reusing this chrome.
+//
+// The border is written as the `border` shorthand deliberately: it applies to all four
+// sides, so it is non-directional and needs no flip annotation, and it avoids the
+// redundant-longhand lint rule that four separate declarations would trip.
+//
+// @param {Color} @fill Panel background. Defaults to the mode-aware core page surface.
+// @param {Color} @border-colour Hairline colour. `@border-color-muted` and
+//   `@border-color-subtle` are both remapped to the Blitzy hairline; pass the latter where
+//   a table or infobox rule should track that name instead.
+// @param {Length} @radius Corner radius. 12px by default; pass
+//   `@blitzy-border-radius-nav` (16px) for the floating navigation card.
+// @param {Shadow} @shadow Elevation. Defaults to the token, which compiles to a fixed
+//   light-mode value. Night mode is owned by `components/DarkMode.less`, which has the
+//   mode-aware `--blitzy-box-shadow-color-nav` property available to it; pass a composed
+//   value here rather than editing this default.
+.blitzy-mixin-card-surface( @fill: @background-color-base; @border-colour: @border-color-muted; @radius: @blitzy-border-radius-card; @shadow: @blitzy-box-shadow-nav ) {
+	background-color: @fill;
+	border: @border-width-base @border-style-base @border-colour;
+	border-radius: @radius;
+	box-shadow: @shadow;
+}
+
+//
+// Pill surface: the brand-tinted chip shape shared by the category-links footer, the
+// navigation chrome and the card-grid badges.
+//
+// Consumed by `components/Footer.less` (category chips), `components/NavCard.less` and
+// `components/Cards.less`.
+//
+// The radius is 999px, NOT core's visually indistinguishable `@border-radius-pill`
+// (9999px). Fidelity is asserted by comparing the SPECIFIED value against the computed
+// style (R11), so the near-match would fail the assertion even though the two render
+// identically. Do not "simplify" this to core's token.
+//
+// @param {Color} @fill Chip background. Defaults to the mode-aware brand tint, the one
+//   core token that carries four Blitzy treatments: infobox header, wikitable header,
+//   hatnote fill and these chips.
+// @param {Color} @label-colour Chip label. Defaults to the mode-aware progressive colour,
+//   which the variable layer remaps to the Blitzy purple.
+.blitzy-mixin-pill-surface( @fill: @background-color-progressive-subtle; @label-colour: @color-progressive ) {
+	background-color: @fill;
+	border-radius: @blitzy-border-radius-pill;
+	color: @label-colour;
+}
+
+//
+// Brand-tinted header row: the bold, tinted leading row of a data surface.
+//
+// Consumed by `components/Infobox.less` (the infobox header row) and
+// `components/Tables.less` (the wikitable header row). Both are parser-emitted content,
+// which the skinStyles rule explicitly leaves to skin-owned stylesheets, so no skinStyles
+// file is involved for this one.
+//
+// Emits no padding and no radius. A wikitable header clips its corners at
+// `@spacing-50` (8px) while an infobox header does not, and the infobox pads at
+// `@spacing-125` (20px) while table cells do not, so both belong to the caller.
+//
+// @param {Color} @fill Row background. Defaults to the mode-aware brand tint.
+// @param {Color} @label-colour Row text. Defaults to the mode-aware emphasized text
+//   colour, which the variable layer remaps to the Blitzy primary text colour.
+.blitzy-mixin-brand-header-row( @fill: @background-color-progressive-subtle; @label-colour: @color-emphasized ) {
+	background-color: @fill;
+	color: @label-colour;
+	font-weight: @font-weight-bold;
+}
+
+//
+// Monospace block: the code, diff and edit-textarea type treatment.
+//
+// Consumed by `components/Prose.less` (code blocks and inline code),
+// `components/Diff.less`, `components/Forms.less`,
+// `../../skinStyles/mediawiki.action.edit.less` (the wikitext textarea) and
+// `../../skinStyles/mediawiki.diff.styles.less` (diff cell contents). It is the clearest
+// case for a shared mixin in the package: five call sites across both sides of the
+// skinStyles boundary, one definition.
+//
+// The family comes from `@font-family-monospace`, which
+// `../mediawiki.less/blitzy/mediawiki.skin.variables.less` remaps to the Blitzy monospace
+// stack. Overriding that one core name is what makes core's own edit-form and diff CSS
+// adopt Blitzy typography with no core stylesheet edited, so this mixin must consume the
+// core name and not the `@blitzy-*` token behind it.
+//
+// @param {Length} @size Type size. 14px by default, the specified diff and reference size.
+// @param {Number} @leading Line height. Defaults to core's `@line-height-xx-small`
+//   (1.375), tight enough for code where the 1.75 prose rhythm is not. NUANCE: that token
+//   sits in core's trailing deprecated-Codex block. If core removes it, declare a Blitzy
+//   line-height token in `../skins.blitzy.tokens/tokens.less` and point this default at it
+//   -- do not substitute a different number, because the value is asserted.
+.blitzy-mixin-monospace-block( @size: @blitzy-font-size-monospace; @leading: @line-height-xx-small ) {
+	font-family: @font-family-monospace;
+	font-size: @size;
+	line-height: @leading;
+}
+
+//
+// Focus ring: the visible 2px purple ring at 2px offset that marks the keyboard-focused
+// control.
+//
+// Consumed by `components/Forms.less`, `components/NavCard.less`,
+// `../../skinStyles/mediawiki.action.edit.less` (the textarea's specified purple focus
+// ring) and `../../skinStyles/mediawiki.special.preferences.styles.ooui.less`, where every
+// control must remain operable and therefore visibly focusable.
+//
+// This mixin ALWAYS produces a visible ring. It never emits `outline: 0` or
+// `outline: none`, with or without a replacement, because removing the focus indicator is
+// the single most common way a redesign breaks keyboard operability (R10). Callers should
+// attach it to `:focus-visible` so the ring reaches keyboard users without appearing on
+// mouse clicks; where a core module's own rule already zeroes the outline, override it
+// from the paired skinStyles file with this mixin rather than reaching for `!important`,
+// which the zero-warning build forbids outright.
+//
+// Both defaults are exact substrate matches consumed by their core names: the 2px width is
+// `@border-width-thick` and the 2px offset is `@spacing-12`. The colour is
+// `@outline-color-progressive--focus`, which the variable layer remaps to the Blitzy
+// purple -- which is also why core's own focus rings turn purple with no core stylesheet
+// edited.
+//
+// @param {Color} @colour Ring colour. Mode-aware by default. `@box-shadow-color-progressive--focus`
+//   is remapped to the same purple, for callers that must draw the ring as a shadow because
+//   an ancestor clips overflow.
+// @param {Length} @width Ring thickness.
+// @param {Length} @offset Gap between the control's edge and the ring.
+.blitzy-mixin-focus-ring( @colour: @outline-color-progressive--focus; @width: @border-width-thick; @offset: @spacing-12 ) {
+	outline: @width @border-style-base @colour;
+	outline-offset: @offset;
+}
+
+//
+// Outline call-to-action (design component 2): the pill with a purple stroke, a purple
+// bold label and a plain surface fill.
+//
+// Consumed by `components/NavCard.less`, for both the navigation pair and the larger hero
+// pair.
+//
+// THE STROKE IS A BOX-SHADOW, NOT A BORDER, AND THAT IS A CORRECTNESS REQUIREMENT.
+// `../skins.blitzy.tokens/tokens.less` records a measured Blink behaviour: `border-width`
+// is quantised to whole CSS pixels, so a specified 1.5px border RESOLVES to a computed
+// `1px`, verified three independent ways and reproducing at device pixel ratio 2. It is
+// property-specific -- `box-shadow` preserves fractional pixels. Because fidelity is
+// asserted by comparing the specified value against the computed style (R11), an assertion
+// of `1.5px` can never pass against a border but does pass against an inset shadow of the
+// same width, which renders identically and occupies no layout space. Do not "fix" this
+// back to a border.
+//   The shadow is inset with zero offsets, so it has no horizontal offset to flip and the
+//   `border-radius` clips it to the pill outline exactly as a border would be clipped.
+//
+// `font-family: inherit` AND `font-size: inherit` ARE BOTH REQUIRED, AND ONE WITHOUT THE
+// OTHER IS NOT ENOUGH. A `<button>` inherits neither, because the user-agent stylesheet
+// applies a `font` SHORTHAND to form controls which sets family and size explicitly, so the
+// page's typeface never reaches the label. Measured on the real compiled output: both pills
+// rendered the user-agent's `Arial` at `13.3333px` while the surrounding page was in its own
+// face at 16px. A probe confirmed `font-family: inherit` alone fixes only the family and
+// leaves the size at `13.3333px`, so both declarations are emitted.
+//   The defect is subtle precisely BECAUSE `font-weight` works: an author longhand beats the
+//   user-agent shorthand, so the label came out bold -- but bold in the wrong face at the
+//   wrong size, which reads as "styled" at a glance.
+//   `inherit` rather than a fixed size is deliberate. The design uses this pattern twice, in
+//   the navigation card and again at a larger hero size, so a size baked in here would be
+//   wrong at one of the two sites. Inheriting lets each call site set the size on its own
+//   cluster -- `@blitzy-font-size-nav` for the navigation pair -- and the pill follows.
+//
+// `border: 0` IS A REQUIRED RESET, NOT TIDYING. Measured in headless Chrome on the real
+// compiled output: a `<button>` carrying this mixin kept the user-agent's default
+// `border: 2px outset`, painting a grey `rgb(168, 168, 168)` bevel just outside the purple
+// ring and shrinking the visible fill to 40px inside the 44px box. A user-agent default
+// that masks the specified appearance is a defect, so it is overridden explicitly. The
+// reset is safe for the non-button consumers too, since `<a>` and `<div>` have no default
+// border to remove.
+//
+// The 44px minimum is `@min-size-interactive-touch` consumed by its core name: the
+// design's stated call-to-action height coincides exactly with the substrate's
+// touch-target floor, so one value satisfies both the design and the accessibility
+// minimum. Verified at runtime: both call-to-action pills render exactly 44px tall.
+// The flex centring is what makes that minimum meaningful -- without it the label sits at
+// the top of a 44px box -- and none of the flex properties is flipped.
+//   `inline-flex` is deliberate, and it is NORMAL for it to compute as `flex`. When the
+//   pill sits inside a flex container -- which is exactly how the navigation card lays the
+//   pair out -- CSS blockifies a flex item's display, so `getComputedStyle` reports `flex`.
+//   That is spec-mandated and harmless: the centring and the minimum height still apply.
+//   `inline-flex` is kept rather than `flex` because it is also correct when the pill is
+//   NOT inside a flex parent. Do not write a fidelity assertion against `display` here.
+//
+// @param {Color} @fill Pill background. Mode-aware page surface by default.
+// @param {Color} @label-colour Label colour. Mode-aware purple by default.
+// @param {Color} @stroke-colour Stroke colour. Mode-aware purple by default.
+// @param {Length} @stroke-width Stroke thickness. 1.5px by default; see the note above
+//   before asserting anything against it.
+.blitzy-mixin-cta-outline( @fill: @background-color-base; @label-colour: @color-progressive; @stroke-colour: @border-color-progressive; @stroke-width: @blitzy-border-width-cta ) {
+	background-color: @fill;
+	border: 0;
+	box-shadow: inset 0 0 0 @stroke-width @stroke-colour;
+	box-sizing: border-box;
+	color: @label-colour;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: @min-size-interactive-touch;
+	border-radius: @blitzy-border-radius-pill;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: @font-weight-bold;
+}
+
+//
+// Gradient call-to-action (design component 3): the purple-gradient pill with an inverted
+// bold label. The second half of the dual cluster, always paired with the outline pill
+// above.
+//
+// Consumed by `components/NavCard.less`.
+//
+// A gradient is a background IMAGE, so it is assigned to `background-image` and a solid
+// `background-color` is set underneath it. That fallback is not ceremony: it is what the
+// label is guaranteed contrast against if the gradient ever fails to paint, and it keeps
+// the pill from rendering as inverted-on-transparent text.
+//
+// Geometry matches `.blitzy-mixin-cta-outline()` exactly -- same pill radius, same 44px
+// minimum, same centring -- because the two sit side by side and any divergence is
+// visible. The shared declarations are written out in both rather than factored into a
+// tenth mixin, which would add a definition that no component or skinStyles file consumes.
+//
+// @param {Image} @gradient Gradient fill. The specified call-to-action gradient by
+//   default. It is a raw token because a gradient is a composite value that the mode-aware
+//   custom-property layer does not carry; night-mode treatment belongs to
+//   `components/DarkMode.less`.
+// @param {Color} @fill Solid colour painted beneath the gradient. Left mode-aware
+//   deliberately: it is only ever seen if the gradient fails to paint, and matching the
+//   active mode's brand colour is the better degradation. `linear-gradient` has been
+//   baseline for over a decade, so this path is effectively unreachable; a consumer that
+//   wants byte-exact parity with the gradient's first stop can pass it explicitly.
+// @param {Color} @label-colour Label colour.
+//   THE `-fixed` SUFFIX IS DELIBERATE AND MUST NOT BE DROPPED. Core carries both
+//   `@color-inverted` and `@color-inverted-fixed`, and they are NOT interchangeable. The
+//   vendored Codex theme documents the fixed one as "the same as color-inverted in light
+//   mode, but does not change in dark mode -- use this for things that should be white in
+//   both modes", and its dark mixin proves the distinction: `--color-inverted` flips to a
+//   near-black `#101418` there, while `--color-inverted-fixed` is absent from the dark
+//   mixin and therefore stays white.
+//   This label sits on a gradient that does NOT change by mode, because a gradient is a
+//   composite value the custom-property layer does not carry. So the label must stay white
+//   in night mode too. `@color-inverted` would mean "inverted relative to the current
+//   mode" and would render near-black text on saturated purple the moment anything remaps
+//   `--color-inverted` for night -- a blocking contrast failure on the dark captures.
+.blitzy-mixin-cta-gradient( @gradient: @blitzy-color-gradient-cta; @fill: @color-progressive; @label-colour: @color-inverted-fixed ) {
+	background-color: @fill;
+	background-image: @gradient;
+	border: 0;
+	box-sizing: border-box;
+	color: @label-colour;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: @min-size-interactive-touch;
+	border-radius: @blitzy-border-radius-pill;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: @font-weight-bold;
+}
+
+//
+// Active underline (design component 11): the 2.5px purple rule marking the selected tab
+// or stepper item.
+//
+// Consumed by `components/Cards.less` (the tab strip and the numbered stepper the
+// main-page fixture instantiates) and available to `components/TableOfContents.less` for
+// its inline disclosure. The table-of-contents card's ACTIVE-SECTION marker is a leading
+// border rather than an underline -- inherently directional, and therefore authored in
+// that component's own file where its `@noflip` exception belongs.
+//
+// Authored with the substrate's inset-box-shadow idiom. Core's
+// `@box-shadow-inset-medium-vertical` is the 2px constructor of that idiom and the
+// vendored Codex tab CSS draws its selected-tab rule the same way, so the shape is
+// borrowed and only the width comes from the Blitzy token -- 2.5px, which has no substrate
+// equivalent. Unlike a border, the shadow adds no height, so switching a tab between
+// states cannot shift the strip and contribute to the layout-shift budget.
+//
+// THE NEGATION MUST STAY PARENTHESISED. Written bare as `inset 0 -@width 0 0`, Less parses
+// the `0 -@width` sequence as a subtraction and collapses two shadow values into one,
+// silently producing a different shadow. Binding the negative through a parenthesised
+// multiplication keeps it a single value.
+//
+// Emits only `box-shadow`, so a caller that also needs an elevation shadow on the same
+// element must compose both into one declaration rather than calling this mixin -- a
+// second `box-shadow` would replace the first.
+//
+// @param {Color} @colour Underline colour. Mode-aware purple by default.
+// @param {Length} @width Underline thickness. 2.5px by default.
+.blitzy-mixin-active-underline( @colour: @color-progressive; @width: @blitzy-border-width-tab-underline ) {
+	@block-end-offset: ( @width * -1 );
+	box-shadow: inset 0 @block-end-offset 0 0 @colour;
+}
+
+//
+// Horizontal scroll container: the containment applied below 768px so a wide wikitable
+// scrolls inside its own box instead of widening the page.
+//
+// Consumed by `components/Tables.less`. It is the mechanism behind the zero-horizontal-
+// overflow threshold at 390px and 768px, which the large sortable-table fixture exists to
+// stress.
+//
+// EMITS NO MEDIA QUERY, BY DESIGN. The 768px switch point lives in
+// `@blitzy-max-width-breakpoint-mobile`, and the caller wraps the call:
+//
+//     @media screen and ( max-width: @blitzy-max-width-breakpoint-mobile ) {
+//         .some-wikitable-wrapper {
+//             .blitzy-mixin-scroll-container();
+//         }
+//     }
+//
+// A query emitted from here would instead nest inside whichever `@media screen` or
+// `@media print` wrapper `skin.less` had opened around the call site.
+//
+// `max-width` is the declaration that actually prevents the overflow: `overflow-x` alone
+// lets a box grow past its parent when the parent does not constrain it. Both properties
+// are non-directional, and `overflow-x` names an axis rather than a side, so neither
+// flips.
+//   `-webkit-overflow-scrolling` is deliberately NOT emitted. Core's Less contains no
+//   occurrence of it and provides no mixin for it, the property is non-standard, and
+//   momentum scrolling is the default behaviour on the browsers this package supports.
+//   Emitting it would risk an unsupported-feature warning, and the zero-warning build
+//   forbids the suppression that would silence one.
+.blitzy-mixin-scroll-container() {
+	max-width: 100%;
+	overflow-x: auto;
+}

@@ -1,0 +1,183 @@
+{{!--
+	ContentBody.mustache -- the page content region, and the skin's preserved DOM contract.
+
+	Every id and every class in the markup below is core's. The Blitzy redesign is total; the
+	DOM contract underneath it is not. Gadgets, user scripts, VisualEditor, core's own
+	JavaScript and the editor-facing tooling core protects all address this region through
+	the names emitted here, so rule R2 requires each of them to survive the redesign with
+	unchanged semantics. tests/playwright/domContract.spec.ts asserts every one against a
+	fetched page, which is Gate 8's second check. The only things this file adds are two
+	class names, which R2 explicitly permits alongside core's.
+
+	The redesign consequently happens entirely in the stylesheets. skins.blitzy.styles hangs
+	the content measure, surface and vertical rhythm on .blitzy-content-body and
+	.blitzy-content-body__inner, while components/Prose.less, Tables.less and Infobox.less
+	reach the parser output through core's own selectors. That licence exists only while this
+	file passes the parser output through unaltered, which is why nothing below rewrites,
+	re-wraps or re-classes it (R7).
+
+	INVOCATION
+
+	skin.mustache includes this file as a bare ContentBody partial reference at root context.
+	No section pushes a context, so every key named below is resolved from the root of the
+	template data and this file must not assume otherwise. Partials resolve by filename, so
+	the name ContentBody.mustache is itself part of the contract.
+
+	Exactly one partial is included from here, CategoryFooter, and it is included inside
+	div#bodyContent. TableOfContents is deliberately not included: it is a sibling of this
+	partial inside skin.mustache's content layout, so that the stylesheet can stick it beside
+	the content at 1024px and reorder it below at narrower widths, and it has to be entered
+	with data-toc as its context, which is not this file's context to supply.
+
+	DATA CONSUMED, all from the root of the template data
+
+	string html-user-language-attributes
+		An attribute fragment, not element content. Skin::prepareUserLanguageAttributes()
+		returns Html::expandAttributes() of lang and dir, and only when the interface
+		language differs from the content language; otherwise the empty string. Every
+		attribute in that fragment already carries its own leading space, so the tag sits
+		flush against the preceding quote inside the start tag with no space of its own.
+
+	string html-subtitle
+		Skin::prepareSubtitle() -- finished HTML, and it brings its own container:
+		div#mw-content-subtitle carrying the same lang and dir pair, wrapping div.subpages
+		(the subpage breadcrumb) and OutputPage::getSubtitle(), which is where redirect,
+		old-revision and similar notices arrive. Never empty of its wrapper, so it is
+		emitted unguarded.
+
+	string|null html-undelete-link
+		Skin::prepareUndeleteLink() -- div.subpages holding the "view deleted revisions"
+		link, or null, which is the case on every ordinary page view. Guarded by a section
+		so an ordinary page gets no empty div#contentSub2 rather than a hollow one.
+
+	string|null html-user-message
+		The new-talk-page-messages notice. SkinMustache::getTemplateData() has already
+		wrapped Skin::getNewtalks() in div.usermessage, which is the selector core's
+		interface-user-message skin feature styles, so this file adds no wrapper of its own;
+		a second one would nest one warning box inside another. Null when there is no
+		notice, and a null interpolation renders as nothing.
+
+	string html-body-content
+		The page's finished body region. Skin::wrapHTML() has already wrapped
+		OutputPage::getHTML() together with the print footer in
+		div#mw-content-text.mw-body-content, so this single key delivers the parser output,
+		div.mw-parser-output, every parser-emitted mw- prefixed class, and
+		div.printfooter[data-nosnippet]. Emitted whole and untouched.
+
+	string html-after-content
+		Skin::afterContentHook() -- div#mw-data-after-content when an extension answers the
+		SkinAfterContent hook, and the empty string when none does. Core assigns that id
+		itself so it is identical across skins.
+
+	html-categories is consumed by CategoryFooter.mustache rather than here, at the same
+	root context, which is why that partial is included and no category markup is authored
+	in this file.
+
+	FOUR RULINGS THAT DECIDE WHAT THIS FILE MAY EMIT
+
+	1. The print footer and div#mw-content-text are already inside html-body-content.
+	   SkinMustache::getTemplateData() builds div.printfooter[data-nosnippet], with the user
+	   language attributes on it, and concatenates it onto the page HTML
+	   (includes/Skin/SkinMustache.php L75-83) before passing the pair through
+	   Skin::wrapHTML(), which adds the div#mw-content-text.mw-body-content wrapper
+	   (includes/Skin/Skin.php L2439-2448). Authoring either here would produce a duplicate
+	   id and a second data-nosnippet region -- the likeliest defect in this folder, and one
+	   no visual check catches. Neither is authored.
+
+	2. html-subtitle brings its own container, and the double wrapping is correct.
+	   Skin::prepareSubtitle() returns div#mw-content-subtitle (includes/Skin/Skin.php
+	   L2365-2375). Wrapping it in div#contentSub therefore yields both the legacy
+	   #contentSub, which is the editor-facing name, and the modern #mw-content-subtitle,
+	   which is what core's interface-subtitle feature styles alongside #contentSub2. Both
+	   are required; the nesting is deliberate and is not to be flattened.
+
+	3. div#contentSub is emitted exactly once, and it is emitted here.
+	   ContentHeader.mustache deliberately does not emit it. The requirement that the content
+	   header sit over the tagline, indicator and subtitle regions is met by visual stacking,
+	   not by duplicating elements: a second #contentSub is a duplicate id, which is a
+	   blocking R10 failure on all twenty-one captures, and it breaks the contract core
+	   annotates on the element. It is never hidden and never removed, not even when it
+	   renders empty, because editors are still using it (Wikimedia task T316830).
+
+	4. html-user-language-attributes is a raw attribute string.
+	   Skin::prepareUserLanguageAttributes() returns Html::expandAttributes()
+	   (includes/Skin/Skin.php L2415-2419), so the triple-brace tag belongs inside a start
+	   tag rather than in element content. That is one of the reserved lawful uses of an
+	   unescaped tag; escaping it would emit the attribute source as visible text.
+
+	ORDER IS PART OF THE CONTRACT
+
+	The sequence below -- subtitle, undelete link, user message, body content, categories,
+	then after-content outside the landmark -- is the order core and every core-conformant
+	skin produce, and gadgets that insert siblings relative to these elements depend on it.
+	Two placements are load-bearing and easy to get wrong in opposite directions:
+
+	  * The category block goes inside div#bodyContent, immediately after the body content.
+	    Lifting it out of the content region is a break no visual check catches, because it
+	    still looks right.
+	  * html-after-content goes outside the main element. Its position relative to the
+	    content region is part of the SkinAfterContent hook's documented contract.
+
+	Nothing here is reordered for layout: the visual order is a stylesheet concern, and
+	nothing below is conditionally omitted, since a fidelity assertion against an absent
+	element has to fail rather than skip (R11).
+
+	NOT EMITTED HERE, DELIBERATELY
+
+	  no printfooter        already inside html-body-content (ruling 1).
+	  no #mw-content-text   already inside html-body-content (ruling 1).
+	  no .mw-body-content   core's Skin::wrapHTML() puts that class on #mw-content-text.
+	                        Repeating it on #bodyContent would apply the content-body
+	                        feature's clearfix and content rules twice over an element that
+	                        also contains the subtitle and the categories (R8).
+	  no h1                 core's h1#firstHeading arrives through html-title-heading in
+	                        ContentHeader.mustache. A second heading, or a second element
+	                        carrying that id, would leave the aria-labelledby reference below
+	                        ambiguous and disturb heading order (R10).
+	  no landmark name      the page carries exactly one main element, so the landmark needs
+	                        no accessible name, and role="main" would only restate the
+	                        element's own semantics.
+	  no tabindex           nothing here is focusable in its own right, and a positive
+	                        tabindex would reorder the whole page's focus sequence (R10).
+	  no id of this skin's  the two Blitzy hooks are classes. Ids have to be unique
+	                        page-wide, and this region renders on every page, so adding none
+	                        is the cheapest guarantee against a collision and the cheapest
+	                        way to emit nothing that could differ between two identical
+	                        requests (R9, R10).
+	  no style attribute    every colour, radius and measure resolves in the stylesheets
+	                        against tokens.less, so no literal reaches this markup (R3).
+	  no directional        no float, align or side-specific attribute. Content flow
+	                        direction arrives in core's dir attribute inside
+	                        html-user-language-attributes, which is passed through, and every
+	                        directional rule stays in the flip-aware stylesheets where the
+	                        style pipeline can flip it (R6).
+	  no subresource        no image, icon, font or script is referenced. Article images and
+	                        editorial hyperlinks inside the parser output are core's and pass
+	                        through untouched; the external-origins guard exempts content
+	                        links and inspects subresources, of which this file adds none
+	                        (R5).
+	  no message key        nothing here is worded by this skin, so no key is referenced and
+	                        none has to be documented in i18n/qqq.json (Gate 2).
+	  no behaviour          no reading-progress indicator, no floating action button, no edit
+	                        affordance of this skin's own, no scroll container, no reading
+	                        time. Structure only (R12).
+
+	Rendered output, in full: main#content.mw-body.blitzy-content-body wrapping
+	div#bodyContent.blitzy-content-body__inner, which holds div#contentSub, optionally
+	div#contentSub2, the user message, the body content and the category footer; then core's
+	after-content region as a sibling that follows the landmark.
+--}}
+<main id="content" class="mw-body blitzy-content-body">
+	<div id="bodyContent" class="blitzy-content-body__inner" aria-labelledby="firstHeading" data-mw-ve-target-container>
+		{{!--
+			#contentSub is in use by editors: never hide it, never remove it, and never
+			emit a second one. See Wikimedia task T316830.
+		--}}
+		<div id="contentSub"{{{html-user-language-attributes}}}>{{{html-subtitle}}}</div>
+		{{#html-undelete-link}}<div id="contentSub2">{{{.}}}</div>{{/html-undelete-link}}
+		{{{html-user-message}}}
+		{{{html-body-content}}}
+		{{>CategoryFooter}}
+	</div>
+</main>
+{{{html-after-content}}}

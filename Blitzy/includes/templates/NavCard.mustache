@@ -1,0 +1,475 @@
+{{!
+	NavCard.mustache — Blitzy component 1, the floating navigation card, and the carrier of
+	components 2 and 3 (the outline and gradient calls to action) and of the mobile
+	navigation disclosure.
+
+	Nothing in this comment may contain a closing mustache delimiter. A comment tag ends at
+	the first one it meets, and everything after it is compiled as template source, so a tag
+	written out in full here would silently reopen the template. That is not a theoretical
+	hazard: it was reproduced against this exact compiler configuration. Template data is
+	therefore named without braces throughout, the way the sibling partials name it, and
+	"the escaping form" means the ordinary double-brace interpolation while "the raw form"
+	means the triple-brace one.
+
+	INVOCATION
+	----------
+	Reached only from skin.mustache, referenced bare and at root context with no enclosing
+	section. Every path below is written in full from the root of the template data, so
+	pushing a context onto this partial would break all of them at once.
+
+	This file is also the sole invoker of PersonalMenu.mustache, which is itself written
+	against root context. An error here therefore orphans that partial, which Gate 9 counts
+	as a wiring failure even though the orphaned file would still be correct in isolation.
+
+	TEMPLATE DATA CONSUMED
+	----------------------
+	Navigation, from MediaWiki\Skin\SkinTemplate::getPortletsTemplateData:
+
+	  data-portlets-sidebar.data-portlets-first
+	                      The first sidebar section, which on a default wiki is the
+	                      navigation portlet and arrives with its id already spelled
+	                      p-navigation. That is not an assumption about the wiki's content:
+	                      the sidebar is whatever MediaWiki:Sidebar holds, so the links in
+	                      this card are always the ones MediaWiki supplies and never a list
+	                      written here. Editing MediaWiki:Sidebar changes the card with no
+	                      change to this file, which is the proof that the derivation is
+	                      real. The key is null on a wiki with no sidebar at all, and a null
+	                      section renders nothing.
+	  data-portlets-sidebar.array-portlets-rest
+	                      Every remaining sidebar section, in the order MediaWiki built
+	                      them, rendered immediately after the first one. Normally this is
+	                      the toolbox, whose id is p-tb, plus any further wiki-defined
+	                      sections. The order is fixed rather than sorted here, because the
+	                      captures of this surface are compared byte for byte between
+	                      consecutive runs and a reordering would break that comparison.
+	                      Note that search and languages are not in this list: MediaWiki
+	                      excludes the first and lifts the second out into its own portlet,
+	                      which the skin renders elsewhere.
+
+	Per portlet, the keys used are the same ones PersonalMenu.mustache uses, for the same
+	reasons:
+
+	  id                  Element id, emitted verbatim. Re-emitting it unaltered is the
+	                      entire mechanism by which the preserved p-navigation selector
+	                      survives a complete visual redesign.
+	  class               mw-portlet plus mw-portlet followed by the section name, gaining a
+	                      trailing emptyPortlet when the section has no items and no hook
+	                      content. Appended to the Blitzy class rather than replacing it, so
+	                      core's hooks and the empty-state marker both pass through
+	                      untouched. Adding a class of the skin's own alongside core's is
+	                      explicitly permitted.
+	  html-tooltip        Raw attribute string from MediaWiki\Linker\Linker::tooltip. It
+	                      already carries its own leading space, so it is emitted with none
+	                      in front of it and an absent tooltip leaves no stray whitespace
+	                      inside the start tag.
+	  html-before-portal  Raw HTML contributed around the list by the SkinAfterPortlet hook.
+	  html-after-portal   Empty strings unless an extension has something to add, and
+	                      emitted so that such content is never silently discarded.
+	  array-items         The list entries. Each carries html-item, the complete list item
+	                      MediaWiki built, including its id, its mw-list-item class and its
+	                      active class when the entry is current. Emitting html-item is what
+	                      guarantees every entry MediaWiki supplies reaches the page:
+	                      nothing here filters, reorders or curates.
+
+	The sibling key html-items is deliberately not consumed. It is the same entries
+	pre-concatenated, so emitting both would render every link twice.
+
+	Logo, from MediaWiki\Skin\Components\SkinComponentLogo. Every key is optional, which is
+	why each one is guarded:
+
+	  link-mainpage       Target of the logo link. Supplied by core on every page.
+	  data-logos.1x       Path to the square mark. Read only as a presence test, never
+	                      emitted: the mark is painted by core, not by this file. See the
+	                      note on the mark below for why, and why this is the right key to
+	                      test rather than data-logos.icon.
+	  data-logos.wordmark An object with src, width and height. Its fourth key, style, is
+	                      deliberately NOT emitted: a style attribute is forbidden here and
+	                      the stylesheet owns every dimension. width and height are emitted
+	                      because MediaWiki requires them on this object and they carry the
+	                      intrinsic aspect ratio.
+	  msg-mainpage        Text of the wordmark fallback and alternative text of the wordmark
+	                      image. A core message, reused rather than reinvented, and accurate
+	                      because it names exactly where the link goes.
+	  msg-tooltip-p-logo  Advisory title on the logo link. Also a core message.
+
+	The wordmark is the case that actually renders on the verification instance. Its site
+	configuration wires a mark and no wordmark, because the Blitzy wordmark is typographic
+	and set in the display font from the stylesheet, so the fallback branch below is the one
+	photographed in all twenty-one captures. This is the required posture: a missing logo
+	must never stall a build, so the wordmark degrades to text at navigation scale and the
+	fallback is reported as unresolved in DELIVERY.md.
+
+	THE MARK IS NOT AN IMAGE ELEMENT, AND THAT IS DELIBERATE
+	--------------------------------------------------------
+	Declaring the logo feature in skin.json makes core emit a background-image rule for the
+	class mw-wiki-logo, built from the 1x logo and pointing at the CACHE-BUSTED url -- the
+	same url core also emits as a preload hint. An image element sourced from the raw logo
+	path is a DIFFERENT url, so the preload is never consumed and the file is fetched twice.
+	That was measured in a browser against this very markup: two requests for one 2 KB asset
+	and a console warning about an unused preload, on every page of every capture. Rendering
+	the mark as an empty element carrying mw-wiki-logo consumes the preloaded, versioned url
+	instead, so the asset is fetched once, and it also means the declared logo feature is
+	actually in effect rather than delivered and unused.
+
+	It is also the mechanism the rest of the package already documents: the site
+	configuration template states that the logo is wired only through the logo setting and
+	is never embedded in a template, and the committed mark says the same in its own
+	description. This file is the only place that could have contradicted them.
+
+	The presence test is on 1x rather than on icon because 1x is the key core actually paints
+	from. Testing icon would emit an element core had no rule for, leaving an empty box sized
+	by the stylesheet with nothing in it. When no logo is configured at all the element is
+	simply not emitted and the typographic wordmark stands alone.
+
+	Search, from MediaWiki\Skin\Components\SkinComponentSearch. Everything inside the search
+	region is core's own raw HTML, emitted rather than rebuilt:
+
+	  data-search-box.form-action
+	                      Form target, the wiki's script path.
+	  data-search-box.page-title
+	                      Value of the hidden title field, the search special page.
+	  data-search-box.html-input
+	                      The query field. Already carries id searchInput and already has an
+	                      accessible name and placeholder from a core message, so no message
+	                      of the skin's own is needed and none is added.
+	  data-search-box.html-button-search
+	                      The go submit, already carrying id searchButton.
+	  data-search-box.html-button-search-fallback
+	                      The full-text submit, already carrying id mw-searchButton. This is
+	                      not decoration. It is the submit path that works when the
+	                      client-side search enhancement has not loaded, so the skin's
+	                      no-scripting requirement depends on it being emitted.
+
+	Rebuilding any of those three would drop the ids that gadgets and mediawiki.util expect,
+	so they are passed through in the raw form and left alone.
+
+	Calls to action, from MediaWiki\Skins\Blitzy\BlitzyViewModel:
+
+	  data-blitzy-cta-primary
+	  data-blitzy-cta-secondary
+	                      Both always present, each with a label and, when a target could be
+	                      resolved, an href. Both values originate in site configuration and
+	                      are therefore untrusted; see the escaping note below.
+	  label               Always present, possibly empty. Interpolated in the escaping form.
+	  href                ABSENT when no target was configured and when the allowlist in
+	                      MediaWiki\Skins\Blitzy\BlitzyUrlValidator rejected the one that
+	                      was, so every use of it sits inside a section on it. Emitting an
+	                      unguarded href would render an empty attribute, which is a link
+	                      back to the page it sits on and has no accessible destination.
+
+	The primary call to action is the outline pill and the secondary is the gradient pill,
+	in that order, always. Neither borrows the announcement bar's hook and the announcement
+	bar does not borrow theirs, so each component's computed-style assertion names exactly
+	one element.
+
+	Messages, all of which must be listed in the messages argument of skin.json — that list
+	is what creates the keys at all, and a key that is not listed silently interpolates as
+	the empty string:
+
+	  msg-navigation-heading     Accessible name of the navigation landmark. Core message,
+	                             reused so the landmark is named consistently with every
+	                             other skin.
+	  msg-blitzy-nav-toggle      Visible text of the disclosure button and fallback
+	                             accessible name on its input. Documented in i18n/qqq.json
+	                             as deliberately state-neutral, because one control both
+	                             opens and closes the menu.
+	  msg-mainpage               See the logo notes above.
+	  msg-tooltip-p-logo         See the logo notes above.
+
+	FIXED IDENTIFIERS DEFINED HERE
+	------------------------------
+	  blitzy-nav-checkbox   The disclosure input.
+	  blitzy-nav-button     The disclosure button.
+	  blitzy-nav-target     The disclosure target, which is the navigation landmark itself.
+
+	All three are literals, never derived, suffixed, hashed or varied between renders.
+	resources/skins.blitzy.js/dropdown.js binds its listeners to them and
+	tests/qunit/dropdown.test.js dispatches against them, so they have to be predictable;
+	and this card appears in every one of the twenty-one byte-compared captures, so nothing
+	in it may differ between two renders of the same URL. Because they are literals, this
+	partial must be referenced exactly once per page.
+
+	PRESERVED SELECTORS
+	-------------------
+	Emitted here and asserted by tests/playwright/domContract.spec.ts: p-navigation, from
+	the portlet id; p-search and searchform, the conventional ids that gadgets and
+	mediawiki.util look for; and searchInput, searchButton and mw-searchButton, which arrive
+	inside core's raw HTML and are preserved by not rebuilding it. p-personal comes from
+	PersonalMenu.mustache, which this file invokes. Every mw-prefixed class MediaWiki puts
+	on a list item passes through untouched for the same reason.
+
+	THE MOBILE DISCLOSURE
+	---------------------
+	The skin has to stay usable with scripting switched off, so the disclosure is the
+	checkbox hack MediaWiki documents in resources/src/mediawiki.page.ready/checkboxHack.js.
+	That documentation is the source of the class names and attributes below, and of one
+	structural constraint: the input need only be a PRECEDING SIBLING of the button and the
+	target. Nothing in MediaWiki binds to these class names on its own — the module exports
+	binders for a skin's own script to call — so opening and closing is done entirely by a
+	checked-state sibling selector in
+	resources/skins.blitzy.styles/components/NavCard.less. Keeping the input, the button and
+	the target as immediate siblings, in that order, is what lets that selector be written
+	once with a single general-sibling combinator instead of duplicated per relation.
+
+	dropdown.js then layers dismiss-on-outside-click and Enter activation over it and keeps
+	the expanded state current, but it is an enhancement: with it absent the control still
+	opens, still closes, and every link inside stays reachable by keyboard. Two consequences
+	for anything driving this control programmatically, both of which also hold for the user
+	menu: target the input rather than the button, because the stylesheet clips the input
+	over it and the input is the topmost hit-test target; and Space activates natively while
+	Enter does not, because the element really is a checkbox however it announces itself.
+
+	The markup is UNCONDITIONAL. It is present at every viewport, including the widest,
+	where the stylesheet simply ignores it. Omitting it above a width would make a fidelity
+	assertion fail rather than skip, and would make the document depend on a viewport the
+	server cannot see. For the same reason the navigation list is emitted exactly once and
+	serves as both the wide-layout list and the disclosure target; a second copy for small
+	screens would duplicate every id inside it.
+
+	THE 768 PIXEL BOUNDARY
+	----------------------
+	Component 1 is viewport-dependent and is asserted at three widths. At 1440 pixels and at
+	768 pixels it is the full 76-pixel card; only BELOW 768 pixels does it become the
+	disclosure. The threshold is exclusive, so the stylesheet expresses it as a maximum of
+	767 pixels and the card is still in its wide configuration at exactly 768. Of the three
+	viewport-dependent components only component 5, the hero type, changes value at that
+	width. No width assumption is baked into this markup, which is what leaves the
+	stylesheet free to say that.
+
+	Components 2 and 3 are NOT viewport-dependent and must measure identically at all three
+	widths, which is why both calls to action sit outside the disclosure target: inside it
+	they would be hidden at the narrowest width and their computed values would no longer
+	match.
+
+	TEMPLATE DIALECT TRAPS
+	----------------------
+	Two behaviours of MediaWiki's mustache compiler shape the markup below, and both were
+	verified by rendering probes against its exact compile flags rather than assumed.
+
+	First, from inside a section whose value is a plain string, the context stack skips the
+	object that string came from and only root-level keys remain reachable. Inside a section
+	on href, therefore, neither href nor label resolves; the sibling label comes back empty
+	and href itself comes back empty, which would produce a link with an empty target and no
+	text at all. The fix, and the shape used below, is to read the string as the implicit
+	current value inside its own section and to interpolate the label OUTSIDE that section,
+	splitting the anchor's start and end tags across the guard. This is also why sections
+	are never nested on two keys of the same object.
+
+	Second, the empty string is TRUTHY in a section here, unlike an absent key. So a guard
+	on label cannot suppress an unlabelled call to action, and the claim in skin.json's
+	configuration descriptions that this file renders no anchor for an empty label is not
+	expressible in this dialect. What is expressible, and what is done, is that the anchor
+	is never rendered without a target, and that the element carrying the fidelity hook is
+	always present so no assertion can silently skip. On the verification instance both
+	labels are configured, so both calls to action are real, named links in every capture.
+
+	STYLING CONTRACT
+	----------------
+	This file carries class hooks only. There is no style attribute anywhere, not even
+	passed through from the logo data, and no colour value; the 24-pixel inset, the
+	76-pixel height, the navigation radius, the soft shadow, the 44-pixel call-to-action
+	height, the 1.5-pixel outline and the gradient all resolve in NavCard.less against
+	resources/skins.blitzy.tokens/tokens.less. There is no directional attribute either:
+	logo-leading and actions-trailing placement is a flip-aware stylesheet concern, so the
+	stylesheet stays free to flip for right-to-left even though no right-to-left capture is
+	produced. Nothing here animates.
+
+	Three notes for the stylesheet, each a real obligation rather than a preference. The mark
+	is an empty element painted by core's background-image rule, and core supplies THAT RULE
+	ONLY: no size, no repeat setting and no position. The stylesheet therefore has to give
+	the mark a width and a height, a contained background size and a no-repeat setting, or a
+	32-pixel asset will tile inside whatever box it is given. The wordmark image, by
+	contrast, carries its own intrinsic width and height attributes, so it needs sizing only
+	to the extent the design departs from them. And below the disclosure breakpoint the
+	disclosure input must be clipped rather than removed from the layout, so it is never
+	given a hidden attribute here.
+
+	One further obligation, found by driving this markup in a real browser rather than by
+	reading it. AT AND ABOVE THE DISCLOSURE BREAKPOINT THE STYLESHEET MUST TAKE THE INPUT
+	OFF THE PAGE ENTIRELY, not merely hide the button. A transparent input left in place
+	stays the topmost hit-test target wherever it sits -- measured at 1440 pixels, a click
+	aimed at the logo landed on the input instead -- and it also stays in the tab order,
+	where it is a focusable control that does nothing at that width. Removing it from the
+	rendered box tree above the breakpoint solves both at once, and costs nothing: the
+	element is still in the document at every width, which is what the fidelity rule
+	requires, and the disclosure it drives has no function at that width anyway.
+
+	Any core-owned class arriving inside core's raw HTML — the search field and its two
+	submits in particular — is restyled from skinStyles, never from a stylesheet of the
+	skin's own.
+
+	DELIBERATELY ABSENT
+	-------------------
+	Nothing here branches on who is reading. There is no test of an anonymous flag and no
+	reference to user identity, so the anonymous and the logged-in card differ only in the
+	entries MediaWiki puts in the user menu, which is what makes the two captures of this
+	surface comparable. The view model does resolve the primary target differently by login
+	state when configuration supplies none, but that decision lives in PHP and this file
+	renders whatever label and target it is handed.
+
+	The card holds a logo, the navigation MediaWiki supplies, search, the user menu, two
+	calls to action and one disclosure. There is no language switcher, no theme toggle, no
+	sticky variant and no notification affordance, because none of those is in scope.
+
+	No subresource here resolves to a foreign origin: the only image is the one the wiki
+	itself serves through its logo configuration, and there is no icon font, no external
+	avatar and nothing inlined.
+}}
+<header class="blitzy-nav-card">
+	<div class="blitzy-nav-card__inner">
+		{{!
+			The logo. One link, to the main page, holding at most a mark and always a
+			wordmark. When the wordmark image is configured it supplies the accessible
+			name through its alternative text; when it is not, the text fallback supplies
+			the same words, so the link is never nameless in either case. The mark is
+			decorative in both: it repeats what the wordmark already says, so it is
+			hidden from assistive technology rather than described twice.
+
+			The mark is an empty element rather than an image element, so that core's own
+			background-image rule paints it from the url it has already asked the browser
+			to preload. The long note above explains what that avoids and what it obliges
+			the stylesheet to supply.
+		}}
+		<a class="blitzy-nav-card__logo" href="{{link-mainpage}}" title="{{msg-tooltip-p-logo}}">{{!
+			}}{{#data-logos.1x}}<span class="blitzy-nav-card__logo-mark mw-wiki-logo" aria-hidden="true"></span>{{/data-logos.1x}}{{!
+			}}{{#data-logos.wordmark}}<img class="blitzy-nav-card__logo-wordmark" src="{{src}}" width="{{width}}" height="{{height}}" alt="{{msg-mainpage}}">{{/data-logos.wordmark}}{{!
+			}}{{^data-logos.wordmark}}<span class="blitzy-nav-card__logo-wordmark blitzy-nav-card__logo-wordmark--text">{{msg-mainpage}}</span>{{/data-logos.wordmark}}{{!
+		}}</a>
+		{{!
+			The disclosure input, the disclosure button and the disclosure target follow as
+			three immediate siblings, in that order. The input is the real control: it is
+			what receives focus, what the keyboard operates and what assistive technology
+			announces. A button role, a popup hint and an expanded state together make a
+			checkbox behave and announce as a disclosure button, and the expanded state is
+			set on the input rather than on the button because the button form has been
+			deprecated since MediaWiki 1.38. Its server-rendered value is the closed state,
+			which is correct both for a first paint and for a reader with no scripting at
+			all, and dropdown.js takes over maintaining it from there.
+
+			The labelling reference points at the button, so the accessible name is the same
+			words a sighted reader sees, and the label attribute repeats the intent as a
+			fallback for the case where that reference cannot be resolved.
+
+			Three omissions are deliberate. There is no name attribute, so the input is
+			never submitted with a surrounding form. There is no tabindex, so the element
+			keeps its natural place in the tab order. And there is no hidden attribute, for
+			the reason given in the styling contract above.
+
+			Autocomplete is switched off so the browser does not restore the checked state
+			on reload or on history navigation. Without that, the menu could come back open
+			on a page that was captured closed, which is the one way this markup could make
+			a capture unreproducible.
+		}}
+		<input {{!
+			}}type="checkbox" {{!
+			}}id="blitzy-nav-checkbox" {{!
+			}}class="mw-checkbox-hack-checkbox blitzy-nav-card__toggle-checkbox" {{!
+			}}role="button" {{!
+			}}aria-haspopup="true" {{!
+			}}aria-expanded="false" {{!
+			}}aria-labelledby="blitzy-nav-button" {{!
+			}}aria-label="{{msg-blitzy-nav-toggle}}" {{!
+			}}autocomplete="off">
+		{{!
+			The button is the visible affordance. It is hidden from assistive technology
+			because the input above already exposes the same control and announcing both
+			would be a duplicate. It still carries real text: that text is what the
+			labelling reference resolves to, and it is what a reader sees and clicks. The
+			inner element is a styling hook and nothing more.
+		}}
+		<label {{!
+			}}id="blitzy-nav-button" {{!
+			}}class="mw-checkbox-hack-button blitzy-nav-card__toggle" {{!
+			}}for="blitzy-nav-checkbox" {{!
+			}}aria-hidden="true">{{!
+			}}<span class="blitzy-nav-card__toggle-text">{{msg-blitzy-nav-toggle}}</span>{{!
+		}}</label>
+		{{!
+			The navigation landmark, which is also the disclosure target. One element serves
+			both roles so that the links exist exactly once in the document.
+
+			Each sidebar section becomes a container carrying core's id and class beside the
+			skin's own, then core's before-portal content, then one list of core's own list
+			items, then core's after-portal content. The first section is written out
+			explicitly and the remainder iterated immediately after it, because they arrive
+			as two separate keys rather than one list and because their relative order is
+			part of the contract.
+
+			The section headings MediaWiki offers for these portlets are not rendered. The
+			landmark above carries the accessible name for the whole navigation, and a
+			visible heading inside the card would introduce a heading level that the content
+			outline does not want.
+		}}
+		<nav {{!
+			}}id="blitzy-nav-target" {{!
+			}}class="mw-checkbox-hack-target blitzy-nav-card__nav" {{!
+			}}aria-label="{{msg-navigation-heading}}">
+			{{#data-portlets-sidebar.data-portlets-first}}
+			<div id="{{id}}" class="blitzy-nav-card__portlet{{#class}} {{.}}{{/class}}"{{{html-tooltip}}}>{{!
+				}}{{{html-before-portal}}}{{!
+				}}<ul class="blitzy-nav-card__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{!
+				}}{{{html-after-portal}}}{{!
+			}}</div>
+			{{/data-portlets-sidebar.data-portlets-first}}
+			{{#data-portlets-sidebar.array-portlets-rest}}
+			<div id="{{id}}" class="blitzy-nav-card__portlet{{#class}} {{.}}{{/class}}"{{{html-tooltip}}}>{{!
+				}}{{{html-before-portal}}}{{!
+				}}<ul class="blitzy-nav-card__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{!
+				}}{{{html-after-portal}}}{{!
+			}}</div>
+			{{/data-portlets-sidebar.array-portlets-rest}}
+		</nav>
+		{{!
+			The search region. The landmark and the form keep the ids the rest of MediaWiki
+			expects, and everything inside the form is core's own markup: the hidden field
+			that aims the query at the search special page, the query field, the go submit
+			and the full-text submit. None of the three is rebuilt, so each keeps the id and
+			the classes core gave it, and the form submits and returns results with no
+			script running at all.
+		}}
+		{{#data-search-box}}
+		<div id="p-search" class="blitzy-nav-card__search" role="search">
+			<form id="searchform" class="blitzy-nav-card__search-form" action="{{form-action}}">{{!
+				}}<input type="hidden" name="title" value="{{page-title}}">{{!
+				}}{{{html-input}}}{{!
+				}}{{{html-button-search}}}{{!
+				}}{{{html-button-search-fallback}}}{{!
+			}}</form>
+		</div>
+		{{/data-search-box}}
+		{{!
+			The user menu, referenced bare so that it resolves its own portlet paths from
+			the root of the template data. This is the only reference to it anywhere in the
+			skin.
+		}}
+		{{>PersonalMenu}}
+		{{!
+			The calls to action. Two affordances, always in this order: the outline pill
+			first, then the gradient pill.
+
+			Each is rendered as a link when a target survived validation and as a plain
+			element when none did, so no empty target is ever emitted. The start and end
+			tags are split across that guard, and the label is interpolated between them,
+			because a section on the target string cannot see the label beside it. Both
+			labels come from site configuration and are interpolated in the escaping form,
+			which is the single place either is escaped: the view model deliberately leaves
+			them raw, so escaping them a second time would render an injected payload as
+			visible text instead of neutralising it. The raw form must never be used on
+			either value.
+		}}
+		<div class="blitzy-nav-card__cta">
+			{{#data-blitzy-cta-primary}}{{!
+				}}{{#href}}<a class="blitzy-cta blitzy-cta--outline" href="{{.}}">{{/href}}{{!
+				}}{{^href}}<span class="blitzy-cta blitzy-cta--outline">{{/href}}{{!
+				}}{{label}}{{!
+				}}{{#href}}</a>{{/href}}{{^href}}</span>{{/href}}{{!
+			}}{{/data-blitzy-cta-primary}}
+			{{#data-blitzy-cta-secondary}}{{!
+				}}{{#href}}<a class="blitzy-cta blitzy-cta--gradient" href="{{.}}">{{/href}}{{!
+				}}{{^href}}<span class="blitzy-cta blitzy-cta--gradient">{{/href}}{{!
+				}}{{label}}{{!
+				}}{{#href}}</a>{{/href}}{{^href}}</span>{{/href}}{{!
+			}}{{/data-blitzy-cta-secondary}}
+		</div>
+	</div>
+</header>

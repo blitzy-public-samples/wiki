@@ -62,6 +62,12 @@
 			"rules": {
 				"selector-max-specificity": "0,4,2"
 			}
+		},
+		{
+			"files": [ "resources/skins.blitzy.styles/fonts.less" ],
+			"rules": {
+				"font-weight-notation": "numeric"
+			}
 		}
 	]
 }
