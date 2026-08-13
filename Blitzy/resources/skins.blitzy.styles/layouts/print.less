@@ -1,0 +1,360 @@
+//
+// == Blitzy print layout ==
+//
+// The whole of the skin's print styling, and the only Blitzy stylesheet that renders on
+// paper. Two concerns live here rather than one -- hiding the screen chrome, and supplying
+// the print type scale. The reference skin splits those across a `layouts/print.less` and a
+// root `print.less`; Blitzy has no root print stylesheet, so there is nowhere else for the
+// typography half to go.
+//
+// -- WHY EVERY COMMENT IN THIS FILE IS A `//` LINE COMMENT --
+//
+// Less strips line comments and preserves block comments, so a block comment here would be
+// emitted verbatim into the `skins.blitzy.styles` payload down the unminified debug path.
+// This file's bytes count against the 60KB gzipped budget `tools/perf-baseline.js` measures
+// (Gate 8), and line comments cost nothing on either delivery path. It is the convention
+// `../../skins.blitzy.tokens/tokens.less` and the twelve `../../../skinStyles/*.less` files
+// already follow, and it is kept here.
+//   The one form that is genuinely unsafe is a `//` comment placed BETWEEN the selectors of
+// a comma-separated list: `no-invalid-double-slash-comments` rejects it, and disabling that
+// rule is exactly what the reference skin's own print file had to do. Every explanation
+// below therefore sits above its rule, never inside a selector list.
+//
+// -- HOW THIS FILE IS DELIVERED --
+//
+// `../skin.less` imports it inside a `@media print` block, so no media query belongs below,
+// and no `@import` does either. `mediawiki.skin.variables.less` -- which pulls in both
+// core's variable API and every `@blitzy-*` token -- `mediawiki.mixins.less`,
+// `../mixins.less` and `../fonts.less` are all already in scope at the point of import.
+//   Everything in `./screen.less` and in all eleven `../components/*.less` files is wrapped
+// in `@media screen`, so none of it reaches paper. There is no card, shadow, gradient,
+// radius, sticky position or night palette to unwind here: those rules do not exist in this
+// medium. For the same reason the night palette cannot leak onto paper --
+// `../../skins.blitzy.tokens/customProperties.less` publishes every custom property inside
+// `@media screen`, so each `var()` below resolves through its light Less fallback.
+//
+// -- NO `font-family` ANYWHERE BELOW --
+//
+// `../fonts.less` declares the four static woff2 faces at the top level of `skin.less`,
+// outside any media query, and `../../mediawiki.less/blitzy/mediawiki.skin.variables.less`
+// remaps `@font-family-base`, `@font-family-heading-main` and `@font-family-monospace`
+// globally rather than per medium. Restating any of them here would be redundant and, if it
+// ever drifted, off-brand: two media would then each carry their own copy of the brand
+// typography and nothing would keep them in step. The reference skin switches print to a
+// serif stack; Blitzy does not.
+//
+// ONE FINDING FOR WHOEVER OWNS THE BASE TYPOGRAPHY, since it is not this file's to fix.
+// Remapping those three variables makes the right value available; it does not by itself
+// apply one, and the family has to be ASSIGNED by some rule. Core assigns no base family in
+// any medium -- `normalize.less` and `elements.less` set `font-family` only on
+// `pre, code, tt, kbd, samp` -- so whichever rule assigns `@font-family-base` must sit
+// OUTSIDE `@media screen` for the brand faces to reach paper. Verified by print-rendering
+// this skin on MediaWiki 1.43.9 with only the print layer installed: every element computed
+// `font-family: "Times New Roman"`, no `font-family` rule matched `body`, and all four faces
+// stayed `status: "unloaded"` because nothing referenced them. Declaring the families here
+// would paper over that at the cost of the drift described above, so this file stays silent
+// and the assignment belongs at the media-independent level, where one declaration serves
+// both media.
+//
+// -- NO `!important` ANYWHERE BELOW --
+//
+// `SkinModule::combineFeatureAndParentStyles()` merges the feature stylesheets ahead of the
+// skin's own, so every rule here is emitted after core's print files and wins on source
+// order at equal specificity. Nothing competes for these selectors. The reference skin
+// needs `!important` and pays for it with an inline lint suppression; both are forbidden
+// here (Gate 2), and neither is necessary.
+//   One core declaration does outrank source order: `elements-print.less` sets
+// `color: inherit !important` on links. Colour is therefore applied to the containing
+// element below and inherited by the anchors inside it, which is why the footer needs no
+// `!important` of its own -- the reference skin resorts to one there.
+//
+// -- WHAT CORE ALREADY SUPPLIES, AND IS NOT RESTATED HERE (R8) --
+//
+// `../../../skin.json` declares twenty ResourceLoader skin features, eight of which ship a
+// print stylesheet: `elements`, `interface-core`, `content-body`, `content-media`,
+// `content-tables`, `interface-category`, `logo` and `toc`. Between them core already owns,
+// in this medium:
+//
+//   headings     `font-weight: bold` and `page-break-after: avoid` on `h1`-`h6` and
+//                `.mw-heading`, so only sizes and block spacing appear below.
+//   paragraphs   `margin: 1em 0`, `line-height: 1.2`, `orphans` and `widows`. None is
+//                restated. `orphans` and `widows` additionally warn under
+//                `plugin/no-unsupported-browser-features`, and `npm run lint:styles` runs
+//                at `--max-warnings 0`, so writing them would fail the build outright.
+//   links        `background: none`, `padding: 0`, and inherited colour and decoration.
+//   media        `page-break-inside: avoid` on `img` and `figure`, plus the whole
+//                thumbnail and framed-file treatment.
+//   code         `pre` and `.mw-code` at 8pt, and `ul { list-style-type: square }`.
+//   hiding       `.mw-editsection`, `.mw-editsection-like`, `.mw-indicators`,
+//                `.mw-redirectedfrom`, `#siteNotice`, `.usermessage`, `.catlinks` and
+//                `.mw-hidden-catlinks`.
+//   attribution  `.printfooter { clear: both; padding: 1em 0 }`.
+//   tables       `.wikitable` in full, at 10pt with its own pagination.
+//   legacy toc   `.toc`, `.tocnumber` and `.toctext`.
+//
+// Restating any of the above would breach R8 and spend payload twice over.
+//
+// -- FOUR REGIONS DELIBERATELY NOT STYLED BELOW --
+//
+// Each was checked against the template that emits it, and each needs nothing. They are
+// recorded so the omissions read as findings rather than as gaps:
+//
+//   `.blitzy-personal-menu`  `NavCard.mustache` renders it inside `.blitzy-nav-card`, so
+//                            hiding the card hides the menu with it.
+//   `.blitzy-content-header__indicators`
+//                            `ContentHeader.mustache` puts this class on the same element
+//                            as `.mw-indicators`, which core hides in this medium. No
+//                            leftover wrapper survives to collapse.
+//   `.blitzy-category-footer` wraps core's `#catlinks`, and the declared
+//                            `interface-category` feature hides `.catlinks` on paper.
+//                            Styling its contents would be dead weight, and hiding the
+//                            wrapper would hide a preserved selector (R2), so this file
+//                            does neither.
+//   `.blitzy-site-notice`    wraps `#siteNotice`, which core also hides here.
+//
+// In the last two cases the surviving Blitzy wrapper carries no print declaration at all,
+// which is what makes it collapse to nothing rather than leave an empty band.
+//
+
+// -- BLITZY CHROME THAT DOES NOT REACH PAPER --
+//
+// One declaration for the whole set, because they share it. Each selector is accounted for
+// here rather than beside itself, for the reason given at the top of the file:
+//
+//   `.blitzy-announcement`   a dismissible screen banner. On paper it is noise, and its
+//                            dismissal state is not something a printed page can carry.
+//   `.blitzy-nav-card`       the whole floating card in one rule. Its logo, portlet-derived
+//                            links, search form, both calls to action, the mobile
+//                            disclosure and the personal menu are all inside it, so none of
+//                            them is enumerated separately.
+//   `.blitzy-tabs`           the page-tab cluster -- Read, Edit, View history, Talk and the
+//                            variants group. Interactive page navigation is the definition
+//                            of the chrome this file removes, and the reference skin hides
+//                            every `nav` for the same reason. It is named explicitly
+//                            because it sits inside the content header rather than inside
+//                            the navigation card, so no other rule reaches it.
+//   `.blitzy-toc__checkbox`  the table-of-contents disclosure control, both halves of it.
+//   `.blitzy-toc__toggle`    The outline they disclose is kept -- see further below.
+//   `.mw-jump-link`          a skip link has no meaning on paper. Core styles this selector
+//                            in no medium at all, so its printed state is Blitzy's to set,
+//                            exactly as its screen state is.
+//
+// `.noprint` belongs to this set by behaviour but NOT to this rule; it is declared last in
+// the file instead, and the reason is recorded there.
+//
+.blitzy-announcement,
+.blitzy-nav-card,
+.blitzy-tabs,
+.blitzy-toc__checkbox,
+.blitzy-toc__toggle,
+.mw-jump-link {
+	display: none;
+}
+
+// -- THE PAGE --
+//
+// Core's `normalize.less` applies at every medium and zeroes the body margin, so without
+// this the text would run to the edge of the sheet. Padding rather than an `@page` rule:
+// declaring a page size or a page margin would add behaviour beyond the in-scope list
+// (R12), and it would compete with the margin the print dialog already applies. The value
+// is symmetric on all four sides and so carries no direction to flip (R6).
+body {
+	padding: 12pt;
+}
+
+// -- THE CONTENT HEADER --
+//
+// The hero scale is 88px, 56px or 40px on screen depending on viewport, none of which
+// belongs on paper. 24pt over a 26pt line keeps the ratio tight, which is the display
+// treatment's character, at a size a sheet can carry.
+//   The heading is reached as a descendant because the element is core's `h1` and carries
+// core's classes; `.blitzy-content-header__title` is only its wrapper. This is the same
+// selector `tests/playwright/fidelity.spec.ts` asserts the screen sizes through, so the two
+// media address the heading the same way.
+//   No rule is drawn under the heading, so it needs no `overflow: hidden` to keep floats
+// off one -- and none is wanted here, because when a wordmark is configured core's
+// `logo-print.less` brings a pseudo-element back into flow on this very heading, and
+// clipping it would suppress the mark on every printed page.
+.blitzy-content-header {
+	.mw-first-heading {
+		margin-bottom: 8pt;
+		font-size: 24pt;
+		line-height: 26pt;
+	}
+
+	// Kept rather than hidden. The tagline resolves to core's `tagline` message, which
+	// names the wiki the page came from: that is provenance, not a repeat of the title, and
+	// it complements the URL that `.printfooter` prints. Its vertical margins are core's
+	// `p` rule and are left alone.
+	&__tagline {
+		color: @color-subtle;
+		font-size: 9pt;
+	}
+}
+
+// -- THE CONTENT BODY --
+//
+// One inherited base size does the work of several rules. Setting it on the container
+// rather than on `p` and `li` separately means table contents keep the 10pt core gives them
+// through `.wikitable`, and `pre` keeps its 8pt, because both are targeted directly and
+// inheritance yields to that. It also avoids by construction the trap the reference skin
+// documents, where sizing list items directly makes an inline list inside a table larger
+// than the table around it.
+//   Core owns paragraph margins, leading, orphans and widows, and none is restated.
+// Headings do need explicit sizes, because the browser defaults are proportional: inherited
+// from 11pt they would put `h5` and `h6` below body size and invert the outline. Their
+// weight and their `page-break-after: avoid` are core's and are left alone.
+.blitzy-content-body {
+	font-size: 11pt;
+
+	.mw-heading2,
+	h2 {
+		margin-top: 14pt;
+		margin-bottom: 5pt;
+		font-size: 17pt;
+		line-height: 21pt;
+	}
+
+	.mw-heading3,
+	h3 {
+		margin-top: 12pt;
+		margin-bottom: 4pt;
+		font-size: 14pt;
+		line-height: 18pt;
+	}
+
+	.mw-heading4,
+	h4,
+	.mw-heading5,
+	h5,
+	.mw-heading6,
+	h6 {
+		margin-top: 10pt;
+		margin-bottom: 3pt;
+		font-size: 12pt;
+		line-height: 16pt;
+	}
+}
+
+// -- THE TABLE OF CONTENTS --
+//
+// The disclosure control is gone but the outline stays: it is one of the more useful things
+// a printed article carries, and the folder requirement scopes the hiding to the control
+// alone. `display: table` shrinks the block to its contents instead of letting it stretch
+// the measure, and the page-break declarations keep the outline whole rather than split
+// across a sheet boundary.
+//   The disclosed content is declared visible outright. The collapse that hides it below
+// 1024px is written in `@media screen` and cannot reach this medium, but stating the printed
+// state explicitly means it never depends on that remaining true, and it holds with
+// scripting disabled because no rule below is conditional on a toggled state (R4).
+//   Core's legacy `.toc`, `.tocnumber` and `.toctext` are untouched: the `toc` feature's own
+// print stylesheet owns them, and Blitzy renders `.blitzy-toc*` instead (R8).
+.blitzy-toc {
+	display: table;
+	margin-bottom: 14pt;
+	page-break-before: avoid;
+	page-break-after: avoid;
+	page-break-inside: avoid;
+
+	&__title {
+		display: block;
+		margin-bottom: 4pt;
+		font-size: 12pt;
+		font-weight: bold;
+	}
+
+	&__content {
+		display: block;
+	}
+
+	&__list {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+
+		// Nested levels indent through core's logical-property mixin, so the offset
+		// follows the document direction instead of being pinned to one side (R6).
+		.blitzy-toc__list {
+			.padding-inline( 12pt, 0 );
+		}
+	}
+
+	&__link {
+		font-size: 10pt;
+	}
+}
+
+// -- THE PRINT ATTRIBUTION BLOCK --
+//
+// Core shows and spaces `.printfooter` on paper and hides it on screen; its `clear: both`
+// and its vertical padding are left in place. What is added is a rule above it and a size
+// that sets the attribution URL apart from the prose it follows.
+.printfooter {
+	margin-top: 14pt;
+	border-top: 1pt solid @border-color-base;
+	padding-top: 8pt;
+	font-size: 9pt;
+}
+
+// -- THE SITE FOOTER --
+//
+// Kept, deliberately. It carries the copyright statement and the last-modified date, which
+// are the two things a printed page most needs and cannot recover from its own text. The
+// reference skin hides `#footer` in one of its two print files and then styles it in the
+// other; that contradiction is not reproduced.
+//   Colour is set on the item rather than on the anchors inside it, because core forces
+// `color: inherit !important` on links: an anchor therefore takes its colour from here and
+// no `!important` is needed to reach it. One rule covers all three rows through the shared
+// class, including the icon row that the `.noprint` rule at the foot of this file removes --
+// and that rule has to come after this one, for the reason recorded beside it.
+.blitzy-footer {
+	margin-top: 12pt;
+	border-top: 1pt solid @border-color-base;
+	padding-top: 6pt;
+
+	&__row {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	&__item {
+		display: block;
+		margin-bottom: 4pt;
+		color: @color-subtle;
+		font-size: 9pt;
+	}
+}
+
+// The last-modified line is the footer's primary information on paper, so it is set in the
+// emphasised text colour at body size against the muted rows around it. Core's id is the
+// only hook the item offers -- there is no Blitzy class specific to it -- and a single id is
+// what `selector-max-id` allows.
+#footer-info-lastmod {
+	color: @color-emphasized;
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+// -- `.noprint`, WHICH MUST HAVE THE LAST WORD --
+//
+// This rule is forced rather than chosen. `SkinComponentFooter` puts `noprint` on the
+// footer-icon row AND on every icon item inside it, and it is a long-standing editorial
+// contract in article wikitext besides -- yet no core stylesheet defines a rule for the class
+// in any medium. Without this declaration the "Powered by MediaWiki" row prints.
+//
+// ITS POSITION AT THE END OF THE FILE IS LOAD-BEARING. DO NOT MOVE IT UP, and do not fold it
+// back into the chrome rule at the top. `.noprint` is a single class, so it ties on
+// specificity with every other single-class rule here and can only win on source order. It
+// collides for real: the footer-icon items core marks `noprint` are the same elements this
+// file styles as `.blitzy-footer__item`, and that rule sets `display: block`. Measured in a
+// print rendering on MediaWiki 1.43.9, with the hide grouped at the top,
+// `li#footer-poweredbyico.blitzy-footer__item.noprint` computed `display: block` rather than
+// `none`; it escaped notice only because its parent row was hidden too, and an item placed in
+// a visible row rendered at 1248x15 and would have printed. Declared here it wins, and the
+// separation is honest about the concerns being different: everything above is Blitzy's own
+// chrome, whereas `noprint` is a contract asserted by core and by editors that this
+// stylesheet has no business overriding from any distance.
+.noprint {
+	display: none;
+}

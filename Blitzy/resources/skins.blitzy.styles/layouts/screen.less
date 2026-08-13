@@ -1,0 +1,541 @@
+//
+// == Blitzy skin -- screen layout ==
+//
+// The page skeleton for screen media. Every rule below divides the rendered page into
+// regions and arranges the Blitzy components inside them: where a region sits, how much
+// room it gets, and how that changes with the viewport. Nothing below says how anything
+// LOOKS.
+//
+// -- THE DISCIPLINE, WHICH IS A RULE AND NOT A PREFERENCE --
+//
+// No colour value appears in this file. Not a literal -- those are denied everywhere except
+// `../../skins.blitzy.tokens/tokens.less`, and that exemption is granted per file in
+// `.stylelintrc.json` and does not reach this folder (R3) -- and not a colour TOKEN either,
+// because colour is not a layout concern. It belongs to the eleven files in `../components/`
+// and to the mode-aware palette in `../../skins.blitzy.tokens/customProperties.less`.
+// Neither does any `font-family`, `font-size`, `font-weight`, `line-height` or
+// `letter-spacing`, nor any `background`, `border-color`, `border-radius` or `box-shadow`.
+// A reader who wants to know what the page looks like should be able to establish that this
+// file cannot be the answer.
+//
+// The reference skin's equivalent file states the same discipline in its own header and then
+// sets a background colour and a text colour on `body` four lines later. That divergence is
+// deliberate here: this file sets neither.
+//
+// -- HOW THIS FILE IS DELIVERED --
+//
+// `skin.json` registers exactly one entry point for the `skins.blitzy.styles` module,
+// `../skin.less`, and that file supplies both media wrappers:
+//
+//     @import 'mediawiki.skin.variables.less';   // core variable API + every @blitzy- token
+//     @import 'mediawiki.mixins.less';           // core's public mixin library
+//     @import './mixins.less';                   // the .blitzy-mixin-*() library
+//     @import './fonts.less';
+//     @media screen { @import './layouts/screen.less';  ... the eleven components ... }
+//     @media print  { @import './layouts/print.less'; }
+//
+// Three consequences follow, and each is a prohibition rather than a note:
+//
+//   * THERE IS NO `@import` IN THIS FILE AND NONE MAY BE ADDED. The core variable API, the
+//     core mixin library and the `@blitzy-*` token surface are already in scope by the time
+//     this file is read -- `./mixins.less` imports the first two and re-exports them, and
+//     the skin-variables file it imports pulls in `tokens.less` itself. Re-importing would
+//     duplicate nothing and cost nothing in Less, but it would misrepresent where this
+//     file's vocabulary comes from, and `wikimedia/no-at-import-css` polices the CSS form.
+//   * THERE IS NO `@media screen` WRAPPER IN THIS FILE. `skin.less` owns it. Wrapping again
+//     would nest one media query inside another and change the emitted CSS.
+//   * NESTED `@media ( min-width: ... )` AND `@media ( max-width: ... )` BLOCKS ARE CORRECT
+//     and are used freely below. Less bubbles them out to
+//     `@media screen and ( min-width: ... )`.
+//
+// This file is imported FIRST inside that `@media screen` block, ahead of all eleven
+// component stylesheets. Any selector collision therefore resolves in the components'
+// favour, which is the intended arrangement: this file lays regions out, the components
+// decorate them, and a component never has to fight the skeleton for the last word.
+//
+// -- WHY EVERY COMMENT HERE IS A `//` LINE COMMENT --
+//
+// Less strips `//` comments and PRESERVES `/* ... */` comments in its output. Documentation
+// written in the block form would ship to every reader of every page and be measured
+// against the module's payload budget; written this way it costs zero bytes. The package's
+// other stylesheets follow the same convention for the same reason. The one place the block
+// form is mandatory is a `/* @noflip */` annotation, and there is none here: see R6 below.
+//
+// -- WHAT THIS FILE MAY AND MAY NOT REACH FOR (R7) --
+//
+// The core ids and classes positioned below -- `.mw-jump-link`, `#content` / `.mw-body`,
+// `#bodyContent`, `#contentSub` and the content headings -- are structural page landmarks,
+// not module CSS, so laying them out here is lawful. Two of them need no core selector at
+// all, because the templates put a Blitzy class on the very same element: `#content` and
+// `.mw-body` are `main.blitzy-content-body`, and `.mw-indicators` is
+// `div.blitzy-content-header__indicators`. Styling the Blitzy class instead is not a
+// cosmetic preference -- it means this file touches a core-owned name only where the markup
+// leaves it no alternative.
+//
+// No core MODULE selector appears here. The edit form, diff, history, pager, search,
+// changes-list, preferences, help-link, interface-helper, OOUI and Codex families are
+// restyled from the twelve files in `../../../skinStyles/`, each named for the module it
+// overrides. Parser output -- `.mw-parser-output` descendants, `.wikitable`, `.infobox`,
+// `.hatnote`, `.reflist` -- is R7's documented exception, but it belongs to
+// `../components/Prose.less`, `Tables.less` and `Infobox.less` on folder-ownership grounds
+// and is left alone here.
+//
+// -- WHAT CORE ALREADY SUPPLIES, VERIFIED RATHER THAN ASSUMED (R8) --
+//
+// `skin.json` declares twenty ResourceLoader skin features on this module, and
+// `SkinModule::getStyles()` emits the feature stylesheets BEFORE the module's own, so
+// anything below at equal specificity layers over them rather than under them. Re-authoring
+// what they already provide would breach R8 and spend payload twice, so it is not done:
+// `content-body` clearfixes `.mw-body-content`, `elements` resets the elements and gives
+// every heading `word-break: break-word` and a block formatting context, `interface-core`
+// hides empty portlets and the print footer on screen, `accessibility` owns the
+// reduced-motion block, and `toc`, `content-media`, `interface-message-box`,
+// `interface-site-notice` and `interface-category` cover their own regions.
+//
+// Two of those declarations were checked against the pinned 1.43.9 runtime because the
+// answer changes what this file must do:
+//
+//   * `interface-subtitle` IS declared, so core already sets `#siteSub { display: none }`.
+//     No Blitzy template emits `#siteSub` at all, so a rule for it here would be dead CSS
+//     duplicating a rule that is already in the payload. It is therefore absent, and the
+//     tagline it would have duplicated is rendered once, by `ContentHeader.mustache`, as
+//     `.blitzy-content-header__tagline`. What core's file does NOT reach is `#contentSub`:
+//     it styles `#mw-content-subtitle` and `#contentSub2`, and this skin's `ContentBody`
+//     emits the traditional `#contentSub`. That gap is closed below; `#contentSub2` is not
+//     touched, because core already spaces it.
+//   * `interface-indicators` IS declared, and it consists of the single rule
+//     `.mw-indicators { float: right; }`, written for skins that emit the indicators BEFORE
+//     the page title. This skin emits them after it, inside a centred content header, so
+//     the inherited float has to be undone rather than relied on. That is done below, on the
+//     Blitzy class, so core's rule is layered over and not re-authored.
+//
+// -- THE THREE DECLARATIONS WHOSE ABSENCE FAILS SILENTLY --
+//
+// Each is called out where it is written, and collected here because none of the three is
+// visible in review as a missing line:
+//
+//   1. `align-items: flex-start` on `.blitzy-content-layout` in its two-column state. The
+//      flex default stretches the table-of-contents item to the full height of the row, and
+//      a sticky element that already fills its containing block has nowhere to travel, so
+//      `../components/TableOfContents.less` stops sticking with no error anywhere.
+//   2. `min-width: 0` on both columns. A flex item's automatic minimum size is its
+//      content's minimum, so one wide table widens the column past the viewport, breaks the
+//      zero-horizontal-overflow threshold at every width, and defeats the below-768px
+//      scroll container in `../components/Tables.less` because that container's own
+//      ancestor has already overflowed.
+//   3. No `overflow` other than `visible` on `.blitzy-page`, `.blitzy-page__inner` or
+//      `.blitzy-content-layout`. All three are ancestors of the sticky card, and any
+//      scroll-clipping ancestor -- as would `contain: paint`, a `filter` or a `transform` --
+//      makes `position: sticky` a no-op. This is why the reference skin's `overflow: hidden`
+//      float-containment trick is unavailable here, and why no substitute is needed: core's
+//      `content-body` feature already clearfixes `.mw-body-content`, which is what contains
+//      the floated infobox and the floated thumbnails.
+//
+// -- TOKEN ACCOUNTING (Gate 12) --
+//
+// Consumed here: `@blitzy-size-nav-height` (the reserved navigation band, and the document
+// scroll padding derived from the same expression), `@blitzy-min-width-breakpoint-desktop`
+// (the two-column arrangement), `@blitzy-max-width-breakpoint-tablet` (its stacked
+// counterpart) and `@blitzy-size-infobox-width` (the sidebar column). No local Less variable
+// is declared: where a token exists it is used, and the substrate exact matches `tokens.less`
+// catalogues -- `@spacing-150`, `@spacing-50`, `@z-index-base`, `@z-index-fixed` -- are taken
+// from the core variables API rather than redeclared.
+//
+// The 768px pair, `@blitzy-min-width-breakpoint-tablet` and its companion
+// `@blitzy-max-width-breakpoint-mobile`, is deliberately NOT consumed here. By the design's
+// own accounting, recorded in `tokens.less`, that switch point governs four behaviours and
+// this file owns none of them: the navigation disclosure belongs to
+// `../components/NavCard.less`, the card-grid column count to `Cards.less`, the wikitable
+// scroll container to `Tables.less` and the middle band of the display type scale to
+// `ContentHeader.less`. The page skeleton itself measures the same at 768px as at 767px, so
+// writing a rule at that bound would be inventing responsive behaviour the specification
+// does not describe (R12) and would leave a rule in the payload that no region justifies.
+// 1024px is this file's bound, and it is where its media queries sit.
+//
+// That is not this file's opinion about the division of labour; three other files in the
+// package state it, which is what makes the pair's audit satisfiable without a rule here:
+//   * `tokens.less` enumerates the four behaviours 768px governs, and none is a skeleton
+//     region; it then justifies the mobile companion specifically by the navigation
+//     disclosure and the wikitable scroll container.
+//   * `../mixins.less` documents `.blitzy-mixin-scroll-container()` as consumed by
+//     `../components/Tables.less` and prints the caller's own
+//     `@media screen and ( max-width: @blitzy-max-width-breakpoint-mobile )` wrapper,
+//     because the mixin deliberately emits no query of its own.
+//   * `../../../includes/templates/ContentHeader.mustache` names
+//     `@blitzy-min-width-breakpoint-tablet` as the token `ContentHeader.less` switches the
+//     display bands on, and records that at 768px the navigation card is still its full
+//     height and the card grid still two columns.
+// Driven in a browser at 767px, 768px and 769px, a field-by-field comparison of this
+// skeleton's geometry found every non-width-dependent measurement identical across all
+// three, so there is no behaviour at that bound for a rule to express.
+//
+// -- MEASURES AND UNITS (R11) --
+//
+// Four values are specified exactly and must compute exactly: the 24px viewport inset, the
+// 76px navigation card, the 320px sidebar column and the 768px and 1024px switch points.
+// None is converted to `rem`, because a computed-style assertion compares the specified
+// value and a `rem` result would depend on the root font size. No `calc()` appears in a
+// media query either: the breakpoint companions are Less arithmetic already parenthesised in
+// `tokens.less`, which is a correctness requirement and not formatting (upstream T367103).
+//
+// No element below carries both a declared width and a padding, so no `box-sizing`
+// declaration is needed and none is added -- core deliberately applies no global border-box
+// reset, and introducing one here would change how every core module's CSS computes its
+// widths.
+//
+// @see ../skin.less for the two media wrappers and the import order
+// @see ../mixins.less for the .blitzy-mixin-*() library and the core mixin re-export
+// @see ../../skins.blitzy.tokens/tokens.less for every @blitzy-* value referenced below
+// @see ./print.less for the print counterpart, the only other file in this folder
+//
+
+// Fragment navigation and reverse tabbing. The floating navigation card occupies the top of
+// the viewport, so a scroll-into-view that puts its target flush against the top of the
+// scrollport hides that target underneath the card. Scroll padding on the scroll container
+// is the mechanism that fixes it for EVERY target, whatever the target happens to be: on
+// the pinned runtime a section anchor is a `span.mw-headline` inside the heading rather than
+// the heading itself, so a rule on headings alone would miss the case this exists for.
+//
+// The band is the card's height plus the viewport inset above it, the same expression the
+// reservation on `.blitzy-page__inner` spends, so the two can never drift. It is budgeted
+// WITH the heading margin further down rather than independently: scroll padding on the
+// container and scroll margin on the target sum, so the band lives here and only the small
+// breathing gap lives there.
+//
+// Applied unconditionally. The reference skin gates its equivalent on a `.client-js` class
+// because its sticky header is a scripted feature; the Blitzy card floats with or without
+// scripting, so gating this would leave fragment navigation broken in exactly the
+// no-JavaScript configuration that has to keep working (R4).
+html {
+	scroll-padding-top: ( @blitzy-size-nav-height + @spacing-150 );
+}
+
+// The skip link, which `skin.mustache` emits as the first element of the skin's own markup.
+//
+// Core styles `.mw-jump-link` nowhere -- verified across the whole of core's `resources/`
+// tree on the pinned runtime -- and this skin has no typography stylesheet for it to land
+// in, so if this file does not own it a visible "Jump to content" link renders above the
+// chrome on every page and in every committed capture.
+//
+// Hidden with core's `.mixin-screen-reader-text()`, which R10 names as the one approved
+// visually-hidden helper; a bespoke `.sr-only` of this skin's own is forbidden, and
+// `../mixins.less` is forbidden from defining one. The mixin carries its own `!important`
+// and its own inline lint exemption inside core's file, so neither reaches Blitzy source and
+// the zero-warning build is unaffected. Scoping it to `:not( :focus )` rather than undoing
+// each of its declarations on focus is what leaves the focused link with a clean slate.
+.mw-jump-link:not( :focus ) {
+	.mixin-screen-reader-text();
+}
+
+// Focused, the link returns to the flow at the top of the document, above the announcement
+// band and the navigation card, and pushes them down. That placement is chosen for a reason
+// this file cannot work around: a link floated over the chrome would need a fill of its own
+// to stay legible against it, and this file may not write one. In the flow it is read
+// against the page surface and needs nothing.
+//
+// `position: relative` with a layout z-index keeps the flow position while lifting the link
+// above the chrome in paint order, so it stays visible even where the card is taken out of
+// the flow and positioned against the viewport. The padding is the focus indicator's
+// clearance -- the browser's own outline is left exactly as it is, since removing or
+// replacing it would defeat the affordance for the keyboard user this element exists for.
+.mw-jump-link:focus {
+	display: block;
+	position: relative;
+	z-index: @z-index-fixed;
+	.padding-inline( @spacing-150, @spacing-150 );
+	padding-top: @spacing-50;
+	padding-bottom: @spacing-50;
+}
+
+// The page surface: everything below the chrome, full width, with the gutters the design
+// specifies.
+//
+// The gutter is `@spacing-150`, exactly 24px, taken from the core variables API rather than
+// redeclared as a Blitzy token because `tokens.less` catalogues it as a substrate exact
+// match. It is the same figure the design insets the floating navigation card by, which is
+// what aligns the content measure with the card above it, and it is emitted through core's
+// `.padding-inline()` so it flips for right-to-left instead of being frozen into a
+// `padding-left` / `padding-right` pair (R6). The closing inset matches, so the footer does
+// not finish flush against the bottom of the viewport; that one is block-axis and needs no
+// flip-aware emitter.
+//
+// `position: relative` with the descriptive layout z-index forms a stacking context for the
+// page, so anything a component positions inside it stays behind the chrome rather than in
+// front of it. The descriptive family -- `@z-index-base` and, for the skip link above,
+// `@z-index-fixed` -- is the one core annotates as being for layout purposes; the
+// `@z-index-stacking-*` family is for layering inside a component and is left to the
+// component files.
+//
+// The hairline top padding is a margin-collapse guard: a zero top padding lets the first
+// child's top margin escape through the surface, and a non-zero one does not. The other way
+// to stop the collapse is a scroll container on this element, which is NOT used -- the
+// reference skin records real bugs from `overflow-y: scroll` here (T270146, T271868), and
+// for this skin it would additionally be fatal, because this element is an ancestor of the
+// sticky table-of-contents card and any scroll-clipping ancestor makes `position: sticky` a
+// no-op.
+.blitzy-page {
+	position: relative;
+	z-index: @z-index-base;
+	.padding-inline( @spacing-150, @spacing-150 );
+	padding-top: 0.05px;
+	padding-bottom: @spacing-150;
+}
+
+// The content measure, centred. Symmetric auto margins, so the centring is flip-neutral and
+// needs no directional emitter.
+//
+// The measure is a geometry literal because no token declares it: `tokens.less` has no
+// content-measure value, and R3's prohibition scopes to colour, so a commented literal is
+// lawful where no token exists. It is derived rather than chosen -- the reference capture is
+// a 1440px artboard and the surface spends 24px of it on each gutter, which leaves 1392px.
+// At that width the content therefore measures exactly as wide as the navigation card above
+// it; wider viewports centre the measure and widen the gutters instead.
+//
+// The top padding reserves the band the floating navigation card occupies. Its value is
+// derived, not chosen: the card's own height plus the viewport inset above it, written as an
+// expression over the two shared tokens so this file and `../components/NavCard.less` cannot
+// drift apart. Whether the card is taken out of the flow is that file's decision, and the
+// reservation is written to be correct either way -- if the card is positioned against the
+// viewport the band is exactly the room it needs, and if it stays in the flow the band is
+// breathing space above the content header. The band does NOT shrink below the disclosure
+// breakpoint even though the card's 76px figure is documented as a wide-band value, because
+// the narrow bar's height is not a fixed figure that this file could derive: the two
+// call-to-action pills sit outside the disclosure target and may wrap. Over-reserving costs
+// whitespace; under-reserving would put the top of the content underneath the bar.
+.blitzy-page__inner {
+	max-width: 1392px;
+	margin: 0 auto;
+	padding-top: ( @blitzy-size-nav-height + @spacing-150 );
+}
+
+// The relationship between the table of contents and the content body -- the one place their
+// arrangement is authored, and the arrangement that lets
+// `../components/TableOfContents.less` stick the card and `../components/Infobox.less` float
+// the infobox.
+//
+// `skin.mustache` puts exactly two regions in here, the table of contents first and the
+// content body second, and may put a third after them: core's after-content hook output is
+// emitted outside `</main>` and renders as a sibling whenever an extension uses it. The
+// stacking sequence is therefore stated explicitly with `order` instead of being inherited
+// from source order, so it is deterministic and cannot change if the template's partial
+// sequence is ever edited. Naming the two known regions alone would not be enough -- an
+// unnamed third child keeps the initial `order: 0` and would sort in FRONT of both -- so the
+// base rule puts every child last and the two named regions are pulled ahead of it. THESE
+// ARE THE ONLY `order` DECLARATIONS IN THE PACKAGE and this is the single place the sequence
+// can be changed.
+//
+// The sequence matches reading order at both widths, which is what keeps the visual order
+// and the tab order in agreement (R10): the disclosure precedes the content it summarises
+// when the two are stacked, and leads the row when they sit side by side. Leading, not
+// trailing, and for a measured reason: the infobox floats to the trailing side INSIDE the
+// content column, so a trailing sidebar column would sit straight against it.
+//
+// This is a flex container at every width -- a column when stacked, a row when there is room
+// -- because `order` has no effect in block layout. The stacked state keeps the default
+// cross-axis stretch so both regions span the measure; the two-column state replaces it, and
+// that replacement is the declaration the sticky card depends on.
+//
+// `min-width: 0` on both regions cancels the automatic minimum size of a flex item at every
+// width. It is the one declaration in this package that stands between a wide sortable table
+// and a horizontally scrolling page, and no component file can supply it: the property has to
+// be on the flex item, and the flex items are the two regions this file arranges.
+.blitzy-content-layout {
+	display: flex;
+	flex-direction: column;
+
+	> * {
+		order: 3;
+	}
+
+	> .blitzy-toc {
+		order: 1;
+		min-width: 0;
+	}
+
+	> .blitzy-content-body {
+		order: 2;
+		min-width: 0;
+	}
+}
+
+// Stacked. The disclosure sits directly below the content header and above the body, so the
+// two regions need a block-axis gap; it is the same `@spacing-150` the two-column state
+// spends on the inline gutter, so the rhythm reads identically in both arrangements.
+//
+// Nothing else has to be undone here. The two-column declarations are scoped to the
+// min-width query below rather than declared globally and cancelled, so there is no sidebar
+// column width, no cross-axis alignment and no sticky offset of this file's to unwind -- and
+// the sticky positioning and the inline-disclosure treatment themselves belong to
+// `../components/TableOfContents.less`, which owns unwinding its own.
+//
+// The bound is the exclusive companion of the 1024px switch point, 1023px, computed in
+// `tokens.less` as Less arithmetic and already parenthesised there.
+@media ( max-width: @blitzy-max-width-breakpoint-tablet ) {
+	.blitzy-content-layout > .blitzy-toc {
+		margin-bottom: @spacing-150;
+	}
+}
+
+// Side by side, from 1024px. The bound is inclusive, so the two-column arrangement is in
+// force AT 1024px and the stacked rule above stops one pixel below it.
+//
+// `align-items: flex-start` IS THE DECLARATION THAT MAKES THE STICKY CARD WORK. The flex
+// default, `stretch`, sizes the table-of-contents item to the full height of the row; a
+// sticky element that already fills its containing block has no distance to travel, so the
+// card simply never sticks, with nothing logged and nothing visibly wrong in review. Do not
+// remove it, and do not replace it with a per-item `align-self` in the component file.
+//
+// The sidebar takes a definite width and is not allowed to grow or shrink. There is no
+// table-of-contents width token, and rather than invent a literal the column takes
+// `@blitzy-size-infobox-width`: the design specifies that the sticky card shares the
+// infobox's chrome, so sharing its width keeps the two sidebar surfaces from drifting apart
+// and keeps the value token-driven. The gutter is emitted as a flip-aware trailing margin
+// rather than as `gap`, which is not a stylistic choice -- flex `gap` raises an
+// unsupported-feature warning under this package's browser-support profile, and the
+// zero-warning build admits neither the warning nor the inline suppression that would
+// silence it (Gate 2).
+//
+// The content column takes the remainder. Its `min-width: 0` is declared once, above, so it
+// holds here too: without it the 320px floated infobox plus a wide table would push this
+// column past the row.
+//
+// ONE MEASURED SUBTLETY, RECORDED SO IT IS NOT MISREAD AS A DEFECT. Core applies no global
+// border-box reset, so `320px` here sizes the sidebar's CONTENT box and the card's own
+// padding and border sit outside it: measured in a browser, `getComputedStyle().width` reads
+// exactly 320px while `getBoundingClientRect().width` reads 320px plus that decoration. That
+// is deliberate and is the arrangement that keeps the two sidebar surfaces consistent,
+// because `../components/Infobox.less` declares the same token as a plain `width` under the
+// same content-box regime, so both cards resolve to the same rendered width. An assertion
+// against this column should therefore read the computed width, and `box-sizing` must NOT be
+// switched to border-box on this column alone -- that would shrink it below the infobox and
+// reintroduce exactly the drift the shared token removes.
+@media ( min-width: @blitzy-min-width-breakpoint-desktop ) {
+	.blitzy-content-layout {
+		flex-direction: row;
+		align-items: flex-start;
+	}
+
+	.blitzy-content-layout > .blitzy-toc {
+		flex: 0 0 @blitzy-size-infobox-width;
+		.margin-inline( 0, @spacing-150 );
+	}
+
+	.blitzy-content-layout > .blitzy-content-body {
+		flex: 1 1 auto;
+	}
+}
+
+// The content region. One element wearing three names -- `main#content.mw-body` -- so
+// addressing the Blitzy class here styles the core landmark without naming it, and the
+// preserved `#content` and `.mw-body` hooks stay exactly as the template emitted them (R2).
+//
+// Positioned so the region is a predictable containing block for anything a component or
+// core interface fragment absolutely positions inside the content, and given the descriptive
+// layout z-index so content paints beneath the chrome rather than through it. No block-axis
+// spacing is added: the content header above supplies its own closing rhythm, and the
+// arrangement rule already spaces this region from the disclosure when the two are stacked.
+//
+// The reference skin also forces `direction: ltr` on its equivalent selector. That is NOT
+// reproduced: it would freeze the content region left-to-right and defeat right-to-left
+// rendering, which the flip-aware authoring throughout this package exists to preserve (R6).
+//
+// The nested rule is the other half of the fragment-navigation budget opened on `html` at
+// the top of this file. The band itself is spent there, as scroll padding on the scroll
+// container, so only a small breathing gap is spent here, as scroll margin on the target --
+// the two sum, and budgeting them together is what stops the offset being counted twice.
+// It is scoped to the headings inside the content region rather than to `.mw-heading`,
+// because that wrapper carries no fragment identifier on either heading DOM the platform
+// produces, and because on the pinned runtime, whose legacy heading markup is the default,
+// the wrapper is not emitted at all. Written this way the gap applies to the heading element
+// under both shapes, and core supplies no heading scroll margin of its own to layer over.
+//   BOTH SHAPES WERE OBSERVED WHILE VALIDATING THIS, WHICH IS WHY IT IS WRITTEN THIS WAY.
+//   The pinned 1.43 runtime emits the legacy form, where the anchor is a span INSIDE the
+//   heading, and the development checkout emits the modern form, where the heading carries
+//   the anchor itself. The scroll padding above covers the first case because it applies to
+//   whatever the target turns out to be; this rule adds the extra gap in the second. Driven
+//   in a browser against the modern form, every section anchor landed 123.5 to 124.4 pixels
+//   down -- the 100px band plus this 24px gap, summing exactly as budgeted -- and with the
+//   band removed the same anchors would have landed 76px UNDER the card.
+.blitzy-content-body {
+	position: relative;
+	z-index: @z-index-base;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		scroll-margin-top: @spacing-150;
+	}
+}
+
+// The subtitle region, which holds core's redirect notice and subpage trail. `ContentBody`
+// emits `#contentSub` unconditionally, and it is visually empty on most pages, so the region
+// must reserve space only when it actually has something to show.
+//
+// THE GUARD IS ON THE INNER REGION, AND THE OUTER ONE WOULD NOT WORK. MEASURED, NOT ASSUMED.
+// `Skin::prepareSubtitle()` takes `$withContainer = true` by default and therefore ALWAYS
+// wraps the subtitle in `div#mw-content-subtitle`, empty or not -- confirmed in core's source
+// and confirmed in the rendered output of both the pinned 1.43 runtime and the development
+// checkout. `#contentSub` consequently always has exactly one child node, and `:empty`
+// requires zero, so a `#contentSub:not( :empty )` guard matches on EVERY page view and
+// discriminates nothing: driven in a browser, it spent the margin identically on a page with
+// no subtitle and on a redirected one. The inner region is the element that genuinely is
+// `:empty` when there is nothing to show, so that is where the guard belongs, and there it
+// was measured to suppress and to apply exactly as intended.
+//
+// Only one id is named, which keeps the selector inside the package's `selector-max-id`
+// limit -- the outer and inner ids could not have been combined into one descendant selector
+// even if that had been the better shape.
+//
+// Spacing only, and only the side core leaves free. Core's declared `interface-subtitle`
+// feature already gives this region its size, its colour, its indent and its closing margin;
+// this adds the opening separation from the content header above it and nothing else, which
+// is layering over a feature rather than re-authoring it (R8). `#contentSub2` is not
+// addressed at all, because the same feature already spaces it.
+#mw-content-subtitle:not( :empty ) {
+	margin-top: @spacing-150;
+}
+
+// Indicators. The wrapper carries core's `.mw-indicators` alongside the Blitzy class, so
+// extensions and gadgets that append into it keep working; addressing the Blitzy class here
+// layers over core's declared `interface-indicators` feature rather than re-authoring it.
+//
+// That feature is a single `float: right`, written for skins that emit the indicators BEFORE
+// the page title. This skin emits them after it, in a centred content header, so the
+// inherited float would pull them alongside whatever follows and pull the hero title off
+// centre. Returning them to the flow is the whole of the fix; where they sit within the
+// header is that component's business. `none` names no side, so nothing here needs a flip
+// annotation, and the region is left with no border, padding or background, which is what
+// lets it render empty -- as it does on the special pages in the capture matrix -- without
+// leaving a mark.
+.blitzy-content-header__indicators {
+	float: none;
+}
+
+// The page title region. The hero renders at 88px, 56px and 40px, so a single long unbroken
+// word -- a chemical name, a long identifier -- is wide enough to push the page sideways at
+// the narrowest viewport and break the zero-horizontal-overflow threshold.
+//
+// The guard sits on this skin's own wrapper rather than on the heading core supplies inside
+// it, for two reasons: the property is inherited, so one declaration covers the heading and
+// anything else the region ever holds, and core's own protection for the heading is a
+// deprecated `word-break` alias in a stylesheet this skin does not own. The type scale
+// itself belongs to `../components/ContentHeader.less`; this is the layout consequence of it.
+//
+// WHERE THIS GUARD STOPS, which is a boundary and not an omission. It covers the title
+// region only. An unbreakable token inside parser output -- a long identifier in a
+// paragraph, a bare URL, a compound noun -- is broken by the layers that own that text, and
+// that is where both core and the reference skin put the same guard rather than blanketing
+// the content region: core breaks headings, message boxes, free external links and captions,
+// and the reference skin breaks links and its own sidebar text. Measured here, a synthetic
+// 71-character token in a paragraph overflows the narrow measure while EVERY skeleton box
+// still ends inside the viewport, which is the division of responsibility working as
+// intended: the arrangement above keeps the regions within the measure, and breaking the
+// text inside them belongs to `../components/Prose.less`. Blanketing the content region from
+// here would silently change how tables, code and preformatted content break, which is
+// user-visible behaviour this file has no mandate to alter.
+.blitzy-content-header__title {
+	overflow-wrap: break-word;
+}
