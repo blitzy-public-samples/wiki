@@ -1,0 +1,44 @@
+# Paths stylelint must not lint.
+#
+# Patterns use gitignore syntax and are anchored to this directory, the package
+# root that `npm run lint:styles` runs from.
+#
+# This list is deliberately minimal, and it is meant to stay that way. Every
+# entry here is silently exempt from token indirection (R3) and from flip-safe
+# directional authoring (R6), because an ignored file is an unchecked file. Only
+# installed dependency trees and generated reports belong here. Authored Blitzy
+# code never does.
+#
+# Do not add:
+#
+#   * /resources/, /skinStyles/, or any individual stylesheet. Every authored
+#     stylesheet stays linted — the token modules, the component stylesheets,
+#     the layouts, the core-variable override and all twelve skinStyles
+#     overrides. Keeping them in the lint surface is how R3 and R6 are verified.
+#
+#   * resources/skins.blitzy.tokens/tokens.less. It is the one file allowed to
+#     hold colour literals, and that exemption is granted in the `overrides`
+#     block of .stylelintrc.json, where a reviewer reading the rule
+#     configuration can see it. Listing the file here instead would hide the
+#     same exemption behind a second, invisible mechanism.
+#
+#   * /design/. design/reference/blitzy-tokens.source.less is committed
+#     reference material rather than authored code, but it lints clean exactly
+#     as its origin wrote it, so it needs no exemption and stays linted.
+#
+#   * /screenshots/. The captures are PNGs and their audits are JSON; no tool
+#     writes a stylesheet there.
+#
+#   * a stylesheet that fails. When stylelint reports a problem, fix the
+#     stylesheet. This file is not an escape hatch from the zero-warning build
+#     (Gate 2), and inline suppression directives are prohibited too.
+
+# Installed dependency trees. Neither is committed; both are recreated by
+# `npm ci` and `composer install`.
+/node_modules/
+/vendor/
+
+# Generated coverage reports. These are committed deliverables, but the HTML
+# assets inside them are stylesheets shipped by the coverage reporters, not
+# code this package authors or controls.
+/coverage/

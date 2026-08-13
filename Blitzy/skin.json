@@ -179,11 +179,11 @@
 		},
 		"BlitzyAnnounceText": {
 			"value": "",
-			"description": "@var string Body text of the announcement bar, anchored to the BLITZY_ANNOUNCE_TEXT environment variable. Read by BlitzyViewModel and HTML-escaped there before it reaches the template. Empty, the default, suppresses the bar even when BlitzyAnnounceEnable is true, so an empty band can never reach a rendered page."
+			"description": "@var string Body text of the announcement bar, anchored to the BLITZY_ANNOUNCE_TEXT environment variable. Read by BlitzyViewModel, which strips ASCII control characters and trims the value; HTML escaping happens once, in the template's {{ }} interpolation, so this value must never be interpolated with {{{ }}}. Empty, the default, suppresses the bar even when BlitzyAnnounceEnable is true, so an empty band can never reach a rendered page."
 		},
 		"BlitzyAnnounceLabel": {
 			"value": "",
-			"description": "@var string Label of the announcement bar call-to-action button, anchored to the BLITZY_ANNOUNCE_LABEL environment variable. Read by BlitzyViewModel and HTML-escaped there. The button is rendered only when this and BlitzyAnnounceLink are both non-empty and the target passes validation; otherwise the bar shows its text alone."
+			"description": "@var string Label of the announcement bar call-to-action button, anchored to the BLITZY_ANNOUNCE_LABEL environment variable. Read by BlitzyViewModel, which normalises but does not escape it; the template's {{ }} interpolation is the single escaping site. The button is rendered only when this and BlitzyAnnounceLink are both non-empty and the target passes validation; otherwise the bar shows its text alone."
 		},
 		"BlitzyAnnounceLink": {
 			"value": "",
@@ -191,7 +191,7 @@
 		},
 		"BlitzyPrimaryActionLabel": {
 			"value": "",
-			"description": "@var string Label of the primary, outline-styled call to action in the navigation card. Read by BlitzyViewModel and HTML-escaped there. Empty, the default, makes the view model derive the label from an existing core message: createaccount for unregistered users and mywatchlist for registered ones, so the component renders on an otherwise unconfigured wiki."
+			"description": "@var string Label of the primary, outline-styled call to action in the navigation card. Read by BlitzyViewModel, which normalises but does not escape it; the template's {{ }} interpolation is the single escaping site. The label never varies with login state, which is what keeps anonymous and logged-in chrome identical outside the personal menu. Empty, the default, leaves the label empty and NavCard.mustache then renders no anchor at all, so an unlabelled call to action can never reach the page without an accessible name."
 		},
 		"BlitzyPrimaryActionLink": {
 			"value": "",
@@ -199,7 +199,7 @@
 		},
 		"BlitzySecondaryActionLabel": {
 			"value": "",
-			"description": "@var string Label of the secondary, gradient-styled call to action in the navigation card. Read by BlitzyViewModel and HTML-escaped there. Empty, the default, makes the view model derive the label from the existing core message randompage."
+			"description": "@var string Label of the secondary, gradient-styled call to action in the navigation card. Read by BlitzyViewModel, which normalises but does not escape it; the template's {{ }} interpolation is the single escaping site. Empty, the default, leaves the label empty and NavCard.mustache then renders no anchor at all, exactly as for BlitzyPrimaryActionLabel."
 		},
 		"BlitzySecondaryActionLink": {
 			"value": "",

@@ -1,0 +1,390 @@
+# =============================================================================
+# Blitzy skin — verification harness container stack
+# =============================================================================
+#
+# Three services stand up a real MediaWiki instance serving real imported
+# Wikipedia articles, and a pinned browser container that captures it. Every
+# Docker-dependent quality gate runs inside this stack: Gate 1 (a committed PNG
+# of a rendered article), all four Gate 8 integration checks, Gate 10 (the single
+# documented command, every step individually invocable) and the R9 byte-identity
+# comparison.
+#
+# There is no user rules document for this project — `review_rules` reports "No
+# user rules provided." The governing constraints are the fifteen numbered rules
+# R1–R15 in §5 of the requirements, inventoried per-rule in AAP §0.9.2 with gate
+# bindings in AAP §0.8.4. Comments below name the rule behind each non-obvious
+# decision, because this file is read by reviewers checking R1, R9 and R15.
+#
+# -----------------------------------------------------------------------------
+# CONTRACT — four sibling files address the names defined here. Do not rename.
+# -----------------------------------------------------------------------------
+#
+#   service `db`         MariaDB backend. Publishes NO host port.
+#   service `mediawiki`  The wiki under test. MW_INSTALL_PATH=/var/www/html.
+#   service `capture`    Playwright browser container. working_dir=/work.
+#
+#   skin mount           <package root>  ->  /var/www/html/skins/Blitzy
+#   capture mount        <package root>  ->  /work
+#   published wiki port  ${MW_DOCKER_PORT:-8080} -> 80 on `mediawiki`
+#   named volumes        db-data (/var/lib/mysql), mw-images (…/html/images)
+#   project name         blitzy-verify (override with -p or COMPOSE_PROJECT_NAME)
+#   database host        the service name `db`; credentials are the
+#                        Compose-internal literals in the `db` block below
+#
+# Consumed by harness/provision.sh, harness/verify.sh, harness/post-import-
+# verify.php (via `docker compose exec mediawiki php …`) and playwright.config.ts
+# (which derives its baseURL from MW_SERVER + MW_SCRIPT_PATH).
+#
+# -----------------------------------------------------------------------------
+# INVOCATION
+# -----------------------------------------------------------------------------
+#
+#   cd <package root>/harness
+#   docker compose --env-file ../.env up -d --wait
+#
+# Relative paths in this file (`../`, `../.env`) resolve against THIS FILE's
+# directory, not the shell's working directory, so `-f harness/docker-compose.yml`
+# from the package root is equivalent. `--env-file ../.env` is what makes the
+# operator's `.env` the source for `${…}` interpolation, because Compose looks for
+# its interpolation env file beside the compose file, and `.env` deliberately
+# lives at the package root (harness/verify.sh passes the flag). Every
+# interpolated variable carries the same default as .env.example, so the stack is
+# still correct without the flag.
+#
+# -----------------------------------------------------------------------------
+# ENVIRONMENT SURFACE
+# -----------------------------------------------------------------------------
+#
+# The eleven operator variables are defined by .env.example and are used here
+# with exactly those names and spellings. Nine carry a `${VAR:-default}` fallback
+# equal to the .env.example default. The two secret-bearing variables —
+# MW_ADMIN_PASSWORD and BLITZY_TEST_PASSWORD — appear in NO `environment:` block
+# and are interpolated NOWHERE: they reach the containers only through
+# `env_file`. That is deliberate and load-bearing in three ways. A
+# `${VAR:-default}` fallback would silently paper over a blank and defeat the
+# named-error assertion harness/verify.sh makes before any other work.
+# Interpolating them without a default would make Compose emit "variable is not
+# set" — a warning, which the zero-warning posture of Gate 2 forbids. And naming
+# them as bare keys under `environment:` would OVERRIDE, with nothing, the value
+# `env_file` had already supplied (verified against Compose v5.3.1).
+#
+# This file additionally sets fixed container-runtime values that are not
+# operator inputs, hold no secret, and add nothing to the eleven-variable surface
+# .env.example defines (R12 No Scope Expansion): MW_INSTALL_PATH, TZ, LANG,
+# LC_ALL and the MARIADB_* connection facts.
+#
+# No `version:` key: it is obsolete under Compose v2+ and emitting it produces a
+# deprecation warning (Gate 2 Zero-Warning Build).
+
+name: blitzy-verify
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # db — MariaDB backend
+  # ---------------------------------------------------------------------------
+  db:
+    # R15 Exact Dependency Pinning: repository:tag@sha256:digest, no floating
+    # tag. 10.11.14 sits exactly on core's documented MariaDB floor — INSTALL
+    # states "MariaDB 10.11 or higher" and includes/Installer/MysqlInstaller.php
+    # declares 'MariaDB' => '10.11'. Do not raise it.
+    #
+    # The three image values are double-quoted deliberately. A digest-pinned
+    # reference cannot be shortened or wrapped without breaking R15, and the
+    # longest of the three exceeds the project's 100-column limit on its own, so
+    # quoting is what keeps `eslint --max-warnings 0` clean (the shared config
+    # sets max-len ignoreStrings) without an inline suppression, which Gate 2
+    # prohibits. Quoting changes nothing a parser sees: `docker compose config`
+    # resolves the identical reference either way. Do not unquote them.
+    image: "mariadb:10.11.14@sha256:dbe56e20372fc6d6b8e0e396866ba89c4c7f128c38c4f59aaa54d957db95790c"
+    # R9 Deterministic Captures: the MediaWiki and MariaDB images are AMD64-only
+    # and the capture image digest resolves a multi-architecture index, so a
+    # digest alone does not fix the execution environment — on an ARM host the
+    # digest would still resolve while the platform silently changed. Pinning the
+    # platform on all three services is therefore mandatory, not decorative.
+    # harness/../tools/check-pins.js parses this file and exits non-zero unless
+    # every image carries both an @sha256: digest and `platform: linux/amd64`,
+    # which is also why nothing here uses YAML anchors, aliases, merge keys or
+    # `x-` indirection: the pin surface must stay literally parseable.
+    platform: linux/amd64
+    environment:
+      # Mapped from the .env.example name MW_DB_NAME.
+      MARIADB_DATABASE: "${MW_DB_NAME:-blitzy_verify}"
+      # Compose-internal credentials, deliberately NOT operator inputs and NOT
+      # secrets: this service publishes no host port, so they are reachable only
+      # from inside the Compose network, and .env.example records that no
+      # database password is ever written to the environment file. They are the
+      # single source of truth for the mirrored values in the `mediawiki` block.
+      MARIADB_USER: blitzy_verify_local
+      MARIADB_PASSWORD: blitzy_verify_local_only
+      MARIADB_ROOT_PASSWORD: blitzy_verify_root_local_only
+      # Fixed timezone for the same reason the wiki and capture containers fix
+      # it: a differing timezone changes rendered timestamps and therefore
+      # changes capture bytes (R9).
+      TZ: "UTC"
+    # No `env_file` here on purpose. The eleven operator variables — including
+    # both secrets — have no business inside the database container; least
+    # privilege keeps them in `mediawiki` and `capture` only.
+    #
+    # No `ports:` on purpose. .env.example records that the database port is
+    # never published outside the Compose network; that is precisely why the
+    # database credential above is not an operator input.
+    volumes:
+      # A NAMED volume, not a host path: nothing from the checkout is mounted
+      # here, and `docker compose down -v` destroys it, which is how the
+      # fresh-database guard in harness/provision.sh is honoured.
+      - db-data:/var/lib/mysql
+    healthcheck:
+      # Synthetic by necessity: `grep -c healthcheck mediawiki/docker-compose.yml`
+      # is 0 and core exposes no health endpoint (AAP §3.10 nonetheless requires
+      # a healthcheck-gated stack), so every probe in this file is authored here.
+      # healthcheck.sh is the MariaDB image's own bundled helper; --connect
+      # proves the server accepts connections and --innodb_initialized proves the
+      # storage engine finished recovery, so `mediawiki` never starts against a
+      # server that would refuse maintenance/install.php.
+      #
+      # Written in CMD (exec) form and free of any `$`, so no shell is involved
+      # and no `$$` escaping is required. A maintainer who introduces a literal
+      # `$` here must double it, or Compose will interpolate it away.
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  # ---------------------------------------------------------------------------
+  # mediawiki — the wiki under test
+  # ---------------------------------------------------------------------------
+  mediawiki:
+    # R15: pinned to the newest patch on the 1.43 LTS line. The checkout reports
+    # MW_VERSION 1.47.0-alpha, but the technology stack mandates the LTS line and
+    # treats the checkout as an API reference only (AAP §0.3.2.3). This image is
+    # also the source of the four bundled extensions the fixtures require
+    # (Scribunto, ParserFunctions, Cite, SyntaxHighlight); installing any
+    # extension not bundled with the release is prohibited.
+    image: "mediawiki:1.43.9@sha256:77a2dda59645bd41c9648eb131416363416208db5936957ae45db3b64d3690f8"
+    # R9: see the note in the `db` service. AMD64-only image; platform fixed.
+    platform: linux/amd64
+    depends_on:
+      db:
+        # Gate ordering: the wiki never starts against an unready database.
+        condition: service_healthy
+    ports:
+      - "${MW_DOCKER_PORT:-8080}:80"
+    volumes:
+      # R1 Core Immutability. The skin is integrated by BIND-MOUNTING the package
+      # root into the image's own core tree — never by a symlink. mediawiki/skins/
+      # README recommends `ln -s` for developers but warns in the same file that
+      # "under POSIX systems (Linux...), parent of a symbolic path refers to the
+      # link source, NOT to the target", and AAP §8.3 records that symlinks are
+      # poorly supported in Docker. Core inside this container comes entirely
+      # from the pinned image, so no host path maps into the core tree except
+      # this one. mediawiki/skins/.gitignore is `/*` with only .gitignore,
+      # .vsls.json and README un-ignored, so a skin mounted at skins/Blitzy can
+      # never appear in a core diff: R1's zero-diff check passes structurally
+      # rather than by discipline. The mount is read-write because
+      # `docker compose exec mediawiki` runs PHPUnit, which writes coverage/php/.
+      - ../:/var/www/html/skins/Blitzy
+      # A NAMED volume, not a host path, so R1's invariant — no host path maps
+      # into the container core tree except the skin above — holds literally, and
+      # nothing in the checkout is written to. It exists because the imported
+      # fixtures contain images: the thumbnails the parser renders for the
+      # article captures must be writable, and they must survive a container
+      # restart between provisioning and capture, or a restart would silently
+      # change the captured bytes (R9).
+      - mw-images:/var/www/html/images
+    env_file:
+      # Delivers all eleven operator variables, and is the ONLY route by which
+      # MW_ADMIN_PASSWORD and BLITZY_TEST_PASSWORD reach the container (see the
+      # ENVIRONMENT SURFACE note in the header). `required: false` keeps
+      # `docker compose config` and tools/check-pins.js working on a clean
+      # checkout, where `.env` does not yet exist; harness/verify.sh is what
+      # fails, by name, when either secret is missing.
+      - path: ../.env
+        required: false
+    environment:
+      # MW_INSTALL_PATH is the $IP every maintenance script resolves, and the
+      # override mediawiki/skins/README documents for out-of-tree components.
+      MW_INSTALL_PATH: /var/www/html
+      # MW_SERVER and MW_SCRIPT_PATH are load-bearing, not decoration: core's own
+      # Gruntfile.js concatenates them into the in-wiki QUnit URL
+      # (`wgServer + wgScriptPath + '/index.php?title=Special:JavaScriptTest/…'`,
+      # mediawiki/Gruntfile.js lines 9–13), playwright.config.ts derives its
+      # baseURL from them, and LocalSettings.template.php reads them as $wgServer
+      # and $wgScriptPath. Written as flat literals rather than composed from
+      # MW_DOCKER_PORT so that every parser reading .env resolves them
+      # identically; change MW_SERVER and MW_DOCKER_PORT together.
+      MW_SERVER: "${MW_SERVER:-http://localhost:8080}"
+      # The default is the empty string, because the pinned image serves
+      # MediaWiki at the web root. The `-` form rather than `:-` keeps an
+      # explicitly empty value explicit; the key is always set, because an unset
+      # MW_SCRIPT_PATH produces a broken QUnit URL.
+      MW_SCRIPT_PATH: "${MW_SCRIPT_PATH-}"
+      MW_DOCKER_PORT: "${MW_DOCKER_PORT:-8080}"
+      MW_DB_NAME: "${MW_DB_NAME:-blitzy_verify}"
+      MW_ADMIN_USER: "${MW_ADMIN_USER:-BlitzyInstaller}"
+      BLITZY_TEST_USER: "${BLITZY_TEST_USER:-BlitzyReviewer}"
+      # Verification-instance announcement values. skin.json ships
+      # BlitzyAnnounceEnable as false; these three apply to this instance only so
+      # the bar renders in all 21 captures, and they are fixed strings because
+      # byte-identity forbids variable chrome content (R9). The dash in the text
+      # is U+2014 EM DASH — substituting a hyphen changes every capture.
+      BLITZY_ANNOUNCE_ENABLE: "${BLITZY_ANNOUNCE_ENABLE:-true}"
+      BLITZY_ANNOUNCE_TEXT: "${BLITZY_ANNOUNCE_TEXT:-State of Wiki Engineering — Read the Notes}"
+      BLITZY_ANNOUNCE_LABEL: "${BLITZY_ANNOUNCE_LABEL:-Read Now}"
+      # Connection facts maintenance/install.php needs, run from inside this
+      # container because the Gate 10 host contract is "Docker and Node.js 20 LTS
+      # only" — no PHP, Composer or PHPUnit may be assumed on the host. The user
+      # and password mirror the `db` service block above and must be changed
+      # together; the root password is deliberately NOT mirrored, because
+      # MARIADB_USER already holds full grants on MARIADB_DATABASE.
+      MARIADB_HOST: db
+      MARIADB_DATABASE: "${MW_DB_NAME:-blitzy_verify}"
+      MARIADB_USER: blitzy_verify_local
+      MARIADB_PASSWORD: blitzy_verify_local_only
+      # R9: a differing timezone or locale changes rendered timestamps and number
+      # formatting, and therefore changes capture bytes. C.UTF-8 rather than
+      # en_US.UTF-8 because `locale -a` in this image offers only C and C.utf8 —
+      # naming an ungenerated locale would make every shell emit a setlocale
+      # warning without changing the formatting.
+      TZ: "UTC"
+      LANG: "C.UTF-8"
+      LC_ALL: "C.UTF-8"
+    healthcheck:
+      # Synthetic HTTP probe against a real MediaWiki URL, because core ships no
+      # healthcheck stanza and no health endpoint.
+      #
+      # Client choice: `php`, not curl or wget. wget is absent from this image,
+      # and using the PHP CLI proves in one shot both that Apache is serving
+      # MediaWiki's entry point and that the PHP CLI every `docker compose exec`
+      # maintenance command depends on is executable. Requesting index.php rather
+      # than a static file is what makes it a MediaWiki probe rather than a web
+      # server probe.
+      #
+      # Lifecycle tolerance: get_headers() returns a header array for ANY HTTP
+      # response and false only when the connection itself fails, so the probe is
+      # deliberately status-agnostic. Before LocalSettings.php exists the entry
+      # point answers with the pre-install notice — verified as HTTP/1.1 200 OK
+      # against this exact digest — and on other configurations it redirects to
+      # mw-config/; both are HEALTHY here, because both prove the web server is
+      # serving MediaWiki's entry point.
+      #
+      # Division of responsibility, stated explicitly: this probe asserts
+      # liveness only. Deep readiness — that the wiki is installed, that the four
+      # fixtures imported, that no transclusion is unexpanded — is NOT its job
+      # and belongs to harness/provision.sh and harness/post-import-verify.php,
+      # which hard-fail before any capture is taken.
+      #
+      # CMD (exec) form, free of any `$`, so no shell and no `$$` escaping.
+      # default_socket_timeout is lowered so the probe fails fast instead of
+      # hanging until Docker's own timeout kills it.
+      test:
+        - CMD
+        - php
+        - -r
+        - 'ini_set("default_socket_timeout", "5"); exit(@get_headers("http://127.0.0.1/index.php?title=Main_Page") ? 0 : 1);'
+      interval: 5s
+      timeout: 10s
+      retries: 40
+      start_period: 15s
+
+  # ---------------------------------------------------------------------------
+  # capture — pinned browser container for captures, audits and measurement
+  # ---------------------------------------------------------------------------
+  capture:
+    # R9: the capture container is what makes byte-identical PNGs achievable at
+    # all. The image fixes the browser binary and the entire font stack, and its
+    # tag matches the @playwright/test and playwright pins (both exactly 1.62.1)
+    # that package.json declares.
+    image: "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+    # R9: this digest resolves a MULTI-ARCHITECTURE INDEX. Without the platform
+    # pin the digest would still resolve on an ARM host while the rendering
+    # environment silently changed, and byte-identity would fail while every
+    # version pin still looked correct. Do not remove this line.
+    platform: linux/amd64
+    depends_on:
+      mediawiki:
+        # Gate ordering: no capture run starts against a wiki that is not serving.
+        condition: service_healthy
+    # Host networking, because MW_SERVER doubles as $wgServer: MediaWiki emits
+    # absolute self-referential URLs on that host, so the browser must resolve
+    # `localhost:${MW_DOCKER_PORT}` to the wiki exactly as the host does. On the
+    # Compose bridge network `localhost` would be this container and every
+    # subresource would fail. Host networking makes one MW_SERVER correct both
+    # inside and outside the container, which is consistent with R9's Linux
+    # capture-container requirement.
+    network_mode: host
+    # Chromium needs adequate shared memory. The alternative — the default 64MB
+    # /dev/shm — causes tab crashes and non-deterministic renders, which would
+    # defeat R9 outright. Note that `shm_size` is IGNORED alongside `ipc: host`,
+    # because the container then uses the host's own /dev/shm: a host that
+    # provides little shared memory is answered by the browser launch flags in
+    # playwright.config.ts, not by a setting here.
+    ipc: host
+    # PID 1 is docker-init, so SIGTERM reaches the long-running command below and
+    # no zombie browser process survives a repeated `docker compose exec`.
+    init: true
+    # The container idles so that harness/verify.sh can exec into it repeatedly —
+    # one exec per individually invocable step, as Gate 10 requires.
+    command:
+      - sleep
+      - infinity
+    working_dir: /work
+    volumes:
+      # The package root, read-write: the seven Playwright specifications,
+      # playwright.config.ts, node_modules, and the committed outputs the run
+      # writes — screenshots/, screenshots/audits/ and coverage/js/ — are all
+      # inside it. working_dir makes /work/node_modules resolve without NODE_PATH.
+      # This is not the container's core tree, so R1's invariant is untouched.
+      - ../:/work
+    env_file:
+      # As on `mediawiki`: the only route by which BLITZY_TEST_PASSWORD reaches
+      # the container, and `required: false` so a clean checkout still parses.
+      - path: ../.env
+        required: false
+    environment:
+      # playwright.config.ts derives its baseURL from these; the auth fixture
+      # signs in as BLITZY_TEST_USER once and reuses the stored session.
+      MW_SERVER: "${MW_SERVER:-http://localhost:8080}"
+      MW_SCRIPT_PATH: "${MW_SCRIPT_PATH-}"
+      MW_DOCKER_PORT: "${MW_DOCKER_PORT:-8080}"
+      BLITZY_TEST_USER: "${BLITZY_TEST_USER:-BlitzyReviewer}"
+      # R9: identical timezone and locale to the wiki container. A differing
+      # value here changes rendered timestamps and number formatting inside the
+      # browser and therefore changes the captured bytes. C.UTF-8 because
+      # `locale -a` in this image offers only C and C.utf8.
+      TZ: "UTC"
+      LANG: "C.UTF-8"
+      LC_ALL: "C.UTF-8"
+    healthcheck:
+      # Trivial by design, so the stack is uniformly healthcheck-gated as AAP
+      # §3.10 describes, but not vacuous: it proves the Node runtime the capture
+      # run invokes is executable and that the bind-mounted package root is
+      # writable, which is where the 21 PNGs and 23 audit reports are written.
+      # accessSync throws on failure, so node exits non-zero. No `$`, so no `$$`.
+      test:
+        - CMD
+        - node
+        - -e
+        - 'require("fs").accessSync("/work", require("fs").constants.W_OK)'
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 5s
+
+volumes:
+  # Both are named volumes rather than host paths, so nothing in the checkout is
+  # written to and R1 holds. `docker compose down -v` destroys both, which is the
+  # fresh-database guard harness/provision.sh relies on: a re-run must never
+  # install over a half-provisioned wiki, because a stale database would change
+  # the history and diff captures and break byte-identity (R9).
+  # Both take an explicit empty mapping rather than a bare key, because the
+  # project's shared lint configuration forbids an empty mapping value
+  # (yml/no-empty-mapping-value) and Gate 2 admits no warnings. Compose treats
+  # `{}` and a bare key identically: a local volume with default options.
+  db-data: {}
+  mw-images: {}

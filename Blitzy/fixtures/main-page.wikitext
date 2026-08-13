@@ -1,0 +1,97 @@
+<!--
+Blitzy skin verification fixture. harness/provision.sh authors this page with
+core's maintenance/edit.php, which reads the content from standard input:
+
+    php maintenance/edit.php 'Main Page' \
+        --user "$BLITZY_TEST_USER" \
+        --summary 'Blitzy fixture: main page with lavender band and card grid' \
+        < skins/Blitzy/fixtures/main-page.wikitext
+
+The provisioning contract, recorded here so that it travels with the file:
+
+* The target title is exactly "Main Page". The 768px measurement pass loads it
+  as Main_Page, which is why two of the four surfaces that pass names resolve to
+  a single URL.
+* Do NOT pass --createonly. MediaWiki's installer has already created Main Page
+  (includes/Installer/Task/InitialContentTask.php), so edit.php would stop with
+  "Page already exists" instead of saving.
+* --user must be BLITZY_TEST_USER, the ordinary preferences-populated account,
+  and never MW_ADMIN_USER, because no capture may display the administrator
+  name. The installer's own revision belongs to the system user
+  "MediaWiki default", so the page history stays clear of the administrator too.
+* Save this page after fixtures/history-seed.wikitext. The history then reads
+  installer default -> seed -> this revision, and that ordering is what produces
+  the captured diff and the captured history list.
+* The markup below is fixed on purpose: no signature tildes, nothing the
+  pre-save transform can expand, and no time-varying magic word. edit.php saves
+  through PageUpdater, and DerivedPageDataUpdater::prepareContent() applies
+  preSaveTransform, so anything expandable would be rewritten at provision time
+  and consecutive capture runs would stop being byte-identical.
+* The blitzy-band and blitzy-card-grid hooks below are the only rendered
+  instance of the lavender band and the card grid anywhere on this wiki. Every
+  visual value they carry arrives from
+  resources/skins.blitzy.styles/components/Cards.less, so never add a style
+  attribute here.
+* Sanitizer::safeEncodeAttribute() serialises every underscore in an attribute
+  value as &#95;, so this page's raw HTML reads class="blitzy-card&#95;&#95;title".
+  A conforming parser decodes it, so CSS rules and DOM queries see
+  blitzy-card__title exactly as written here. Anything verifying these hooks must
+  therefore query the DOM rather than match the raw HTML as text.
+-->
+This wiki is the fixed verification instance for the '''Blitzy''' skin. It holds a small,
+unchanging set of reference articles imported from Wikipedia, together with the talk, category
+and history pages needed to exercise every surface the skin styles. Nothing on it is generated
+at view time, so each page renders the same way on every run, and ordinary MediaWiki behaviour
+is left untouched: [[Special:RecentChanges|recent changes]], page histories, diffs, searching
+and the edit form all work exactly as they do under any other skin.
+
+<div class="blitzy-band blitzy-band--lavender">
+<div class="blitzy-band__inner">
+<div class="blitzy-card-panel">
+<div class="blitzy-card-panel__title">MediaWiki content in the Blitzy design language</div>
+<div class="blitzy-card-panel__body">Core supplies the articles, the navigation and the page actions. The skin supplies the typography, the colour and the card surfaces around them, and it changes nothing about how the wiki works.</div>
+</div>
+</div>
+</div>
+
+== Reference articles ==
+
+Four articles are imported together with their templates, so that every content treatment the
+skin styles has a real instance to render.
+
+<div class="blitzy-card-grid">
+<div class="blitzy-card">
+<div class="blitzy-card__title">[[Ada Lovelace]]</div>
+<div class="blitzy-card__body">A biography, carrying a floated infobox, images and a dense reference list.</div>
+</div>
+<div class="blitzy-card">
+<div class="blitzy-card__title">[[Python (programming language)]]</div>
+<div class="blitzy-card__body">A software article, carrying an infobox, syntax-highlighted code samples and nested lists.</div>
+</div>
+<div class="blitzy-card">
+<div class="blitzy-card__title">[[List of countries by GDP (nominal)]]</div>
+<div class="blitzy-card__body">A large sortable wikitable, and the widest layout on the wiki: the horizontal overflow test.</div>
+</div>
+<div class="blitzy-card">
+<div class="blitzy-card__title">[[Photosynthesis]]</div>
+<div class="blitzy-card__body">Deep heading nesting, chemical notation, diagrams and hatnotes.</div>
+</div>
+</div>
+
+== Verification coverage ==
+
+The captures taken from this wiki cover reading, editing and administration: an article, this
+main page and a search result; the wikitext edit form, a diff and a page history; preferences,
+recent changes, a category page and a talk page; and several of the same surfaces again in dark
+mode. Each capture is also scanned for accessibility violations and measured for contrast, and
+consecutive runs are compared, so a change in the skin shows up as a change in the evidence.
+
+== Content provenance ==
+
+The four reference articles and their templates are imported from Wikipedia and remain available
+under the Creative Commons Attribution-ShareAlike licence. The article, the source URL and the
+revision each export was taken from are recorded in the attribution notice that ships beside
+this file. The imported articles are never edited: only this page, the talk page, the category
+page and one seeded revision are authored locally.
+
+[[Category:Blitzy verification fixtures]]

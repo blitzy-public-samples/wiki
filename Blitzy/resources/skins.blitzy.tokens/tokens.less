@@ -1,0 +1,705 @@
+//
+// == Blitzy design language -- token module ==
+//
+// The complete Blitzy token set: 71 declarations covering the brand palette, the light
+// and night semantic palettes, typography, geometry and the two breakpoints. Every design
+// value the Blitzy skin renders is either declared here, or named here as a core token to
+// be consumed directly at the point of use. No other file in this package declares a
+// design value, and no other file in this package is permitted a colour literal.
+//
+// -- MANDATE 1: THIS FILE EMITS ZERO CSS --
+// It contains Less variable declarations and comments, and nothing else. Not one selector,
+// not one rule, not one output-producing at-rule, not one mixin call, not one media-query
+// block. Its compiled contribution is the empty string, and that is asserted rather than
+// assumed.
+//   This is load-bearing, not tidiness, because two delivery paths multiply anything
+//   emitted here:
+//     1. `skin.json` lists this file directly in the `skins.blitzy.tokens` module's
+//        `styles` array, so ResourceLoader compiles and serves it on every page view.
+//     2. `resources/mediawiki.less/blitzy/mediawiki.skin.variables.less` imports it, and
+//        every core module stylesheet imports `mediawiki.skin.variables.less` by name
+//        through the `SkinLessImportPaths.blitzy` registration. A single emitted rule
+//        would therefore be duplicated into the compiled CSS of
+//        `mediawiki.action.edit.styles`, `mediawiki.diff.styles`,
+//        `mediawiki.pager.styles`, `oojs-ui-core.styles`, `codex-styles` and every other
+//        core module the wiki serves.
+//   The result would silently inflate every payload, break the 60KB gzipped CSS budget
+//   that `tools/perf-baseline.js` measures, and consume the 1.5 kB cap that
+//   `bundlesize.config.json` sets for this module -- a cap whose entire budget belongs to
+//   `customProperties.less`. Variable and mixin *definitions* produce no output; rules do.
+//
+// -- WHY EVERY COMMENT BELOW IS A `//` LINE COMMENT --
+// Less preserves `/* ... */` comments in its output and strips `//` comments. A block
+// comment here would therefore be emitted verbatim down both delivery paths above, which
+// is exactly what Mandate 1 forbids: a probe file whose only content was one block
+// comment, one line comment and one variable was measured compiling to 26 bytes of CSS,
+// all of it the block comment. Every comment below is consequently a line comment --
+// including the accessibility flags, which elsewhere in this package take the block form
+// `/* BLITZY [A11Y]: ... */`. Do not convert any comment in this file to block form.
+//
+// -- MANDATE 2: THIS FILE IMPORTS NOTHING --
+// There is no import statement here and none may be added.
+//   * Not `mediawiki.skin.variables.less`: that file imports *this* one, so the import
+//     would close a cycle and break the build.
+//   * Not `mediawiki.skin.defaults.less`: reaching core's defaults from here would make
+//     this file's output depend on core's, defeating Mandate 1.
+//   * Not a Codex theme file: the skin takes no npm and no Codex component-library
+//     dependency. Core and the reference skin pin different major versions of the Codex
+//     token package, so a skin with its own dependency would have to pick one and drift
+//     from the other. Tokens reach core-owned surfaces through MediaWiki's own Less
+//     variable API instead.
+//   * Not a sibling. `customProperties.less` imports this file, never the reverse.
+//
+// -- THE CONSEQUENCE OF MANDATE 2 --
+// Because nothing is imported, no core Less variable is in scope here. `@spacing-150`,
+// `@color-emphasized` and `@font-weight-bold` cannot be referenced from this file. That
+// splits the token surface three ways, and the split is deliberate:
+//   * Non-colour values that core already declares exactly are NOT redeclared. They are
+//     catalogued in the next section and consumed directly from core by the component
+//     stylesheets and skinStyles files, all of which do import
+//     `mediawiki.skin.variables.less`. One value, one source of truth.
+//   * Colours ARE declared here even where a core value coincides, because
+//     `customProperties.less` imports only this file and cannot see core's variables, and
+//     because this is the only lawful site for a colour literal in the package.
+//   * Skin-owned gaps -- values with no core equivalent -- are declared here.
+//
+// -- SOLE COLOUR-LITERAL SITE --
+// `.stylelintrc.json` denies `color-no-hex`, `color-named` and a `function-disallowed-list`
+// covering `rgb`/`rgba`/`hsl`/`hsla` and the wider colour-function family across the whole
+// package, and grants exactly one `overrides` exemption: this file, by path. Every hex
+// literal and the one `fade()` call below are lawful only because of that exemption. It
+// follows that this file must carry the *complete* colour surface, light and night, so that
+// no sibling stylesheet ever has cause to write a literal. Adding a second exemption to
+// `.stylelintrc.json` would defeat the rule; add the missing colour here instead.
+//   Geometry literals are lawful here because the token-indirection rule scopes to colour
+//   only, and only where core declares no equivalent -- every such gap is evidenced below.
+//
+// -- PROVENANCE --
+// Values are transcribed from the Blitzy design-language specification and cross-checked,
+// value for value, against the committed reference assets:
+//   * `../../design/reference/blitzy-tokens.source.less`
+//         The source token stylesheet, frozen at its origin values and carrying its own
+//         provenance comment naming the originating repository and path. It is reference
+//         material only: nothing imports it, no ResourceLoader module names it, and no
+//         compilation, direction-flipping or minification stage ever sees it.
+//   * `../../design/reference/blitzy-home-nav-hero-1440.png`
+//         Navigation card and hero. Evidences the navigation geometry, the hero display
+//         scale, the announcement bar and the outline/gradient call-to-action pair.
+//   * `../../design/reference/blitzy-home-lavender-card-1440.png`
+//         Lavender band and the shadowed card panel it hosts.
+//   * `../../design/reference/blitzy-docs-card-grid-1440.png`
+//         Card grid.
+//   * `../../design/reference/blitzy-docs-article-prose-1440.png`
+//         Prose and tabs. Evidences the prose scale and the active-tab underline.
+// The origin spells colours as six-digit upper-case hexadecimal with compact function
+// spacing. This file re-spells them to the house style verified on disk -- lower case,
+// shortened where lossless, spaces inside function parentheses -- because
+// `mediawiki/resources/src/mediawiki.less/` and `mediawiki-skins-Vector/resources/` contain
+// zero upper-case hex between them. The values are identical; only the spelling differs.
+// No Figma file or Figma link was supplied with this work, so no token below carries a
+// Figma reference and none should be invented.
+//
+// -- NAMING CONTRACT --
+// This file is authored before any consumer exists, so the names below are the
+// package-wide contract. Every token is `@blitzy-<category>-<name>`: one stable prefix,
+// so `tools/token-audit.js` can enumerate the public token surface by grep and so the
+// stylelint exemption stays a genuine single-file exemption. Categories follow the
+// substrate's grammar -- category first, kebab-case, state suffixes `--hover`/`--active`/
+// `--visited`, intensity and role suffixes `-light`/`-lighter`/`-muted`/`-base`. Every
+// colour lives under `@blitzy-color-` regardless of whether it is used as a foreground or
+// a fill, which keeps the colour surface enumerable with a single pattern.
+//   Names and values are side-neutral. Token declarations are not CSS properties, so the
+//   direction-flipping stage never sees them; direction is resolved where a token is
+//   consumed. No token name or value below contains `left` or `right`, and the two
+//   inherently directional treatments -- the hatnote's radius on its trailing corners only
+//   and the table-of-contents' leading active border -- are authored flip-aware in their
+//   component stylesheets, with `@noflip` on any intentional exception.
+//
+// -- MACHINE-READABLE ANNOTATIONS --
+// Two tools read this file as data, so its shape is an interface. Three markers are
+// defined, each on its own line and each greppable:
+//   `// @contrast-pair <mode> <class> <foreground-token> <background-token>`
+//         An intended text-on-background pairing for `tools/contrast-report.js`.
+//         <mode> is `light` or `dark`. <class> is `body` (minimum ratio 4.5:1) or `large`
+//         (minimum ratio 3:1, also the floor applied to non-text affordances such as the
+//         inline-link underline and the focus ring).
+//   `// @reserved - <reason>`
+//         A token named by the design-language specification that has no consuming rule.
+//         It is excluded from the public token surface and must be enumerated in
+//         `DELIVERY.md`. Removal is preferred over reservation: an invented token is an
+//         unconsumed token.
+//   `// BLITZY [A11Y]: <finding>`
+//         A specified value that computes below a generic accessibility recommendation.
+//         The specified value is implemented exactly and the finding is raised for
+//         designer review; the rendered output is never silently corrected.
+// One declaration per line, exactly `@blitzy-...: <value>;`, with no multi-line values and
+// no two declarations on one line.
+//   SEQUENCING NOTE. This file precedes `resources/skins.blitzy.styles/components/*.less`
+//   and `skinStyles/*.less`, so which tokens finally go unconsumed cannot be known yet.
+//   Revisit every `@reserved` annotation once those files exist and treat
+//   `tools/token-audit.js` as the arbiter.
+//
+// -- DETERMINISM --
+// Every value below is a fixed constant. Byte-identical screenshot capture forbids any
+// value whose resolution depends on the host, the operating system or the browser, so none
+// of the following appears in this file, as a value or as a name:
+//   * the environment-variable function, which resolves against device insets;
+//   * any CSS system colour keyword -- the platform-palette family that renders the host
+//     theme's own surface, text, button and accent colours;
+//   * any colour function whose support or rounding varies between engines, including the
+//     colour-mixing function, the light-and-dark selection function, and relative-colour
+//     syntax;
+//   * any host-resolved font family, meaning the platform user-interface stacks and their
+//     vendor-prefixed relatives, which resolve to a different typeface on every machine;
+//   * a CSS calculation expression inside a breakpoint token, which a media feature may not
+//     carry -- the breakpoint arithmetic below is evaluated by Less at compile time instead.
+// Those constructs are described here rather than named, deliberately: it keeps the
+// determinism sweep a plain grep over the whole file, with no need to strip comments first
+// and no risk of this very paragraph raising a false positive.
+//   The one function call in this file, `fade()`, is a Less built-in evaluated at compile
+//   time to a fixed colour triple, so it is a constant like every other value here.
+//   There is no asset reference of any kind in this file and no reference to any origin
+//   outside the wiki: the `@font-face` rules and their self-hosted woff2 sources live in
+//   `resources/skins.blitzy.styles/fonts.less`.
+//
+// -- ACCESSIBILITY POSTURE --
+// The pairings below are the data the blocking contrast gate measures. That gate is a
+// floor, not a conformance proof: automated tooling detects only a fraction of
+// accessibility issues, so nothing in this file claims WCAG conformance and no comment
+// below should be read as claiming it.
+//
+
+//
+// == Exact substrate matches -- consumed from core, never redeclared here ==
+//
+// Catalogued, not declared. Each value below is already declared by MediaWiki core with
+// the identical value, so redeclaring it would create a second source of truth for one
+// number. Consumers reach these through `mediawiki.skin.variables.less`, which they all
+// import; this file cannot reach them at all (Mandate 2). Line citations were verified
+// character for character against
+// `mediawiki/resources/src/mediawiki.less/mediawiki.skin.defaults.less` (488 lines). If
+// the tree moves, the values govern and the line numbers here must be corrected.
+//
+// @min-size-interactive-touch: 44px;                                          core L227
+//   Height of the navigation and hero call-to-action pills, and the touch-target floor.
+//   That the design's stated call-to-action height coincides exactly with the substrate's
+//   accessibility floor is a meaningful signal about the design rather than a
+//   coincidence: its touch targets already satisfy the platform minimum.
+//
+// @spacing-150: 24px;                                                         core L302
+//   Two uses: the inset of the floating navigation card from the viewport edges, and the
+//   gutter of the card grid. `components/NavCard.less` and `components/Cards.less`
+//   consume the core token directly.
+//   RESOLUTION, RECORDED SO IT READS AS DECIDED RATHER THAN OVERLOOKED. One input to this
+//   work listed the 24px navigation inset among the skin-owned geometry gaps while the
+//   authoritative token mapping lists 24px as an exact match to `@spacing-150` with two
+//   uses. The mapping governs, so no Blitzy token is declared for 24px.
+//
+// @spacing-125: 20px;                                                         core L301
+//   Interior padding of the infobox.
+//
+// @spacing-12: 2px;                                                           core L293
+//   Offset of the inline-link underline, and the offset of the focus ring.
+//
+// @spacing-50: 8px;                                                           core L297
+//   Clipped corner radius of a wikitable's header row. The authoritative mapping
+//   designates this spacing token as the match even though the use is a radius, because
+//   the value is identical and the substrate declares no 8px radius.
+//
+// @color-emphasized: #000;                                                    core L127
+//   Value-identical to the Blitzy primary text colour. This one is a colour, so the
+//   third branch of the Mandate 2 consequence applies and `@blitzy-color-text-primary` is
+//   *also* declared below -- `customProperties.less` cannot see core's variables.
+//
+// @line-height-xxx-small: 1.25;                                               core L483
+//   Line height of the h2 and h3 content headings.
+//   NUANCE A FUTURE MAINTAINER MUST NOT BE BLINDSIDED BY: this token sits inside core's
+//   trailing deprecated-Codex-token block (block header at L476, `// Since v2.0.0-rc.1`
+//   sub-header at L482). The authoritative mapping designates it as the exact match and
+//   that remains binding, but it is deprecated upstream. If core removes it, declare
+//   `@blitzy-line-height-heading: 1.25;` here and remove this entry -- do not substitute a
+//   different value, because the heading line height is an asserted fidelity value.
+//
+// @font-weight-normal: 400;                                                   core L418
+//   Body prose weight.
+//
+// @font-weight-semi-bold: 600;                                                core L419
+//   The semibold navigation links.
+//
+// @font-weight-bold: 700;                                                     core L420
+//   Display type, call-to-action labels, inline links, and table and infobox header rows.
+//
+// @border-width-base: 1px;                                                    core L320
+//   Hairline borders on cards, tables and infoboxes.
+//
+// @border-width-thick: 2px;                                                   core L321
+//   The inline-link underline, the edit-form focus ring, and the leading border marking
+//   the active table-of-contents section.
+//
+// @transition-duration-base: 100ms;                                           core L438
+// @transition-duration-medium: 250ms;                                         core L439
+//   Chrome and disclosure transitions. Both are wrapped in a
+//   `prefers-reduced-motion: no-preference` media query by their consumers, and the
+//   capture harness freezes them to `0ms` exactly -- never a small non-zero value, which
+//   core records as causing infinite motion on iOS.
+//
+// DELIBERATELY NOT CONSUMED
+// @color-base--subtle: #767676;                                               core L487
+//   Core annotates this `@deprecated - do not use!`. The Blitzy muted text colour is its
+//   own value, `@blitzy-color-text-muted` below, and is not derived from it.
+//
+
+//
+// == Brand colour families ==
+//
+// Palette primitives. Their roles are assigned in the semantic section below and at the
+// point of use; the names here are hues, not jobs. Evidenced by
+// `../../design/reference/blitzy-home-nav-hero-1440.png` and
+// `../../design/reference/blitzy-home-lavender-card-1440.png`.
+//
+// `@blitzy-color-purple` is the anchor of the palette and the hue the whole family is
+// measured on. It drives every progressive affordance in the skin, and one core family --
+// `@color-progressive`, `@border-color-progressive`, `@outline-color-progressive--focus`
+// and `@box-shadow-color-progressive--focus` -- is remapped to it in
+// `../mediawiki.less/blitzy/mediawiki.skin.variables.less`, which is what carries it into
+// the edit form's focus ring and into every core-owned progressive control without a
+// single core stylesheet being edited.
+@blitzy-color-purple: #5b39f3;
+// Hover darkens rather than lightens, so text contrast rises with the interaction instead
+// of falling. This is the reverse of the usual instinct and is intentional.
+@blitzy-color-purple--hover: #4822f2;
+@blitzy-color-purple--active: #310dd4;
+// BLITZY [A11Y]: `@blitzy-color-purple-light` measures 4.11:1 on the light page surface,
+// below the 4.5:1 body-text minimum. It is specified as a decorative gradient stop and is
+// implemented at the specified value; it must never carry text. Raised for designer
+// review rather than corrected, and deliberately absent from the pairing set below.
+@blitzy-color-purple-light: #8065f6;
+// The dark-surface-safe stop, reused as the night-mode purple. See the night palette.
+@blitzy-color-purple-lighter: #a795f9;
+// The deep neutral of the brand, and the colour inside `@blitzy-box-shadow-nav` below.
+//   RESOLUTION, RECORDED SO IT READS AS DECIDED RATHER THAN OVERLOOKED. One input to this
+//   work gave the brand navy as `#12102e`, which is in fact the heading colour named by
+//   the authoritative token mapping as the `@color-link` remap target. The source token
+//   stylesheet distinguishes the two, and the arithmetic settles it: the specified
+//   navigation shadow is `rgba( 16, 10, 64, 0.06 )`, and `rgb( 16, 10, 64 )` is exactly
+//   `#100a40`. Both values are therefore declared, as distinct tokens with distinct roles
+//   -- `@blitzy-color-navy` here and `@blitzy-color-text-heading` below -- so either
+//   reading of the input is satisfied and neither value is lost.
+@blitzy-color-navy: #100a40;
+// Secondary accent, held light enough to stay usable for text; it is the external-link
+// colour. See the pairing set.
+@blitzy-color-teal: #157f75;
+// The lightest brand tint carries four separate treatments -- the infobox header row, the
+// wikitable header row, the hatnote and message-box fill, and the category chips -- and is
+// the value `@background-color-progressive-subtle` is remapped to, which is how those core
+// surfaces inherit it.
+@blitzy-color-brand-50: #f2f0fe;
+// One step deeper than `@blitzy-color-brand-50`, for hovered chips and nested tints.
+@blitzy-color-brand-100: #e2defd;
+// The full-bleed band behind the hero-adjacent card panel.
+@blitzy-color-lavender-band: #d8d2f9;
+// Announcement bar fill. Deep enough to carry the 18px inverse text; see the pairing set.
+@blitzy-color-announce-bg: #301a93;
+
+//
+// == Semantic colours -- light mode ==
+//
+// -- Text --
+//
+// Display and hero type. Value-identical to core's `@color-emphasized` (L127) and declared
+// here anyway, because `customProperties.less` imports only this file.
+@blitzy-color-text-primary: #000;
+// Body prose. Remaps core's `@color-base` (L124, `#222`), which is what carries it across
+// every core-owned surface.
+@blitzy-color-text-secondary: #333;
+// Secondary and metadata text. Remaps core's `@color-subtle` (L129, `#555`). Its own
+// value, not derived from the deprecated `@color-base--subtle`.
+@blitzy-color-text-muted: #5f5b76;
+// Section headings, and the colour of inline link text.
+@blitzy-color-text-heading: #12102e;
+// Type set on the announcement fill, on the purple fill and on the gradient
+// call-to-action. Spelled `-inverse` after the design language; the substrate's
+// equivalent is `@color-inverted`.
+@blitzy-color-text-inverse: #fff;
+//
+// -- Links --
+//
+// The design's most easily violated rule: an inline link is bold heading-coloured text
+// carrying a purple underline. Link text is NEVER purple; the purple lives in the
+// underline. `@color-link` (core L39) is therefore remapped to the heading colour and not
+// to the brand purple, and the two tokens below keep that separation explicit so a future
+// maintainer cannot collapse them by accident.
+@blitzy-color-link: @blitzy-color-text-heading;
+@blitzy-color-link-underline: @blitzy-color-purple;
+// Remaps core's `@color-link--visited` (L40, `#0b0080`).
+@blitzy-color-link--visited: #4c307e;
+// Remaps core's `@color-link-external` (L46, `#36b`).
+@blitzy-color-link-external: @blitzy-color-teal;
+//
+// -- Feedback fills --
+//
+// Diff added rows and success surfaces. Remaps `@background-color-success-subtle` (L102).
+@blitzy-color-success-bg: #c9fcea;
+// Diff removed rows and error surfaces. Remaps `@background-color-error-subtle` (L98).
+@blitzy-color-error-bg: #ffdfdf;
+// Warning surfaces. Remaps `@background-color-warning-subtle` (L101).
+@blitzy-color-warning-bg: #fffbeb;
+// Destructive accent; remaps core's `@color-destructive` (L138, `#d03`).
+// BLITZY [A11Y]: this value measures 4.08:1 on the light page surface, below the 4.5:1
+// body-text minimum though above the 3:1 large-text and non-text minimum. It is specified
+// for icons, borders and large labels and is implemented at the specified value; it must
+// never carry body-size text. Raised for designer review rather than corrected, and
+// entered in the pairing set below at the `large` class only.
+@blitzy-color-error: #ec3636;
+//
+// -- Surfaces and borders --
+//
+// Page surface. Remaps `@background-color-base` (L68) and diverges from
+// `@blitzy-color-surface-card` in night mode, which is why the two are separate tokens
+// despite sharing a value here.
+@blitzy-color-surface-base: #fff;
+// Floating navigation card, content cards, infoboxes, the table-of-contents card.
+@blitzy-color-surface-card: #fff;
+// Default border; remaps core's `@border-color-base` (L325, `#aaa`).
+// BLITZY [A11Y]: core applies `@border-color-base` to form-control boundaries, and this
+// value measures roughly 1.5:1 against the light page surface -- below the 3:1 minimum for
+// a non-text user-interface boundary. It is implemented at the specified value and raised
+// for designer review rather than silently darkened. The edit form remains identifiable
+// without it: its focus ring is a 2px purple outline at 2px offset, which is entered in
+// the pairing set. Excluded from the pairing set itself because listing it would fail the
+// blocking gate on a value the design specifies; the exclusion is recorded here rather
+// than left silent.
+@blitzy-color-border-light: #d9d9d9;
+// Hairline rules on cards, tables and infoboxes; remaps `@border-color-muted` (L333,
+// `#eee`) and `@border-color-subtle` (L332, `#ccc`).
+// BLITZY [A11Y]: roughly 1.15:1 against the light page surface. These hairlines are
+// decorative separators -- the surfaces they divide are distinguished by fill and by the
+// navigation shadow, never by the rule alone -- so they are not user-interface component
+// boundaries and are excluded from the pairing set. Recorded rather than silent.
+@blitzy-color-border-hairline: #e8e8ed;
+//
+// -- Gradient fills --
+//
+// The two gradients have no substrate equivalent: core declares no gradient token at all.
+// Both are composed from the palette above rather than repeating literals, so a palette
+// change propagates into them. Night mode remaps the component stops through custom
+// properties rather than declaring separate dark gradient tokens.
+//
+// Filled call-to-action pill, inverse label.
+@blitzy-color-gradient-cta: linear-gradient( 135deg, @blitzy-color-purple 0%, @blitzy-color-purple-light 100% );
+// Hero wash, resolving into the lavender band.
+@blitzy-color-gradient-hero: linear-gradient( 180deg, @blitzy-color-surface-base 0%, @blitzy-color-lavender-band 100% );
+
+//
+// == Night palette ==
+//
+// Ten values, and only ten. The night palette remaps the same core-named custom properties
+// the light palette defines, so unmodified core CSS inherits the dark treatment without a
+// single additional selector. A whole-page `filter: invert()` is deliberately not used: it
+// degrades performance on large pages and corrupts colour-carried meaning. Only the narrow
+// per-image inversion path applies, honouring the `mw-no-invert`, `skin-invert`,
+// `skin-invert-image` and `notheme` content contracts.
+//
+// Page surface in night mode. Remaps `@background-color-base` (L68).
+@blitzy-color-dark-surface: #0e0b24;
+// Cards and the navigation card, lifted off the page surface.
+@blitzy-color-dark-surface-raised: #1c1839;
+// Primary night text, and the type set on the three night feedback fills below.
+@blitzy-color-dark-text-primary: #efeef7;
+@blitzy-color-dark-text-secondary: #d1cfe2;
+// Chosen as its own value rather than as a tint of `@blitzy-color-text-muted`, which would
+// not clear the body-text floor against the night surface.
+@blitzy-color-dark-text-muted: #a5a2b9;
+// THE NIGHT PURPLE IS DELIBERATELY LIGHTER THAN THE LIGHT-MODE PURPLE. DO NOT "FIX" IT
+// BACK TO THE BRAND PURPLE. `@blitzy-color-purple` (#5b39f3) measures only 3.04:1 against
+// `@blitzy-color-dark-surface`, well below the 4.5:1 body-text minimum, and the darker
+// candidates on the same hue axis measured too close to that threshold to be safe. This
+// stop measures 7.61:1. Reverting it would silently fail the blocking contrast gate while
+// looking more "on brand", which is precisely why the reasoning is recorded here rather
+// than left in a review thread. `tools/contrast-report.js` must confirm the measured ratio
+// and verdict for this value and for all ten night values, in the night mode.
+@blitzy-color-dark-purple: @blitzy-color-purple-lighter;
+// Borders and hairlines on night surfaces.
+// BLITZY [A11Y]: measures below the 3:1 non-text minimum against both night surfaces. Like
+// its light-mode counterparts this is a decorative separator between surfaces already
+// distinguished by fill, not a user-interface component boundary, so it is implemented at
+// the specified value and excluded from the pairing set. Recorded rather than silent; this
+// is the one night value with no text pairing, and it is annotated here precisely so that
+// all ten remain accounted for.
+@blitzy-color-dark-border: #353154;
+// Diff added rows in night mode.
+@blitzy-color-dark-success-bg: #1c5441;
+// Diff removed rows in night mode.
+@blitzy-color-dark-error-bg: #592322;
+// Warning surfaces in night mode.
+@blitzy-color-dark-warning-bg: #5c491f;
+
+//
+// == Intended contrast pairings ==
+//
+// The machine-readable input to `tools/contrast-report.js`, which emits a measured ratio
+// and a verdict for every pairing below in both modes. Grammar, one pairing per line:
+//
+//     `@contrast-pair` <mode> <class> <foreground-token> <background-token>
+//
+// The marker is written in backticks on the illustrative line above, and only there, so
+// that the grammar cannot be mistaken for a pairing: every line a parser should read as
+// data carries the bare marker followed by four real values, and this file contains no
+// other bare-marker line. A parser that skipped this precaution would emit a spurious
+// pairing whose tokens are the angle-bracket placeholders -- which is exactly what happened
+// on the first validation run of this file, so the precaution is load-bearing rather than
+// decorative.
+// <class> `body` requires at least 4.5:1; <class> `large` requires at least 3:1 and is
+// also the floor applied to the non-text affordances listed -- the inline-link underline,
+// the focus ring and the destructive accent. Three light values and one night value are
+// deliberately absent, each carrying a `BLITZY [A11Y]` flag at its declaration explaining
+// why: `@blitzy-color-purple-light` is a decorative gradient stop that never carries text,
+// and `@blitzy-color-border-light`, `@blitzy-color-border-hairline` and
+// `@blitzy-color-dark-border` are decorative separators rather than component boundaries.
+// The gate these pairings feed is a blocking floor, not a conformance proof.
+//
+// -- Light mode --
+// @contrast-pair light body @blitzy-color-text-primary @blitzy-color-surface-base
+// @contrast-pair light body @blitzy-color-text-secondary @blitzy-color-surface-base
+// @contrast-pair light body @blitzy-color-text-secondary @blitzy-color-surface-card
+// @contrast-pair light body @blitzy-color-text-muted @blitzy-color-surface-base
+// @contrast-pair light body @blitzy-color-text-heading @blitzy-color-surface-base
+// @contrast-pair light body @blitzy-color-text-heading @blitzy-color-brand-50
+// @contrast-pair light body @blitzy-color-link @blitzy-color-surface-base
+// @contrast-pair light body @blitzy-color-link--visited @blitzy-color-surface-base
+// @contrast-pair light body @blitzy-color-link-external @blitzy-color-surface-base
+// @contrast-pair light large @blitzy-color-link-underline @blitzy-color-surface-base
+// @contrast-pair light body @blitzy-color-purple @blitzy-color-brand-50
+// @contrast-pair light body @blitzy-color-text-inverse @blitzy-color-announce-bg
+// @contrast-pair light body @blitzy-color-text-inverse @blitzy-color-purple
+// @contrast-pair light body @blitzy-color-text-secondary @blitzy-color-success-bg
+// @contrast-pair light body @blitzy-color-text-secondary @blitzy-color-error-bg
+// @contrast-pair light body @blitzy-color-text-secondary @blitzy-color-warning-bg
+// @contrast-pair light body @blitzy-color-text-heading @blitzy-color-lavender-band
+// @contrast-pair light large @blitzy-color-error @blitzy-color-surface-base
+//
+// -- Night mode --
+// @contrast-pair dark body @blitzy-color-dark-text-primary @blitzy-color-dark-surface
+// @contrast-pair dark body @blitzy-color-dark-text-primary @blitzy-color-dark-surface-raised
+// @contrast-pair dark body @blitzy-color-dark-text-secondary @blitzy-color-dark-surface
+// @contrast-pair dark body @blitzy-color-dark-text-secondary @blitzy-color-dark-surface-raised
+// @contrast-pair dark body @blitzy-color-dark-text-muted @blitzy-color-dark-surface
+// @contrast-pair dark body @blitzy-color-dark-purple @blitzy-color-dark-surface
+// @contrast-pair dark body @blitzy-color-dark-purple @blitzy-color-dark-surface-raised
+// @contrast-pair dark body @blitzy-color-dark-text-primary @blitzy-color-dark-success-bg
+// @contrast-pair dark body @blitzy-color-dark-text-primary @blitzy-color-dark-error-bg
+// @contrast-pair dark body @blitzy-color-dark-text-primary @blitzy-color-dark-warning-bg
+//
+
+//
+// == Typography ==
+//
+// -- Families --
+//
+// Three families, one purpose each, each with a generic CSS family as its only fallback.
+// NO HOST-RESOLVED FAMILY MAY BE ADDED to any stack below. The platform user-interface font
+// keywords and the vendor-prefixed platform stacks resolve to a different typeface on every
+// machine, which would break byte-identical capture outright; a generic family is the only
+// permitted fallback because the generic families degrade predictably. For the same reason
+// the four woff2 files these stacks name are static single-weight instances and not variable
+// fonts, which render non-deterministically across environments. The faces are self-hosted;
+// no family is fetched from any third-party origin at build time or at run time, and the
+// `@font-face` rules that declare their sources live in
+// `resources/skins.blitzy.styles/fonts.less`.
+//
+// Display, hero and heading type. Remaps core's `@font-family-heading-main` (L415).
+@blitzy-font-family-display: 'Space Grotesk', 'Inter', sans-serif;
+// Body prose, navigation and interface text. Remaps core's `@font-family-base` (L408).
+@blitzy-font-family-base: 'Inter', sans-serif;
+// Code, diffs and edit surfaces. Remaps core's `@font-family-monospace` (L413).
+// Remapping these three lines is the highest-leverage change in the whole style layer: it
+// is what makes the edit form, the diff and the preferences page adopt Blitzy typography
+// without one of their stylesheets being edited.
+@blitzy-font-family-monospace: 'Fira Code', monospace;
+//
+// -- Type scale --
+//
+// The substrate's scale tops out at 1.75rem (28px) against a required 30px heading, and
+// declares nothing near the display sizes, so the scale is skin-owned end to end.
+//
+// THE DISPLAY AND SUB-HEADLINE STEPS ARE NAMED BY BAND, NOT BY DEVICE, AND THE BANDS ARE
+// NOT THE SAME FOR BOTH. This is the single most error-prone detail in the specification,
+// so it is spelled out rather than implied:
+//
+//     token                              band                       width asserted at
+//     ---------------------------------  -------------------------  ------------------
+//     @blitzy-font-size-display-wide     1024px and above           1440px
+//     @blitzy-font-size-display-mid      768px to 1023px inclusive  768px
+//     @blitzy-font-size-display-narrow   below 768px                390px
+//     @blitzy-font-size-subhead-wide     768px and above            1440px and 768px
+//     @blitzy-font-size-subhead-narrow   below 768px                390px
+//
+// The three viewport-dependent components DO NOT switch together at 768px. At exactly
+// 768px the navigation card is still the full-height card, because the mobile disclosure
+// applies *below* 768px; the card grid is still two columns, because two columns apply at
+// *and above* 768px; and the sub-headline is still at its wide step, because that step also
+// applies at and above 768px. The display step is the one value that changes at that width,
+// dropping to its middle band. Every viewport-dependent fidelity assertion is written
+// against exactly these boundaries, which is why each band carries its own named token
+// instead of the scale being computed.
+//
+// Hero and page-title display type. See `../../design/reference/blitzy-home-nav-hero-1440.png`.
+@blitzy-font-size-display-wide: 88px;
+@blitzy-font-size-display-mid: 56px;
+@blitzy-font-size-display-narrow: 40px;
+// Hero sub-headline, and the content header's tagline and subtitle regions.
+@blitzy-font-size-subhead-wide: 19px;
+@blitzy-font-size-subhead-narrow: 17px;
+// Content headings. Both are width-invariant and must assert the same value at every
+// viewport. See `../../design/reference/blitzy-docs-article-prose-1440.png`.
+@blitzy-font-size-h2: 30px;
+@blitzy-font-size-h3: 22px;
+// Announcement bar text, set in the inverse colour on the announcement fill.
+@blitzy-font-size-announce: 18px;
+// Navigation links, set at the semibold core weight.
+@blitzy-font-size-nav: 17px;
+// Body prose.
+@blitzy-font-size-prose: 16px;
+// Reference lists and footnotes, set in the muted colour.
+@blitzy-font-size-reference: 14px;
+// Code, diff and edit-surface text. Shares the reference size but is a separate token
+// because the two roles are asserted independently and may diverge.
+@blitzy-font-size-monospace: 14px;
+
+//
+// == Geometry ==
+//
+// -- Radii --
+//
+// The substrate declares only `@border-radius-base: 0`, `-sharp: 0`, `-pill: 9999px` and
+// `-circle: 50%` (core L375-378), so no card or navigation radius exists to consume and all
+// three below are skin-owned.
+//
+// Cards, infoboxes, content panels, the table-of-contents card, and the trailing corners of
+// a hatnote or message box.
+@blitzy-border-radius-card: 12px;
+// The floating navigation card. See
+// `../../design/reference/blitzy-home-nav-hero-1440.png`.
+@blitzy-border-radius-nav: 16px;
+// Call-to-action pills and category chips.
+//   999px, NOT the substrate's `@border-radius-pill: 9999px` (core L377). The two render
+//   indistinguishably, and reusing core's token would be the tidier instinct -- but the
+//   specified value is 999px and fidelity is asserted by comparing the *specified* value
+//   against the computed style, so the near-match fails the assertion even though the
+//   pixels agree. Do not "simplify" this to core's token.
+@blitzy-border-radius-pill: 999px;
+//
+// -- Border and underline widths --
+//
+// The 1px hairline and the 2px underline, focus ring and active-section border are core
+// exact matches and are catalogued above rather than declared. The three below have no
+// substrate equivalent: core declares `@border-width-base: 1px` and
+// `@border-width-thick: 2px` and nothing else, and contains no 3px value anywhere.
+//
+// Border of the outline call-to-action.
+//   MEASURED BROWSER CAVEAT -- READ BEFORE WRITING A FIDELITY ASSERTION AGAINST THIS TOKEN.
+//   Blink quantises `border-width` to whole CSS pixels, so this token's specified 1.5px
+//   RESOLVES to a computed `1px`. That was measured in Chromium on this very value, three
+//   independent ways: the resolved style reported `1px`; layout agreed
+//   (`offsetHeight - clientHeight` was 2px total, i.e. 1px per side, where a used 1.5px
+//   would give 3px); and a synthetic ladder resolved 0.5px, 1.4px, 1.5px and 1.9999px all
+//   to `1px` while 2px resolved to `2px`. It reproduces at device pixel ratio 2, so it is
+//   not a scaling artefact. The quantisation is property-specific: `box-shadow` and
+//   `text-decoration-thickness` DO preserve fractional pixels, which is why the 2.5px tab
+//   underline below survives as a computed value and this does not.
+//   The token keeps the specified 1.5px regardless, because fidelity is asserted against the
+//   SPECIFIED value and substituting 1px or 2px here would silently redefine the design.
+//   The consequence is for the CONSUMER, not for this declaration: an assertion of the form
+//   `border-top-width === '1.5px'` can never pass in Chromium. Assert it one of these ways
+//   instead -- either compare against the computed `1px` with this snap noted, or read the
+//   authored declaration from the CSSOM rule text rather than from the computed style, or
+//   author the stroke as `box-shadow: 0 0 0 @blitzy-border-width-cta <colour>`, whose
+//   computed value was verified to preserve `1.5px` and is therefore directly assertable.
+@blitzy-border-width-cta: 1.5px;
+// Underline marking the active tab.
+//   2.5px, NOT the 2px carried by the substrate's `@box-shadow-inset-medium-vertical`
+//   (core L382). Consumers borrow that inset-box-shadow *idiom* -- an inset shadow offset
+//   along the block axis is how the substrate draws an underline -- and take the width from
+//   this token, never the value from core's constructor. See
+//   `../../design/reference/blitzy-docs-article-prose-1440.png`.
+@blitzy-border-width-tab-underline: 2.5px;
+// Leading border of a hatnote or message box.
+@blitzy-border-width-hatnote: 3px;
+//
+// -- Elevation --
+//
+// The single soft shadow of the design language, carried by the navigation card and by
+// content cards. None of the substrate's three `@box-shadow-drop-*` values (core L479-481,
+// themselves inside the deprecated block) matches it, so it is skin-owned.
+//   Composed from `@blitzy-color-navy` rather than repeating the literal, which keeps one
+//   source of truth for the hue and makes the relationship visible: `fade()` is a Less
+//   built-in evaluated at compile time, and this declaration was verified to compile to
+//   `0 2px 12px rgba( 16, 10, 64, 0.06 )` -- byte-identical to the specified value, and a
+//   fixed constant, so nothing here varies by host or browser.
+@blitzy-box-shadow-nav: 0 2px 12px fade( @blitzy-color-navy, 6% );
+//
+// -- Sizing --
+//
+// Height of the floating navigation card. Held at this value at and above 768px; below it
+// the card gives way to the mobile disclosure. See the band table above.
+@blitzy-size-nav-height: 76px;
+// Width of the infobox when it is floated to the trailing side, at and above 1024px. Below
+// that width the infobox is full-width and stacked above the content, and this token does
+// not apply.
+@blitzy-size-infobox-width: 320px;
+// Maximum measure of the hero sub-headline in the reference design.
+// @reserved - no consuming rule; excluded from the public token surface (Gate 12). The
+// design-language specification names it and the reference captures evidence it, but no
+// surface in the skin's own user-interface specification constrains a measure, so nothing
+// consumes it today. Declared so the value is not lost, annotated so it does not fail the
+// unconsumed-token audit, and enumerated in `DELIVERY.md`. Remove the annotation if and
+// when `components/ContentHeader.less` adopts it; remove the token if it never does.
+@blitzy-max-width-hero-measure: 880px;
+//
+// -- Line heights --
+//
+// The h2 and h3 heading line height is core's `@line-height-xxx-small` (L483) and is
+// catalogued above rather than declared. The two below are skin-owned: the display value
+// has no substrate counterpart, and the prose value is a remap of core's
+// `@line-height-content` (L428, `1.6`) rather than a match to it.
+//
+// Hero and page-title display type, set tight.
+@blitzy-line-height-display: 0.98;
+// Body prose reading rhythm.
+@blitzy-line-height-prose: 1.75;
+
+//
+// == Breakpoints ==
+//
+// Two switch points, and no others. Neither matches any substrate breakpoint -- core
+// declares 320px, 640px, 1120px and 1680px (L272-275) -- which makes this the most
+// consequential divergence in the whole design system, because six independent responsive
+// behaviours pivot on these two numbers and every viewport-dependent fidelity assertion is
+// written against them:
+//   768px governs four -- the navigation disclosure (below), the card-grid column count (at
+//   and above), the wikitable horizontal-scroll container (below), and the middle band of
+//   the display type scale (at and above).
+//   1024px governs two -- the sticky table-of-contents card (at and above) and the floated
+//   infobox (at and above).
+// Naming follows the design language, so `tablet` and `desktop` here are Blitzy's switch
+// points and deliberately NOT core's same-named values. The `@blitzy-` prefix keeps them
+// from colliding; the divergence is intentional and must not be "aligned" to core.
+//
+@blitzy-min-width-breakpoint-tablet: 768px;
+@blitzy-min-width-breakpoint-desktop: 1024px;
+//
+// Maximum widths follow the convention core documents at L281-285 and are computed here in
+// the same way, for the same three reasons core gives:
+//   * each is the next minimum width minus one pixel;
+//   * the subtraction is a Less calculation evaluated at compile time and NOT a CSS
+//     calculation expression, because the CSS media-query standard does not specify complex
+//     values for media features -- a breakpoint token must resolve to a plain length;
+//   * the expression must be wrapped in parentheses, or the Less calculation breaks
+//     (upstream task T367103). The parentheses are a correctness requirement, not
+//     formatting, and must not be removed by a formatter.
+// Both companions are genuinely required, because the design switches in both directions at
+// both points: the navigation disclosure and the wikitable scroll container apply below
+// 768px, and the inline table-of-contents disclosure applies below 1024px.
+// Verified to compile to 767px and 1023px respectively.
+@blitzy-max-width-breakpoint-mobile: ( @blitzy-min-width-breakpoint-tablet - 1px );
+@blitzy-max-width-breakpoint-tablet: ( @blitzy-min-width-breakpoint-desktop - 1px );

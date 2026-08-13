@@ -1,0 +1,50 @@
+# ESLint ignore list for the Blitzy skin.
+#
+# Keep this list minimal. Every entry below is a silent exemption from the
+# zero-warning build gate, so nothing this package authors may appear here:
+# when a source file fails lint, fix the file, never add it to this list.
+#
+# `eslint .` does not only walk `.js`. eslint-config-wikimedia declares
+# overrides for `**/*.json`, `**/*.jsonc`, `**/*.yaml`, `**/*.yml` and
+# `**/*.ts`, and ESLint adds those extensions to its directory traversal, so
+# manifests, message catalogues, Compose files and TypeScript specs are all
+# lint targets here. It also un-ignores dotfiles that carry an extension
+# (`.eslintrc.json`, `.stylelintrc.json`, `.svgo.config.js` are linted) while
+# already excluding the contents of dot-directories, which is why `.cache/`
+# and `.playwright/` need no entry of their own.
+#
+# Deliberately NOT ignored, and why:
+#   resources/skins.blitzy.js/  the client script; progressive enhancement is a
+#                               hard requirement, so this code is linted.
+#   tests/qunit/                the client unit suites that earn the coverage
+#                               floor; linted like production code.
+#   tools/, karma.conf.js, .svgo.config.js
+#                               package tooling; linted.
+#   playwright.config.ts, tests/playwright/**/*.ts
+#                               linted as-is. The pinned eslint-config-wikimedia
+#                               already depends on @typescript-eslint/parser and
+#                               applies its TypeScript profile to `**/*.ts`, so
+#                               no extra parser and no new build tooling are
+#                               needed. An unlinted spec is exactly where a
+#                               stray `test.skip` or a swallowed assertion
+#                               hides, and fidelity assertions must fail rather
+#                               than skip.
+#   screenshots/, design/       committed deliverables. `screenshots/audits/`
+#                               holds generated JSON that is linted like any
+#                               other JSON, so the generators must write it
+#                               tab-indented with a trailing newline rather
+#                               than have this list excuse them.
+
+# Dependency trees: third-party code this package installs but does not author.
+/node_modules/
+/vendor/
+
+# Generated reports and transient test-runner output. Never committed, never
+# authored here, and written by their tools with formatting ESLint rejects.
+/coverage/
+/test-results/
+/playwright-report/
+
+# Message catalogues. Validated by banana-checker, which checks key
+# completeness and qqq documentation: obligations ESLint cannot express.
+/i18n/
