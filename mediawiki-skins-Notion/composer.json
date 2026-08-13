@@ -1,0 +1,52 @@
+{
+	"name": "mediawiki/notion-skin",
+	"type": "mediawiki-skin",
+	"description": "MediaWiki skin that re-expresses the modern reading experience in Notion's visual language",
+	"keywords": [
+		"wiki",
+		"MediaWiki",
+		"skin"
+	],
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Blitzy Agent"
+		}
+	],
+	"require": {
+		"composer/installers": ">1.0.12"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.x-dev"
+		},
+		"installer-name": "Notion"
+	},
+	"require-dev": {
+		"mediawiki/mediawiki-codesniffer": "52.0.0",
+		"mediawiki/mediawiki-phan-config": "0.20.0",
+		"mediawiki/minus-x": "2.0.1",
+		"php-parallel-lint/php-console-highlighter": "1.0.0",
+		"php-parallel-lint/php-parallel-lint": "1.4.0"
+	},
+	"scripts": {
+		"fix": [
+			"minus-x fix .",
+			"phpcbf"
+		],
+		"test": [
+			"parallel-lint . --exclude node_modules --exclude vendor",
+			"@phpcs",
+			"minus-x check ."
+		],
+		"test:size": "@composer -d ../../ phpunit skins/Notion/tests/phpunit/structure/BundleSizeTest.php",
+		"phan": "phan -d . --long-progress-bar",
+		"phpcs": "phpcs -sp --cache"
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}
