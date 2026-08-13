@@ -802,10 +802,10 @@ According to the historian of computing and Babbage specialist [[Doron Swade]]:
 			<origin>2029</origin>
 			<model>wikitext</model>
 			<format>text/x-wiki</format>
-			<text bytes="399" sha1="l9ylybzi2b6ikctxe01xkvpbc23aqnt" xml:space="preserve">&lt;div class="reflist {{#if:{{{1|}}}|reflist-columns}}" {{#if:{{{1|}}}|style="column-width:{{{1}}};"}}&gt;&lt;references /&gt;&lt;/div&gt;&lt;noinclude&gt;
+			<text bytes="435" sha1="23i77mo98sgrkg0431nwl9ypwamb7ea" xml:space="preserve">&lt;div class="reflist {{#if:{{{1|}}}|reflist-columns}}" {{#if:{{{1|}}}|style="column-width:{{{1}}};"}}&gt;{{#tag:references|{{{refs|}}}|group={{{group|}}}}}&lt;/div&gt;&lt;noinclude&gt;
 ''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
 &lt;/noinclude&gt;</text>
-			<sha1>l9ylybzi2b6ikctxe01xkvpbc23aqnt</sha1>
+			<sha1>23i77mo98sgrkg0431nwl9ypwamb7ea</sha1>
 		</revision>
 	</page>
 	<page>

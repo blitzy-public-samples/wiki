@@ -1,0 +1,82 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/server"
+	],
+	"overrides": [
+		{
+			"files": [
+				"resources/skins.blitzy.js/**/*.js"
+			],
+			"extends": [
+				"wikimedia/client",
+				"wikimedia/mediawiki"
+			],
+			"env": {
+				"browser": true,
+				"node": false
+			},
+			"globals": {
+				"mw": "readonly"
+			}
+		},
+		{
+			"files": [
+				"tests/qunit/**/*.js"
+			],
+			"extends": [
+				"wikimedia/mediawiki/qunit"
+			],
+			"env": {
+				"browser": true,
+				"qunit": true,
+				"node": false
+			},
+			"globals": {
+				"mw": "readonly",
+				"QUnit": "readonly"
+			}
+		},
+		{
+			"files": [
+				"tools/*.js",
+				"karma.conf.js",
+				".svgo.config.js"
+			],
+			"extends": [
+				"wikimedia/server"
+			],
+			"env": {
+				"browser": false,
+				"node": true
+			},
+			"rules": {
+				"security/detect-non-literal-fs-filename": "off"
+			}
+		},
+		{
+			"files": [
+				"playwright.config.ts",
+				"tests/playwright/**/*.ts"
+			],
+			"env": {
+				"browser": false,
+				"node": true
+			},
+			"settings": {
+				"n": {
+					"tryExtensions": [ ".ts", ".js", ".json", ".node" ]
+				}
+			}
+		},
+		{
+			"files": [
+				"**/*.yaml",
+				"**/*.yml"
+			],
+			"rules": {
+				"yml/plain-scalar": "off"
+			}
+		}
+	]
+}

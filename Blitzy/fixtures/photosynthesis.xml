@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+	<siteinfo>
+		<sitename>Wikipedia</sitename>
+		<dbname>enwiki</dbname>
+		<base>https://en.wikipedia.org/wiki/Main_Page</base>
+		<generator>MediaWiki 1.47.0-wmf.14</generator>
+		<case>first-letter</case>
+		<namespaces>
+			<namespace key="-2" case="first-letter">Media</namespace>
+			<namespace key="-1" case="first-letter">Special</namespace>
+			<namespace key="0" case="first-letter" />
+			<namespace key="1" case="first-letter">Talk</namespace>
+			<namespace key="2" case="first-letter">User</namespace>
+			<namespace key="3" case="first-letter">User talk</namespace>
+			<namespace key="4" case="first-letter">Wikipedia</namespace>
+			<namespace key="5" case="first-letter">Wikipedia talk</namespace>
+			<namespace key="6" case="first-letter">File</namespace>
+			<namespace key="7" case="first-letter">File talk</namespace>
+			<namespace key="8" case="first-letter">MediaWiki</namespace>
+			<namespace key="9" case="first-letter">MediaWiki talk</namespace>
+			<namespace key="10" case="first-letter">Template</namespace>
+			<namespace key="11" case="first-letter">Template talk</namespace>
+			<namespace key="12" case="first-letter">Help</namespace>
+			<namespace key="13" case="first-letter">Help talk</namespace>
+			<namespace key="14" case="first-letter">Category</namespace>
+			<namespace key="15" case="first-letter">Category talk</namespace>
+		</namespaces>
+	</siteinfo>
+	<page>
+		<title>Photosynthesis</title>
+		<ns>0</ns>
+		<id>4001</id>
+		<revision>
+			<id>5001</id>
+			<timestamp>2026-06-22T18:44:09Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: article subset derived from https://en.wikipedia.org/w/index.php?oldid=1368470526 (CC BY-SA 4.0); Scribunto-backed furniture omitted, notation kept in the native sub/sup markup MediaWiki renders without the Math extension, displayed equations re-indented with block indent and colour-only caption styling dropped to clear blocking axe-core findings</comment>
+			<origin>5001</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="110386" sha1="olmwcw1bavs9dn856v5zib52smcfx6m" xml:space="preserve">{{short description|Biological process to convert light into chemical energy}}
+{{other uses}}
+{{pp-vandalism|small=yes}}
+[[File:Photosynthesis en.svg|thumb|upright=1.5|Schematic of photosynthesis in plants. The [[carbohydrate]]s produced are stored in or used by the plant.]]
+[[File:Seawifs global biosphere.jpg|upright=1.5|thumb|right|Composite image showing the global distribution of photosynthesis, including both oceanic [[phytoplankton]] and terrestrial [[vegetation]]. Dark red and blue-green indicate regions of high photosynthetic activity in the ocean and on land, respectively.]]
+
+'''Photosynthesis''' is a [[biological system|system]] of [[biological process]]es by which [[photopigment]]-bearing [[autotroph]]ic [[organism]]s, such as most [[plant]]s, [[algae]] and [[cyanobacteria]], convert [[light energy]]—typically from [[sunlight]]—into the [[chemical energy]] necessary to fuel their [[metabolism]]. The term ''photosynthesis'' usually refers to '''oxygenic photosynthesis''', a process that releases [[oxygen]] as a [[byproduct]] of [[water splitting]]. Photosynthetic organisms store the converted chemical energy within the [[chemical bond|bond]]s of intracellular [[organic compound]]s (complex [[chemical compound|compound]]s containing [[carbon]]), typically [[carbohydrate]]s like [[sugar]]s (mainly [[glucose]], [[fructose]] and [[sucrose]]), [[starch]]es, [[phytoglycogen]] and [[cellulose]]. When needing to use this stored energy, an organism's cells then metabolize the organic compounds through [[cellular respiration]]. Photosynthesis plays a critical role in producing and maintaining the [[atmospheric oxygen|oxygen content]] of the [[Earth's atmosphere]], and it supplies most of the [[biological energy]] necessary for [[complex life]] on [[Earth]].&lt;ref name="Bryant-2006"&gt;{{cite journal |last1= Bryant |first1= Donald A. |last2= Frigaard |first2= Niels-Ulrik |date= Nov 2006 |title= Prokaryotic photosynthesis and phototrophy illuminated |journal= [[Trends in Microbiology]] |volume= 14 |issue= 11 |pages= 488–496 |doi= 10.1016/j.tim.2006.09.001 |pmid= 16997562 }}&lt;/ref&gt;
+
+Some organisms also perform [[anoxygenic photosynthesis]], which does not produce oxygen. Some [[bacteria]] (e.g. [[purple bacteria]]) use [[bacteriochlorophyll]] to split [[hydrogen sulfide]] as a [[reductant]] instead of [[water]], releasing [[sulfur]] instead of oxygen, which was a dominant form of photosynthesis in the [[euxinic]] [[Canfield ocean]]s during the [[Boring Billion]].&lt;ref name="Canfield1998"&gt;{{Cite journal |last=Canfield |first=D. E. |year=1998 |title=A new model for Proterozoic ocean chemistry |journal=[[Nature (journal)|Nature]] |volume=396 |issue=6710 |pages=450–453 |bibcode=1998Natur.396..450C |doi=10.1038/24839 |df=dmy-all}}&lt;/ref&gt;&lt;ref name=Javaux2018&gt;{{cite journal|first1=E. J.|last1=Javaux|first2=K.|last2=Lepot|year=2018|title=The Paleoproterozoic fossil record: Implications for the evolution of the biosphere during Earth's middle-age|journal=Earth-Science Reviews|volume=176|pages=68–86|doi=10.1016/j.earscirev.2017.10.001|bibcode=2018ESRv..176...68J|doi-access=free|hdl=20.500.12210/62416|hdl-access=free}}&lt;/ref&gt; [[Archaea]] such as ''[[Halobacterium]]'' also perform a type of non-[[carbon fixation|carbon-fixing]] anoxygenic photosynthesis, where the simpler photopigment [[retinal]] and its [[microbial rhodopsin]] [[derivative (chemistry)|derivative]]s are used to absorb green light and produce a proton ([[hydron]]) [[electrochemical gradient|gradient]] across the [[cell membrane]], and the subsequent [[chemiosmosis|ion movement]] powers [[transmembrane protein|transmembrane]] [[proton pump]]s to directly synthesize [[adenosine triphosphate]] (ATP), the "energy currency" of cells. Such archaeal photosynthesis might have been the earliest form of photosynthesis that evolved on Earth, as far back as the [[Paleoarchean]], preceding that of [[cyanobacteria]] (see [[Purple Earth hypothesis]]).&lt;ref&gt;{{cite journal|last1=DasSarma|first1=Shiladitya|last2=Schwieterman|first2=Edward W.|date=2018-10-11|title=Early evolution of purple retinal pigments on Earth and implications for exoplanet biosignatures|url=https://www.cambridge.org/core/journals/international-journal-of-astrobiology/article/early-evolution-of-purple-retinal-pigments-on-earth-and-implications-for-exoplanet-biosignatures/63A1AD8AF544BEEF4C6D4A2D53130327|journal=[[International Journal of Astrobiology]]|volume=20|issue=3|publisher=[[ Cambridge University Press]]|pages=241–250|doi=10.1017/S1473550418000423|access-date=2025-08-03|arxiv=1810.05150|bibcode=2021IJAsB..20..241D|archive-date=2019-04-19|archive-url=https://web.archive.org/web/20190419084336/https://www.cambridge.org/core/journals/international-journal-of-astrobiology/article/early-evolution-of-purple-retinal-pigments-on-earth-and-implications-for-exoplanet-biosignatures/63A1AD8AF544BEEF4C6D4A2D53130327|url-status=live}}&lt;/ref&gt;
+
+While the details may differ between [[species]], the process always begins when light energy is absorbed by the [[reaction center]]s, proteins that contain [[photosynthetic pigment]]s or [[chromophore]]s. In plants, these pigments are [[chlorophyll]]s (a [[porphyrin]] derivative that absorbs the red and blue [[optical spectrum|spectra]] of light, thus reflecting green) held inside [[chloroplast]]s, abundant in [[leaf]] cells. In cyanobacteria, they are embedded in the [[plasma membrane]]. In these light-dependent reactions, some energy is used to strip [[electron]]s from suitable substances, such as water, producing oxygen gas. The [[hydrogen]] freed by the splitting of water is used in the creation of two important molecules that participate in energetic processes: reduced [[nicotinamide adenine dinucleotide phosphate]] (NADPH) and ATP.
+
+In plants, [[algae]], and [[cyanobacteria]], sugars are synthesized by a subsequent sequence of {{nowrap|light-independent}} reactions called the [[Calvin cycle]]. In this process, atmospheric carbon dioxide is incorporated into already existing organic compounds, such as [[ribulose bisphosphate]] (RuBP).&lt;ref&gt;{{cite book |last1= Reece |first1= Jane B. |last2= Urry |first2= Lisa A. |last3= Cain |first3= Michael L. |last4= Wasserman |first4= Steven A. |last5= Minorsky |first5= Peter V. |last6= Jackson |first6= Robert B. |last7= Campbel |first7= Neil A. |year= 2011 |title= Biology |edition= International |publisher= [[Pearson Education]] |location= Upper Saddle River, NJ |isbn= 978-0-321-73975-9 |pages= [https://archive.org/details/isbn_9781256158769/page/235 235, 244] |quote=This initial incorporation of carbon into organic compounds is known as carbon fixation |url= https://archive.org/details/isbn_9781256158769/page/235 }}&lt;/ref&gt; Using the ATP and NADPH produced by the light-dependent reactions, the resulting compounds are then [[biological reductant|reduced]] and removed to form further carbohydrates, such as [[glucose]]. In other bacteria, different mechanisms like the [[reverse Krebs cycle]] are used to achieve the same end.
+
+The first photosynthetic organisms probably [[evolved]] early in the [[evolutionary history of life]] using [[reducing agent]]s such as hydrogen or hydrogen sulfide, rather than water, as sources of electrons.&lt;ref&gt;{{cite journal |vauthors= Olson JM |title= Photosynthesis in the Archean era |journal= [[Photosynthesis Research]] |volume= 88 |issue= 2 |pages= 109–117 |date= May 2006 |bibcode= 2006PhoRe..88..109O |doi= 10.1007/s11120-006-9040-5 |pmid= 16453059 }}&lt;/ref&gt; Cyanobacteria appeared later; the [[Oxygen cycle|excess oxygen]] they produced contributed directly to the [[oxygenation of the Earth]],&lt;ref&gt;{{cite journal |vauthors= Buick R |date= Aug 2008 |title= When did oxygenic photosynthesis evolve? |journal= [[Philosophical Transactions of the Royal Society of London, Series B]] |volume= 363 |issue= 1504 |pages= 2731–2743 |doi= 10.1098/rstb.2008.0041 |pmc= 2606769 |pmid= 18468984 |bibcode= 2008RSPTB.363.2731B }}&lt;/ref&gt; which rendered the evolution of complex life possible. The average rate of energy captured by global photosynthesis is approximately 130 [[terawatts]],&lt;ref&gt;{{cite journal |vauthors=Nealson KH, Conrad PG |title=Life: past, present and future |journal=[[Philosophical Transactions of the Royal Society of London, Series B]] |volume= 354 |issue= 1392 |pages= 1923–1939 |date= Dec 1999 |pmid=10670014 |pmc=1692713 |doi=10.1098/rstb.1999.0532 |bibcode=1999RSPTB.354.1923N }}&lt;/ref&gt;&lt;ref&gt;{{cite book |last1= Whitmarsh |first1= John |last2= Govindjee |year= 1999 |chapter= Chapter 2: The photosynthetic process |editor1= Singhal G.S. |editor2= Renger G. |editor3= Sopory S.K. |editor4= Irrgang K.D. |editor5= Govindjee |title= Concepts in photobiology: photosynthesis and photomorphogenesis |location= Boston |publisher= [[Kluwer Academic Publishers]] |pages= 11–51 |isbn= 978-0-7923-5519-9 |quote= It is estimated that photosynthetic organisms remove {{val|100|e=15}} grams of carbon/year fixed by photosynthetic organisms. This is equivalent to {{val|4|e=18|u=kJ|up=yr}} of free energy stored in reduced carbon. (in Part 8: "Global photosynthesis and the atmosphere") |chapter-url= http://www.life.illinois.edu/govindjee/paper/gov.html#80 |access-date= 2012-07-07 |archive-date= 2010-08-14 |archive-url= https://web.archive.org/web/20100814191216/http://www.life.illinois.edu/govindjee/paper/gov.html#80 |url-status= live }}&lt;/ref&gt;&lt;ref&gt;{{cite book |vauthors=Steger U, Achterberg W, Blok K, Bode H, Frenz W, Gather C, Hanekamp G, Imboden D, Jahnke M, Kost M, Kurz R, Nutzinger HG, Ziesemer T |year= 2005 |title= Sustainable development and innovation in the energy sector |publisher= [[Springer (publisher)|Springer]] |location= Berlin |page= 32 |isbn= 978-3-540-23103-5 |url= https://books.google.com/books?id=duVJsAqXlkEC&amp;q=photosynthesis%20terawatt&amp;pg=PA32 |quote= The average global rate of photosynthesis is 130 TW. |access-date= 2016-02-21 |archive-url= https://web.archive.org/web/20160902191543/https://books.google.com/books?id=duVJsAqXlkEC&amp;lpg=PA32&amp;dq=photosynthesis%20terawatt&amp;pg=PA32#v=onepage&amp;q=photosynthesis%20terawatt&amp;f=false |archive-date= 2016-09-02 |url-status= live }}&lt;/ref&gt; which is about eight times the total [[power consumption of human civilization]].&lt;ref&gt;{{cite web |title= World Consumption of Primary Energy by Energy Type and Selected Country Groups, 1980–2004 |format= XLS |publisher= [[Energy Information Administration]] |date= July 31, 2006 |url= http://www.eia.doe.gov/pub/international/iealf/table18.xls |access-date=2007-01-20 |url-status=dead |archive-url=https://web.archive.org/web/20061109125803/http://www.eia.doe.gov/pub/international/iealf/table18.xls |archive-date=November 9, 2006 }}&lt;/ref&gt; Photosynthetic organisms also convert around 100–115 billion [[ton]]s (91–104 Pg [[Orders of magnitude (mass)|petagrams]], or billions of metric tons), of carbon into [[Biomass (ecology)|biomass]] per year.&lt;ref&gt;{{cite journal |vauthors= Field CB, Behrenfeld MJ, Randerson JT, Falkowski P |date= Jul 1998 |title= Primary production of the biosphere: integrating terrestrial and oceanic components |journal= [[Science (journal)|Science]] |volume= 281 |issue= 5374 |pages= 237–240 |bibcode= 1998Sci...281..237F |doi= 10.1126/science.281.5374.237 |pmid= 9657713 |url= http://www.escholarship.org/uc/item/9gm7074q |access-date= 2018-04-20 |archive-url= https://web.archive.org/web/20180925215921/https://escholarship.org/uc/item/9gm7074q |archive-date= 2018-09-25 |url-status= live }}&lt;/ref&gt;&lt;ref name="McGraw-Hill-2007"&gt;{{cite book |chapter= Photosynthesis |title= McGraw-Hill Encyclopedia of Science &amp; Technology |volume= 13 |location= New York |publisher= [[McGraw-Hill]] |year= 2007 |isbn= 978-0-07-144143-8 }}&lt;/ref&gt; Photosynthesis was discovered in 1779 by [[Jan Ingenhousz]] who showed that plants need light, not just soil and water.
+
+==Overview==
+{{Main article|Biological carbon fixation}}
+[[File:Simple photosynthesis overview.svg|thumb|Photosynthesis changes sunlight into chemical energy, splits water to liberate O&lt;sub&gt;2&lt;/sub&gt;, and fixes CO&lt;sub&gt;2&lt;/sub&gt; into sugar.]]
+Most photosynthetic organisms are [[photoautotroph]]s, which means that they are able to [[Chemical synthesis|synthesize]] food directly from [[carbon dioxide]] and [[water]] using [[energy]] from light. However, not all organisms use carbon dioxide as a source of carbon atoms to carry out photosynthesis; [[photoheterotroph]]s use organic compounds, rather than carbon dioxide, as a source of carbon.&lt;ref name="Bryant-2006"/&gt;
+
+In [[plant]]s, [[algae]], and [[cyanobacteria]], photosynthesis releases oxygen. This '''oxygenic photosynthesis''' is by far the most common type of photosynthesis used by living organisms. Some shade-loving plants (sciophytes) produce such low levels of oxygen during photosynthesis that they use all of it themselves instead of releasing it to the atmosphere.&lt;ref&gt;{{Cite book|url=https://books.google.com/books?id=L8DHHSO2RFsC&amp;dq=Sciophytes+shade+plants+compensation+uptake+aerobic+respiration&amp;pg=PA282|title=Plants: Diversity and Evolution|first1=Martin|last1=Ingrouille|first2=Bill|last2=Eddie|date=August 17, 2006|publisher=Cambridge University Press|isbn=978-1-139-45546-6 |via=Google Books}}&lt;/ref&gt;
+
+Although there are some differences between oxygenic photosynthesis in plants, algae, and cyanobacteria, the overall process is quite similar in these organisms. There are also many varieties of [[anoxygenic photosynthesis]], used mostly by bacteria, which consume carbon dioxide but do not release oxygen or which produce elemental sulfur instead of molecular oxygen.&lt;ref&gt;{{Cite journal |last1= George |first1= Drishya M. |last2= Vincent |first2= Annette S. |last3= Mackey |first3= Hamish R. |date= 2020 |title= An overview of anoxygenic phototrophic bacteria and their applications in environmental biotechnology for sustainable Resource recovery |journal= Biotechnology Reports (Amsterdam, Netherlands) |volume= 28 |article-number= e00563 |doi= 10.1016/j.btre.2020.e00563 |pmc= 7714679 |pmid= 33304839 }}&lt;/ref&gt;&lt;ref&gt;{{Cite book |last= Fuchs |first= Georg |date= 1987 |chapter= Carbon Dioxide Reduction by Anaerobic Bacteria |editor-last= Aresta |editor-first= M. |editor2-last= Forti |editor2-first= G. |title= Carbon Dioxide as a Source of Carbon: Biochemical and Chemical Uses |place= Dordrecht |publisher= Springer Netherlands |language= en |pages= 263–273 |doi= 10.1007/978-94-009-3923-3_14 |isbn= 978-94-009-3923-3 |chapter-url= https://doi.org/10.1007/978-94-009-3923-3_14 |access-date= 2024-06-10 }}&lt;/ref&gt;
+
+Carbon dioxide is converted into sugars in a process called [[carbon fixation]]; photosynthesis captures energy from sunlight to convert carbon dioxide into [[carbohydrate]]s. Carbon fixation is an [[endothermic]] [[redox]] reaction. In general outline, photosynthesis is the opposite of [[cellular respiration]]: while photosynthesis is a process of reduction of carbon dioxide to carbohydrates, cellular respiration is the oxidation of carbohydrates or other [[nutrient]]s to carbon dioxide. Nutrients used in cellular respiration include carbohydrates, amino acids and fatty acids. These nutrients are oxidized to produce carbon dioxide and water, and to release chemical energy to drive the organism's [[metabolism]].
+
+Photosynthesis and cellular respiration are distinct processes, as they take place through different sequences of chemical reactions and in different [[cellular compartment]]s (cellular respiration in [[mitochondria]]).&lt;ref&gt;{{Cite journal |last1= Stefano |first1= George B. |last2= Snyder |first2= Christopher |last3= Kream |first3= Richard M. |date= 2015-07-17 |title= Mitochondria, Chloroplasts in Animal and Plant Cells: Significance of Conformational Matching |journal= Medical Science Monitor: International Medical Journal of Experimental and Clinical Research |volume= 21 |pages= 2073–2078 |doi= 10.12659/MSM.894758 |pmc= 4517925 |pmid= 26184462 }}&lt;/ref&gt;&lt;ref&gt;{{Cite journal |last1= Shimakawa |first1= Ginga |last2= Matsuda |first2= Yusuke |last3= Burlacot |first3= Adrien |date= 2024 |title= Crosstalk between photosynthesis and respiration in microbes |journal= Journal of Biosciences |volume= 49 |issue= 2 |pages=45 |doi= 10.1007/s12038-023-00417-4 |pmid= 38516912 }}&lt;/ref&gt;
+
+The general [[chemical equation|equation]] for photosynthesis as first proposed by [[C. B. van Niel|Cornelis van Niel]] is:{{sfn|Whitmarsh|Govindjee|1999|p=13}}
+{{block indent|{{underset|carbon&lt;br/&gt;dioxide|CO&lt;sub&gt;2&lt;/sub&gt;}} + {{underset|electron donor|2H&lt;sub&gt;2&lt;/sub&gt;A}} + {{underset|light energy|[[photons]]}} → {{underset|[[carbohydrate]]|[CH&lt;sub&gt;2&lt;/sub&gt;O]}} + {{underset|oxidized&lt;br/&gt;electron&lt;br/&gt;donor|2A}} + {{underset|water|H&lt;sub&gt;2&lt;/sub&gt;O}}}}
+
+Since water is used as the electron donor in oxygenic photosynthesis, the equation for this process is:
+{{block indent|{{underset|carbon&lt;br/&gt;dioxide|CO&lt;sub&gt;2&lt;/sub&gt;}} + {{underset|water|2H&lt;sub&gt;2&lt;/sub&gt;O}} + {{underset|light energy|photons}} → {{underset|carbohydrate|[CH&lt;sub&gt;2&lt;/sub&gt;O]}} + {{underset|oxygen|O&lt;sub&gt;2&lt;/sub&gt;}} + {{underset|water|H&lt;sub&gt;2&lt;/sub&gt;O}}}}
+
+This equation emphasizes that water is both a reactant in the [[#Light-dependent reactions|light-dependent reaction]] and a product of the [[#Light-independent reactions|light-independent reaction]], but canceling ''n'' water molecules from each side gives the net equation:
+
+{{block indent|{{underset|carbon&lt;br/&gt;dioxide|CO&lt;sub&gt;2&lt;/sub&gt;}} + {{underset| water |H&lt;sub&gt;2&lt;/sub&gt;O}} + {{underset|light energy|photons}} → {{underset|carbohydrate|[CH&lt;sub&gt;2&lt;/sub&gt;O]}} + {{underset| oxygen |O&lt;sub&gt;2&lt;/sub&gt;}}}}
+
+Other processes substitute other compounds (such as [[arsenite]]) for water in the electron-supply role; for example some microbes use sunlight to oxidize [[arsenite]] to [[arsenate]]:&lt;ref&gt;''Anaerobic Photosynthesis'', [[Chemical &amp; Engineering News]], '''86''', 33, August 18, 2008, p. 36&lt;/ref&gt; The equation for this reaction is:
+{{block indent|{{underset|carbon&lt;br/&gt;dioxide|CO&lt;sub&gt;2&lt;/sub&gt;}} + {{underset|&lt;br/&gt;arsenite|(AsO{{su|b=3|p=3−}})}} + {{underset|light energy|photons}} → {{underset|&lt;br/&gt;arsenate|(AsO{{su|b=4|p=3−}})}} + {{underset|carbon&lt;br/&gt;monoxide|CO}}(used to build other compounds in subsequent reactions)&lt;ref&gt;{{cite journal |vauthors= Kulp TR, Hoeft SE, Asao M, Madigan MT, Hollibaugh JT, Fisher JC, Stolz JF, Culbertson CW, Miller LG, Oremland RS | author10-link= Ronald Oremland |date= Aug 2008 |title= Arsenic(III) fuels anoxygenic photosynthesis in hot spring biofilms from Mono Lake, California |journal= Science |volume= 321 |issue= 5891 |pages= 967–970 |bibcode= 2008Sci...321..967K |doi= 10.1126/science.1160799 |pmid= 18703741 }}&lt;/ref&gt;}}
+
+Photosynthesis occurs in two stages. In the first stage, ''light-dependent reactions'' or ''light reactions'' capture the energy of light and use it to make the hydrogen carrier [[NADPH]] and the energy-storage molecule [[Adenosine triphosphate|ATP]]. During the second stage, the ''light-independent reactions'' use these products to capture and reduce carbon dioxide.
+
+Most organisms that use oxygenic photosynthesis use [[Visible spectrum|visible light]] for the light-dependent reactions, although at least three use shortwave [[infrared]] or, more specifically, far-red radiation.&lt;ref&gt;{{cite web |title= Scientists discover unique microbe in California's largest lake |website= bio-medicine.org |date= January 2005 |url= http://www.bio-medicine.org/biology-news/Scientists-discover-unique-microbe-in-Californias-largest-lake-203-1/ |access-date= 2009-07-20 |archive-url= https://web.archive.org/web/20090712152053/http://www.bio-medicine.org/biology-news/Scientists-discover-unique-microbe-in-Californias-largest-lake-203-1/ |archive-date= 2009-07-12 |url-status= dead }}&lt;/ref&gt;
+
+Some organisms employ even more radical variants of photosynthesis. Some [[archaea]] use a simpler method that employs a pigment similar to those used for vision in animals. The [[bacteriorhodopsin]] changes its configuration in response to sunlight, acting as a [[proton pump]]. This produces a [[proton gradient]] more directly, which is then converted to chemical energy. The process does not involve carbon dioxide fixation and does not release oxygen, and seems to have evolved separately from the more common types of photosynthesis.&lt;ref&gt;{{Cite book |vauthors= Ingrouille M, Eddie B |date= 2006-08-17 |title= Plants: Diversity and Evolution |publisher= Cambridge University Press |pages= 13–14 |isbn= 978-1-139-45546-6 |url= https://books.google.com/books?id=L8DHHSO2RFsC&amp;dq=bacteriorhodopsin+photosynthesis+evolved+separately&amp;pg=PA14 }}&lt;/ref&gt;
+
+==Photosynthetic membranes and organelles==
+{{Main|Chloroplast|Thylakoid}}
+[[File:Chloroplast.svg|thumb|upright=1.4|right|'''Chloroplast ultrastructure''':{{ordered list
+|outer membrane
+|intermembrane space
+|inner membrane (1+2+3: envelope)
+|stroma (aqueous fluid)
+|thylakoid lumen (inside of thylakoid)
+|thylakoid membrane
+|granum (stack of thylakoids)
+|thylakoid (lamella)
+|starch
+|ribosome
+|plastidial DNA
+|plastoglobule (drop of lipids)}}
+]]
+In photosynthetic bacteria, the proteins that gather light for photosynthesis are embedded in [[cell membrane]]s. In its simplest form, this involves the membrane surrounding the cell itself.&lt;ref&gt;{{cite journal |vauthors= Tavano CL, Donohue TJ |date= December 2006 |title= Development of the bacterial photosynthetic apparatus |journal= [[Current Opinion in Microbiology]] |volume= 9 |issue= 6 |pages= 625–631 |doi= 10.1016/j.mib.2006.10.005 |pmc= 2765710 |pmid= 17055774 }}&lt;/ref&gt; However, the membrane may be tightly folded into cylindrical sheets called [[thylakoid]]s,&lt;ref name="Mullineaux-1999"&gt;{{cite journal |vauthors= Mullineaux CW |year= 1999 |title= The thylakoid membranes of cyanobacteria: structure, dynamics and function |journal= [[Australian Journal of Plant Physiology]] |volume= 26 |issue= 7 |pages= 671–677 |doi= 10.1071/PP99027 |bibcode= 1999FunPB..26..671M }}&lt;/ref&gt; or bunched up into round [[vesicle (biology)|vesicles]] called ''intracytoplasmic membranes''.&lt;ref&gt;{{cite journal |vauthors= Sener MK, Olsen JD, Hunter CN, Schulten K |date= October 2007 |title= Atomic-level structural and functional model of a bacterial photosynthetic membrane vesicle |journal= [[Proceedings of the National Academy of Sciences of the United States of America]] |volume= 104 |issue= 40 |pages= 15723–15728 |bibcode= 2007PNAS..10415723S |doi= 10.1073/pnas.0706861104 |doi-access= free |pmc= 2000399 |pmid= 17895378 }}&lt;/ref&gt; These structures can fill most of the interior of a cell, giving the membrane a very large surface area and therefore increasing the amount of light that the bacteria can absorb.&lt;ref name="Mullineaux-1999"/&gt;
+
+In plants and algae, photosynthesis takes place in [[organelle]]s called [[chloroplast]]s. A typical [[plant cell]] contains about 10 to 100 chloroplasts. The chloroplast is enclosed by a membrane. This membrane is composed of a phospholipid inner membrane, a phospholipid outer membrane, and an intermembrane space. Enclosed by the membrane is an aqueous fluid called the stroma. Embedded within the stroma are stacks of thylakoids (grana), which are the site of photosynthesis. The thylakoids appear as flattened disks. The thylakoid itself is enclosed by the thylakoid membrane, and within the enclosed volume is a lumen or thylakoid space. Embedded in the thylakoid membrane are integral and [[peripheral membrane protein]] complexes of the photosynthetic system.
+
+Plants absorb light primarily using the [[pigment]] [[chlorophyll]]. The green part of the [[light spectrum]] is not absorbed but is reflected, which is the reason that most plants have a green color. Besides chlorophyll, plants also use pigments such as [[carotene]]s and [[xanthophyll]]s.&lt;ref&gt;{{cite book |vauthors=Campbell NA, Williamson B, Heyden RJ |title=Biology Exploring Life |publisher=[[Prentice Hall]] |location=Upper Saddle River, New Jersey |year=2006 |isbn=978-0-13-250882-7 |url=http://www.phschool.com/el_marketing.html |access-date=2009-02-03 |archive-url=https://web.archive.org/web/20141102041816/http://www.phschool.com/el_marketing.html |archive-date=2014-11-02 |url-status=dead }}&lt;/ref&gt; Algae also use chlorophyll, but various other pigments are present, such as [[phycocyanin]], [[carotene]]s, and [[xanthophyll]]s in [[green algae]], [[phycoerythrin]] in [[red algae]] (rhodophytes) and [[fucoxanthin]] in [[brown algae]] and [[diatoms]] resulting in a wide variety of colors.
+
+These pigments are embedded in plants and algae in complexes called antenna proteins. In such proteins, the pigments are arranged to work together. Such a combination of proteins is also called a [[light-harvesting complex]].&lt;ref&gt;{{cite journal | title=Molecular mechanism of SRP-dependent light-harvesting protein transport to the thylakoid membrane in plants | vauthors = Ziehe D, Dünschede B, Schünemann D | journal=Photosynthesis Research | volume=138 | issue=3 | pages=303–313 | date=December 2018 | pmid=29956039 | pmc=6244792 | doi=10.1007/s11120-018-0544-6 | bibcode = 2018PhoRe.138..303Z }}&lt;/ref&gt;
+
+Although all cells in the green parts of a plant have chloroplasts, the majority of those are found in specially adapted structures called [[leaf|leaves]]. Certain species adapted to conditions of strong sunlight and [[arid]]ity, such as many ''[[Euphorbia]]'' and [[cactus]] species, have their main photosynthetic organs in their stems. The cells in the interior tissues of a leaf, called the [[mesophyll tissue|mesophyll]], can contain between 450,000 and 800,000 chloroplasts for every square millimeter of leaf. The surface of the leaf is coated with a water-resistant [[wax]]y [[Plant cuticle|cuticle]] that protects the leaf from excessive [[evaporation]] of water and decreases the absorption of [[ultraviolet]] or [[blue]] [[light]] to minimize [[heat]]ing. The transparent [[Leaf#Epidermis|epidermis]] layer allows light to pass through to the [[Mesophyll tissue|palisade]] mesophyll cells where most of the photosynthesis takes place.
+
+==Light-dependent reactions==
+{{Main|Light-dependent reactions}}
+[[File:Thylakoid membrane 3.svg|thumb|upright=1.4|right|Light-dependent reactions of photosynthesis at the thylakoid membrane]]
+In the [[light-dependent reactions]], one [[molecule]] of the pigment [[chlorophyll]] absorbs one [[photon]] and loses one [[electron]]. This electron is taken up by a modified form of chlorophyll called [[pheophytin]], which passes the electron to a [[quinone]] molecule, starting the flow of electrons down an [[electron transport chain]] that leads to the ultimate [[Redox|reduction]] of [[Nicotinamide adenine dinucleotide phosphate|NADP]] to [[Nicotinamide adenine dinucleotide phosphate|NADPH]]. In addition, this creates a [[Electrochemical gradient|proton gradient]] (energy gradient) across the [[chloroplast membrane]], which is used by [[ATP synthase]] in the synthesis of [[Adenosine triphosphate|ATP]]. The chlorophyll molecule ultimately regains the electron it lost when a [[water]] molecule is split in a process called [[Photodissociation|photolysis]], which releases [[oxygen]].
+
+The overall equation for the light-dependent reactions under the conditions of non-cyclic electron flow in green plants is:&lt;ref name="Raven-2005"&gt;{{cite book |vauthors= Raven PH, Evert RF, Eichhorn SE |year= 2005 |title= Biology of Plants |edition= 7th |location= New York |publisher= [[W. H. Freeman and Company]] |pages= [https://archive.org/details/biologyofplants00rave_0/page/124 124–127] |isbn= 978-0-7167-1007-3 |url= https://archive.org/details/biologyofplants00rave_0 |url-access= registration }}&lt;/ref&gt;
+
+{{block indent|2 H&lt;sub&gt;2&lt;/sub&gt;O + 2 NADP&lt;sup&gt;+&lt;/sup&gt; + 3 ADP + 3 P&lt;sub&gt;i&lt;/sub&gt; + light → 2 NADPH + 2 H&lt;sup&gt;+&lt;/sup&gt; + 3 ATP + O&lt;sub&gt;2&lt;/sub&gt;}}
+
+Not all [[wavelength]]s of [[light]] can support photosynthesis. The photosynthetic [[action spectrum]] depends on the type of [[accessory pigment]]s present. For example, in [[green plants]], the action spectrum resembles the [[absorption spectrum]] for [[chlorophyll]]s and [[carotenoid]]s with absorption peaks in violet-blue and red light. In [[red algae]], the action spectrum is blue-green light, which allows these [[algae]] to use the blue end of the spectrum to grow in the deeper waters that filter out the longer wavelengths (red light) used by above-ground green plants. The non-absorbed part of the [[Electromagnetic spectrum|light spectrum]] is what gives [[photosynthetic organism]]s their [[color]] (e.g., green plants, red algae, [[purple bacteria]]) and is the least effective for photosynthesis in the respective [[organism]]s.
+
+===Z scheme===
+[[File:Z-scheme.png|thumb|upright=3|center|The "Z scheme"]]
+In [[plant]]s, [[light-dependent reaction]]s occur in the [[thylakoid membrane]]s of the [[chloroplast]]s where they drive the synthesis of [[Adenosine triphosphate|ATP]] and [[NADPH]]. The light-dependent reactions are of two forms: [[Photophosphorylation|cyclic and non-cyclic]].
+
+In the non-cyclic reaction, the photons are captured in the light-harvesting [[antenna complex]]es of [[Photosystem|photosystem II]] by [[chlorophyll]] and other [[accessory pigments]] (see diagram "Z-scheme"). The absorption of a photon by the antenna complex loosens an electron by a process called [[photoinduced charge separation]]. The antenna system is at the core of the [[chlorophyll]] molecule of the photosystem II reaction center. That loosened electron is taken up by the primary [[Electron acceptor|electron-acceptor]] molecule, [[pheophytin]]. As the electrons are shuttled through an [[Electron transfer chain|electron transport chain]] (the so-called ''Z-scheme'' shown in the diagram), a [[chemiosmotic potential]] is generated by pumping [[Hydron (chemistry)|proton cations]] ([[Hydrogen|H]]&lt;sup&gt;+&lt;/sup&gt;) across the [[Cell membrane|membrane]] and into the [[thylakoid space]]. An ATP synthase [[enzyme]] uses that [[chemiosmotic potential]] to make ATP during [[photophosphorylation]], whereas [[NADPH]] is a product of the terminal [[redox]] reaction in the ''Z-scheme''. The electron enters a chlorophyll [[molecule]] in [[Photosystem I]]. There it is further excited by the [[light]] absorbed by that [[photosystem]]. The electron is then passed along a chain of [[electron acceptor]]s to which it transfers some of its [[energy]]. The energy delivered to the electron acceptors is used to move [[hydrogen ion]]s across the thylakoid membrane into the [[Lumen (anatomy)|lumen]]. The electron is eventually used to [[Redox|reduce]] the coenzyme [[Nicotinamide adenine dinucleotide phosphate|NADP]] with an [[Hydron (chemistry)|H&lt;sup&gt;+&lt;/sup&gt;]] to NADPH (which has functions in the light-independent reaction); at that point, the path of that electron ends.
+
+The cyclic reaction is similar to that of the non-cyclic but differs in that it generates only ATP, and no reduced NADP (NADPH) is created. The cyclic reaction takes place only at photosystem I. Once the electron is displaced from the photosystem, the electron is passed down the electron acceptor molecules and returns to photosystem I, from where it was emitted, hence the name ''cyclic reaction''.
+
+===Water photolysis===
+{{Main|Photodissociation|Oxygen evolution}}
+[[#Z scheme|Linear electron transport]] through a photosystem will leave the [[Photosynthetic reaction centre|reaction center]] of that photosystem [[oxidized]]. Elevating another electron will first require re-reduction of the reaction center. The excited electrons lost from the reaction center ([[P700]]) of [[photosystem I]] are replaced by transfer from [[plastocyanin]], whose electrons come from electron transport through [[photosystem II]]. Photosystem II, as the first step of the ''Z-scheme'', requires an external source of electrons to reduce its oxidized [[Chlorophyll a|chlorophyll ''a'']] reaction center. The source of electrons for photosynthesis in green plants and [[cyanobacteria]] is water. Two water molecules are oxidized by the energy of four successive charge-separation reactions of photosystem II to yield a molecule of [[Diatomic molecule|diatomic]] oxygen and four [[hydrogen]] ions. The electrons yielded are transferred to a redox-active [[tyrosine]] residue that is oxidized by the energy of [[P680|P680{{sup|+}}]]. This resets the ability of P680 to absorb another photon and release another [[Photodissociation|photo-dissociated]] electron. The oxidation of water is [[catalysis|catalyzed]] in photosystem II by a redox-active structure that contains four [[manganese]] ions and a [[calcium ion]]; this [[oxygen-evolving complex]] binds two [[water molecules]] and contains the four oxidizing equivalents that are used to drive the water-oxidizing reaction (Kok's S-state diagrams). The hydrogen ions are released in the [[Thylakoid#Lumen|thylakoid lumen]] and therefore contribute to the transmembrane chemiosmotic potential that leads to [[ATP synthesis]]. Oxygen is a [[By-product|waste product]] of light-dependent reactions, but the majority of organisms on [[Earth]] use oxygen and its energy for [[cellular respiration]], including [[photosynthetic organism]]s.&lt;ref&gt;{{cite journal |vauthors= Pushkar Y, Yano J, Sauer K, Boussac A, Yachandra VK |date= February 2008 |title= Structural changes in the Mn4Ca cluster and the mechanism of photosynthetic water splitting |journal= [[Proceedings of the National Academy of Sciences of the United States of America]] |volume= 105 |issue= 6 |pages= 1879–1884 |bibcode= 2008PNAS..105.1879P |doi= 10.1073/pnas.0707092105 |doi-access= free |pmc= 2542863 |pmid= 18250316 }}&lt;/ref&gt;
+
+==Light-independent reactions==
+
+===Calvin cycle===
+{{Main|Calvin cycle|Carbon fixation}}
+In the [[light-independent reactions|light-independent]] (or "dark") reactions, the enzyme [[RuBisCO]] captures [[carbon dioxide|CO&lt;sub&gt;2&lt;/sub&gt;]] from the [[Earth's atmosphere|atmosphere]] and, in a [[Biological process|process]] called the [[Calvin cycle]], uses the newly formed [[NADPH]] and releases [[Triose|three-carbon sugars]], which are later [[Condensation reaction|combined]] to form [[sucrose]] and [[starch]]. The overall equation for the light-independent reactions in [[green plants]] is&lt;ref name="Raven-2005"/&gt;{{rp|128}}
+
+{{block indent|3 CO&lt;sub&gt;2&lt;/sub&gt; + 9 ATP + 6 NADPH + 6 H&lt;sup&gt;+&lt;/sup&gt; → C&lt;sub&gt;3&lt;/sub&gt;H&lt;sub&gt;6&lt;/sub&gt;O&lt;sub&gt;3&lt;/sub&gt;-phosphate + 9 ADP + 8 P&lt;sub&gt;i&lt;/sub&gt; + 6 NADP&lt;sup&gt;+&lt;/sup&gt; + 3 H&lt;sub&gt;2&lt;/sub&gt;O}}
+[[File:Calvin Cycle 5.svg|thumb|Overview of the Calvin cycle and [[Biological carbon fixation|carbon fixation]]|350x350px]]
+[[Carbon fixation]] produces the [[Glyceraldehyde 3-phosphate|three-carbon sugar intermediate]], which is then converted into the final [[carbohydrate]] products. The [[Monosaccharide|simple carbon sugars]] photosynthesis produces are then used to form other [[organic compound]]s, such as the building material [[cellulose]], the [[Precursor (chemistry)|precursors]] for [[lipid]] and [[amino acid]] biosynthesis, or as a fuel in [[cellular respiration]]. The latter occurs not only in [[plant]]s but also in [[animal]]s when the [[carbon]] and [[energy]] from plants is passed through a [[food chain]].
+
+The [[Biological carbon fixation|fixation]] or [[Redox|reduction]] of [[carbon dioxide]] is a process in which carbon dioxide combines with a [[five-carbon sugar]], [[ribulose 1,5-bisphosphate]], to [[Yield (chemistry)|yield]] two [[molecule]]s of a three-carbon compound, [[glycerate 3-phosphate]], also known as 3-phosphoglycerate. Glycerate 3-phosphate, in the presence of [[Adenosine triphosphate|ATP]] and [[NADPH]] produced during the light-dependent stages, is reduced to [[glyceraldehyde 3-phosphate]]. This [[Product (chemistry)|product]] is also referred to as 3-phosphoglyceraldehyde (PGAL) or, more generically, as [[triose]] phosphate. Most (five out of six molecules) of the glyceraldehyde 3-phosphate produced are used to regenerate ribulose 1,5-bisphosphate so the process can continue. The triose phosphates not thus "recycled" often condense to form [[hexose]] phosphates, which ultimately yield [[sucrose]], [[starch]], and [[cellulose]], as well as [[glucose]] and [[fructose]]. The [[sugar]]s produced during carbon [[metabolism]] yield [[carbon skeleton]]s that can be used for other [[metabolic reaction]]s like the production of [[amino acids]] and [[lipids]].
+
+===Carbon concentrating mechanisms===
+
+====On land====
+{{Main|C4 carbon fixation|CAM photosynthesis|Alarm photosynthesis}}
+
+[[File:HatchSlackpathway2.svg|thumb|right|upright=1.4|Overview of [[C4 carbon fixation]]. (This image mistakenly shows [[lactic acid]] instead of [[pyruvate]], and all the [[Chemical species|species]] ending in "-ate" are shown as unionized acids, such as [[malic acid]] and so on).]]
+In [[Xerophyte|hot and dry conditions]], plants close their [[stomata]] to prevent water loss. Under these conditions, {{co2}} will decrease and oxygen [[gas]], produced by the [[light reactions]] of photosynthesis, will increase, causing an increase of [[photorespiration]] by the [[oxygenase]] activity of [[Rubisco|ribulose-1,5-bisphosphate carboxylase/oxygenase]] (RuBisCO) and decrease in carbon fixation. Some plants have [[evolution|evolved]] mechanisms to increase the {{co2}} concentration in the leaves under these conditions.&lt;ref name="Williams-2013"&gt;{{cite journal |vauthors= Williams BP, Johnston IG, Covshoff S, Hibberd JM |date= September 2013 |title= Phenotypic landscape inference reveals multiple evolutionary paths to C4 photosynthesis |journal= [[eLife]] |volume= 2 |article-number= e00961 |doi= 10.7554/eLife.00961 |doi-access= free |pmc= 3786385 |pmid= 24082995 |bibcode= 2013eLife...200961W }}&lt;/ref&gt;
+
+Plants that use the [[C4 carbon fixation|C&lt;sub&gt;4&lt;/sub&gt; carbon fixation]] process chemically fix carbon dioxide in the [[Cell (biology)|cells]] of the [[mesophyll]] by adding it to the three-carbon molecule [[phosphoenolpyruvate]] (PEP), a reaction [[Catalysis|catalyzed]] by an [[enzyme]] called [[Phosphoenolpyruvate carboxylase|PEP carboxylase]], creating the four-carbon organic acid [[oxaloacetic acid]]. Oxaloacetic acid or [[malate]] synthesized by this process is then [[Translocation (botany)|translocated]] to specialized [[bundle sheath]] cells where the enzyme [[RuBisCO]] and other Calvin cycle enzymes are located, and where {{co2}} released by [[decarboxylation]] of the four-carbon acids is then fixed by RuBisCO activity to the three-carbon [[3-phosphoglyceric acid]]s. The physical separation of RuBisCO from the oxygen-generating light reactions reduces photorespiration and increases {{co2}} fixation and, thus, the [[photosynthetic capacity]] of the [[leaf]].&lt;ref&gt;{{cite book |vauthors= Taiz L, Geiger E |year= 2006 |title= Plant Physiology |edition= 4th |publisher= [[Sinauer Associates]] |isbn= 978-0-87893-856-8 |url= https://archive.org/details/plantphysiology0000taiz_y5k4 |url-access= registration }}&lt;/ref&gt; [[C4 carbon fixation|{{c4}} plants]] can produce more sugar than [[C3 carbon fixation|{{c3}} plants]] in conditions of high light and [[Thermophile|temperature]]. Many important [[crop plants]] are {{c4}} plants, including [[maize]], [[sorghum]], [[sugarcane]], and [[millet]]. Plants that do not use PEP-carboxylase in carbon fixation are called C&lt;sub&gt;3&lt;/sub&gt; plants because the primary [[Carboxylation|carboxylation reaction]], catalyzed by RuBisCO, produces the three-carbon 3-phosphoglyceric acids directly in the [[Calvin-Benson cycle]]. Over 90% of plants use {{c3}} carbon fixation, compared to 3% that use {{c4}} carbon fixation;&lt;ref&gt;{{cite book |vauthors= Monson RK, Sage RF |title= C&lt;sub&gt;4&lt;/sub&gt; plant biology |publisher= [[Academic Press]] |location=Boston |year=1999 |pages= 551–580 |chapter= The Taxonomic Distribution of {{chem|C|4}} Photosynthesis |isbn= 978-0-12-614440-6 |chapter-url= https://books.google.com/books?id=H7Wv9ZImW-QC&amp;pg=PA551 |access-date= 2019-04-17 |archive-date= 2023-01-19 |archive-url= https://web.archive.org/web/20230119181847/https://books.google.com/books?id=H7Wv9ZImW-QC&amp;pg=PA551 |url-status= live }}&lt;/ref&gt; however, the evolution of {{c4}} in over sixty plant lineages makes it a striking example of [[convergent evolution]].&lt;ref name="Williams-2013"/&gt; [[C2 photosynthesis|C&lt;sub&gt;2&lt;/sub&gt; photosynthesis]], which involves carbon-concentration by selective breakdown of photorespiratory glycine, is both an evolutionary precursor to {{c4}} and a useful [[#Carbon concentrating mechanisms|carbon-concentrating mechanism]] in its own right.&lt;ref&gt;{{cite journal |vauthors= Lundgren MR |date= December 2020 |title= C 2 photosynthesis: a promising route towards crop improvement? |journal= New Phytologist |volume= 228 |issue= 6 |pages= 1734–1740 |doi= 10.1111/nph.16494 |doi-access= free |pmid= 32080851 |bibcode= 2020NewPh.228.1734L }}&lt;/ref&gt;
+
+[[Xerophytes]], such as [[cacti]] and most [[succulents]], also use PEP carboxylase to capture carbon dioxide in a process called [[CAM photosynthesis|Crassulacean acid metabolism]] (CAM). In contrast to {{c4}} metabolism, which ''spatially'' separates the {{co2}} fixation to PEP from the Calvin cycle, CAM ''temporally'' separates these two processes. CAM plants have a different [[Leaf#Anatomy|leaf anatomy]] from {{c3}} plants, and fix the {{co2}} at night, when their stomata are open. CAM plants store the {{co2}} mostly in the form of [[malic acid]] via carboxylation of [[phosphoenolpyruvate]] to [[oxaloacetate]], which is then reduced to malate. Decarboxylation of malate during the day releases {{co2}} inside the leaves, thus allowing carbon fixation to 3-phosphoglycerate by RuBisCO. CAM is used by 16,000 [[species]] of plants.&lt;ref&gt;{{cite journal |vauthors= Dodd AN, Borland AM, Haslam RP, Griffiths H, Maxwell K |date= April 2002 |title= Crassulacean acid metabolism: plastic, fantastic |journal= [[Journal of Experimental Botany]] |volume= 53 |issue= 369 |pages= 569–580 |doi= 10.1093/jexbot/53.369.569 |doi-access= free |pmid= 11886877 }}&lt;/ref&gt;
+
+[[Calcium oxalate|Calcium-oxalate]]-accumulating plants, such as ''[[Amaranthus hybridus]]'' and ''[[Colobanthus quitensis]],'' show a variation of photosynthesis where calcium oxalate [[Druse (botany)|crystals]] function as dynamic [[Carbon sink|carbon pools]], supplying carbon dioxide (CO&lt;sub&gt;2&lt;/sub&gt;) to photosynthetic cells when stomata are partially or totally closed. This process was named [[alarm photosynthesis]]. Under [[Stress (biology)|stress]] conditions (e.g., [[Water scarcity|water deficit]]), [[oxalate]] released from calcium oxalate crystals is converted to CO&lt;sub&gt;2&lt;/sub&gt; by an [[oxalate oxidase]] enzyme, and the produced CO&lt;sub&gt;2&lt;/sub&gt; can support the [[Calvin cycle]] reactions. Reactive [[hydrogen peroxide]] (H&lt;sub&gt;2&lt;/sub&gt;O&lt;sub&gt;2&lt;/sub&gt;), the [[By-product|byproduct]] of oxalate oxidase reaction, can be [[Neutralization (chemistry)|neutralized]] by [[catalase]]. Alarm photosynthesis represents a photosynthetic variant to be added to the well-known C4 and CAM pathways. However, alarm photosynthesis, in contrast to these pathways, operates as a biochemical pump that collects carbon from the organ interior (or from the [[soil]]) and not from the atmosphere.&lt;ref&gt;{{cite journal | vauthors = Tooulakou G, Giannopoulos A, Nikolopoulos D, Bresta P, Dotsika E, Orkoula MG, Kontoyannis CG, Fasseas C, Liakopoulos G, Klapa MI, Karabourniotis G |display-authors= 6 |date= August 2016 |title= Alarm Photosynthesis: Calcium Oxalate Crystals as an Internal CO2 Source in Plants |journal= Plant Physiology |volume= 171 |issue= 4 |pages= 2577–2585 |doi= 10.1104/pp.16.00111 |pmc= 4972262 |pmid= 27261065 |bibcode= 2016PlanP.171.2577T }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Gómez-Espinoza O, González-Ramírez D, Bresta P, Karabourniotis G, Bravo LA | title=Decomposition of Calcium Oxalate Crystals in ''Colobanthus quitensis'' under CO&lt;sub&gt;2&lt;/sub&gt; Limiting Conditions |journal= Plants |volume= 9 |issue= 10 |pages= 1307 | date= October 2020 |doi= 10.3390/plants9101307 |doi-access= free |pmc= 7600318 |pmid= 33023238 | bibcode=2020Plnts...9.1307G }}&lt;/ref&gt;
+
+====In water====
+[[Cyanobacteria]] possess [[carboxysome]]s, which increase the concentration of {{co2}} around RuBisCO to increase the rate of photosynthesis. An enzyme, [[carbonic anhydrase]], located within the carboxysome, releases CO&lt;sub&gt;2&lt;/sub&gt; from dissolved [[Hydrocarbonate|hydrocarbonate ions]] (HCO{{su|b=3|p=−}}). Before the CO&lt;sub&gt;2&lt;/sub&gt; can diffuse out&lt;!-- of what? --&gt;, RuBisCO concentrated within the carboxysome quickly sponges it up. HCO{{su|b=3|p=−}} ions are made from CO&lt;sub&gt;2&lt;/sub&gt; outside the cell by another carbonic anhydrase and are actively pumped into the cell by a membrane protein. They cannot cross the membrane as they are charged, and within the cytosol they turn back into CO&lt;sub&gt;2&lt;/sub&gt; very slowly without the help of carbonic anhydrase. This causes the HCO{{su|b=3|p=−}} ions to accumulate within the cell from where they diffuse into the carboxysomes.&lt;ref&gt;{{cite journal |vauthors= Badger MR, Price GD |date= February 2003 |title= CO2 concentrating mechanisms in cyanobacteria: molecular components, their diversity and evolution |journal= [[Journal of Experimental Botany]] |volume= 54 |issue= 383 |pages= 609–622 |doi= 10.1093/jxb/erg076 |doi-access= free |pmid= 12554704 }}&lt;/ref&gt; [[Pyrenoid]]s in [[algae]] and [[hornwort]]s also act to concentrate {{co2}} around RuBisCO.&lt;ref&gt;{{Cite journal |vauthors=Badger MR, Andrews JT, Whitney SM, Ludwig M, Yellowlees DC, Leggat W, Price GD |year= 1998 |title= The diversity and coevolution of Rubisco, plastids, pyrenoids, and chloroplast-based CO&lt;sub&gt;2&lt;/sub&gt;-concentrating mechanisms in algae |journal= [[Canadian Journal of Botany]] |volume= 76 |issue= 6 |pages= 1052–1071 |doi= 10.1139/b98-074 |bibcode= 1998CaJB...76.1052B }}&lt;/ref&gt;&lt;ref&gt;{{cite journal | vauthors=((Robison, T. A.)), ((Oh, Z. G.)), ((Lafferty, D.)), ((Xu, X.)), ((Villarreal, J. C. A.)), ((Gunn, L. H.)), ((Li, F.-W.)) | journal=Nature Plants | title=Hornworts reveal a spatial model for pyrenoid-based CO2-concentrating mechanisms in land plants | pages=63–73 | publisher=Nature Publishing Group | date=3 January 2025 | volume=11 | issue=1 | doi=10.1038/s41477-024-01871-0| pmid=39753956 }}
+&lt;/ref&gt;
+
+==Order and kinetics==
+The overall [[Biological process|process]] of photosynthesis takes place in four stages:&lt;ref name="McGraw-Hill-2007"/&gt;
+{| class="wikitable"
+|-
+! Stage !! Event 
+!Site!! Time scale
+|-
+| 1 || [[Energy transfer]] in [[Light-harvesting complex|antenna chlorophyll]]
+| rowspan="3" |[[Thylakoid membranes]] in the [[chloroplast]]s|| [[Femtosecond]] to [[picosecond]]
+|-
+| 2 || [[Electron transfer|Transfer of electrons]] in [[photochemical reactions]] || [[Picosecond]] to [[nanosecond]]
+|-
+| 3 || [[Electron transport chain]] and [[ATP synthesis]]|| [[Microsecond]] to [[millisecond]]
+|-
+| 4 || [[Biological carbon fixation|Carbon fixation]] and export of stable [[Product (chemistry)|products]]
+|[[Stroma (fluid)|Stroma]] of the chloroplasts and the cell [[cytosol]]|| [[Millisecond]] to [[second]]
+|}
+
+==Efficiency==
+{{Main|Photosynthetic efficiency}}
+
+[[Plant]]s usually [[Photophosphorylation|convert light into chemical energy]] with a [[photosynthetic efficiency]] of 3–6%.&lt;ref&gt;{{cite book |veditors=Miyamoto K |date=1997 |chapter=Biological energy production |chapter-url=https://www.fao.org/4/w7241e/w7241e05.htm |title=Renewable biological systems for alternative sustainable energy production |series=FAO Agricultural Services Bulletin - 128 |publisher=FAO |isbn=92-5-104059-1 }}&lt;/ref&gt;&lt;ref name="Ehrenberg-2017"&gt;{{cite journal |vauthors=Ehrenberg R |date= 2017-12-15 |title= The photosynthesis fix |journal=Knowable Magazine |publisher= Annual Reviews |doi=10.1146/knowable-121917-115502 }}&lt;/ref&gt; 
+Absorbed light that is unconverted is [[Dissipation|dissipated]] primarily as [[heat]], with a small [[fraction]] (1–2%) reemitted as [[chlorophyll fluorescence]] at longer (redder) [[wavelength]]s. This fact allows [[measurement]] of the [[Light reactions|light reaction]] of photosynthesis by using chlorophyll [[fluorometer]]s.&lt;ref name="Maxwell-2000"&gt;{{cite journal |vauthors= Maxwell K, Johnson GN |date= April 2000 |title= Chlorophyll fluorescence – a practical guide |journal= Journal of Experimental Botany |volume= 51 |issue= 345 |pages= 659–668 |doi= 10.1093/jexbot/51.345.659 |doi-access= free |pmid= 10938857 }}&lt;/ref&gt;
+
+Actual plants' photosynthetic efficiency varies with the [[Frequency#Light|frequency of the light]] being converted, [[Irradiance|light intensity]], [[temperature]], and proportion of [[Carbon dioxide in Earth's atmosphere|carbon dioxide in the atmosphere]], and can vary from 0.1% to 8%.&lt;ref&gt;{{cite web |vauthors= Govindjee, Rajni |title= What is Photosynthesis? |publisher= Biology at Illinois |url= http://www.life.illinois.edu/govindjee/whatisit.htm |access-date= 2014-04-17 |archive-url= https://web.archive.org/web/20140527074801/http://www.life.illinois.edu/govindjee/whatisit.htm |archive-date= 2014-05-27 |url-status= dead |df= dmy-all }}&lt;/ref&gt; By comparison, [[photovoltaic module|solar panels]] convert light into [[electric energy]] at an efficiency of approximately 6–20% for [[Mass production|mass-produced]] panels, and above 40% in [[laboratory]] devices.
+[[Scientist]]s are studying photosynthesis in hopes of developing plants with increased [[Crop yield|yield]].&lt;ref name="Ehrenberg-2017"/&gt;
+
+The efficiency of both light and dark reactions can be measured, but the relationship between the two can be complex. For example, the [[Light reactions|light reaction]] creates [[Adenosine triphosphate|ATP]] and [[NADPH]] energy [[molecule]]s, which [[C3 plants|{{chem|C|3}} plants]] can use for [[Biological carbon fixation|carbon fixation]] or [[photorespiration]].&lt;ref&gt;{{cite book |vauthors=Rosenqvist E, van Kooten O |chapter=Chlorophyll Fluorescence: A General Description and Nomenclature |veditors=DeEll JA, Toivonen PM |title=Practical Applications of Chlorophyll Fluorescence in Plant Biology |date=2003 |pages=31–77 |doi=10.1007/978-1-4615-0415-3_2 |isbn=978-1-4613-5065-1 |oclc=840283350 |chapter-url=https://research.wur.nl/en/publications/chlorophyll-fluorescence-a-general-description-and-nomenclature }}&lt;/ref&gt; [[Electron]]s may also flow to other electron sinks.&lt;ref&gt;{{cite book |vauthors= Baker NR, Oxborough K |title=Chlorophyll a Fluorescence |chapter=Chlorophyll Fluorescence as a Probe of Photosynthetic Productivity |series=Advances in Photosynthesis and Respiration |date=2004 |volume=19 |pages=65–82 |doi=10.1007/978-1-4020-3218-9_3 |isbn=978-1-4020-3217-2 }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Flexas J, Escalnona JM, Medrano H |date= January 1999 |title= Water stress induces different levels of photosynthesis and electron transport rate regulation in grapevines |journal= Plant, Cell and Environment |volume= 22 |issue= 1 |pages= 39–48 |doi= 10.1046/j.1365-3040.1999.00371.x |doi-access= free |bibcode= 1999PCEnv..22...39F }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Fryer MJ, Andrews JR, Oxborough K, Blowers DA, Baker NR |year= 1998 |title= Relationship between {{chem|CO|2}} assimilation, photosynthetic electron transport, and active {{chem|O|2}} metabolism in leaves of maize in the field during periods of low temperature |journal= Plant Physiology |volume= 116 |issue= 2 |pages= 571–580 |doi= 10.1104/pp.116.2.571 |pmc= 35114 |pmid= 9490760 }}&lt;/ref&gt; For this reason, it is not uncommon for [[author]]s to differentiate between work done under [[Photorespiration#Conditions which affect photorespiration|non-photorespiratory conditions and under photorespiratory conditions]].&lt;ref&gt;{{cite journal |vauthors= Earl H, Said Ennahli S |year= 2004 |title= Estimating photosynthetic electron transport via chlorophyll fluorometry without Photosystem II light saturation |journal= Photosynthesis Research |volume= 82 |issue= 2 |pages= 177–186 |bibcode= 2004PhoRe..82..177E |doi= 10.1007/s11120-004-1454-3 |pmid= 16151873 }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Genty B, Briantais J, Baker NR |year= 1989 |title= The relationship between the quantum yield of photosynthetic electron transport and quenching of chlorophyll fluorescence |journal= Biochimica et Biophysica Acta (BBA) - General Subjects |volume= 990 |issue= 1 |pages= 87–92 |doi= 10.1016/s0304-4165(89)80016-9 |bibcode= 1989BBAcG.990...87G }}&lt;/ref&gt;&lt;ref name="Baker-2008"&gt;{{cite journal |vauthors= Baker NR |year= 2008 |title= Chlorophyll fluorescence: A probe of photosynthesis ''in vivo'' |journal= Annual Review of Plant Biology |volume= 59 |issue= 1 |pages= 89–113 |doi= 10.1146/annurev.arplant.59.032607.092759 |pmid= 18444897 |bibcode= 2008AnRPB..59...89B }}&lt;/ref&gt;
+
+[[Chlorophyll fluorescence]] of [[photosystem II]] can measure the light reaction, and [[infrared gas analyzer]]s can measure the [[dark reaction]].&lt;ref name="Bernacchi-2002"&gt;{{cite journal |vauthors= Bernacchi CJ, Portis AR, Nakano H, von Caemmerer S, Long SP |year= 2002 |title= Temperature response of mesophyll conductance. Implications for the determination of Rubisco enzyme kinetics and for limitations to photosynthesis in vivo |journal= Plant Physiology |volume= 130 |issue= 4 |pages= 1992–1998 |doi= 10.1104/pp.008250 |pmc= 166710 |pmid= 12481082 |bibcode= 2002PlanP.130.1992B }}&lt;/ref&gt; An integrated chlorophyll [[fluorometer]] and [[Gas-exchange system|gas exchange system]] can investigate both light and dark reactions when researchers use the two separate [[Computer Systems|systems]] together.&lt;ref name="Ribas-Carbo-2010"&gt;{{cite book |vauthors= Ribas-Carbo M, Flexas J, Robinson SA, Tcherkez GG |year= 2010 |chapter=''In vivo'' measurement of plant respiration |veditors=Taiz L, Zeiger E |title=A Companion to Plant Physiology |edition=5th |hdl=10779/uow.27696597 |hdl-access=free }}&lt;/ref&gt; Infrared gas analyzers and some [[Hygrometer|moisture sensors]] are sensitive enough to measure the [[Assimilation (biology)|photosynthetic assimilation]] of [[CO2|{{chem|CO|2}}]] and of [[Relative change|Δ]]{{chem|H|2|O}} using [[Methodology|reliable methods]]. {{chem|CO|2}} is commonly measured in {{Abbr|μmols|micromoles}}/([[Square metre|m&lt;sup&gt;2&lt;/sup&gt;]]/[[Second|s]]), [[Parts-per notation|parts per]] million, or volume per million; and [[H2O|{{chem|H|2|O}}]] is commonly measured in {{Abbr|mmols|millimole}}/(m&lt;sup&gt;2&lt;/sup&gt;/s) or in {{Abbr|mbars|millibars}}. By measuring [[CO2 assimilation|{{chem|CO|2}} assimilation]], Δ{{chem|H|2|O}}, leaf temperature, [[barometric pressure]], leaf area, and [[photosynthetically active radiation]] (PAR), it becomes possible to estimate, "A" or carbon assimilation, "E" or [[transpiration]], "gs" or [[stomatal conductance]], and "Ci" or intracellular {{chem|CO|2}}.&lt;ref name="Long-2003"&gt;{{cite journal |vauthors= Long SP, Bernacchi CJ |year= 2003 |title= Gas exchange measurements, what can they tell us about the underlying limitations to photosynthesis? Procedures and sources of error |journal= Journal of Experimental Botany |volume= 54 |issue= 392 |pages= 2393–2401 |doi= 10.1093/jxb/erg262 |doi-access=free |pmid= 14512377 }}&lt;/ref&gt; However, it is more common to use chlorophyll fluorescence for [[plant stress measurement]], where appropriate, because the most commonly used parameters [[Plant stress measurement#Fv/Fm|FV/FM]] and [[Plant stress measurement#Y(II) or ΔF/Fm' and ETR|Y(II) or F/FM']] can be measured in a few seconds, allowing the investigation of larger plant populations.&lt;ref name="Baker-2008"/&gt;
+
+[[Gas-exchange system|Gas exchange systems]] that offer control of {{chem|CO|2}} levels, above and below [[Ambient pressure|ambient]], allow the common practice of measurement of A/Ci curves, at different {{chem|CO|2}} levels, to characterize a plant's photosynthetic response.&lt;ref name="Long-2003"/&gt;
+
+Integrated chlorophyll fluorometer – gas exchange systems allow a more [[Accuracy and precision|precise]] measure of photosynthetic response and mechanisms.&lt;ref name="Bernacchi-2002"/&gt;&lt;ref name="Ribas-Carbo-2010"/&gt; While standard gas exchange photosynthesis systems can measure Ci, or substomatal {{chem|CO|2}} levels, the addition of integrated chlorophyll fluorescence measurements allows a more precise measurement of C&lt;sub&gt;C&lt;/sub&gt;, the estimation of {{chem|CO|2}} concentration at the site of [[carboxylation]] in the chloroplast, to replace Ci.&lt;ref name="Ribas-Carbo-2010"/&gt;&lt;ref name="Bernacchi-2002"/&gt; {{chem|CO|2}} concentration in the chloroplast becomes possible to estimate with the measurement of mesophyll conductance or g&lt;sub&gt;m&lt;/sub&gt; using an integrated system.&lt;ref name="Bernacchi-2002"/&gt;&lt;ref name="Ribas-Carbo-2010"/&gt;&lt;ref&gt;{{cite journal |vauthors= Yin X, Struik PC |year= 2009 |title= Theoretical reconsiderations when estimating the mesophyll conductanceto {{chem|CO|2}} diffusion in leaves of C3 plants by analysis of combined gas exchange and chlorophyll fluorescence measurements |journal= Plant, Cell and Environment |volume= 32 |issue= 11 |pages= 1513–1524 [1524] |doi= 10.1111/j.1365-3040.2009.02016.x |doi-access= free |pmid= 19558403 |bibcode= 2009PCEnv..32.1513Y }}&lt;/ref&gt;
+
+Photosynthesis measurement systems are not designed to directly measure the amount of light the leaf absorbs, but analysis of [[chlorophyll fluorescence]], [[P700]]- and P515-absorbance, and [[gas exchange]] measurements reveal detailed information about, e.g., the [[photosystem]]s, [[quantum efficiency]] and the {{chem|CO|2}} assimilation rates. With some instruments, even wavelength dependency of the photosynthetic efficiency can be [[Analysis|analyzed]].&lt;ref&gt;{{cite journal |vauthors= Schreiber U, Klughammer C, Kolbowski J |year= 2012 |title= Assessment of wavelength-dependent parameters of photosynthetic electron transport with a new type of multi-color PAM chlorophyll fluorometer |journal= Photosynthesis Research |volume= 113 |issue= 1–3 |pages= 127–144 |bibcode= 2012PhoRe.113..127S |doi= 10.1007/s11120-012-9758-1 |pmc= 3430841 |pmid= 22729479 }}&lt;/ref&gt;
+
+A [[phenomenon]] known as [[quantum walk]] increases the efficiency of the energy transport of light significantly. In the photosynthetic cell of an [[Algae|alga]], [[Bacteria|bacterium]], or plant, there are light-sensitive molecules called [[chromophore]]s arranged in an antenna-shaped structure called a photocomplex. When a [[photon]] is absorbed by a chromophore, it is converted into a [[quasiparticle]] referred to as an [[exciton]], which jumps from chromophore to chromophore towards the reaction center of the photocomplex, a collection of molecules that traps its energy in a chemical form accessible to the cell's metabolism. The exciton's wave properties enable it to cover a wider area and try out several possible paths simultaneously, allowing it to instantaneously "choose" the most efficient route, where it will have the highest probability of arriving at its destination in the minimum possible time.{{fact|date=April 2026}}
+
+Because that quantum walking takes place at temperatures far higher than quantum phenomena usually occur, it is only possible over very short distances. Obstacles in the form of destructive interference cause the particle to lose its wave properties for an instant before it regains them once again after it is freed from its locked position through a classic "hop". The movement of the electron towards the photo center is therefore covered in a series of conventional hops and quantum walks.&lt;ref&gt;{{cite news |vauthors= Palmer J |date= 21 June 2013 |title= Plants 'seen doing quantum physics' |journal= BBC News |url= https://www.bbc.com/news/science-environment-22996054 |access-date= 21 June 2018 |archive-url= https://web.archive.org/web/20181003013809/https://www.bbc.com/news/science-environment-22996054 |archive-date= 3 October 2018 |url-status= live }}&lt;/ref&gt;&lt;ref&gt;{{cite web |vauthors= Lloyd S |date= 10 March 2014 |title= Quantum Biology: Better living through quantum mechanics |series= The Nature of Reality |publisher= Nova: PBS Online; WGBH Boston |url= https://www.pbs.org/wgbh/nova/article/quantum-life/ |access-date= 8 September 2017 |archive-url= https://web.archive.org/web/20170703071034/http://www.pbs.org/wgbh/nova/blogs/physics/2014/03/quantum-life/ |archive-date= 3 July 2017 |url-status= live }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Hildner R, Brinks D, Nieder JB, Cogdell RJ, van Hulst NF |date= June 2013 |title= Quantum coherent energy transfer over varying pathways in single light-harvesting complexes |journal= Science |volume= 340 |issue= 6139 |pages= 1448–1451 |bibcode= 2013Sci...340.1448H |doi= 10.1126/science.1235820 |pmid= 23788794 }}&lt;/ref&gt;
+
+==Evolution==
+{{main|Evolution of photosynthesis}}
+
+[[Fossil]]s of what are thought to be [[Protein filament|filamentous]] photosynthetic [[organism]]s have been dated at 3.4 billion years old.&lt;ref&gt;{{cite magazine |vauthors= Davis K |date= 2 October 2004 |title= Photosynthesis got a really early start |journal= New Scientist |url= https://www.newscientist.com/article/mg18424671.600-photosynthesis-got-a-really-early-start.html |access-date= 8 September 2017 |archive-url= https://web.archive.org/web/20150501021507/http://www.newscientist.com/article/mg18424671.600-photosynthesis-got-a-really-early-start.html |archive-date= 1 May 2015 |url-status= live }}&lt;/ref&gt;&lt;ref&gt;{{cite magazine |vauthors= Hooper R |date= 19 August 2006 |title= Revealing the dawn of photosynthesis |journal= New Scientist |url= https://www.newscientist.com/article/mg19125654.200-revealing-the-dawn-of-photosynthesis.html |access-date= 8 September 2017 |archive-url= https://web.archive.org/web/20150524053125/http://www.newscientist.com/article/mg19125654.200-revealing-the-dawn-of-photosynthesis.html |archive-date= 24 May 2015 |url-status= live }}&lt;/ref&gt; More recent [[Research|studies]] also suggest that photosynthesis may have begun about 3.4 billion years ago,&lt;ref&gt;{{cite journal |vauthors= Cardona T |date= March 2018 |title= Early Archean origin of heterodimeric Photosystem I |journal= Heliyon |volume= 4 |issue= 3 |article-number= e00548 |bibcode= 2018Heliy...400548C |doi= 10.1016/j.heliyon.2018.e00548 |doi-access= free |pmc= 5857716 |pmid= 29560463 }}&lt;/ref&gt;&lt;ref&gt;{{cite web |vauthors= Howard V |date= 7 March 2018 |title= Photosynthesis Originated A Billion Years Earlier Than We Thought, Study Shows |work= [[Astrobiology Magazine]] |url= https://www.astrobio.net/also-in-news/photosynthesis-originated-billion-years-earlier-thought-study-shows/ |access-date= 23 March 2018 |archive-url= https://web.archive.org/web/20201001223438/https://www.astrobio.net/also-in-news/photosynthesis-originated-billion-years-earlier-thought-study-shows/ |archive-date= October 1, 2020 |url-status= dead }}&lt;/ref&gt; though the first direct [[evidence]] of photosynthesis comes from [[thylakoid membranes]] preserved in 1.75-billion-year-old [[chert]]s.&lt;ref&gt;{{cite journal |last1= Demoulin |first1= Catherine F. |last2= Lara |first2= Yannick J. |last3= Lambion |first3= Alexandre |last4= Javaux |first4= Emmanuelle J. |date= 2024 |title= Oldest thylakoids in fossil cells directly evidence oxygenic photosynthesis |journal= Nature |volume= 625 |issue= 7995 |pages= 529–534 |bibcode= 2024Natur.625..529D |doi= 10.1038/s41586-023-06896-7 |pmid= 38172638 |hdl= 2268/312062 }}&lt;/ref&gt;
+
+[[Oxygen evolution|Oxygenic photosynthesis]] is the main source of [[oxygen]] in the [[Atmosphere of Earth|Earth's atmosphere]], and its earliest appearance is sometimes referred to as the [[oxygen catastrophe]]. [[Geology|Geological]] evidence suggests that oxygenic photosynthesis, such as that in [[cyanobacteria]], became important during the [[Paleoproterozoic]] era around two billion years ago. Modern photosynthesis in [[plant]]s and most photosynthetic [[prokaryote]]s is oxygenic, using [[water]] as an [[electron donor]], which is [[oxidized]] to molecular oxygen in the [[photosynthetic reaction center]].
+
+===Symbiosis and the origin of chloroplasts===
+[[File:Plagiomnium affine laminazellen.jpeg|thumb|left|Plant cells with visible chloroplasts (from a moss, ''[[Plagiomnium affine]]'')]]
+
+Several groups of [[animal]]s have formed [[symbiosis|symbiotic]] relationships with photosynthetic [[algae]]. These are most common in [[coral]]s, [[sponge]]s, and [[sea anemone]]s. [[Scientist]]s presume that this is due to the particularly simple [[body plan]]s and large [[surface area]]s of these animals compared to their [[volume]]s.&lt;ref&gt;{{cite journal |vauthors= Venn AA, Loram JE, Douglas AE |title= Photosynthetic symbioses in animals |journal= Journal of Experimental Botany |volume= 59 |issue= 5 |pages= 1069–1080 |year= 2008 |pmid= 18267943 |doi= 10.1093/jxb/erm328 |doi-access= free }}&lt;/ref&gt; In addition, a few marine [[mollusks]], such as ''[[Elysia viridis]]'' and ''[[Elysia chlorotica]],'' also maintain a symbiotic relationship with [[chloroplast]]s they capture from the algae in [[Mollusca#Eating, digestion, and excretion|their diet]] and then store in their bodies (see [[Kleptoplasty]]). This allows the mollusks to survive solely by photosynthesis for several months at a time.&lt;ref&gt;{{cite journal |vauthors= Rumpho ME, Summer EJ, Manhart JR |date= May 2000 |title= Solar-powered sea slugs. Mollusc/algal chloroplast symbiosis |journal= Plant Physiology |volume= 123 |issue= 1 |pages= 29–38 |doi= 10.1104/pp.123.1.29 |pmc= 1539252 |pmid= 10806222 }}&lt;/ref&gt;&lt;ref&gt;{{Cite book |vauthors= Muscatine L, Greene RW |title=Chloroplasts and Algae as Symbionts in Molluscs |series=International Review of Cytology |date=1973 |volume=36 |pages=137–169 |doi=10.1016/S0074-7696(08)60217-X |pmid=4587388 |isbn=978-0-12-364336-0 }}&lt;/ref&gt; Some of the [[gene]]s from the plant [[cell nucleus]] have even been transferred to the [[slug]]s, so that the chloroplasts can be supplied with [[protein]]s they need to survive.&lt;ref&gt;{{cite journal |vauthors= Rumpho ME, Worful JM, Lee J, Kannan K, Tyler MS, Bhattacharya D, Moustafa A, Manhart JR |date= November 2008 |title= Horizontal gene transfer of the algal nuclear gene psbO to the photosynthetic sea slug Elysia chlorotica |journal= Proceedings of the National Academy of Sciences of the United States of America |volume= 105 |issue= 46 |pages= 17867–17871 |bibcode= 2008PNAS..10517867R |doi= 10.1073/pnas.0804968105 |doi-access= free |pmc= 2584685 |pmid= 19004808 }}&lt;/ref&gt;
+
+An even closer form of symbiosis may explain the origin of chloroplasts. Chloroplasts have many similarities with photosynthetic [[bacteria]], including a circular [[chromosome]], prokaryotic-type [[ribosome]], and similar [[Photosynthetic reaction centre protein family|proteins in the photosynthetic reaction center]].&lt;ref&gt;{{cite journal |vauthors= Douglas SE |date= December 1998 |title= Plastid evolution: origins, diversity, trends |journal= Current Opinion in Genetics &amp; Development |volume= 8 |issue= 6 |pages= 655–661 |doi= 10.1016/S0959-437X(98)80033-6 |pmid= 9914199 }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors=Reyes-Prieto A, Weber AP, Bhattacharya D |year=2007 |title=The origin and establishment of the plastid in algae and plants |journal=Annual Review of Genetics |volume=41 |pages=147–168 |doi=10.1146/annurev.genet.41.110306.130134 |pmid=17600460 }}&lt;/ref&gt; The [[endosymbiotic theory]] suggests that photosynthetic bacteria were acquired (by [[endocytosis]]) by early [[eukaryotic]] cells to form the first plant cells. Therefore, chloroplasts may be photosynthetic bacteria that adapted to life inside plant cells. Like [[mitochondria]], chloroplasts possess their own [[DNA]], separate from the [[nuclear DNA]] of their plant host cells and the genes in this chloroplast DNA resemble those found in [[cyanobacteria]].&lt;ref&gt;{{cite journal |vauthors= Raven JA, Allen JF |year= 2003 |title= Genomics and chloroplast evolution: what did cyanobacteria do for plants? |journal= Genome Biology |volume= 4 |issue= 3 |page= 209 |doi= 10.1186/gb-2003-4-3-209 |doi-access= free |pmc= 153454 |pmid= 12620099 }}&lt;/ref&gt; DNA in chloroplasts codes for [[redox]] proteins such as those found in the photosynthetic reaction centers. The [[CoRR Hypothesis]] proposes that this co-location of genes with their gene products is required for redox regulation of [[gene expression]], and accounts for the persistence of DNA in bioenergetic [[organelle]]s.&lt;ref&gt;{{cite journal |vauthors= Allen JF |date= December 2017 |title= The CoRR hypothesis for genes in organelles |journal= Journal of Theoretical Biology |volume= 434 |pages= 50–57 |bibcode= 2017JThBi.434...50A |doi= 10.1016/j.jtbi.2017.04.008 |doi-access= free |pmid= 28408315 }}&lt;/ref&gt;
+
+===Photosynthetic eukaryotic lineages===
+Symbiotic and [[Kleptoplasty|kleptoplastic]] organisms excluded:
+
+*The [[glaucophyte]]s and the [[Red algae|red]] and [[Viridiplantae|green algae]]—clade [[Archaeplastida]] ([[Unicellular organism|uni]]- and [[Multicellular organism|multicellular]])
+*The [[Cryptophyceae|cryptophytes]]—clade [[Cryptista]] (unicellular)
+*The [[haptophyte]]s—clade [[Haptista]] (unicellular)
+*The [[dinoflagellate]]s and [[Chromerida|chromerids]] in the superphylum [[Myzozoa]], and [[Pseudoblepharisma]] in the phylum [[Ciliate|Ciliophora]]—clade [[Alveolata]] (unicellular)
+*The [[Ochrophyta|ochrophytes]]—clade [[Stramenopile|Stramenopila]] (uni- and multicellular)
+*The [[chlorarachniophyte]]s and three [[species]] of [[Paulinella]] in the phylum [[Cercozoa]]—clade [[Rhizaria]] (unicellular)
+*The [[euglenid]]s—clade [[Excavata]] (unicellular)
+
+Except for the euglenids, which are found within the [[Excavata]], all of these belong to the [[Diaphoretickes]]. Archaeplastida and the photosynthetic Paulinella got their plastids, which are surrounded by two membranes, through primary [[Endosymbiont|endosymbiosis]] in two separate events, by engulfing a cyanobacterium. The plastids in all the other groups have either a red or green algal origin, and are referred to as the "red lineages" and the "green lineages". The only known exception is the ciliate [[Pseudoblepharisma|Pseudoblepharisma tenue]], which in addition to its plastids that originated from green algae also has a [[purple sulfur bacteria|purple sulfur bacterium]] as a symbiont. In dinoflagellates and euglenids the plastids are surrounded by three membranes, and in the remaining lines by four. A [[nucleomorph]], remnants of the original algal nucleus located between the inner and outer membranes of the plastid, is present in the cryptophytes (from a red alga) and chlorarachniophytes (from a green alga).&lt;ref&gt;{{cite journal |vauthors= Keeling PJ |date= March 2010 |title= The endosymbiotic origin, diversification and fate of plastids |journal= Philosophical Transactions of the Royal Society of London. Series B, Biological Sciences |volume= 365 |issue= 1541 |pages= 729–748 |doi= 10.1098/rstb.2009.0103 |pmc= 2817223 |pmid= 20124341 }}&lt;/ref&gt;
+Some dinoflagellates that lost their photosynthetic ability later regained it again through new endosymbiotic events with different algae.
+While able to perform photosynthesis, many of these eukaryotic groups are [[mixotroph]]s and practice [[heterotroph]]y to various degrees.
+
+===Photosynthetic prokaryotic lineages===
+Early photosynthetic systems, such as those in [[Green sulfur bacteria|green]] and [[purple sulfur]] and [[Chloroflexota|green]] and [[purple nonsulfur bacteria]], are thought to have been [[Anoxygenic photosynthesis|anoxygenic]], and used various other molecules than water as [[electron donor]]s. Green and purple sulfur bacteria are thought to have used [[hydrogen]] and [[sulfur]] as electron donors. Green nonsulfur bacteria used various [[amino acid|amino]] and other [[organic acid]]s as electron donors. Purple nonsulfur bacteria used a variety of nonspecific organic molecules. The use of these molecules is consistent with the geological evidence that Earth's early atmosphere was highly [[Reducing environment|reducing]] at [[History of Earth#Hadean and Archean Eons|that time]].&lt;ref&gt;{{cite book |vauthors= Gale J |date= 2009 |title= Astrobiology of Earth: The emergence, evolution and future of life on a planet in turmoil |publisher= Oxford University Press |isbn= 978-0-19-154835-2 |pages= 112–113 |url= https://books.google.com/books?id=64zn0nxDVUYC&amp;pg=PA112 |access-date= 2019-04-17 |archive-url= https://web.archive.org/web/20230119181850/https://books.google.com/books?id=64zn0nxDVUYC&amp;pg=PA112 |archive-date= 2023-01-19 |url-status= live }}&lt;/ref&gt;
+
+With a possible exception of [[Asgard (archaea)|Heimdallarchaeota]], photosynthesis is not found in [[archaea]].&lt;ref&gt;{{cite bioRxiv |vauthors= Liu R, Cai R, Zhang J, Sun C |title= Heimdallarchaeota harness light energy through photosynthesis. |date= February 2020 |biorxiv= 10.1101/2020.02.20.957134 }}&lt;/ref&gt; [[Haloarchaea]] are [[photoheterotroph]]ic; they can absorb energy from the sun, but do not harvest carbon from the atmosphere and are therefore not photosynthetic.&lt;ref&gt;{{cite journal |vauthors= DasSarma S, Schwieterman EW |date= June 2021 |title= Early evolution of purple retinal pigments on Earth and implications for exoplanet biosignatures |journal= International Journal of Astrobiology |volume= 20 |issue= 3 |pages= 241–250 |arxiv= 1810.05150 |bibcode= 2021IJAsB..20..241D |doi= 10.1017/S1473550418000423 |doi-access= free }} {{lay source |template=cite news |url= https://www.cbc.ca/radio/quirks/oct-27-2018-neanderthal-nursing-antarctica-s-singing-snows-fish-and-hook-injuries-a-1.4878288/purple-reign-life-on-earth-might-once-have-been-dominated-by-purple-microorganisms-1.4878298 |title= Purple reign: life on Earth might once have been dominated by purple microorganisms |date= 26 October 2018 |work= CBC/Radio-Canada }}&lt;/ref&gt; Instead of chlorophyll they use rhodopsins, which convert light-energy to ion gradients but cannot mediate electron transfer reactions.&lt;ref&gt;{{cite journal |vauthors= Hamilton TL |date= August 2019 |title= The trouble with oxygen: The ecophysiology of extant phototrophs and implications for the evolution of oxygenic photosynthesis |journal= Free Radical Biology &amp; Medicine |volume= 140 |pages= 233–249 |doi= 10.1016/j.freeradbiomed.2019.05.003 |doi-access= free |pmid= 31078729 |bibcode= 2019FRBM..140..233H }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Sharma AK, Walsh DA, Bapteste E, Rodriguez-Valera F, Ford Doolittle W, Papke RT |date= May 2007 |title= Evolution of rhodopsin ion pumps in haloarchaea |journal= BMC Evolutionary Biology |volume= 7 |issue= 1 |pages= 79 |bibcode= 2007BMCEE...7...79S |doi= 10.1186/1471-2148-7-79 |doi-access= free |pmc= 1885257 |pmid= 17511874 }}&lt;/ref&gt;
+
+In [[bacteria]] eight photosynthetic lineages are currently known:&lt;ref&gt;{{cite journal |vauthors= Xiong J |title= Photosynthesis: what color was its origin? |journal= Genome Biology |volume= 7 |issue= 12 |pages= 245 |date= 2006 |pmid= 17210067 |pmc= 1794423 |doi= 10.1186/gb-2006-7-12-245 |doi-access= free }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Paoli L, Ruscheweyh HJ, Forneris CC, Hubrich F, Kautsar S, Bhushan A, Lotti A, Clayssen Q, Salazar G, Milanese A, Carlström CI, Papadopoulou C, Gehrig D, Karasikov M, Mustafa H, Larralde M, Carroll LM, Sánchez P, Zayed AA, Cronin DR, Acinas SG, Bork P, Bowler C, Delmont TO, Gasol JM, Gossert AD, Kahles A, Sullivan MB, Wincker P, Zeller G, Robinson SL, Piel J, Sunagawa S |display-authors= 6 |date= July 2022 |title= Biosynthetic potential of the global ocean microbiome |journal= Nature |volume= 607 |issue= 7917 |pages= 111–118 |doi= 10.1038/s43705-022-00201-9 |doi-access= free |pmc= 9758169 |pmid= 35732736 }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= He Z, Ferlez B, Kurashov V, Tank M, Golbeck JH, Bryant DA |title= Reaction centers of the thermophilic microaerophile, Chloracidobacterium thermophilum (Acidobacteria) I: biochemical and biophysical characterization |journal= Photosynthesis Research |volume= 142 |issue= 1 |pages= 87–103 |date= October 2019 |pmid= 31161318 |doi= 10.1007/s11120-019-00650-9 |bibcode= 2019PhoRe.142...87H |osti= 1800808 |url= https://scholarworks.montana.edu/handle/1/15841 }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Zeng Y, Feng F, Medová H, Dean J, Koblížek M |date= May 2014 |title= Functional type 2 photosynthetic reaction centers found in the rare bacterial phylum Gemmatimonadetes |journal= Proceedings of the National Academy of Sciences of the United States of America |volume= 111 |issue= 21 |pages= 7795–7800 |bibcode= 2014PNAS..111.7795Z |doi= 10.1073/pnas.1400295111 |doi-access= free |pmc= 4040607 |pmid= 24821787 }}&lt;/ref&gt;
+
+*[[Cyanobacteria]], the only prokaryotes performing oxygenic photosynthesis and the only prokaryotes that contain two types of photosystems (type I (RCI), also known as Fe-S type, and type II (RCII), also known as quinone type). The seven remaining prokaryotes have [[anoxygenic photosynthesis]] and use versions of either type I or type II.
+*[[Green sulfur bacteria|Chlorobi]] (green sulfur bacteria) Type I
+*[[Heliobacteria]] Type I
+*[[Chloracidobacterium]] Type I
+*[[Pseudomonadota|Proteobacteria]] (purple sulfur bacteria and purple non-sulfur bacteria) Type II (see: [[Purple bacteria]])
+*[[Chloroflexota]] (green non-sulfur bacteria) Type II
+*[[Gemmatimonadota]] Type II
+*Eremiobacterota Type II
+
+===Cyanobacteria and the evolution of photosynthesis===
+The biochemical capacity to use water as the source for electrons in photosynthesis evolved once, in a [[common ancestor]] of extant [[cyanobacteria]] (formerly called blue-green algae). The geological record indicates that this transforming event took place early in Earth's history, at least 2450–2320 million years ago (Ma), and, it is speculated, much earlier.&lt;ref&gt;{{cite journal |vauthors= Tomitani A, Knoll AH, Cavanaugh CM, Ohno T |date= April 2006 |title= The evolutionary diversification of cyanobacteria: molecular-phylogenetic and paleontological perspectives |journal= Proceedings of the National Academy of Sciences of the United States of America |volume= 103 |issue= 14 |pages= 5442–5447 |bibcode= 2006PNAS..103.5442T |doi= 10.1073/pnas.0600999103 |doi-access= free |pmc= 1459374 |pmid= 16569695 }}&lt;/ref&gt;&lt;ref&gt;{{cite web |title=Fossil Record of the Cyanobacteria |url=https://ucmp.berkeley.edu/bacteria/cyanofr.html |website=UC Museum of Paleontology }}&lt;/ref&gt; Because the Earth's atmosphere contained almost no oxygen during the estimated development of photosynthesis, it is believed that the first photosynthetic cyanobacteria did not generate oxygen.&lt;ref&gt;{{cite book |vauthors= Smith A |year= 2010 |title= Plant biology |publisher= Garland Science |location= New York |isbn= 978-0-8153-4025-6 |url= https://books.google.com/books?id=eC0WBAAAQBAJ&amp;pg=PA5 |page= 5 |access-date= 2019-04-17 |archive-date= 2023-01-19 |archive-url= https://web.archive.org/web/20230119181851/https://books.google.com/books?id=eC0WBAAAQBAJ&amp;pg=PA5 |url-status= live }}&lt;/ref&gt; Available evidence from geobiological studies of [[Archean]] (&gt;2500 Ma) [[sedimentary rock]]s indicates that life existed 3500 Ma, but the question of when oxygenic photosynthesis evolved is still unanswered. A clear paleontological window on cyanobacterial [[evolution]] opened about 2000 Ma, revealing an already-diverse biota of cyanobacteria. Cyanobacteria remained the principal [[primary producers]] of oxygen throughout the [[Proterozoic Eon]] (2500–543 Ma), in part because the redox structure of the oceans favored photoautotrophs capable of [[nitrogen fixation]].&lt;ref&gt;{{Cite journal |last1= Olson |first1= Stephanie L. |last2= Reinhard |first2= Christopher T. |last3= Lyons |first3= Timothy W. |date=2016 |title=Cyanobacterial Diazotrophy and Earth's Delayed Oxygenation |journal= Frontiers in Microbiology |volume= 7 |pages= 1526 |doi= 10.3389/fmicb.2016.01526 |doi-access= free |pmc= 5033965 |pmid= 27721813 |bibcode= 2016FrMic...7.1526O }}&lt;/ref&gt;&lt;ref&gt;{{Cite journal |last1= Sánchez-Baracaldo |first1= Patricia |last2= Bianchini |first2= Giorgio |last3= Wilson |first3= Jamie D. |last4= Knoll |first4= Andrew H. |date= 2022 |title= Cyanobacteria and biogeochemical cycles through Earth history |journal= Trends in Microbiology |volume= 30 |issue= 2 |pages= 143–157 |doi= 10.1016/j.tim.2021.05.008 |pmid= 34229911 }}&lt;/ref&gt; [[Green algae]] joined cyanobacteria as the major primary producers of oxygen on [[continental shelves]] near the end of the [[Proterozoic]], but only with the [[Mesozoic]] (251–66 Ma) radiations of dinoflagellates, coccolithophorids, and diatoms did the [[primary production]] of oxygen in marine shelf waters take modern form. Cyanobacteria remain critical to [[marine ecosystem]]s as [[Oxygen cycle|primary producers of oxygen]] in oceanic gyres, as agents of biological nitrogen fixation, and, in modified form, as the [[plastid]]s of marine algae.&lt;ref&gt;{{cite book |vauthors= Herrero A, Flores E |year= 2008 |title= The Cyanobacteria: Molecular Biology, Genomics and Evolution |edition= 1st |publisher= Caister Academic Press |isbn= 978-1-904455-15-8 |oclc=1498473237 |url=https://archive.org/details/cyanobacteriamol0000unse }}{{pn|date=April 2026}}&lt;/ref&gt;
+
+==Experimental history==
+===Discovery===
+Although some of the steps in photosynthesis are still not completely understood, the overall photosynthetic equation has been known since the 19th century.
+
+[[File:Jan Baptist van Helmont portrait.jpg|thumb|left|Portrait of [[Jan Baptist van Helmont]] by [[Mary Beale]], c. 1674]]
+
+[[Jan Baptist van Helmont|Jan van Helmont]] began the [[research]] of the [[Biological process|process]] in the mid-17th century when he carefully measured the [[mass]] of the [[soil]] a [[plant]] was using and the mass of the plant as it grew. After noticing that the soil mass changed very little, he [[Hypothesis|hypothesized]] that the mass of the [[Plant development|growing]] plant must come from the [[water]], the only [[Chemical substance|substance]] he added to the potted plant. His hypothesis was partially [[Accuracy and precision|accurate]] – much of the gained mass comes from [[carbon dioxide]] as well as water. However, this was a signaling point to the idea that the bulk of a plant's [[Biomass (ecology)|biomass]] comes from the inputs of photosynthesis, not the soil itself.
+
+[[Joseph Priestley]], a [[chemist]] and [[Minister (Christianity)|minister]], discovered that when he isolated a [[volume]] of air under an inverted [[jar]] and burned a [[candle]] in it (which gave off [[Carbon dioxide|CO&lt;sub&gt;2&lt;/sub&gt;]]), the candle would burn out very quickly, much before it ran out of [[Candle#Wax|wax]]. He further discovered that a [[mouse]] could similarly [[Breathing|"injure"]] air. He then showed that a plant could restore the air the candle and the mouse had "injured".&lt;ref name="Martin-2012"&gt;{{cite journal |vauthors= Martin D, Thompson A, Stewart I, Gilbert E, Hope K, Kawai G, Griffiths A |date= September 2012 |title= A paradigm of fragile Earth in Priestley's bell jar |journal= Extreme Physiology &amp; Medicine |volume= 1 |issue= 1 |article-number= 4 |doi= 10.1186/2046-7648-1-4 |doi-access= free |pmc= 3707099 |pmid= 23849304 }}&lt;/ref&gt;
+
+In 1779, [[Jan Ingenhousz]] repeated Priestley's [[experiment]]s. He discovered that it was the influence of [[sunlight]] on the plant that could cause it to revive a mouse in a matter of hours.&lt;ref name="Martin-2012"/&gt;&lt;ref&gt;{{cite journal |vauthors= Gest H |year= 2000 |title= Bicentenary homage to Dr Jan Ingen-Housz, MD (1730-1799), pioneer of photosynthesis research |journal= Photosynthesis Research |volume= 63 |issue= 2 |pages= 183–190 |doi= 10.1023/A:1006460024843 |doi-access= free |pmid= 16228428 |bibcode= 2000PhoRe..63..183G }}&lt;/ref&gt;
+
+In 1796, [[Jean Senebier]], a Swiss [[pastor]], [[botanist]], and [[naturalist]], [[Scientific demonstration|demonstrated]] that [[green plants]] consume carbon dioxide and release oxygen under the influence of [[light]]. Soon afterward, [[Nicolas-Théodore de Saussure]] showed that the increase in mass of the plant as it grows could not be due only to uptake of CO&lt;sub&gt;2&lt;/sub&gt; but also to the incorporation of water. Thus, the basic [[Chemical reaction|reaction]] by which [[organism]]s use photosynthesis to produce [[food]] (such as [[glucose]]) was outlined.&lt;ref&gt;{{cite book |vauthors= Rabinowitch EI |author-link1= Eugene Rabinowitch |date= 1945 |title= Photosynthesis and Related Processes |volume= 1 |via= [[Biodiversity Heritage Library]] |url= https://www.biodiversitylibrary.org/item/26615#page/9/mode/1up |access-date= 2019-12-14 |archive-url= https://web.archive.org/web/20200806055256/https://www.biodiversitylibrary.org/item/26615#page/9/mode/1up |archive-date= 2020-08-06 |url-status= live }}&lt;/ref&gt;
+
+===Refinements===
+[[Cornelis Van Niel]] made key discoveries explaining the [[chemistry]] of photosynthesis. By studying [[purple sulfur bacteria]] and [[green bacteria]], he was the first to demonstrate that photosynthesis is a light-dependent [[Redox|redox reaction]] in which hydrogen [[Reducing agent|reduces]] (donates its [[atom]]s as [[electron]]s and [[proton]]s to) carbon dioxide.
+
+[[Robert Emerson (scientist)|Robert Emerson]] discovered two light reactions by testing plant productivity using different wavelengths of light. With the red alone, the light reactions were suppressed. When blue and red were combined, the output was much more substantial. Thus, there were two photosystems, one absorbing up to 600&amp;nbsp;nm wavelengths, the other up to 700&amp;nbsp;nm. The former is known as PSII, the latter is PSI. PSI contains only chlorophyll "a", PSII contains primarily chlorophyll "a" with most of the available chlorophyll "b", among other pigments. These include phycobilins, which are the red and blue pigments of red and blue algae, respectively, and fucoxanthol for brown algae and diatoms. The process is most productive when the absorption of quanta is equal in both PSII and PSI, assuring that input energy from the antenna complex is divided between the PSI and PSII systems, which in turn powers the photochemistry.&lt;ref name="McGraw-Hill-2007"/&gt;
+
+[[Robin Hill (biochemist)|Robert Hill]] thought that a complex of reactions consisted of an intermediate to cytochrome b&lt;sub&gt;6&lt;/sub&gt; (now a plastoquinone), and that another was from cytochrome f to a step in the carbohydrate-generating mechanisms. These are linked by plastoquinone, which does require energy to reduce cytochrome f. Further experiments to prove that the oxygen developed during the photosynthesis of green plants came from water were performed by Hill in 1937 and 1939. He showed that isolated [[chloroplast]]s give off oxygen in the presence of unnatural reducing agents like [[iron]] [[oxalate]], [[ferricyanide]] or [[benzoquinone]] after exposure to light. In the Hill reaction:&lt;ref&gt;{{cite journal |vauthors= Walker DA |author-link1= David Alan Walker |title='And whose bright presence' – an appreciation of Robert Hill and his reaction |journal=Photosynthesis Research |date=2002 |volume=73 |issue=1–3 |pages=51–54 |id={{ProQuest|753892870}} |doi=10.1023/A:1020479620680 |pmid=16245102 |bibcode=2002PhoRe..73...51W |url=https://www.life.illinois.edu/govindjee/Part1/Part1_Walker.pdf }}&lt;/ref&gt;
+
+{{block indent|2 H&lt;sub&gt;2&lt;/sub&gt;O + 2 A + (light, chloroplasts) → 2 AH&lt;sub&gt;2&lt;/sub&gt; + O&lt;sub&gt;2&lt;/sub&gt;}}
+
+A is the electron acceptor. Therefore, in light, the electron acceptor is reduced and oxygen is evolved. [[Sam Ruben|Samuel Ruben]] and [[Martin Kamen]] used [[Radionuclide|radioactive isotopes]] to determine that the oxygen liberated in photosynthesis came from the water.
+
+[[File:Melvin Calvin.jpg|thumb|left|170px|[[Melvin Calvin]] works in his photosynthesis laboratory.]]
+
+[[Melvin Calvin]] and [[Andrew Benson]], along with [[James Bassham]], elucidated the path of carbon assimilation (the photosynthetic carbon reduction cycle) in plants. The carbon reduction cycle is known as the [[Calvin cycle]], but many scientists refer to it as the Calvin-Benson, Benson-Calvin, or even Calvin-Benson-Bassham (or CBB) Cycle.
+
+[[Nobel Prize]]–winning scientist [[Rudolph A. Marcus]] was later able to discover the function and significance of the electron transport chain.
+
+[[Otto Heinrich Warburg]] and [[Dean Burk]] discovered the I-quantum photosynthesis reaction that splits CO&lt;sub&gt;2&lt;/sub&gt;, activated by the respiration.&lt;ref&gt;[http://nobelprize.org/nobel_prizes/medicine/laureates/1931/warburg.html Otto Warburg – Biography] {{Webarchive |url= https://web.archive.org/web/20101215084840/http://nobelprize.org/nobel_prizes/medicine/laureates/1931/warburg.html |date= 2010-12-15 }}. Nobelprize.org (1970-08-01). Retrieved on 2011-11-03.&lt;/ref&gt;
+
+In 1950, first experimental evidence for the existence of [[photophosphorylation]] ''in vivo'' was presented by [[Otto Kandler]] using intact ''[[Chlorella]]'' cells and interpreting his findings as light-dependent [[Adenosine triphosphate|ATP]] formation.&lt;ref&gt;{{cite journal |vauthors= Kandler O |author-link= Otto Kandler |year= 1950 |title= Über die Beziehungen zwischen Phosphathaushalt und Photosynthese. I. Phosphatspiegelschwankungen bei Chlorella pyrenoidosa als Folge des Licht-Dunkel-Wechsels |trans-title= On the relationship between the phosphate metabolism and photosynthesis I. Variations in phosphate levels in Chlorella pyrenoidosa as a consequence of light-dark changes |journal= Zeitschrift für Naturforschung |volume= 5b |issue= 8 |pages= 423–437 |doi= 10.1515/znb-1950-0806 |bibcode= 1950ZNatB...5..423K |url= http://zfn.mpdl.mpg.de/xtf/data/Reihe_B/5/ZNB-1950-5b-0423.pdf |access-date= 2018-06-26 |archive-url= https://web.archive.org/web/20180624204544/http://zfn.mpdl.mpg.de/xtf/data/Reihe_B/5/ZNB-1950-5b-0423.pdf |archive-date= 2018-06-24 |url-status= live }}&lt;/ref&gt;
+In 1954, [[Daniel I. Arnon]] et al. discovered photophosphorylation ''in vitro'' in isolated [[chloroplast]]s with the help of P&lt;sup&gt;32&lt;/sup&gt;.&lt;ref&gt;{{cite journal |vauthors= Arnon DI, Whatley FR, Allen MB |author-link1= Daniel I. Arnon |year= 1954 |title= Photosynthesis by isolated chloroplasts. II. Photophosphorylation, the conversion of light into phosphate bond energy |journal= Journal of the American Chemical Society |volume= 76 |issue= 24 |pages= 6324–6329 |doi= 10.1021/ja01653a025 }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Arnon DI |author-link= Daniel I. Arnon |year= 1956 |title= Phosphorus metabolism and photosynthesis |journal= Annual Review of Plant Physiology |volume= 7 |pages= 325–354 |doi= 10.1146/annurev.pp.07.060156.001545 |bibcode= 1956ARPP....7..325A }}&lt;/ref&gt;
+
+[[Louis N. M. Duysens]] and [[Jan Amesz]] discovered that chlorophyll "a" will absorb one light, oxidize cytochrome f, while chlorophyll "a" (and other pigments) will absorb another light but will reduce this same oxidized cytochrome, stating the two light reactions are in series.
+
+===Development of the concept===
+In 1893, the American botanist [[Charles Reid Barnes]] proposed two terms, ''photosyntax'' and ''photosynthesis'', for the biological process of ''synthesis of complex carbon compounds out of carbonic acid, in the presence of chlorophyll, under the influence of light''. The term ''photosynthesis'' is derived from the [[Greek language|Greek]] {{translit|grc|phōs}} ({{wikt-lang|grc|φῶς}}, {{gloss|gleam}}) and {{translit|grc|sýnthesis}} ({{wikt-lang|grc|σύνθεσις}}, {{gloss|arranging together}}),&lt;ref name="Online Etymology Dictionary"&gt;{{cite web |title= Photosynthesis |work= [[Online Etymology Dictionary]] |url= http://www.etymonline.com/index.php?term=photosynthesis&amp;allowed_in_frame=0 |access-date= 2013-05-23 |archive-url= https://web.archive.org/web/20130307020959/http://www.etymonline.com/index.php?term=photosynthesis&amp;allowed_in_frame=0 |archive-date= 2013-03-07 |url-status= live }}&lt;/ref&gt;&lt;ref&gt;{{cite encyclopedia |vauthors= Liddell HG, Scott R |author-link1= Henry Liddell |author-link2= Robert Scott (philologist) |title= φῶς |url= https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0057:entry=fw=s2 |dictionary= [[A Greek–English Lexicon]] |publisher= [[Perseus Project]] |access-date= 2023-09-03 |archive-date= 2014-10-19 |archive-url= https://web.archive.org/web/20141019122727/https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0057:entry=fw=s2 |url-status= live }}&lt;/ref&gt;&lt;ref&gt;{{cite encyclopedia |vauthors= Liddell HG, Scott R |author-link1= Henry Liddell |author-link2= Robert Scott (philologist) |title= σύνθεσις |dictionary= [[A Greek–English Lexicon]] |publisher= [[Perseus Project]] |url= https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0057:entry=su/nqesis |access-date= 2023-09-03 |archive-date= 2014-06-14 |archive-url= https://web.archive.org/web/20140614224157/https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0057:entry=su/nqesis |url-status= live }}&lt;/ref&gt; while ''photosyntax'' comes from {{translit|grc|sýntaxis}} ({{wikt-lang|grc|σύνταξις}}, {{gloss|configuration}}). Over time, the term ''photosynthesis'' came into common usage. Later discovery of anoxygenic photosynthetic bacteria and photophosphorylation necessitated redefinition of the term.&lt;ref&gt;{{cite journal |vauthors= Gest H |year= 2002 |title= History of the word photosynthesis and evolution of its definition |journal= Photosynthesis Research |volume= 73 |issue= 1–3 |pages= 7–10 |doi= 10.1023/A:1020419417954 |pmid= 16245098 |bibcode= 2002PhoRe..73....7G }}&lt;/ref&gt;
+
+===C3 : C4 photosynthesis research===
+In the late 1940s at the [[University of California, Berkeley]], the details of photosynthetic carbon metabolism were sorted out by the chemists [[Melvin Calvin]], Andrew Benson, James Bassham and a score of students and researchers utilizing the carbon-14 isotope and paper chromatography techniques.&lt;ref&gt;{{cite journal |vauthors= Calvin M |title= Forty years of photosynthesis and related activities |journal= Photosynthesis Research |volume= 21 |issue= 1 |pages= 3–16 |date= July 1989 |bibcode= 1989PhoRe..21....3C |doi= 10.1007/BF00047170 |pmid= 24424488 |name-list-style= vanc }}&lt;/ref&gt; The pathway of CO&lt;sub&gt;2&lt;/sub&gt; fixation by the algae ''Chlorella'' in a fraction of a second in light resulted in a three carbon molecule called phosphoglyceric acid (PGA). For that original and ground-breaking work, a [[Nobel Prize in Chemistry]] was awarded to Melvin Calvin in 1961. In parallel, plant physiologists studied leaf gas exchanges using the new method of infrared gas analysis and a leaf chamber where the net photosynthetic rates ranged from 10 to 13 μmol CO&lt;sub&gt;2&lt;/sub&gt;·m&lt;sup&gt;−2&lt;/sup&gt;·s&lt;sup&gt;−1&lt;/sup&gt;, with the conclusion that all terrestrial plants have the same photosynthetic capacities, that are light saturated at less than 50% of sunlight.&lt;ref&gt;{{cite journal |vauthors= Verduin J |year= 1953 |title= A table of photosynthesis rates under optimal, near natural conditions. |journal= Am. J. Bot. |volume= 40 |issue= 9 |pages= 675–679 |doi=10.1002/j.1537-2197.1953.tb06540.x |jstor= 2439681 |bibcode= 1953AmJB...40..675V }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Verduin J, Whitwer EE, Cowell BC |date= July 1959 |title= Maximal photosynthetic rates in nature |journal= Science |volume= 130 |issue= 3370 |pages= 268–269 |bibcode= 1959Sci...130..268V |doi= 10.1126/science.130.3370.268 |pmid= 13668557 }}&lt;/ref&gt;
+
+Later in 1958–1963 at [[Cornell University]], field grown [[maize]] was reported to have much greater leaf photosynthetic rates of 40 μmol CO&lt;sub&gt;2&lt;/sub&gt;·m&lt;sup&gt;−2&lt;/sup&gt;·s&lt;sup&gt;−1&lt;/sup&gt; and not be saturated at near full sunlight.&lt;ref&gt;{{cite journal |vauthors= Hesketh JD, Musgrave R |year= 1962 |title= Photosynthesis under field conditions. IV. Light studies with individual corn leaves |journal= Crop Sci. |volume= 2 |issue= 4 |pages= 311–315 |doi= 10.2135/cropsci1962.0011183x000200040011x |bibcode= 1962CrSci...2..311H }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Hesketh JD, Moss DN |year= 1963 |title= Variation in the response of photosynthesis to light |journal= Crop Sci. |volume= 3 |issue= 2 |pages= 107–110 |doi= 10.2135/cropsci1963.0011183X000300020002x |bibcode= 1963CrSci...3..107H }}&lt;/ref&gt; This higher rate in maize was almost double of those observed in other species such as wheat and soybean, indicating that large differences in photosynthesis exist among higher plants. At the University of Arizona, detailed gas exchange research on more than 15 species of [[Monocotyledon|monocot]]s and [[Dicotyledon|dicot]]s uncovered for the first time that differences in leaf anatomy are crucial factors in differentiating photosynthetic capacities among species.&lt;ref name="El-Sharkawy"&gt;{{cite journal |vauthors= El-Sharkawy, MA, Hesketh JD |year= 1965 |title= Photosynthesis among species in relation to characteristics of leaf anatomy and CO&lt;sub&gt;2&lt;/sub&gt; diffusion resistances |journal= Crop Sci. |volume= 5 |issue= 6 |pages= 517–521 |doi=10.2135/cropsci1965.0011183x000500060010x }} Republished as: {{cite journal |vauthors= El-Sharkawy MA, Hesketh JD |year= 1986 |title= Citation Classic-Photosynthesis among species in relation to characteristics of leaf anatomy and CO&lt;sub&gt;2&lt;/sub&gt; diffusion resistances |journal= Curr. Cont./Agr.Biol.Environ |volume= 27 |page= 14 |url= http://www.garfield.library.upenn.edu/classics1986/A1986C891300001.pdf |access-date= 2023-12-06 |archive-url= https://web.archive.org/web/20231129020950/http://www.garfield.library.upenn.edu/classics1986/A1986C891300001.pdf |archive-date= 2023-11-29 |url-status= dead }}&lt;/ref&gt; In tropical grasses, including maize, sorghum, sugarcane, Bermuda grass and in the dicot amaranthus, leaf photosynthetic rates were around 38−40 μmol CO&lt;sub&gt;2&lt;/sub&gt;·m&lt;sup&gt;−2&lt;/sup&gt;·s&lt;sup&gt;−1&lt;/sup&gt;, and the leaves have two types of green cells, i.e. outer layer of mesophyll cells surrounding a tightly packed cholorophyllous vascular bundle sheath cells. This type of anatomy was termed Kranz anatomy in the 19th century by the botanist [[Gottlieb Haberlandt]] while studying leaf anatomy of sugarcane.&lt;ref&gt;{{cite book |vauthors= Haberlandt G |year= 1904 |title= Physiologische Pflanzanatomie |publisher= Engelmann |location= Leipzig |url= https://books.google.com/books?id=6pk_AAAAYAAJ |access-date= 2019-04-17 |archive-date= 2023-01-19 |archive-url= https://web.archive.org/web/20230119181853/https://books.google.com/books?id=6pk_AAAAYAAJ |url-status= live |oclc=1432100820 |hdl=2027/coo.31924001886070 |hdl-access=free }}&lt;/ref&gt; Plant species with the greatest photosynthetic rates and Kranz anatomy showed no apparent photorespiration, very low CO&lt;sub&gt;2&lt;/sub&gt; compensation point, high optimum temperature, high stomatal resistances and lower mesophyll resistances for gas diffusion and rates never saturated at full sun light.&lt;ref&gt;{{cite thesis |vauthors= El-Sharkawy MA |year= 1965 |title= Factors Limiting Photosynthetic Rates of Different Plant Species |degree= Ph.D. |publisher= The University of Arizona, Tucson |id={{ProQuest|302171747}} |oclc=28758199 }}{{pn|date=April 2026}}&lt;/ref&gt; The research at Arizona was designated a Citation Classic in 1986.&lt;ref name="El-Sharkawy"/&gt; These species were later termed C4 plants as the first stable compound of CO&lt;sub&gt;2&lt;/sub&gt; fixation in light has four carbons as malate and aspartate.&lt;ref&gt;{{cite journal |vauthors= Karpilov YS |year= 1960 |title= The distribution of radioactvity in carbon-14 among the products of photosynthesis in maize |journal= Proc. Kazan Agric. Inst. |volume= 14 |pages= 15–24 }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Kortschak HP, Hart CE, Burr GO |year= 1965 |title= Carbon dioxide fixation in sugarcane leaves |journal= Plant Physiol |volume= 40 |issue= 2 |pages= 209–213 |doi= 10.1104/pp.40.2.209 |pmc= 550268 |pmid= 16656075 }}&lt;/ref&gt;&lt;ref&gt;{{cite journal |vauthors= Hatch MD, Slack CR |year= 1966 |title= Photosynthesis by sugar-cane leaves. A new carboxylation reaction and the pathway of sugar formation |journal= Biochem. J. |volume= 101 |issue= 1 |pages= 103–111 |doi= 10.1042/bj1010103 |pmc= 1270070 |pmid= 5971771 }}&lt;/ref&gt; Other species that lack Kranz anatomy were termed C3 type such as cotton and sunflower, as the first stable carbon compound is the three-carbon PGA. At 1000 ppm CO&lt;sub&gt;2&lt;/sub&gt; in measuring air, both the C3 and C4 plants had similar leaf photosynthetic rates around 60 μmol CO&lt;sub&gt;2&lt;/sub&gt;·m&lt;sup&gt;−2&lt;/sup&gt;·s&lt;sup&gt;−1&lt;/sup&gt; indicating the suppression of photorespiration in C3 plants.&lt;ref name="El-Sharkawy"/&gt;
+
+==Factors==
+
+[[File:Leaf 1 web.jpg|thumb|The [[leaf]] is the primary site of photosynthesis in plants.]]
+There are four main factors influencing photosynthesis and several corollary factors. The four main are:&lt;ref&gt;{{cite journal |vauthors= Stirbet A, Lazár D, Guo Y, Govindjee G |date= September 2020 |title= Photosynthesis: basics, history and modelling |journal= Annals of Botany |volume= 126 |issue= 4 |pages= 511–537 |doi= 10.1093/aob/mcz171 |pmc= 7489092 |pmid= 31641747 }}&lt;/ref&gt;
+* Light [[irradiance]] and [[wavelength]]
+* Water absorption
+* [[Carbon dioxide]] [[concentration]]
+* [[Temperature]].
+
+Total photosynthesis is limited by a range of environmental factors. These include the amount of light available, the amount of [[leaf]] area a plant has to capture light (shading by other plants is a major limitation of photosynthesis), the rate at which carbon dioxide can be supplied to the [[chloroplast]]s to support photosynthesis, the availability of water, and the availability of suitable temperatures for carrying out photosynthesis.&lt;ref&gt;{{cite book |vauthors= Chapin FS, Matson PA, Mooney HA |year= 2002 |title= Principles of Terrestrial Ecosystem Ecology |publisher= Springer |pages= 97–104 |isbn= 978-0-387-95443-1 |url= https://books.google.com/books?id=shsBCAAAQBAJ&amp;pg=PA97 |location= New York |access-date= 2019-04-17 |archive-date= 2023-01-19 |archive-url= https://web.archive.org/web/20230119181855/https://books.google.com/books?id=shsBCAAAQBAJ&amp;pg=PA97 |url-status= live }}&lt;/ref&gt;
+
+===Light intensity (irradiance), wavelength and temperature===
+{{See also|PI curve|label 1=PI (photosynthesis-irradiance) curve}}
+[[File:Chlorophyll ab spectra-en.svg|thumb|[[Absorbance]] spectra of free chlorophyll ''a'' (blue) and ''b'' (red) in a solvent. The action spectra of chlorophyll molecules are slightly modified ''in vivo'' depending on specific pigment–protein interactions.]]
+The process of photosynthesis provides the main input of free energy into the biosphere, and is one of four main ways in which radiation is important for plant life.&lt;ref&gt;{{cite book |vauthors= Jones HG |date= 2014 |title= Plants and Microclimate: a Quantitative Approach to Environmental Plant Physiology |edition= Third |location= Cambridge |publisher= Cambridge University Press |isbn= 978-0-521-27959-8 |url= https://books.google.com/books?id=BYALAgAAQBAJ |access-date= 2019-04-17 |archive-date= 2023-01-19 |archive-url= https://web.archive.org/web/20230119181859/https://books.google.com/books?id=BYALAgAAQBAJ |url-status= live }}&lt;/ref&gt;
+
+The radiation climate within plant communities is extremely variable, in both time and space.
+
+In the early 20th century, [[Frederick Blackman]] and [[Gabrielle Matthaei]] investigated the effects of light intensity ([[irradiance]]) and temperature on the rate of carbon assimilation.
+* At constant temperature, the rate of carbon assimilation varies with irradiance, increasing as the irradiance increases, but reaching a plateau at higher irradiance.
+* At low irradiance, increasing the temperature has little influence on the rate of carbon assimilation. At constant high irradiance, the rate of carbon assimilation increases as the temperature is increased.
+
+&lt;!--[[File:carbon a t.jpg|thumb|Carbon assimilation at a constant temperature.]] unsourced graph with swapped axis titles --&gt;
+These two experiments illustrate several important points: First, it is known that, in general, [[photochemical]] reactions are not affected by [[temperature]]. However, these experiments clearly show that temperature affects the rate of carbon assimilation, so there must be two sets of reactions in the full process of carbon assimilation. These are the light-dependent 'photochemical' temperature-independent stage, and the light-independent, temperature-dependent stage. Second, Blackman's experiments illustrate the concept of [[limiting factor]]s. Another limiting factor is the wavelength of light. Cyanobacteria, which reside several meters underwater, cannot receive the correct wavelengths required to cause photoinduced charge separation in conventional photosynthetic pigments. To combat this problem, Cyanobacteria have a light-harvesting complex called [[Phycobilisome]].&lt;ref&gt;{{cite journal |vauthors= Adir N, Bar-Zvi S, Harris D |date= April 2020 |title= The amazing phycobilisome |journal= Biochimica et Biophysica Acta (BBA) - Bioenergetics |series= Light harvesting |volume= 1861 |issue= 4 |article-number= 148047 |doi= 10.1016/j.bbabio.2019.07.002 |doi-access= free |pmid= 31306623 |bibcode= 2020BBAcB186148047A }}&lt;/ref&gt; This complex is made up of a series of proteins with different pigments which surround the reaction center.
+
+===Carbon dioxide levels and photorespiration===
+[[File:Photorespiration.svg|thumb|350px|Photorespiration]]
+As carbon dioxide concentrations rise, the rate at which sugars are made by the light-independent reactions increases until limited by other factors. [[RuBisCO]], the enzyme that captures carbon dioxide in the light-independent reactions, has a binding affinity for both carbon dioxide and oxygen. When the concentration of carbon dioxide is high, RuBisCO will fix carbon dioxide. However, if the carbon dioxide concentration is low, RuBisCO will bind oxygen instead of carbon dioxide. This process, called [[photorespiration]], uses energy, but does not produce sugars.
+
+RuBisCO oxygenase activity is disadvantageous to plants for several reasons:
+# One product of oxygenase activity is phosphoglycolate (2 carbon) instead of [[3-phosphoglycerate]] (3 carbon). Phosphoglycolate cannot be metabolized by the Calvin-Benson cycle and represents carbon lost from the cycle. A high oxygenase activity, therefore, drains the sugars that are required to recycle ribulose 5-bisphosphate and for the continuation of the [[Calvin-Benson cycle]].
+# Phosphoglycolate is quickly metabolized to glycolate that is toxic to a plant at a high concentration; it inhibits photosynthesis.
+# Salvaging glycolate is an energetically expensive process that uses the glycolate pathway, and only 75% of the carbon is returned to the Calvin-Benson cycle as 3-phosphoglycerate. The reactions also produce [[ammonia]] (NH&lt;sub&gt;3&lt;/sub&gt;), which is able to [[Molecular diffusion|diffuse]] out of the plant, leading to a loss of nitrogen.
+
+{{block indent|A highly simplified summary is:}}
+
+{{block indent|2 glycolate + ATP → 3-phosphoglycerate + carbon dioxide + ADP + NH&lt;sub&gt;3&lt;/sub&gt;}}
+
+The salvaging pathway for the products of RuBisCO oxygenase activity is more commonly known as photorespiration, since it is characterized by light-dependent oxygen consumption and the release of carbon dioxide.
+
+== See also ==
+{{div col|colwidth=20em}}
+* [[Jan Anderson (scientist)]]
+* [[Artificial photosynthesis]]
+* [[Calvin-Benson cycle]]
+* [[Carbon fixation]]
+* [[Cellular respiration]]
+* [[Chemosynthesis]]
+* [[Daily light integral]]
+* [[Hill reaction]]
+* [[Integrated fluorometer]]
+* [[Light-dependent reaction]]
+* [[Organic reaction]]
+* [[Photobiology]]
+* [[Photoinhibition]]
+* [[Photosynthetic reaction center]]
+* [[Photosynthetically active radiation]]
+* [[Photosystem]]
+* [[Photosystem I]]
+* [[Photosystem II]]
+* [[Quantasome]]
+* [[Quantum biology]]
+* [[Radiosynthesis (metabolism)|Radiosynthesis]]
+* [[Red edge]]
+* [[Vitamin D]]
+{{div col end}}
+
+== References ==
+{{Reflist}}
+
+== Further reading ==
+
+===Books===
+{{Refbegin|33em}}
+* {{cite book |vauthors=Bidlack JE, Stern KR, Jansky S | title = Introductory Plant Biology | publisher = McGraw-Hill | location = New York | year = 2003 | isbn = 978-0-07-290941-8 }}
+* {{cite book |vauthors=Blankenship RE |author1-link=Robert E. Blankenship |title=Molecular Mechanisms of Photosynthesis |date=2002 |doi=10.1002/9780470758472 |isbn=978-0-632-04321-7 }}
+* {{cite book |veditors=Govindjee, Beatty JT, Gest H, Allen JF |title=Discoveries in Photosynthesis |series=Advances in Photosynthesis and Respiration |date=2005 |volume=20 |doi=10.1007/1-4020-3324-9 |isbn=978-1-4020-3323-0 }}
+* {{cite book  |vauthors=Reece JB, etal |title=Campbell Biology |date=2014 |publisher=Pearson |isbn=978-0-321-77565-8 }}
+
+{{Refend}}
+
+===Papers===
+{{refbegin|33em}}
+* {{cite journal |vauthors=Gupta RS, Mukhtar T, Singh B |title=Evolutionary relationships among photosynthetic prokaryotes (''Heliobacterium chlorum'', ''Chloroflexus aurantiacus'', cyanobacteria, ''Chlorobium tepidum'' and proteobacteria): implications regarding the origin of photosynthesis |journal=Molecular Microbiology |volume=32 |issue=5 |pages=893–906 |date=Jun 1999 |pmid=10361294 |doi=10.1046/j.1365-2958.1999.01417.x }}
+* {{cite journal |vauthors=Rutherford AW, Faller P |title=Photosystem II: evolutionary perspectives |journal=Philosophical Transactions of the Royal Society of London. Series B, Biological Sciences |volume=358 |issue=1429 |pages=245–253 |date=Jan 2003 |pmid=12594932 |pmc=1693113 |doi=10.1098/rstb.2002.1186}}
+{{refend}}
+
+== External links ==
+* [http://www.life.uiuc.edu/govindjee/linksPSed.htm A collection of photosynthesis pages for all levels from a renowned expert (Govindjee)]
+* [http://www.life.uiuc.edu/govindjee/paper/gov.html In depth, advanced treatment of photosynthesis, also from Govindjee]
+* [https://web.archive.org/web/20090428090455/http://scienceaid.co.uk/biology/biochemistry/photosynthesis.html Science Aid: Photosynthesis] Article appropriate for high school science
+* [https://web.archive.org/web/20050316052050/http://www.biochemweb.org/metabolism.shtml Metabolism, Cellular Respiration and Photosynthesis – The Virtual Library of Biochemistry and Cell Biology]
+* [https://web.archive.org/web/20060420081033/http://www.chemsoc.org/networks/learnnet/cfb/Photosynthesis.htm Overall examination of Photosynthesis at an intermediate level]
+* [http://www.life.uiuc.edu/govindjee/photosynBook.html Overall Energetics of Photosynthesis]
+* [https://web.archive.org/web/20100126064437/http://bcs.whfreeman.com/thelifewire/content/chp08/0802001.html The source of oxygen produced by photosynthesis] Interactive animation, a textbook tutorial
+
+[[Category:Photosynthesis| ]]
+[[Category:Agronomy]]
+[[Category:Biological processes]]
+[[Category:Botany]]
+[[Category:Cellular respiration]]
+[[Category:Ecosystems]]
+[[Category:Metabolism]]
+[[Category:Plant nutrition]]
+[[Category:Plant physiology]]
+[[Category:Quantum biology]]</text>
+			<sha1>olmwcw1bavs9dn856v5zib52smcfx6m</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Abbr</title>
+		<ns>10</ns>
+		<id>4002</id>
+		<revision>
+			<id>5002</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5002</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="316" sha1="f7qdlkmcaj6yooumo4d2nuls1wzmwf9" xml:space="preserve">&lt;abbr title="{{{2|}}}"&gt;{{{1|}}}&lt;/abbr&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>f7qdlkmcaj6yooumo4d2nuls1wzmwf9</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Block indent</title>
+		<ns>10</ns>
+		<id>4003</id>
+		<revision>
+			<id>5003</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5003</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="324" sha1="g8b86a3lrdj3zqouipsb5kdstmbt0ek" xml:space="preserve">&lt;div style="margin-left:1.6em;"&gt;{{{1|}}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>g8b86a3lrdj3zqouipsb5kdstmbt0ek</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:C3</title>
+		<ns>10</ns>
+		<id>4004</id>
+		<revision>
+			<id>5004</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5004</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="291" sha1="pvwk7nhratva9halj50ye0cqrffyhpo" xml:space="preserve">C&lt;sub&gt;3&lt;/sub&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>pvwk7nhratva9halj50ye0cqrffyhpo</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:C4</title>
+		<ns>10</ns>
+		<id>4005</id>
+		<revision>
+			<id>5005</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5005</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="291" sha1="7jkzap2y3x433jzcklwo2fyh83yrjr1" xml:space="preserve">C&lt;sub&gt;4&lt;/sub&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>7jkzap2y3x433jzcklwo2fyh83yrjr1</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Chem</title>
+		<ns>10</ns>
+		<id>4006</id>
+		<revision>
+			<id>5006</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5006</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="407" sha1="a6d41owl33yc2s6a9kylllqqs03krem" xml:space="preserve">{{{1|}}}{{#if:{{{2|}}}|&lt;sub&gt;{{{2}}}&lt;/sub&gt;}}{{{3|}}}{{#if:{{{4|}}}|&lt;sub&gt;{{{4}}}&lt;/sub&gt;}}{{{5|}}}{{#if:{{{6|}}}|&lt;sub&gt;{{{6}}}&lt;/sub&gt;}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>a6d41owl33yc2s6a9kylllqqs03krem</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite bioRxiv</title>
+		<ns>10</ns>
+		<id>4007</id>
+		<revision>
+			<id>5007</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5007</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="513" sha1="fr4n7f1g2n0pv2gy65gfsf6cug4or4a" xml:space="preserve">&lt;cite class="citation biorxiv cs1"&gt;{{#if:{{{author|}}}|{{{author}}}. }}"{{{title|}}}". ''bioRxiv''. {{#if:{{{date|{{{year|}}}}}}|{{{date|{{{year|}}}}}}. }}{{#if:{{{biorxiv|}}}|[https://doi.org/{{{biorxiv}}} doi:{{{biorxiv}}}].}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>fr4n7f1g2n0pv2gy65gfsf6cug4or4a</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite book</title>
+		<ns>10</ns>
+		<id>4008</id>
+		<revision>
+			<id>5008</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5008</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="3394" sha1="dofvg44pjfmzwu5zs0n3neph93ntccu" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation book cs1"&gt;|&lt;cite class="citation book cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{chapter|{{{contribution|}}}}}}|{{#if:{{{chapter-url|}}}|[{{{chapter-url}}} "{{{chapter|{{{contribution|}}}}}}"]|"{{{chapter|{{{contribution|}}}}}}"}}.}} {{#if:{{{url|}}}|[{{{url}}} ''{{{title|}}}'']|''{{{title|}}}''}}. {{#if:{{{edition|}}}|{{{edition}}}&amp;nbsp;ed.}} {{#if:{{{others|}}}|{{{others}}}.}} {{#if:{{{language|}}}|(in {{{language}}}).}} {{#if:{{{editor|}}}{{{editor-last|}}}{{{editor1-last|}}}{{{editor-last1|}}}|Edited by {{#if:{{{editor|}}}|{{{editor}}}|{{#if:{{{editor2-last|{{{editor-last2|}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}; {{{editor2-last|{{{editor-last2|}}}}}}{{#if:{{{editor2-first|{{{editor-first2|}}}}}}|, {{{editor2-first|{{{editor-first2|}}}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}}}}}.}} {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>dofvg44pjfmzwu5zs0n3neph93ntccu</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite encyclopedia</title>
+		<ns>10</ns>
+		<id>4009</id>
+		<revision>
+			<id>5009</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5009</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="703" sha1="tu02ne9mfs34d4k1sjjfphionq9dab1" xml:space="preserve">&lt;cite class="citation encyclopaedia cs1"&gt;{{#if:{{{author|}}}|{{{author}}}. }}{{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{dictionary|{{{encyclopedia|}}}}}}|''{{{dictionary|{{{encyclopedia|}}}}}}''. }}{{#if:{{{publisher|}}}|{{{publisher}}}. }}{{#if:{{{date|{{{year|}}}}}}|{{{date|{{{year|}}}}}}. }}{{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}. }}{{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>tu02ne9mfs34d4k1sjjfphionq9dab1</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite journal</title>
+		<ns>10</ns>
+		<id>4010</id>
+		<revision>
+			<id>5010</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5010</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="3107" sha1="0e57eo4k3dlrfxpyhrs35cwvl07ow2n" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation journal cs1"&gt;|&lt;cite class="citation journal cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{editor|}}}{{{editor-last|}}}{{{editor1-last|}}}{{{editor-last1|}}}|Edited by {{#if:{{{editor|}}}|{{{editor}}}|{{#if:{{{editor2-last|{{{editor-last2|}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}; {{{editor2-last|{{{editor-last2|}}}}}}{{#if:{{{editor2-first|{{{editor-first2|}}}}}}|, {{{editor2-first|{{{editor-first2|}}}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}}}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>0e57eo4k3dlrfxpyhrs35cwvl07ow2n</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite magazine</title>
+		<ns>10</ns>
+		<id>4011</id>
+		<revision>
+			<id>5011</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5011</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="2435" sha1="l0an0npe7spg4f2qyalqcbja76cb06j" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation magazine cs1"&gt;|&lt;cite class="citation magazine cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>l0an0npe7spg4f2qyalqcbja76cb06j</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite news</title>
+		<ns>10</ns>
+		<id>4012</id>
+		<revision>
+			<id>5012</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5012</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="2427" sha1="d4zqbrvb933plyus9ov610qxk5v5jil" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation news cs1"&gt;|&lt;cite class="citation news cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>d4zqbrvb933plyus9ov610qxk5v5jil</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite thesis</title>
+		<ns>10</ns>
+		<id>4013</id>
+		<revision>
+			<id>5013</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5013</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="626" sha1="md277398wbmvs5cco03jctcqlicy63t" xml:space="preserve">&lt;cite class="citation thesis cs1"&gt;{{#if:{{{author|}}}|{{{author}}}. }}{{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{degree|}}}|{{{degree}}} thesis. }}{{#if:{{{publisher|}}}|{{{publisher}}}. }}{{#if:{{{date|{{{year|}}}}}}|{{{date|{{{year|}}}}}}. }}{{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}. }}{{#if:{{{id|}}}|{{{id}}}.}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>md277398wbmvs5cco03jctcqlicy63t</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite web</title>
+		<ns>10</ns>
+		<id>4014</id>
+		<revision>
+			<id>5014</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5014</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="2425" sha1="mc1d57tfn6ao5yqnj5lv946jstzr8t1" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation web cs1"&gt;|&lt;cite class="citation web cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>mc1d57tfn6ao5yqnj5lv946jstzr8t1</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Co2</title>
+		<ns>10</ns>
+		<id>4015</id>
+		<revision>
+			<id>5015</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5015</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="292" sha1="8cqjn7sabjo8lsjrvc7dc8lx5a1zpoi" xml:space="preserve">CO&lt;sub&gt;2&lt;/sub&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8cqjn7sabjo8lsjrvc7dc8lx5a1zpoi</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Div col</title>
+		<ns>10</ns>
+		<id>4016</id>
+		<revision>
+			<id>5016</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5016</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="357" sha1="q21du7893t2gbmojxcp55ga99p1wvry" xml:space="preserve">&lt;div class="div-col" style="column-width:{{{colwidth|30em}}}; column-gap:2em;"&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>q21du7893t2gbmojxcp55ga99p1wvry</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Div col end</title>
+		<ns>10</ns>
+		<id>4017</id>
+		<revision>
+			<id>5017</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5017</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="284" sha1="4od62ewpgul91cpwnkq5engklbwxc3y" xml:space="preserve">&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>4od62ewpgul91cpwnkq5engklbwxc3y</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Fact</title>
+		<ns>10</ns>
+		<id>4018</id>
+		<revision>
+			<id>5018</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5018</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="347" sha1="5vfo9zg8ldy475p92ya2yq0g1w3ofaw" xml:space="preserve">&lt;sup class="noprint Inline-Template"&gt;[''citation&amp;nbsp;needed'']&lt;/sup&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>5vfo9zg8ldy475p92ya2yq0g1w3ofaw</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Gloss</title>
+		<ns>10</ns>
+		<id>4019</id>
+		<revision>
+			<id>5019</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5019</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="292" sha1="mim0ssoc9zbj11hd71z62o3w7tcbc0i" xml:space="preserve">‘{{{1|}}}’&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>mim0ssoc9zbj11hd71z62o3w7tcbc0i</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Lay source</title>
+		<ns>10</ns>
+		<id>4020</id>
+		<revision>
+			<id>5020</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5020</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="406" sha1="4s2az9zmwwl7j6kxcidpafgv1pif1aw" xml:space="preserve">{{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}{{#if:{{{work|}}}| ''{{{work}}}''.}}{{#if:{{{date|}}}| {{{date}}}.}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>4s2az9zmwwl7j6kxcidpafgv1pif1aw</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Main</title>
+		<ns>10</ns>
+		<id>4021</id>
+		<revision>
+			<id>5021</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5021</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="402" sha1="l1ga61xjub36p0ubvnpb4vwo20djn9g" xml:space="preserve">&lt;div class="hatnote navigation-not-searchable" role="note"&gt;Main article: [[{{{1|}}}]] {{#if:{{{2|}}}|and [[{{{2}}}]]}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>l1ga61xjub36p0ubvnpb4vwo20djn9g</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Main article</title>
+		<ns>10</ns>
+		<id>4022</id>
+		<revision>
+			<id>5022</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5022</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="402" sha1="l1ga61xjub36p0ubvnpb4vwo20djn9g" xml:space="preserve">&lt;div class="hatnote navigation-not-searchable" role="note"&gt;Main article: [[{{{1|}}}]] {{#if:{{{2|}}}|and [[{{{2}}}]]}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>l1ga61xjub36p0ubvnpb4vwo20djn9g</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Nowrap</title>
+		<ns>10</ns>
+		<id>4023</id>
+		<revision>
+			<id>5023</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5023</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="314" sha1="k1v9bjnimgid2dy3fogqv6x1cldlaml" xml:space="preserve">&lt;span class="nowrap"&gt;{{{1|}}}&lt;/span&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>k1v9bjnimgid2dy3fogqv6x1cldlaml</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Ordered list</title>
+		<ns>10</ns>
+		<id>4024</id>
+		<revision>
+			<id>5024</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5024</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="689" sha1="2e1bfkfbi60vqlojx0vvnig8z5eufor" xml:space="preserve">&lt;ol&gt;{{#if:{{{1|}}}|&lt;li&gt;{{{1}}}&lt;/li&gt;}}{{#if:{{{2|}}}|&lt;li&gt;{{{2}}}&lt;/li&gt;}}{{#if:{{{3|}}}|&lt;li&gt;{{{3}}}&lt;/li&gt;}}{{#if:{{{4|}}}|&lt;li&gt;{{{4}}}&lt;/li&gt;}}{{#if:{{{5|}}}|&lt;li&gt;{{{5}}}&lt;/li&gt;}}{{#if:{{{6|}}}|&lt;li&gt;{{{6}}}&lt;/li&gt;}}{{#if:{{{7|}}}|&lt;li&gt;{{{7}}}&lt;/li&gt;}}{{#if:{{{8|}}}|&lt;li&gt;{{{8}}}&lt;/li&gt;}}{{#if:{{{9|}}}|&lt;li&gt;{{{9}}}&lt;/li&gt;}}{{#if:{{{10|}}}|&lt;li&gt;{{{10}}}&lt;/li&gt;}}{{#if:{{{11|}}}|&lt;li&gt;{{{11}}}&lt;/li&gt;}}{{#if:{{{12|}}}|&lt;li&gt;{{{12}}}&lt;/li&gt;}}&lt;/ol&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>2e1bfkfbi60vqlojx0vvnig8z5eufor</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Other uses</title>
+		<ns>10</ns>
+		<id>4025</id>
+		<revision>
+			<id>5025</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5025</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="405" sha1="lgazganb7e6a0m4vxoyb5v7i67cteb4" xml:space="preserve">&lt;div class="hatnote navigation-not-searchable" role="note"&gt;For other uses, see [[{{{1|{{PAGENAME}} (disambiguation)}}}]].&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>lgazganb7e6a0m4vxoyb5v7i67cteb4</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Pn</title>
+		<ns>10</ns>
+		<id>4026</id>
+		<revision>
+			<id>5026</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5026</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="343" sha1="7d1jyiqlq4bnmi6gpd9chsi4eghvurp" xml:space="preserve">&lt;sup class="noprint Inline-Template"&gt;[''page&amp;nbsp;needed'']&lt;/sup&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>7d1jyiqlq4bnmi6gpd9chsi4eghvurp</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Pp-vandalism</title>
+		<ns>10</ns>
+		<id>4027</id>
+		<revision>
+			<id>5027</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5027</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:ProQuest</title>
+		<ns>10</ns>
+		<id>4028</id>
+		<revision>
+			<id>5028</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5028</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="344" sha1="1hzzya3sqkydsqy8f9gx3jy5q7ib0pd" xml:space="preserve">ProQuest&amp;nbsp;[https://www.proquest.com/docview/{{{1|}}} {{{1|}}}]&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>1hzzya3sqkydsqy8f9gx3jy5q7ib0pd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Refbegin</title>
+		<ns>10</ns>
+		<id>4029</id>
+		<revision>
+			<id>5029</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5029</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="381" sha1="s5o5ygcy5pt0o08b60uv3juym6w5su8" xml:space="preserve">&lt;div class="refbegin {{#if:{{{1|}}}|refbegin-columns}}" {{#if:{{{1|}}}|style="column-width:{{{1}}};"}}&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>s5o5ygcy5pt0o08b60uv3juym6w5su8</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Refend</title>
+		<ns>10</ns>
+		<id>4030</id>
+		<revision>
+			<id>5030</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5030</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="284" sha1="4od62ewpgul91cpwnkq5engklbwxc3y" xml:space="preserve">&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>4od62ewpgul91cpwnkq5engklbwxc3y</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Reflist</title>
+		<ns>10</ns>
+		<id>4031</id>
+		<revision>
+			<id>5031</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5031</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="435" sha1="23i77mo98sgrkg0431nwl9ypwamb7ea" xml:space="preserve">&lt;div class="reflist {{#if:{{{1|}}}|reflist-columns}}" {{#if:{{{1|}}}|style="column-width:{{{1}}};"}}&gt;{{#tag:references|{{{refs|}}}|group={{{group|}}}}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>23i77mo98sgrkg0431nwl9ypwamb7ea</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Rp</title>
+		<ns>10</ns>
+		<id>4032</id>
+		<revision>
+			<id>5032</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5032</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="329" sha1="4ca73fb5s0dy6307exkcb39m2cfreyp" xml:space="preserve">&lt;sup class="reference nowrap"&gt;:&amp;nbsp;{{{1|}}}&lt;/sup&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>4ca73fb5s0dy6307exkcb39m2cfreyp</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:See also</title>
+		<ns>10</ns>
+		<id>4033</id>
+		<revision>
+			<id>5033</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5033</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="498" sha1="nprtotuqa693h9vg00qers6y56ublb8" xml:space="preserve">&lt;div class="hatnote navigation-not-searchable" role="note"&gt;See also: [[{{{1|}}}|{{{label 1|{{{1|}}}}}}]]{{#if:{{{2|}}}| and [[{{{2}}}|{{{label 2|{{{2}}}}}}]]}}{{#if:{{{3|}}}| and [[{{{3}}}|{{{label 3|{{{3}}}}}}]]}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>nprtotuqa693h9vg00qers6y56ublb8</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Sfn</title>
+		<ns>10</ns>
+		<id>4034</id>
+		<revision>
+			<id>5034</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5034</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="704" sha1="p4ny71nforo2osiivtda2lmuy3az14m" xml:space="preserve">{{#tag:ref|{{#if:{{{4|}}}|[[#CITEREF{{{1|}}}{{{2|}}}{{{3|}}}{{{4|}}}|{{{1|}}}, {{{2|}}} &amp;amp; {{{3|}}} {{{4|}}}]]|{{#if:{{{3|}}}|[[#CITEREF{{{1|}}}{{{2|}}}{{{3|}}}|{{{1|}}} &amp;amp; {{{2|}}} {{{3|}}}]]|[[#CITEREF{{{1|}}}{{{2|}}}|{{{1|}}} {{{2|}}}]]}}}}{{#if:{{{p|}}}|, p.&amp;nbsp;{{{p}}}}}{{#if:{{{pp|}}}|, pp.&amp;nbsp;{{{pp}}}}}{{#if:{{{loc|}}}|, {{{loc}}}}}.|name=FOOTNOTE{{{1|}}}{{{2|}}}{{{3|}}}{{{4|}}}{{{p|}}}{{{pp|}}}{{{loc|}}}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>p4ny71nforo2osiivtda2lmuy3az14m</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Short description</title>
+		<ns>10</ns>
+		<id>4035</id>
+		<revision>
+			<id>5035</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5035</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="380" sha1="qjymop9xtnszbvpzkue7skwexbdhb8v" xml:space="preserve">&lt;div class="shortdescription nomobile noexcerpt noprint searchaux" style="display:none"&gt;{{{1|}}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>qjymop9xtnszbvpzkue7skwexbdhb8v</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Su</title>
+		<ns>10</ns>
+		<id>4036</id>
+		<revision>
+			<id>5036</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5036</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="316" sha1="6lg1zljwli8enhb4unk18tm1bl9hvnv" xml:space="preserve">&lt;sup&gt;{{{p|}}}&lt;/sup&gt;&lt;sub&gt;{{{b|}}}&lt;/sub&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>6lg1zljwli8enhb4unk18tm1bl9hvnv</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Sup</title>
+		<ns>10</ns>
+		<id>4037</id>
+		<revision>
+			<id>5037</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5037</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="297" sha1="pqgwylwhu5otshwbsm8py0ytzzrq6c1" xml:space="preserve">&lt;sup&gt;{{{1|}}}&lt;/sup&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>pqgwylwhu5otshwbsm8py0ytzzrq6c1</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Translit</title>
+		<ns>10</ns>
+		<id>4038</id>
+		<revision>
+			<id>5038</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5038</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="314" sha1="tmodzosg8cb6smn6ch5i2muoabp5dbi" xml:space="preserve">&lt;i lang="{{{1|}}}-Latn"&gt;{{{2|}}}&lt;/i&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>tmodzosg8cb6smn6ch5i2muoabp5dbi</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Underset</title>
+		<ns>10</ns>
+		<id>4039</id>
+		<revision>
+			<id>5039</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5039</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="458" sha1="huoxja6s3iju01638uvxoasq6rg0jwo" xml:space="preserve">&lt;span style="display:inline-block; text-align:center; vertical-align:middle; white-space:nowrap;"&gt;{{{2|}}}&lt;br /&gt;&lt;span style="font-size:85%; line-height:1.2;"&gt;{{{1|}}}&lt;/span&gt;&lt;/span&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>huoxja6s3iju01638uvxoasq6rg0jwo</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Val</title>
+		<ns>10</ns>
+		<id>4040</id>
+		<revision>
+			<id>5040</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5040</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="389" sha1="nqqebdrexp1idt9usq6qkhh1non1ifp" xml:space="preserve">{{{1|}}}{{#if:{{{e|}}}|&amp;nbsp;× 10&lt;sup&gt;{{{e}}}&lt;/sup&gt;}}{{#if:{{{u|}}}|&amp;nbsp;{{{u}}}{{#if:{{{up|}}}|/{{{up}}}}}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>nqqebdrexp1idt9usq6qkhh1non1ifp</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Webarchive</title>
+		<ns>10</ns>
+		<id>4041</id>
+		<revision>
+			<id>5041</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5041</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="351" sha1="dskeosw1okkey5figszs9mn9jlxodnz" xml:space="preserve">[{{{url|}}} Archived]{{#if:{{{date|}}}| from the original on {{{date}}}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>dskeosw1okkey5figszs9mn9jlxodnz</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Wikt-lang</title>
+		<ns>10</ns>
+		<id>4042</id>
+		<revision>
+			<id>5042</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>5042</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="333" sha1="8bw22mzq6qdqg2o1licfgi7pmnlsv06" xml:space="preserve">&lt;span lang="{{{1|}}}"&gt;[[wikt:{{{2|}}}|{{{2|}}}]]&lt;/span&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8bw22mzq6qdqg2o1licfgi7pmnlsv06</sha1>
+		</revision>
+	</page>
+</mediawiki>

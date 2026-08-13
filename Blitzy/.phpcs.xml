@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+	PHP coding-standard ruleset for the Blitzy MediaWiki skin.
+
+	The "phpcs" Composer script runs PHP_CodeSniffer with no path argument, so the
+	<file> scope declared below is exactly what gets checked. PHP_CodeSniffer is one
+	of the five linters the zero-warning build gate requires to exit cleanly, which
+	means a single reported warning fails the build, not just a reported error.
+
+	The MediaWiki standard is referenced whole and unmodified: no sniff is excluded
+	and no sniff property is overridden. When a sniff fires, the PHP is corrected
+	rather than the sniff silenced. That keeps the docblock, spacing, naming and
+	test-annotation sniffs in force on every PHP file this skin owns, and it keeps
+	this ruleset free of the grandfathering exclusions an older tree accumulates.
+
+	Static analysis is configured separately by the "phan" Composer script through
+	its own configuration flag, so no static-analysis settings belong in this file.
+-->
+<ruleset name="Blitzy">
+	<description>The MediaWiki coding standard, applied to every PHP file in the Blitzy skin.</description>
+
+	<!--
+		The standard itself, resolved relative to this file's directory. Its exact
+		version is pinned in composer.json and deliberately not repeated here, so
+		the pin has exactly one home and upgrading stays a one-manifest change.
+	-->
+	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki" />
+
+	<!--
+		Scope is this package and nothing above it. The skin never reaches outside
+		its own directory, so a run can only ever report on files the skin owns.
+	-->
+	<file>.</file>
+
+	<!--
+		Check PHP only. PHP_CodeSniffer otherwise defaults to php, inc, js and css,
+		which would pull the skin's JavaScript into this run even though ESLint
+		already owns it, and would apply a deprecated tokenizer while doing so. The
+		Mustache templates, Less stylesheets and JSON manifests are likewise checked
+		by their own tools, so this run stays PHP and nothing else.
+	-->
+	<arg name="extensions" value="php"/>
+	<arg name="encoding" value="UTF-8"/>
+
+	<!--
+		Installed dependency trees contain no authored code. These two patterns
+		mirror the exclusions the "test" Composer script hands to the PHP syntax
+		linter, so both PHP checkers walk an identical file set and nothing ends up
+		checked by one tool but skipped by the other. They are also the two trees
+		.gitignore keeps out of the repository.
+
+		type="relative" anchors each pattern at the package root. An unanchored
+		pattern is matched against the whole absolute path instead, and would
+		silently suppress every file in the package if any parent directory happened
+		to be named vendor.
+	-->
+	<exclude-pattern type="relative">^vendor/*</exclude-pattern>
+	<exclude-pattern type="relative">^node_modules/*</exclude-pattern>
+</ruleset>

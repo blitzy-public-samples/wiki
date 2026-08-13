@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+	<siteinfo>
+		<sitename>Wikipedia</sitename>
+		<dbname>enwiki</dbname>
+		<base>https://en.wikipedia.org/wiki/Main_Page</base>
+		<generator>MediaWiki 1.47.0-wmf.14</generator>
+		<case>first-letter</case>
+		<namespaces>
+			<namespace key="-2" case="first-letter">Media</namespace>
+			<namespace key="-1" case="first-letter">Special</namespace>
+			<namespace key="0" case="first-letter" />
+			<namespace key="1" case="first-letter">Talk</namespace>
+			<namespace key="2" case="first-letter">User</namespace>
+			<namespace key="3" case="first-letter">User talk</namespace>
+			<namespace key="4" case="first-letter">Wikipedia</namespace>
+			<namespace key="5" case="first-letter">Wikipedia talk</namespace>
+			<namespace key="6" case="first-letter">File</namespace>
+			<namespace key="7" case="first-letter">File talk</namespace>
+			<namespace key="8" case="first-letter">MediaWiki</namespace>
+			<namespace key="9" case="first-letter">MediaWiki talk</namespace>
+			<namespace key="10" case="first-letter">Template</namespace>
+			<namespace key="11" case="first-letter">Template talk</namespace>
+			<namespace key="12" case="first-letter">Help</namespace>
+			<namespace key="13" case="first-letter">Help talk</namespace>
+			<namespace key="14" case="first-letter">Category</namespace>
+			<namespace key="15" case="first-letter">Category talk</namespace>
+		</namespaces>
+	</siteinfo>
+	<page>
+		<title>List of countries by GDP (nominal)</title>
+		<ns>0</ns>
+		<id>3001</id>
+		<revision>
+			<id>4001</id>
+			<timestamp>2026-06-22T18:44:03Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: article subset derived from https://en.wikipedia.org/w/index.php?oldid=1229115239 (CC BY-SA 4.0); wide sortable wikitable retained verbatim; markup requiring non-bundled extensions replaced</comment>
+			<origin>4001</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="50279" sha1="1q9j7kgolpasq5syimelpja05zg0syc" xml:space="preserve">{{Short description|none}}
+{{For|countries by GDP based on purchasing power parity|List of countries by GDP (PPP)}}
+{{For|countries by GDP per capita|List of countries by GDP (nominal) per capita}}
+{{pp-protect|small=yes}}
+{{Use dmy dates|date=July 2016}}
+
+[[Gross domestic product]] (GDP) is the [[market value]] of all final goods and services from a nation in a given year.&lt;ref&gt;{{cite web | url=http://www.investopedia.com/ask/answers/199.asp | title=What is GDP and why is it so important? | publisher=[[IAC/InterActiveCorp]] | work=[[Investopedia]] | date=26 February 2009 | access-date=23 May 2016 | archive-date=23 May 2016 | archive-url=https://web.archive.org/web/20160523230418/http://www.investopedia.com/ask/answers/199.asp | url-status=live }}&lt;/ref&gt; Countries are sorted by nominal GDP estimates from financial and statistical institutions, which are calculated at market or government official [[exchange rate]]s. Nominal GDP does not take into account differences in the [[cost of living]] in different countries, and the results can vary greatly from one year to another based on fluctuations in the exchange rates of the country's [[currency]].&lt;ref&gt;{{cite web | url=http://economics.about.com/cs/money/a/purchasingpower.htm | title=A Beginner's Guide to Purchasing Power Parity Theory | publisher=[[IAC (company)|IAC/InterActiveCorp]] | work=[[About.com]] | access-date=31 May 2014 | author=Moffatt, Mike | archive-date=1 March 2017 | archive-url=https://web.archive.org/web/20170301091007/http://economics.about.com/cs/money/a/purchasingpower.htm | url-status=dead }}&lt;/ref&gt; Such fluctuations may change a country's ranking from one year to the next, even though they often make little or no difference in the standard of living of its population.&lt;ref&gt;{{cite web | url=https://www.nber.org/chapters/c8616.pdf | title=Economic Growth and Real Exchange Rate: An Overview of the Balassa-Samuelson Hypothesis in Asia | publisher=[[National Bureau of Economic Research]] | work=Changes in Exchange Rates in Rapidly Development Countries: Theory, Practice, and Policy Issues | date=January 1999 | access-date=23 May 2016 | author1=[[Takatoshi Ito|Ito, Takatoshi]] | author2=Isard, Peter | author3=Symansky, Steven | archive-date=28 March 2016 | archive-url=https://web.archive.org/web/20160328101132/http://www.nber.org/chapters/c8616.pdf | url-status=live }}&lt;/ref&gt;
+
+Comparisons of national wealth are also frequently made based on [[purchasing power parity]] (PPP), to adjust for differences in the cost of living in different countries. Other metrics, [[List of countries by GDP (nominal) per capita|nominal GDP per capita]] and a corresponding [[List of countries by GDP (PPP) per capita|GDP (PPP) per capita]] are used for comparing national [[standard of living]]. On the whole, PPP per capita figures are less spread than nominal GDP per capita figures.&lt;ref&gt;{{cite web | url=http://www.imf.org/external/pubs/ft/fandd/basics/gdp.htm | title=Gross Domestic Product: An Economy's All | publisher=[[International Monetary Fund]] | work=[[Finance &amp; Development]] | date=28 March 2012 | access-date=31 May 2014 | author=Callen, Tim | archive-date=11 December 2021 | archive-url=https://web.archive.org/web/20211211141652/https://www.imf.org/external/pubs/ft/fandd/basics/gdp.htm | url-status=live }}&lt;/ref&gt;
+
+The [[List of countries by past and projected GDP (nominal)|rankings of national economies over time]] have changed considerably; the United States surpassed the [[British Empire]]'s output around 1916,&lt;ref&gt;{{Cite web|last=Frum|first=David|date=2014-12-24|title=The Real Story of How America Became an Economic Superpower|url=https://www.theatlantic.com/international/archive/2014/12/the-real-story-of-how-america-became-an-economic-superpower/384034/|access-date=2022-02-16|website=The Atlantic|language=en|archive-date=16 February 2022|archive-url=https://web.archive.org/web/20220216122337/https://www.theatlantic.com/international/archive/2014/12/the-real-story-of-how-america-became-an-economic-superpower/384034/|url-status=live}}&lt;/ref&gt; which in turn had surpassed the [[Qing dynasty]] in aggregate output decades earlier.&lt;ref&gt;{{cite web | url=http://fortune.com/2014/10/05/most-powerful-economic-empires-of-all-time/ | title=5 Most Powerful Economic Empires of All Time | publisher=[[Time, Inc.]] | work=[[Fortune (magazine)|Fortune]] | date=5 October 2014 | access-date=23 May 2016 | author=Matthews, Chris | archive-date=16 August 2016 | archive-url=https://web.archive.org/web/20160816110110/http://fortune.com/2014/10/05/most-powerful-economic-empires-of-all-time/ | url-status=live }}&lt;/ref&gt;&lt;ref name="ChinaKnow"&gt;{{cite book | url=https://books.google.com/books?id=cPa9CwAAQBAJ | title=China's Economy: What Everyone Needs to Know | publisher=[[Oxford University Press]] | author=Kroeber, Arthur R. | year=2016 | location=New York, United States | isbn=9780190239053 | access-date=28 May 2016 | archive-date=5 February 2021 | archive-url=https://web.archive.org/web/20210205123111/https://books.google.com/books?id=cPa9CwAAQBAJ | url-status=live }}&lt;/ref&gt; Since [[Chinese economic reform|China's transition to a socialist market economy]] through controlled privatisation and deregulation,&lt;ref&gt;{{cite book | url=https://books.google.com/books?id=mDS0GW7FH_0C | title=China in the Era of Deng Xiaoping: A Decade of Reform | publisher=[[Taylor &amp; Francis]] | series=Studies on Contemporary China | date=30 September 1993 | access-date=23 May 2016 | author=Kau, Michael Ying-mao | isbn=9781563242786 | archive-date=5 February 2021 | archive-url=https://web.archive.org/web/20210205114255/https://books.google.com/books?id=mDS0GW7FH_0C | url-status=live }}&lt;/ref&gt;&lt;ref&gt;{{cite web | url=https://www.imf.org/EXTERNAL/PUBS/FT/ISSUES8/issue8.pdf | title=Why Is China Growing So Fast? | publisher=[[International Monetary Fund]] | work=Economic Issues | date=April 1997 | access-date=26 May 2016 | author1=Hu, Zuliu | author2=Khan, Mohsin S. | archive-date=16 April 2016 | archive-url=https://web.archive.org/web/20160416122508/https://www.imf.org/EXTERNAL/PUBS/FT/ISSUES8/issue8.pdf | url-status=live }}&lt;/ref&gt; the country has seen its ranking increase from ninth in 1978, to second in 2010; China's economic growth accelerated during this period and its share of global nominal GDP surged from 2% in 1980 to 18% in 2021.&lt;ref name="ChinaKnow" /&gt;&lt;ref name="GDP IMF" /&gt;&lt;ref&gt;{{Cite web |date=2022-01-18 |title=China GDP growth slows as population crisis, Covid-19 cloud economic outlook |url=https://www.scmp.com/economy/china-economy/article/3163720/china-gdp-growth-2021-beats-expectations-narrowing-gap-us |access-date=2022-08-12 |website=South China Morning Post |language=en |archive-date=5 December 2022 |archive-url=https://web.archive.org/web/20221205193835/https://www.scmp.com/economy/china-economy/article/3163720/china-gdp-growth-2021-beats-expectations-narrowing-gap-us |url-status=live }}&lt;/ref&gt; Among others, India has also experienced an economic boom since the implementation of [[Economic liberalisation in India|economic liberalisation]] in the early 1990s.&lt;ref&gt;{{cite web | url=http://www.nber.org/papers/w10376.pdf | title=From "Hindu Growth" to Productivity Surge: The Mystery of the Indian Growth Transition | publisher=[[National Bureau of Economic Research]] | date=March 2004 | access-date=23 March 2016 | author=[[Dani Rodrik|Rodrik, Dani]] | display-authors=etal | archive-date=27 March 2016 | archive-url=https://web.archive.org/web/20160327131506/http://www.nber.org/papers/w10376.pdf | url-status=live }}&lt;/ref&gt;
+
+The first list includes estimates compiled by the [[International Monetary Fund]]'s World Economic Outlook, the second list shows the [[World Bank]]'s data, and the third list includes data compiled by the [[United Nations Statistics Division]]. The IMF's definitive data for the past year and estimates for the current year are published twice a year in April and October. Non-sovereign entities (the world, continents, and some [[dependent territory|dependent territories]]) and states with limited international recognition (such as [[Kosovo]] and [[Taiwan]]) are included in the list where they appear in the sources.&lt;!-- These are marked in ''italics''.--&gt;
+
+==Table==
+''The table initially ranks each IMF member including {{color box|#ECECEC|sovereign states not part of the IMF, [[List of sovereign states|non-sovereign states]] and territories, and countries with limited recognition}}''
+
+The links in the "Country/Territory" row of the following table link to the article on the GDP or the economy of the respective country or territory.
+&lt;!--
+PLEASE, NO RANDOM FIGURES
+THERE ARE NO FIGURES BASED ON NATIONAL STATISTICS IN THIS ARTICLE.
+THE FIRST LIST IS THE INTERNATIONAL MONETARY FUND FIGURES.
+THE SECOND LIST IS THE WORLD BANK ESTIMATES.
+THE THIRD LIST IS THE UNITED NATIONS FIGURES.
+THE GEOGRAPHICAL SORTING OF CONTINENTS AND SUBREGIONS FOR EACH COUNTRY IS BASED ON THE CLASSIFICATIONS OF THE UNITED NATIONS GEOSCHEME.
+
+Please update [[List of countries by past and projected GDP (nominal)]] with the historical data.
+--&gt;
+
+{{Static row numbers}}&lt;!-- Read [[Talk:List_of_countries_by_GDP_(nominal)/Archive_8#Remove_European_union_please]] before removing --&gt;
+{{sticky header}}{{table alignment}}
+{| class="wikitable sortable sticky-header-multi static-row-numbers" style="text-align:right;"
+|+GDP (million US$) by country
+|- class="static-row-header" style="text-align:center;vertical-align:bottom;"
+! rowspan="2" | Country/Territory
+! rowspan="2" | [[United Nations geoscheme|UN region]]
+! colspan="2" | [[International Monetary Fund|IMF]]&lt;ref name="GDP IMF"&gt;{{cite web |date=16 April 2024 |title=World Economic Outlook Database, April 2024 |url=https://www.imf.org/en/Publications/WEO/weo-database/2024/April/weo-report?c=512,914,612,171,614,311,213,911,314,193,122,912,313,419,513,316,913,124,339,638,514,218,963,616,223,516,918,748,618,624,522,622,156,626,628,228,924,233,632,636,634,238,662,960,423,935,128,611,321,243,248,469,253,642,643,939,734,644,819,172,132,646,648,915,134,652,174,328,258,656,654,336,263,268,532,944,176,534,536,429,433,178,436,136,343,158,439,916,664,826,542,967,443,917,544,941,446,666,668,672,946,137,546,674,676,548,556,678,181,867,682,684,273,868,921,948,943,686,688,518,728,836,558,138,196,278,692,694,962,142,449,564,565,283,853,288,293,566,964,182,359,453,968,922,714,862,135,716,456,722,942,718,724,576,936,961,813,726,199,733,184,524,361,362,364,732,366,144,146,463,528,923,738,578,537,742,866,369,744,186,925,869,746,926,466,112,111,298,927,846,299,582,487,474,754,698,&amp;s=NGDPD,&amp;sy=2022&amp;ey=2029&amp;ssm=0&amp;scsm=1&amp;scc=0&amp;ssd=1&amp;ssc=0&amp;sic=0&amp;sort=country&amp;ds=.&amp;br=1 |access-date=16 April 2024 |website=IMF.org |publisher=[[International Monetary Fund]]}}&lt;/ref&gt;&lt;ref&gt;{{cite web |date=16 April 2024 |title=WEO Database, April 2024. Report for Selected Countries and Subjects: World, European Union |url=https://www.imf.org/en/Publications/WEO/weo-database/2024/April/weo-report?a=1&amp;c=001,998,&amp;s=NGDPD,PPPGDP,PPPPC,PPPSH,&amp;sy=2022&amp;ey=2029&amp;ssm=0&amp;scsm=1&amp;scc=0&amp;ssd=1&amp;ssc=0&amp;sic=0&amp;sort=country&amp;ds=.&amp;br=1 |archive-url= |archive-date= |access-date=16 April 2024 |website=IMF.org |publisher=[[International Monetary Fund]]}}&lt;/ref&gt;
+! colspan="2" | [[World Bank]]&lt;ref&gt;{{Cite web|title=GDP (current US$)|url=https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?most_recent_value_desc=true&amp;year_high_desc=true|access-date=2024-06-13|website=data.worldbank.org|archive-date=13 June 2024|archive-url=https://web.archive.org/web/20240613220015/https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?most_recent_value_desc=true&amp;year_high_desc=true|url-status=live}}&lt;/ref&gt;
+! colspan="2" | [[United Nations]]&lt;ref name="UN"&gt;{{cite web|url=https://unstats.un.org/unsd/amaapi/api/file/2|title=United Nations Statistics Division - National Accounts|website=unstats.un.org|access-date=13 June 2024|archive-date=13 June 2024|archive-url=https://web.archive.org/web/20240613012106/https://unstats.un.org/unsd/amaapi/api/file/2|url-status=live}}&lt;/ref&gt;
+|- class="static-row-header" style="text-align:center;vertical-align:bottom;"
+! Forecast !! Year !! Estimate !! Year !! Estimate !! Year
+|- class="static-row-header " style="font-weight:bold;"
+| style="text-align:left" |{{noflag|World}} || style="text-align:center" | — || 109,529,216 || 2024 || 100,879,560 || 2022 || 100,834,796 || 2022
+|-
+| {{flagg|uspeft|United States|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Americas]] || 28,781,083 || 2024 || 25,439,700 || 2022 || 25,744,100 || 2022
+|-
+| {{flagg|uspeft|China|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 18,532,633 || &lt;ref group="n" name="China-THM" /&gt;2024 || 17,963,171 || &lt;ref group="n" name="China-HM" /&gt;2022 || 17,963,170 || &lt;ref group="n" name="China-THM" /&gt;2022
+|-
+| {{flagg|uspeft|Germany|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 4,591,100 || 2024 || 4,082,469 || 2022 || 4,076,923 || 2022
+|-
+| {{flagg|uspeft|Japan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 4,110,452 || 2024 || 4,256,410 || 2022 || 4,232,173 || 2022
+|-
+| {{flagg|uspeft|India|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 3,937,011 || 2024 || 3,416,645 || 2022 || 3,465,541 || 2022
+|-
+| {{flagg|uspeft|United Kingdom|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Europe]] || 3,495,261 || 2024 || 3,089,072 || 2022 || 3,089,072 || 2022
+|-
+| {{flagg|uspeft|France|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 3,130,014 || 2024 || 2,779,092 || 2022 || 2,775,316 || 2022
+|-
+| {{flagg|uspeft|Brazil|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 2,331,391 || 2024 || 1,920,095 || 2022 || 1,920,095 || 2022
+|-
+| {{flagg|uspeft|Italy|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 2,328,028 || 2024 || 2,049,737 || 2022 || 2,046,952 || 2022
+|-
+| {{flagg|uspeft|Canada|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 2,242,182 || 2024 || 2,161,483 || 2022 || 2,137,939 || 2022
+|-
+| {{flagg|uspeft|Russia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 2,056,844 || 2024 || 2,240,422 || 2022 || 2,240,422 || 2022
+|-
+| {{flagg|uspeft|Mexico|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 2,017,025 || 2024 || 1,465,854 || 2022 || 1,463,323 || 2022
+|-
+| {{flagg|uspeft|Australia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 1,790,348 || 2024 || 1,692,956 || 2022 || 1,776,577 || 2022
+|-
+| {{flagg|uspeft|South Korea|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 1,760,947 || 2024 || 1,673,916 || 2022 || 1,673,916 || 2022
+|-
+| {{flagg|uspeft|Spain|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 1,647,114 || 2024 || 1,417,800 || 2022 || 1,415,874 || 2022
+|-
+| {{flagg|uspeft|Indonesia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 1,475,690 || 2024 || 1,319,100 || 2022 || 1,319,100 || 2022
+|-
+| {{flagg|uspeft|Netherlands|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Europe]] || 1,142,513 || 2024 || 1,009,398 || 2022 || 1,008,027 || 2022
+|-
+| {{flagg|uspeft|Turkey|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 1,113,561 || 2024 || 907,118 || 2022 || 907,118 || 2022
+|-
+| {{flagg|uspeft|Saudi Arabia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 1,106,015 || 2024 || 1,108,571 || 2022 || 1,108,148 || 2022
+|-
+| {{flagg|uspeft|Switzerland|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 938,458 || 2024 || 818,426 || 2022 || 818,426 || 2022
+|-
+| {{flagg|uspeft|Poland|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 844,623 || 2024 || 688,125 || 2022 || 688,125 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Taiwan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 802,958 || &lt;ref group="n" name="Taiwan_China" /&gt;2024 || colspan=2 {{n/a}} || colspan=2 {{n/a}}
+|-
+| {{flagg|uspeft|Belgium|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 655,192 || 2024 || 583,435 || 2022 || 582,643 || 2022
+|-
+| {{flagg|uspeft|Sweden|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 623,048 || 2024 || 591,718 || 2022 || 591,188 || 2022
+|-
+| {{flagg|uspeft|Argentina|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 604,260 || 2024 || 631,133 || 2022 || 631,133 || 2022
+|-
+| {{flagg|uspeft|Ireland|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Europe]] || 564,020 || 2024 || 533,140 || 2022 || 532,415 || 2022
+|-
+| {{flagg|uspeft|Thailand|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 548,890 || 2024 || 495,423 || 2022 || 495,340 || 2022
+|-
+| {{flagg|uspeft|Austria|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 540,887 || 2024 || 470,941 || 2022 || 470,302 || 2022
+|-
+| {{flagg|uspeft|Israel|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 530,664 || 2024 || 525,002 || 2022 || 525,002 || 2022
+|-
+| {{flagg|uspeft|United Arab Emirates|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Asia]] || 527,796 || 2024 || 507,063 || 2022 || 507,063 || 2022
+|-
+| {{flagg|uspeft|Norway|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 526,951 || 2024 || 593,348 || 2022 || 579,422 || 2022
+|-
+| {{flagg|uspeft|Singapore|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 525,228 || 2024 || 466,788 || 2022 || 466,788 || 2022
+|-
+| {{flagg|uspeft|Philippines|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Asia]] || 471,516 || 2024 || 404,284 || 2022 || 404,284 || 2022
+|-
+| {{flagg|uspeft|Vietnam|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 465,814 || 2024 || 408,802 || 2022 || 408,802 || 2022
+|-
+| {{flagg|uspeft|Iran|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 464,181 || 2024 || 413,493 || 2022 || 398,047 || 2022
+|-
+| {{flagg|uspeft|Bangladesh|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 455,162 || 2024 || 460,201 || 2022 || 432,677 || 2022
+|-
+| {{flagg|uspeft|Malaysia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 445,519 || 2024 || 407,027 || 2022 || 406,305 || 2022
+|-
+| {{flagg|uspeft|Denmark|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 409,989 || 2024 || 400,167 || 2022 || 400,167 || 2022
+|-
+| {{flagg|uspeft|Hong Kong|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 406,775 || &lt;ref group="n" name="HongKong_China" /&gt;2024 || 359,838 || 2022 || 359,838 || 2022
+|-
+| {{flagg|uspeft|Colombia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 386,076 || 2024 || 343,622 || 2022 || 343,939 || 2022
+|-
+| {{flagg|uspeft|South Africa|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 373,233 || 2024 || 405,270 || 2022 || 405,270 || 2022
+|-
+| {{flagg|uspeft|Romania|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 369,971 || 2024 || 300,691 || 2022 || 300,690 || 2022
+|-
+| {{flagg|uspeft|Egypt|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 347,594 || 2024 || 476,747 || 2022 || 409,306 || 2022
+|-
+| {{flagg|uspeft|Pakistan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 338,237 || 2023 || 374,697 || 2022 || 326,796 || 2022
+|-
+| {{flagg|uspeft|Chile|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 333,760 || 2024 || 301,024 || 2022 || 300,686 || 2022
+|-
+| {{flagg|uspeft|Czech Republic|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Europe]] || 325,880 || 2024 || 290,565 || 2022 || 290,527 || 2022
+|-
+| {{flagg|uspeft|Finland|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 308,055 || 2024 || 282,649 || 2022 || 282,511 || 2022
+|-
+| {{flagg|uspeft|Portugal|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 298,949 || 2024 || 255,196 || 2022 || 254,849 || 2022
+|-
+| {{flagg|uspeft|Kazakhstan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 296,740 || 2024 || 225,496 || 2022 || 225,496 || 2022
+|-
+| {{flagg|uspeft|Peru|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 282,458 || 2024 || 242,631 || 2022 || 242,631 || 2022
+|-
+| {{flagg|uspeft|Algeria|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 266,780 || 2024 || 194,998 || 2022 || 191,912 || 2022
+|-
+| {{flagg|uspeft|Iraq|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 265,894 || 2024 || 264,182 || 2022 || 264,182 || 2022
+|-
+| {{flagg|uspeft|New Zealand|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 257,625 || 2024 || 248,101 || 2022 || 245,845 || 2022
+|-
+| {{flagg|uspeft|Nigeria|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 252,738 || 2024 || 472,624 || 2022 || 475,058 || 2022
+|-
+| {{flagg|uspeft|Greece|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 250,276 || 2024 || 217,581 || 2022 || 217,285 || 2022
+|-
+| {{flagg|uspeft|Qatar|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 244,686 || 2024 || 236,258 || 2022 || 237,101 || 2022
+|-
+| {{flagg|uspeft|Hungary|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 223,413 || 2024 || 177,337 || 2022 || 177,337 || 2022
+|-
+| {{flagg|uspeft|Ethiopia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 205,130 || 2024 || 126,783 || 2022 || 118,971 || 2022
+|-
+| {{flagg|uspeft|Ukraine|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 188,943 || &lt;ref group="n" name="Ukraine" /&gt;2024 || 160,502 || &lt;ref group="n" name="Ukraine" /&gt;2022 || 160,502 || &lt;ref group="n" name="Ukraine" /&gt;2022
+|-
+| {{flagg|uspeft|Kuwait|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 160,397 || 2024 || 175,363 || 2022 || 175,363 || 2022
+|-
+| {{flagg|uspeft|Morocco|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 152,377 || 2024 || 130,912 || 2022 || 130,912 || &lt;ref group="n" name="Morocco" /&gt;2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Cuba|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || colspan=2 {{n/a}} || 147,193 || 2022
+|-
+| {{flagg|uspeft|Slovakia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 140,808 || 2024 || 115,461 || 2022 || 115,304 || 2022
+|-
+| {{flagg|uspeft|Dominican Republic|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Americas]] || 127,356 || 2024 || 113,537 || 2022 || 113,537 || 2022
+|-
+| {{flagg|uspeft|Ecuador|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 121,592 || 2024 || 115,049 || 2022 || 115,049 || 2022
+|-
+| {{flagg|uspeft|Puerto Rico|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 117,763 || 2024 || 113,434 || 2022 || 113,434 || 2022
+|-
+| {{flagg|uspeft|Guatemala|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 110,035 || 2024 || 95,003 || 2022 || 95,003 || 2022
+|-
+| {{flagg|uspeft|Oman|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 108,927 || 2024 || 114,667 || 2022 || 114,666 || 2022
+|-
+| {{flagg|uspeft|Bulgaria|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 107,933 || 2024 || 90,346 || 2022 || 90,213 || 2022
+|-
+| {{flagg|uspeft|Kenya|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 104,001 || 2024 || 113,420 || 2022 || 113,419 || 2022
+|-
+| {{flagg|uspeft|Venezuela|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 102,328 || 2024 || colspan=2 {{n/a}} || 129,313 || 2022
+|-
+| {{flagg|uspeft|Uzbekistan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 97,956 || 2024 || 80,391 || 2022 || 80,391 || 2022
+|-
+| {{flagg|uspeft|Costa Rica|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 96,058 || 2024 || 69,243 || 2022 || 68,380 || 2022
+|-
+| {{flagg|uspeft|Angola|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 92,123 || 2024 || 106,782 || 2022 || 113,304 || 2022
+|-
+| {{flagg|uspeft|Luxembourg|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 88,556 || 2024 || 81,641 || 2022 || 81,530 || 2022
+|-
+| {{flagg|uspeft|Croatia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 88,076 || 2024 || 71,600 || 2022 || 71,552 || 2022
+|-
+| {{flagg|uspeft|Panama|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 87,347 || 2024 || 76,522 || 2022 || 76,522 || 2022
+|-
+| {{flagg|uspeft|Ivory Coast|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 86,911 || 2024 || 70,018 || 2022 || 70,018 || 2022
+|-
+| {{flagg|uspeft|Uruguay|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 82,605 || 2024 || 71,177 || 2022 || 71,171 || 2022
+|-
+| {{flagg|uspeft|Turkmenistan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 81,896 || 2024 || 56,542 || 2022 || 67,009 || 2022
+|-
+| {{flagg|uspeft|Serbia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 81,873 || 2024 || 63,563 || 2022 || 63,563 || 2022
+|-
+| {{flagg|uspeft|Lithuania|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 81,170 || 2024 || 70,974 || 2022 || 70,878 || 2022
+|-
+| {{flagg|uspeft|Tanzania|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 79,605 || 2024 || 75,732 || 2022 || 73,535 || &lt;ref group="n" name="Tanzania" /&gt;2022
+|-
+| {{flagg|uspeft|Azerbaijan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 78,749 || 2024 || 78,721 || 2022 || 78,721 || 2022
+|-
+| {{flagg|uspeft|Ghana|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 75,244 || 2024 || 73,766 || 2022 || 73,766 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Sri Lanka|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 74,846 || 2022 || 74,403 || 2022 || 76,187 || 2022
+|-
+| {{flagg|uspeft|DR Congo|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Africa]] || 73,761 || 2024 || 64,718 || 2022 || 62,551 || 2022
+|-
+| {{flagg|uspeft|Slovenia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 72,101 || 2024 || 60,063 || 2022 || 59,981 || 2022
+|-
+| {{flagg|uspeft|Belarus|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 69,048 || 2024 || 72,793 || 2022 || 72,873 || 2022
+|-
+| {{flagg|uspeft|Myanmar|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 68,006 || 2024 || 62,263 || 2022 || 65,211 || 2022
+|-
+| {{flagg|uspeft|Uganda|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 56,310 || 2024 || 45,567 || 2022 || 48,243 || 2022
+|-
+| {{flagg|uspeft|Tunisia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 54,708 || 2024 || 46,303 || 2022 || 46,181 || 2022
+|-
+| {{flagg|uspeft|Macau|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 54,677 || &lt;ref group="n" name="Macau_China" /&gt;2024 || 24,042 || 2022 || 24,042 || 2022
+|-
+| {{flagg|uspeft|Jordan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 53,570 || 2024 || 48,653 || 2022 || 47,452 || 2022
+|-
+| {{flagg|uspeft|Cameroon|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 53,205 || 2024 || 43,644 || 2022 || 44,341 || 2022
+|-
+| {{flagg|uspeft|Bolivia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 49,334 || 2024 || 44,008 || 2022 || 44,008 || 2022
+|-
+| {{flagg|uspeft|Libya|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 48,221 || 2024 || 45,752 || 2022 || 40,537 || 2022
+|-
+| {{flagg|uspeft|Bahrain|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 46,790 || 2024 || 44,383 || 2022 || 44,382 || 2022
+|-
+| {{flagg|uspeft|Paraguay|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 45,817 || 2024 || 41,722 || 2022 || 41,722 || 2022
+|-
+| {{flagg|uspeft|Latvia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 45,466 || 2024 || 40,932 || 2022 || 40,876 || 2022
+|-
+| {{flagg|uspeft|Cambodia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 45,150 || 2024 || 29,504 || 2022 || 29,504 || 2022
+|-
+| {{flagg|uspeft|Nepal|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 44,179 || 2024 || 40,828 || 2022 || 39,406 || 2022
+|-
+| {{flagg|uspeft|Estonia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 43,486 || 2024 || 38,100 || 2022 || 38,049 || 2022
+|-
+| {{flagg|uspeft|Honduras|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 37,355 || 2024 || 31,717 || 2022 || 31,717 || 2022
+|-
+| {{flagg|uspeft|Senegal|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 35,450 || 2024 || 27,684 || 2022 || 27,775 || 2022
+|-
+| {{flagg|uspeft|El Salvador|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 35,333 || 2024 || 32,488 || 2022 || 32,488 || 2022
+|-
+| {{flagg|uspeft|Zimbabwe|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 34,405 || 2024 || 27,366 || 2022 || 26,418 || 2022
+|-
+| {{flagg|uspeft|Cyprus|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 34,221 || &lt;ref group="n" name="Cyprus" /&gt;2024 || 29,250 || &lt;ref group="n" name="Cyprus" /&gt;2022 || 29,210 || &lt;ref group="n" name="Cyprus" /&gt;2022
+|-
+| {{flagg|uspeft|Iceland|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 33,338 || 2024 || 28,064 || 2022 || 28,064 || 2022
+|-
+| {{flagg|uspeft|Georgia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 32,865 || &lt;ref group="n" name="Georgia" /&gt;2024 || 24,780 || &lt;ref group="n" name="Georgia" /&gt;2022 || 24,605 || &lt;ref group="n" name="Georgia" /&gt;2022
+|-
+| {{flagg|uspeft|Papua New Guinea|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 31,716 || 2024 || 31,603 || 2022 || 31,609 || 2022
+|-
+| {{flagg|uspeft|Zambia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 29,872 || 2024 || 29,163 || 2022 || 29,136 || 2022
+|-
+| {{flagg|uspeft|Bosnia and Herzegovina|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 29,078 || 2024 || 24,473 || 2022 || 24,473 || 2022
+|-
+| {{flagg|uspeft|Trinidad and Tobago|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 28,365 || 2024 || 30,053 || 2022 || 30,053 || 2022
+|-
+| {{flagg|uspeft|Sudan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 26,865 || 2024 || 51,662 || 2022 || 36,729 || 2022
+|-
+| {{flagg|uspeft|Guinea|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 25,447 || 2024 || 20,999 || 2022 || 20,846 || 2022
+|-
+| {{flagg|uspeft|Albania|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 25,431 || 2024 || 18,916 || 2022 || 18,916 || 2022
+|-
+| {{flagg|uspeft|Armenia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 25,408 || 2024 || 19,513 || 2022 || 19,513 || 2022
+|-
+| {{flagg|uspeft|Haiti|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 24,046 || 2024 || 20,253 || 2022 || 18,751 || 2022
+|-
+| {{flagg|uspeft|Mozambique|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 22,975 || 2024 || 18,406 || 2022 || 18,406 || 2022
+|-
+| {{flagg|uspeft|Malta|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 22,737 || 2024 || 18,125 || 2022 || 18,100 || 2022
+|-
+| {{flagg|uspeft|Mongolia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 21,943 || 2024 || 17,146 || 2022 || 17,146 || 2022
+|-
+| {{flagg|uspeft|Burkina Faso|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 21,902 || 2024 || 18,820 || 2022 || 19,176 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Lebanon|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 21,780 || 2022 || 23,131 || 2021 || 39,303 || 2022
+|-
+| {{flagg|uspeft|Mali|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 21,662 || 2024 || 18,827 || 2022 || 18,827 || 2022
+|-
+| {{flagg|uspeft|Botswana|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 21,418 || 2024 || 20,355 || 2022 || 20,352 || 2022
+|-
+| {{flagg|uspeft|Benin|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 21,371 || 2024 || 17,396 || 2022 || 17,396 || 2022
+|-
+| {{flagg|uspeft|Guyana|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 21,178 || 2024 || 14,718 || 2022 || 14,718 || 2022
+|-
+| {{flagg|uspeft|Gabon|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 21,013 || 2024 || 21,071 || 2022 || 20,132 || 2022
+|-
+| {{flagg|uspeft|Jamaica|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 20,098 || 2024 || 17,097 || 2022 || 17,097 || 2022
+|-
+| {{flagg|uspeft|Nicaragua|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 18,829 || 2024 || 15,671 || 2022 || 15,671 || 2022
+|-
+| {{flagg|uspeft|Niger|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 18,816 || 2024 || 15,342 || 2022 || 15,414 || 2022
+|-
+| {{flagg|uspeft|Chad|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 18,697 || 2024 || 12,704 || 2022 || 16,799 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Palestine|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Asia]] || 18,602 || &lt;ref group="n" name="WBG" /&gt;2023 || 19,111 || &lt;ref group="n" name="WBG" /&gt;2022 || 19,111 || &lt;ref group="n" name="Palestine" /&gt;2022
+|-
+| {{flagg|uspeft|Moldova|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 18,356 || &lt;ref group="n" name="Moldova" /&gt;2024 || 14,508 || &lt;ref group="n" name="Moldova" /&gt;2022 || 14,510 || &lt;ref group="n" name="Moldova" /&gt;2022
+|-
+| {{flagg|uspeft|Yemen|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 16,940 || 2024 || colspan=2 {{n/a}} || 11,007 || 2022
+|-
+| {{flagg|uspeft|Madagascar|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 16,465 || 2024 || 15,297 || 2022 || 14,954 || 2022
+|-
+| {{flagg|uspeft|Mauritius|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 16,359 || 2024 || 12,948 || 2022 || 12,898 || 2022
+|-
+| {{flagg|uspeft|North Macedonia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 15,873 || 2024 || 13,563 || 2022 || 13,711 || 2022
+|-
+| {{flagg|uspeft|Brunei|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 15,510 || 2024 || 16,681 || 2022 || 16,681 || 2022
+|-
+| {{flagg|uspeft|Congo|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Africa]] || 15,501 || 2024 || 15,816 || 2022 || 15,344 || 2022
+|-
+| {{flagg|uspeft|Laos|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 15,190 || 2024 || 15,468 || 2022 || 15,362 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|North Korea|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || colspan=2 {{n/a}} || colspan=2 {{n/a}} || 15,176 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Afghanistan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 14,467 || 2022 || 14,266 || 2021 || 14,174 || 2022
+|-
+| {{flagg|uspeft|Bahamas|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 14,390 || 2024 || 12,897 || 2022 || 12,897 || 2022
+|-
+| {{flagg|uspeft|Rwanda|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 13,701 || 2024 || 13,311 || 2022 || 13,312 || 2022
+|-
+| {{flagg|uspeft|Kyrgyzstan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 13,599 || 2024 || 11,543 || 2022 || 10,930 || 2022
+|-
+| {{flagg|uspeft|Tajikistan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 12,953 || 2024 || 10,492 || 2022 || 10,492 || 2022
+|-
+| {{flagg|uspeft|Somalia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 12,804 || 2024 || 10,419 || 2022 || 10,420 || 2022
+|-
+| {{flagg|uspeft|Namibia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 12,765 || 2024 || 12,914 || 2022 || 12,607 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Kosovo|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 11,318 || 2024 || 9,409 || 2022 || 9,397 || 2022
+|-
+| {{flagg|uspeft|Malawi|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 11,241 || 2024 || 13,164 || 2022 || 12,558 || 2022
+|-
+| {{flagg|uspeft|Equatorial Guinea|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 10,708 || 2024 || 12,029 || 2022 || 11,767 || 2022
+|-
+| {{flagg|uspeft|Mauritania|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 10,628 || 2024 || 9,780 || 2022 || 10,997 || 2022
+|-
+| {{flagg|uspeft|Togo|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 9,832 || 2024 || 8,341 || 2022 || 8,087 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|New Caledonia|pref=GDP of|pref2=Economy of|variant=local}} || style="text-align:center" | [[Oceania]] || colspan=2 {{n/a}} || 9,623 || 2022 || 9,623 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Syria|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || colspan=2 {{n/a}} || 8,969 || 2021 || 18,595 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Monaco|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || colspan=2 {{n/a}} || 8,784 || 2022 || 8,772 || 2022
+|-
+| {{flagg|uspeft|Montenegro|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 8,010 || 2024 || 6,229 || 2022 || 6,229 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Liechtenstein|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || colspan=2 {{n/a}} || 7,710 || 2021 || 7,757 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Bermuda|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || 7,546 || 2022 || 7,546 || 2022
+|-
+| {{flagg|uspeft|Maldives|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 7,199 || 2024 || 6,170 || 2022 || 6,170 || 2022
+|-
+| {{flagg|uspeft|Barbados|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 6,863 || 2024 || 5,699 || 2022 || 5,699 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Cayman Islands|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || 6,844 || 2022 || 6,281 || 2022
+|-
+| {{flagg|uspeft|South Sudan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 6,517 || 2024 || colspan=2 {{n/a}} || 4,616 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|French Polynesia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || colspan=2 {{n/a}} || 5,814 || 2022 || 5,814 || 2022
+|-
+| {{flagg|uspeft|Fiji|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 5,801 || 2024 || 4,979 || 2022 || 4,979 || 2022
+|-
+| {{flagg|uspeft|Eswatini|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 5,085 || 2024 || 4,790 || 2022 || 4,326 || 2022
+|-
+| {{flagg|uspeft|Liberia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 4,754 || 2024 || 4,001 || 2022 || 3,265 || 2022
+|-
+| {{flagg|uspeft|Sierra Leone|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 4,558 || 2024 || 4,094 || 2022 || 3,481 || 2022
+|-
+| {{flagg|uspeft|Djibouti|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 4,364 || 2024 || 3,515 || 2022 || 4,003 || 2022
+|-
+| {{flagg|uspeft|Suriname|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 4,337 || 2024 || 3,620 || 2022 || 3,620 || 2022
+|-
+| {{flagg|uspeft|Aruba|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 4,069 || 2024 || 3,544 || 2022 || 3,544 || 2022
+|-
+| {{flagg|uspeft|Andorra|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 3,897 || 2024 || 3,352 || 2022 || 3,376 || 2022
+|-
+| {{flagg|uspeft|Belize|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 3,296 || 2024 || 2,830 || 2022 || 2,830 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Greenland (Denmark)|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || 3,235 || 2021 || 2,926 || 2022
+|-
+| {{flagg|uspeft|Bhutan|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 3,110 || 2024 || 2,768 || 2021 || 2,898 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Curaçao|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || 3,075 || 2022 || 3,075 || 2022
+|-
+| {{flagg|uspeft|Burundi|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 3,075 || 2024 || 3,338 || 2022 || 4,032 || 2022
+|-
+| {{flagg|uspeft|Central African Republic|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Africa]] || 2,810 || 2024 || 2,382 || 2022 || 2,395 || 2022
+|-
+| {{flagg|uspeft|Cape Verde|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 2,718 || 2024 || 2,226 || 2022 || 2,314 || 2022
+|-
+| {{flagg|uspeft|Gambia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 2,694 || 2024 || 2,187 || 2022 || 2,231 || 2022
+|-
+| {{flagg|uspeft|Saint Lucia|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 2,582 || 2024 || 2,343 || 2022 || 2,165 || 2022
+|-
+| {{flagg|uspeft|Lesotho|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 2,395 || 2024 || 2,236 || 2022 || 2,287 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Eritrea|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || colspan=2 {{n/a}} || colspan=2 {{n/a}} || 2,383 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Zanzibar|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || colspan=2 {{n/a}} || colspan=2 {{n/a}} || 2,361 || 2022
+|-
+| {{flagg|uspeft|Seychelles|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 2,203 || 2024 || 1,588 || 2022 || 1,994 || 2022
+|-
+| {{flagg|uspeft|Guinea-Bissau|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 2,151 || 2024 || 1,633 || 2022 || 1,574 || 2022
+|-
+| {{flagg|uspeft|Antigua and Barbuda|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 2,127 || 2024 || 1,867 || 2022 || 1,770 || 2022
+|-
+| {{flagg|uspeft|San Marino|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Europe]] || 2,033 || 2024 || 1,855 || 2021 || 1,780 || 2022
+|-
+| {{flagg|uspeft|Timor-Leste|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Asia]] || 1,992 || 2024 || 3,204 || 2022 || 3,204 || 2022
+|-
+| {{flagg|uspeft|Solomon Islands|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Oceania]] || 1,707 || 2024 || 1,597 || 2022 || 1,597 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Sint Maarten|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || 1,537 || 2022 || 1,572 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|British Virgin Islands|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || colspan=2 {{n/a}} || 1,471 || 2022
+|-
+| {{flagg|uspeft|Comoros|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Africa]] || 1,422 || 2024 || 1,242 || 2022 || 1,246 || 2022
+|-
+| {{flagg|uspeft|Grenada|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 1,406 || 2024 || 1,215 || 2022 || 1,192 || 2022
+|-
+| {{flagg|uspeft|Vanuatu|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 1,289 || 2024 || 1,055 || 2022 || 985 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Turks and Caicos Islands|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || 1,138 || 2022 || 1,138 || 2022
+|-
+| {{flagg|uspeft|Saint Kitts and Nevis|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 1,134 || 2024 || 965 || 2022 || 979 || 2022
+|-
+| {{flagg|uspeft|Saint Vincent and the Grenadines|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 1,128 || 2024 || 948 || 2022 || 946 || 2022
+|-
+| {{flagg|uspeft|Samoa|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 1,024 || 2024 || 832 || 2022 || 857 || 2022
+|-
+| {{flagg|uspeft|São Tomé and Príncipe|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Africa]] || 751 || 2024 || 542 || 2022 || 546 || 2022
+|-
+| {{flagg|uspeft|Dominica|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || 708 || 2024 || 607 || 2022 || 612 || 2022
+|-
+| {{flagg|uspeft|Tonga|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 581 || 2024 || 469 || 2021 || 488 || 2022
+|-
+| {{flagg|uspeft|Micronesia|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Oceania]] || 484 || 2024 || 424 || 2022 || 427 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Anguilla|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || colspan=2 {{n/a}} || 452 || 2022
+|-
+| {{flagg|uspeft|Kiribati|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 311 || 2024 || 223 || 2022 || 223 || 2022
+|-
+| {{flagg|uspeft|Palau|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 308 || 2024 || 232 || 2021 || 225 || 2022
+|-
+| {{flagg|uspeft|Marshall Islands|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Oceania]] || 305 || 2024 || 258 || 2022 || 279 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Cook Islands|pref=GDP of|pref2=Economy of|the=y}} || style="text-align:center" | [[Oceania]] || colspan=2 {{n/a}} || colspan=2 {{n/a}} || 289 || 2022
+|-
+| {{flagg|uspeft|Nauru|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 161 || 2024 || 151 || 2022 || 147 || 2022
+|- class="static-row-header" style="background:#ECECEC"
+| {{flagg|uspeft|Montserrat|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Americas]] || colspan=2 {{n/a}} || colspan=2 {{n/a}} || 72 || 2022
+|-
+| {{flagg|uspeft|Tuvalu|pref=GDP of|pref2=Economy of}} || style="text-align:center" | [[Oceania]] || 66 || 2024 || 59 || 2022 || 59 || 2022
+|}
+
+==See also==
+{{Portal|Business and economics|Contents/Lists}}
+
+===Countries===
+* [[List of countries by GDP (nominal) per capita]]
+* [[List of countries by GDP (PPP)]]
+* [[List of countries by GDP (PPP) per capita]]
+* [[List of countries by past and projected GDP (nominal)]]
+* [[List of countries by past and projected GDP (PPP)]]
+
+===Other entities===
+* [[List of cities by GDP]]
+* [[List of continents by GDP]]
+* [[Largest country subdivisions by GDP]]
+* [[List of regions by past GDP (PPP)]]
+* {{section link|Trade bloc|Statistics}}
+
+==Notes==
+&lt;references group="n"&gt;
+&lt;ref group="n" name="China-THM"&gt;Figures for China exclude [[Taiwan]], and the [[Special administrative regions of China|special administrative regions]] of [[Hong Kong]] and [[Macau]].&lt;/ref&gt;
+&lt;ref group="n" name="China-HM"&gt;Figures exclude the [[special administrative regions of China|special administrative regions]] of [[Hong Kong]] and [[Macau]].&lt;/ref&gt;
+&lt;ref group="n" name="Taiwan_China"&gt;The name used in the IMF report is "Taiwan Province of China".&lt;/ref&gt;
+&lt;ref group="n" name="HongKong_China"&gt;The name used in the IMF report is "Hong Kong SAR".&lt;/ref&gt;
+&lt;ref group="n" name="Ukraine"&gt;Figures exclude the [[Autonomous Republic of Crimea]] and [[Sevastopol]].&lt;/ref&gt;
+&lt;ref group="n" name="Morocco"&gt;Includes [[Western Sahara]]&lt;/ref&gt;
+&lt;ref group="n" name="Tanzania"&gt;The UN figure excludes the autonomous region of [[Zanzibar]].&lt;/ref&gt;
+&lt;ref group="n" name="Cyprus"&gt;Data are for the area controlled by the Government of the Republic of Cyprus.&lt;/ref&gt;
+&lt;ref group="n" name="Georgia"&gt;Excludes [[Abkhazia]] and [[South Ossetia]]&lt;/ref&gt;
+&lt;ref group="n" name="Macau_China"&gt;The name used in the IMF report is "Macao SAR".&lt;/ref&gt;
+&lt;ref group="n" name="WBG"&gt;The name used in the IMF and World Bank reports is "West Bank and Gaza".&lt;/ref&gt;
+&lt;ref group="n" name="Palestine"&gt;The name used by the UN is "State of Palestine".&lt;/ref&gt;
+&lt;ref group="n" name="Moldova"&gt;Excludes data for [[Transnistria]]&lt;/ref&gt;
+&lt;/references&gt;
+
+==References==
+{{reflist|30em}}
+
+{{DEFAULTSORT:Countries By Gdp (Nominal), List Of}}
+
+[[Category:Lists of countries by GDP|Gdp (Nominal)]]
+[[Category:Lists of countries by economic indicator|Gdp (Nominal)]]</text>
+			<sha1>1q9j7kgolpasq5syimelpja05zg0syc</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite book</title>
+		<ns>10</ns>
+		<id>3002</id>
+		<revision>
+			<id>4002</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4002</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="3394" sha1="dofvg44pjfmzwu5zs0n3neph93ntccu" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation book cs1"&gt;|&lt;cite class="citation book cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{chapter|{{{contribution|}}}}}}|{{#if:{{{chapter-url|}}}|[{{{chapter-url}}} "{{{chapter|{{{contribution|}}}}}}"]|"{{{chapter|{{{contribution|}}}}}}"}}.}} {{#if:{{{url|}}}|[{{{url}}} ''{{{title|}}}'']|''{{{title|}}}''}}. {{#if:{{{edition|}}}|{{{edition}}}&amp;nbsp;ed.}} {{#if:{{{others|}}}|{{{others}}}.}} {{#if:{{{language|}}}|(in {{{language}}}).}} {{#if:{{{editor|}}}{{{editor-last|}}}{{{editor1-last|}}}{{{editor-last1|}}}|Edited by {{#if:{{{editor|}}}|{{{editor}}}|{{#if:{{{editor2-last|{{{editor-last2|}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}; {{{editor2-last|{{{editor-last2|}}}}}}{{#if:{{{editor2-first|{{{editor-first2|}}}}}}|, {{{editor2-first|{{{editor-first2|}}}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}}}}}.}} {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>dofvg44pjfmzwu5zs0n3neph93ntccu</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite web</title>
+		<ns>10</ns>
+		<id>3003</id>
+		<revision>
+			<id>4003</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4003</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="2425" sha1="mc1d57tfn6ao5yqnj5lv946jstzr8t1" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation web cs1"&gt;|&lt;cite class="citation web cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>mc1d57tfn6ao5yqnj5lv946jstzr8t1</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Color box</title>
+		<ns>10</ns>
+		<id>3004</id>
+		<revision>
+			<id>4004</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4004</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="430" sha1="n17srmlysg0smi110zo1woowa1mfg10" xml:space="preserve">&lt;span class="legend-color mw-no-invert" style="forced-color-adjust:none; background-color:{{{1|transparent}}}; color:black;"&gt;&amp;nbsp;{{{2|}}}&amp;nbsp;&lt;/span&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>n17srmlysg0smi110zo1woowa1mfg10</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Flagg</title>
+		<ns>10</ns>
+		<id>3005</id>
+		<revision>
+			<id>4005</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4005</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="519" sha1="chwk7neehda9wrsxiv0jbqc56e0qsft" xml:space="preserve">style="text-align:left" | &lt;span class="nowrap"&gt;&lt;span class="flagicon" style="display:inline-block;width:25px;text-align:left"&gt;&lt;/span&gt;&amp;nbsp;&lt;/span&gt;[[{{#if:{{{pref2|}}}|{{{pref2}}} {{#if:{{{the|}}}|the {{{2|}}}|{{{2|}}}}}|{{{2|}}}}}|{{{2|}}}]]&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>chwk7neehda9wrsxiv0jbqc56e0qsft</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:For</title>
+		<ns>10</ns>
+		<id>3006</id>
+		<revision>
+			<id>4006</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4006</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="407" sha1="t7hjdxk3gtbvowxzdy0cunlqkcqh1hp" xml:space="preserve">&lt;div class="hatnote navigation-not-searchable" role="note"&gt;For {{{1|}}}, see [[{{{2|}}}]] {{#if:{{{3|}}}|and [[{{{3}}}]]}}.&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>t7hjdxk3gtbvowxzdy0cunlqkcqh1hp</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:N/a</title>
+		<ns>10</ns>
+		<id>3007</id>
+		<revision>
+			<id>4007</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4007</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="464" sha1="hhuckxral3np4vx64b3ykwbzdnvj9t7" xml:space="preserve">data-sort-value="" style="background: var(--background-color-interactive, #ececec); color: var(--color-base, inherit); vertical-align: middle; text-align: center;" class="table-na" | N/A&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>hhuckxral3np4vx64b3ykwbzdnvj9t7</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Noflag</title>
+		<ns>10</ns>
+		<id>3008</id>
+		<revision>
+			<id>4008</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4008</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="349" sha1="srokdiuybcj1nyb8x1rqstotfyzpq7u" xml:space="preserve">&lt;span class="flagicon" style="padding-left:25px;"&gt;&amp;nbsp;&lt;/span&gt;{{{1|}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>srokdiuybcj1nyb8x1rqstotfyzpq7u</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Portal</title>
+		<ns>10</ns>
+		<id>3009</id>
+		<revision>
+			<id>4009</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4009</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="485" sha1="6ia2nm7q9xpr1n7ln1llyaj8296ewfp" xml:space="preserve">&lt;div class="portal plainlist"&gt;&lt;ul&gt;&lt;li&gt;[[Portal:{{{1|}}}|{{{1|}}} portal]]&lt;/li&gt;{{#if:{{{2|}}}|&lt;li&gt;[[Portal:{{{2}}}|{{{2}}} portal]]&lt;/li&gt;}}{{#if:{{{3|}}}|&lt;li&gt;[[Portal:{{{3}}}|{{{3}}} portal]]&lt;/li&gt;}}&lt;/ul&gt;&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>6ia2nm7q9xpr1n7ln1llyaj8296ewfp</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Pp-protect</title>
+		<ns>10</ns>
+		<id>3010</id>
+		<revision>
+			<id>4010</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4010</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Reflist</title>
+		<ns>10</ns>
+		<id>3011</id>
+		<revision>
+			<id>4011</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4011</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="435" sha1="23i77mo98sgrkg0431nwl9ypwamb7ea" xml:space="preserve">&lt;div class="reflist {{#if:{{{1|}}}|reflist-columns}}" {{#if:{{{1|}}}|style="column-width:{{{1}}};"}}&gt;{{#tag:references|{{{refs|}}}|group={{{group|}}}}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>23i77mo98sgrkg0431nwl9ypwamb7ea</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Section link</title>
+		<ns>10</ns>
+		<id>3012</id>
+		<revision>
+			<id>4012</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4012</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="384" sha1="g15vgi0zrbnwaywe10cj118qp205cu9" xml:space="preserve">{{#if:{{{1|}}}|[[{{{1}}}#{{{2|}}}|{{{1}}}&amp;nbsp;&amp;sect;&amp;nbsp;{{{2|}}}]]|[[#{{{2|}}}|&amp;sect;&amp;nbsp;{{{2|}}}]]}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>g15vgi0zrbnwaywe10cj118qp205cu9</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Short description</title>
+		<ns>10</ns>
+		<id>3013</id>
+		<revision>
+			<id>4013</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4013</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="380" sha1="qjymop9xtnszbvpzkue7skwexbdhb8v" xml:space="preserve">&lt;div class="shortdescription nomobile noexcerpt noprint searchaux" style="display:none"&gt;{{{1|}}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>qjymop9xtnszbvpzkue7skwexbdhb8v</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Static row numbers</title>
+		<ns>10</ns>
+		<id>3014</id>
+		<revision>
+			<id>4014</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4014</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Sticky header</title>
+		<ns>10</ns>
+		<id>3015</id>
+		<revision>
+			<id>4015</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4015</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Table alignment</title>
+		<ns>10</ns>
+		<id>3016</id>
+		<revision>
+			<id>4016</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4016</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Use dmy dates</title>
+		<ns>10</ns>
+		<id>3017</id>
+		<revision>
+			<id>4017</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>4017</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+</mediawiki>

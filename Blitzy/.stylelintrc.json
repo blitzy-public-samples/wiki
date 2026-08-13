@@ -1,0 +1,52 @@
+{
+	"extends": [
+		"stylelint-config-wikimedia/support-modern",
+		"stylelint-config-wikimedia/mediawiki"
+	],
+	"reportNeedlessDisables": true,
+	"rules": {
+		"color-named": "never",
+		"color-no-hex": true,
+		"function-disallowed-list": [
+			"color",
+			"color-mix",
+			"hsl",
+			"hsla",
+			"hsv",
+			"hsva",
+			"hwb",
+			"lab",
+			"lch",
+			"oklab",
+			"oklch",
+			"rgb",
+			"rgba"
+		],
+		"no-descending-specificity": null,
+		"selector-class-pattern": null,
+		"selector-max-id": 1,
+		"selector-max-specificity": "1,5,2"
+	},
+	"overrides": [
+		{
+			"files": [ "**/*.less" ],
+			"rules": {
+				"wikimedia/no-darkmode-override": [ true, { "severity": "error" } ]
+			}
+		},
+		{
+			"files": [ "resources/skins.blitzy.tokens/tokens.less" ],
+			"rules": {
+				"color-named": null,
+				"color-no-hex": null,
+				"function-disallowed-list": null
+			}
+		},
+		{
+			"files": [ "resources/skins.blitzy.styles/components/Prose.less" ],
+			"rules": {
+				"selector-max-specificity": "0,4,2"
+			}
+		}
+	]
+}

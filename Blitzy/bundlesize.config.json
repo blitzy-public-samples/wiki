@@ -1,0 +1,14 @@
+[
+	{
+		"resourceModule": "skins.blitzy.tokens",
+		"maxSize": "1.5 kB"
+	},
+	{
+		"resourceModule": "skins.blitzy.styles",
+		"maxSize": "18.0 kB"
+	},
+	{
+		"resourceModule": "skins.blitzy.js",
+		"maxSize": "6.0 kB"
+	}
+]
