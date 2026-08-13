@@ -1,0 +1,47 @@
+{{!
+	Body before-content: the strip that opens div#bodyContent. It is rendered on every page,
+	directly beneath the page toolbar and immediately above div#contentSub, and it carries at
+	most two children: the page status indicators, when the page titlebar is occupied by the
+	language button, and the site tagline, on article pages only. Both children are
+	conditional, so on an ordinary non-article view this is an empty container.
+
+	bool has-buttons-in-content-top true when the language dropdown or the add-topic button
+		occupies the page titlebar, which is where the indicators would otherwise be rendered;
+		they move down into this strip instead. This positive section is the exact complement
+		of the inverted has-buttons-in-content-top section in PageTitlebar.mustache, so
+		between the two templates the Indicators partial sits on exactly one code path and
+		div.mw-indicators is emitted exactly once per page. Do not invert this test and do not
+		wrap the partial in a second guard: either change yields zero or two indicator
+		containers.
+	bool is-article core flag derived from OutputPage::isArticle(). It gates the tagline so
+		that the element is emitted on content pages only, and never on special pages,
+		history views or diffs.
+	string msg-tagline the core tagline message, rendered in English as "From" followed by the
+		site name. SkinMustache::getTemplateData() supplies it as plain text for every key
+		listed in skin.json's messages array; it is a core message key, so it is deliberately
+		not renamed to a notion- key and needs no entry in this skin's i18n/en.json. The
+		double-brace expression below HTML-escapes it, which is correct for plain text.
+
+	Platform DOM contract, reproduced verbatim below: neither the id nor the class on the
+	tagline element may be renamed. The id is the long-standing public selector that on-wiki
+	site CSS and gadgets use to reveal or restyle the tagline, which ships hidden: core's
+	interface-subtitle feature hides it, and because the modern feature set switches that
+	feature off, the skin re-declares the hide in its own typography stylesheet, per T335625,
+	so that on-wiki overrides keep working. The class is the platform-wide print-suppression
+	convention, applied by core itself elsewhere and implemented generically by one shared
+	rule in the skin's print stylesheet, so this element needs no print rule of its own and
+	none should be added for it. For that shared class rule to keep winning, the skin's own
+	rule for this element must stay scoped to screen media: a bare id selector out-specifies
+	a class selector and a media query contributes no specificity of its own, so an unscoped
+	id rule would survive into print and defeat the suppression. The only name this skin owns
+	in this partial is the wrapper class below, whose appearance lives in
+	resources/skins.notion.styles/layouts/screen.less: it contains the floating indicators
+	and spaces them from the page chrome above.
+}}
+<div class="notion-body-before-content">
+	{{#has-buttons-in-content-top}}
+		{{>Indicators}}
+	{{/has-buttons-in-content-top}}
+
+	{{#is-article}}<div id="siteSub" class="noprint">{{msg-tagline}}</div>{{/is-article}}
+</div>

@@ -1,0 +1,183 @@
+This folder themes MediaWiki core's deprecated jquery.ui module for the Notion skin. It holds
+14 stylesheets, an images/ directory, DEPRECATED and this file, and nothing else. Read
+DEPRECATED first: it records why the module is frozen and what may and may not be changed here.
+Neither DEPRECATED nor this file is referenced from skin.json, and neither is ever served by
+ResourceLoader.
+
+The stylesheets are jQuery UI 1.9.2 -- jquery.ui.button.css is 1.11.2-alpha -- recoloured to
+the Notion palette. Below is every deviation they carry: the ones inherited from the copy in
+mediawiki-skins-Vector/skinStyles/jquery.ui/ that this one was adapted from, and the ones that
+are new here. None of them is cosmetic. Each fixes something, and removing it reintroduces the
+bug it fixed. The @noflip annotations and the RTL dialog-placement fix for T344467 in
+particular must survive any future edit to these files.
+
+jquery.ui.button.css
+* Picked from jQuery UI 1.11.2-alpha instead of 1.9.2.
+* Extra customizations.
+* Notion: the coloured button variants those customizations add -- .ui-button-green,
+  .ui-button-blue, .ui-button-red and the disabled state -- keep their selectors and their
+  !important declarations, and are recoloured. Their linear-gradient() fills become flat
+  background colours.
+* Notion: the "white icons for colored buttons" rule keeps
+  url(images/ui-icons_ffffff_256x240.png) and its @embed. It is the only url() in this file.
+
+jquery.ui.datepicker.css
+* Add @noflip to prevent CSSJanus flipping.
+  Eleven rules carry it, one for each .ui-datepicker-rtl rule. Stylesheets here are authored
+  LTR and flipped mechanically by CSSJanus; those eleven rules are already the RTL case, so
+  flipping them would cancel them out and break the RTL calendar.
+
+jquery.ui.dialog.css
+* Extra customizations.
+* Ia48990a7f3 Fix jQuery UI's dialog placement in RTL
+  https://phabricator.wikimedia.org/T344467
+  The fix is the @noflip annotation on "left: 0" in the .ui-dialog rule. jQuery UI positions a
+  dialog at runtime by writing left into the element's own style attribute; if CSSJanus flips
+  the stylesheet's "left: 0" into "right: 0" the two disagree and the dialog is placed
+  off-screen in RTL. That annotation is the only @noflip in this file. Do not remove it, and do
+  not reformat the .ui-dialog rule in a way that separates it from the declaration it guards.
+* Notion: the titlebar customization loses its gradient tile and becomes a flat fill, so
+  images/titlebar-fade.png is not carried here. See "Notion skin" below.
+* Notion: the close glyph keeps url(images/close.png) and its @embed; the PNG itself is
+  recoloured to Notion's secondary text colour #787774. After the titlebar change it is the
+  only url() left in this file.
+
+jquery.ui.resizable.css
+* Add @noflip to prevent CSSJanus flipping.
+  Six rules carry it: .ui-resizable-e, -w, -se, -sw, -nw and -ne. .ui-resizable-n and -s are
+  deliberately left unannotated -- they are direction-neutral, so flipping them is harmless.
+
+jquery.ui.theme.css
+* Add @embed instructions for CSSMin.
+* Change font-size from 1.0em to 0.8em.
+* Join ".ui-icon", ".ui-widget-content .ui-icon" and ".ui-widget-header .ui-icon" rules
+  to optimise image embedding.
+* Removed ".ui-widget-content a { color: #362b36; }" and
+  ".ui-widget-header a { color: #222222; }" due to bug T85857.
+  They remain absent here, deliberately. Do not restore them: they recolour every link inside
+  every jQuery UI widget, which is what T85857 reported.
+* Notion: .ui-widget takes an Inter-first font stack in place of "sans-serif" -- Inter, then
+  system UI faces, then the Codex sans stack. No webfont is bundled: MediaWiki has no
+  client-side build step, and a font file would breach the skin's bundle-size budget, so on a
+  machine without Inter installed these widgets render in the fallback face. That is an
+  accepted fidelity compromise, not an omission. The 0.8em font-size above is kept.
+* Notion: the surface and interaction-state rules are recoloured -- .ui-widget-content to the
+  white canvas #ffffff, .ui-widget-header and .ui-state-default to the warm off-white
+  surface #f7f6f3, .ui-state-hover and .ui-state-focus to #efefee, .ui-state-active
+  to #e8e7e4, text to #37352f with #787774 for subdued text and #487ca5 for links. Borders
+  become 1px hairlines in #e3e2de or #e9e9e7. The 3px corner radius is unchanged, vendor
+  prefixes included.
+* Notion: .ui-state-error keeps a solid, saturated red with white text rather than being
+  softened to a light tint. Its icons come from ui-icons_ffffff_256x240.png, so a pale
+  background would leave both the text and the icons illegible.
+* Notion: .ui-widget-overlay is a white scrim. Vector's copy had already replaced upstream's
+  black flat tile with "rgba(255, 255, 255, 0.5); opacity: 1; filter: none" without recording
+  it, which is why ui-bg_flat_100_000000_40x100.png sits in Vector's images/ referenced from
+  nowhere at all. It is recorded here, and the tile is not carried.
+* Notion: .ui-widget-shadow loses its background image and becomes a flat low-alpha shadow
+  colour. Upstream painted it with ui-bg_flat_70_000000_40x100.png at opacity .2; that tile is
+  not carried, so the url() had to go with it or it would dangle. The legacy
+  filter:Alpha(Opacity=20) declaration and the vendor-prefixed border-radius properties stay.
+* Notion: the ".ui-dialog { border: ...; box-shadow: ...; }" rule appended at the end of this
+  file is recoloured to a #e3e2de hairline and Notion's subtle elevation. Vector appended that
+  rule without recording it either; jQuery UI's own ThemeRoller output contains no .ui-dialog
+  rule in this file at all, so it is a local addition in both skins.
+
+jquery.ui.progressbar.css
+* Notion: .ui-progressbar .ui-progressbar-value is given an explicit accent fill, #2eaadc.
+  Upstream gives the value bar no background of its own -- jQuery UI paints it by putting the
+  ui-widget-header class on it -- and once ui-widget-header becomes the warm off-white #f7f6f3
+  the fill would be invisible against the white ui-widget-content track. It is exactly the
+  single-declaration fill DEPRECATED permits adding for a control a recolour would otherwise
+  render invisible, and not a licence to restyle the widget.
+
+jquery.ui.slider.css
+* Notion: .ui-slider .ui-slider-range is given the same explicit #2eaadc fill, for the same
+  reason -- it too is painted by ui-widget-header upstream, and would otherwise disappear
+  against the track.
+
+jquery.ui.tooltip.css
+* Notion: .ui-tooltip trades the grey blur "box-shadow: 0 0 5px #aaa" for Notion's subtle
+  elevation, and the "body .ui-tooltip" border-width drops from 2px to the 1px hairline used
+  throughout this skin. padding, position, z-index and max-width are untouched.
+
+jquery.ui.selectable.css
+* Notion: the .ui-selectable-helper marquee border changes from "1px dotted black" to a
+  dotted #787774. Pure black is not in the Notion palette.
+
+jquery.ui.core.css, jquery.ui.accordion.css, jquery.ui.autocomplete.css, jquery.ui.menu.css,
+jquery.ui.tabs.css
+* Carried across structurally unchanged. They are layout and behaviour only; the colour they
+  display comes from jquery.ui.theme.css, so recolouring that file restyles them. Listed here
+  so the absence of an entry is understood as "checked, nothing to patch" rather than
+  "overlooked".
+
+Notion skin:
+* Colour values in this folder are written as literals, not as design tokens. These are plain
+  .css files: they cannot @import 'mediawiki.skin.variables.less', and the folder is excluded
+  from stylelint by .stylelintignore. This is the single documented exception to the skin's
+  zero-hardcoded-values rule. The twelve .less overrides in the parent skinStyles/ directory do
+  use tokens, and nothing here licenses a literal anywhere else in the skin. The literals used
+  are the Notion palette: primary text #37352f, secondary text #787774, tertiary #9b9a97,
+  canvas #ffffff, secondary surface #f7f6f3, hover #efefee, active #e8e7e4, divider #e3e2de,
+  hairline #e9e9e7, base border #d3d1cb, accent #2eaadc, link #487ca5, icon blue #337ea9.
+* Gradient chrome removed. jQuery UI's gradient and inset background-image tiles are replaced
+  by flat background-color declarations, because Notion's visual language is flat surfaces,
+  1px hairlines and no heavy chrome. Ten of the images/ files Vector ships are consequently not
+  carried here, and every rule that referenced one lost its url() and its @embed along with it:
+  ui-bg_highlight-hard_100_f2f5f7_1x100.png -- was .ui-widget-content
+  ui-bg_highlight-soft_100_ffffff_1x100.png -- was .ui-widget-header
+  ui-bg_highlight-hard_80_d7ebf9_1x100.png -- was .ui-state-default
+  ui-bg_highlight-soft_100_e4f1fb_1x100.png -- was .ui-state-hover / .ui-state-focus
+  ui-bg_inset-hard_100_f0f0f0_1x100.png -- was .ui-state-active
+  ui-bg_highlight-soft_25_ffef8f_1x100.png -- was .ui-state-highlight
+  ui-bg_flat_15_cd0a0a_40x100.png -- was .ui-state-error
+  ui-bg_flat_70_000000_40x100.png -- was .ui-widget-shadow
+  ui-bg_flat_100_000000_40x100.png -- referenced from nowhere in Vector's copy either
+  titlebar-fade.png -- was the .ui-dialog titlebar customization
+  The three ui-bg_flat_* tiles are 40x100 pixels of solid colour composited over the same
+  background-color, so dropping them changes nothing on screen. The six 1x100 strips -- the
+  five highlight-* tiles and the inset-hard tile -- and the 1x36 titlebar fade each encoded a
+  vertical gradient, and losing it is the intended flattening rather than an oversight.
+* Icon sprite set reduced from six variants to four. Only the url() values changed: no selector
+  was joined or split beyond the join Vector already made, all six icon rules remain, and each
+  keeps its @embed. The complete mapping is:
+  images/ui-icons_787774_256x240.png (Notion secondary text) -- the joined
+    ".ui-icon, .ui-widget-content .ui-icon, .ui-widget-header .ui-icon" rule, and
+    ".ui-state-default .ui-icon"
+  images/ui-icons_337ea9_256x240.png (Notion icon blue) -- ".ui-state-hover .ui-icon,
+    .ui-state-focus .ui-icon"
+  images/ui-icons_37352f_256x240.png (Notion primary text) -- ".ui-state-active .ui-icon" and
+    ".ui-state-highlight .ui-icon"
+  images/ui-icons_ffffff_256x240.png -- ".ui-state-error .ui-icon, .ui-state-error-text
+    .ui-icon" in jquery.ui.theme.css, and the coloured-button rule in jquery.ui.button.css
+  Not carried, being Vector's discarded variants: ui-icons_72a7cf_256x240.png,
+  ui-icons_3d80b3_256x240.png, ui-icons_2694e8_256x240.png, ui-icons_666666_256x240.png and
+  ui-icons_2e83ff_256x240.png. ui-icons_ffffff_256x240.png is the one sprite whose filename is
+  unchanged. All four kept sprites are 256x240, so no background-position in the sprite grid
+  moved.
+* Annotation totals, for anyone auditing the folder: 18 @noflip -- 11 in
+  jquery.ui.datepicker.css, 6 in jquery.ui.resizable.css, 1 in jquery.ui.dialog.css -- and
+  8 @embed, one on each surviving image rule: 6 in jquery.ui.theme.css, 1 in
+  jquery.ui.dialog.css, 1 in jquery.ui.button.css.
+* Nothing else was restructured. Selectors, rule order, the vendor-prefixed border-radius
+  properties, the filter:Alpha(Opacity=...) and zoom: 1 declarations, the ::-moz-focus-inner
+  resets and the IE6 .ui-datepicker-cover iframe fix are all upstream's and are kept
+  deliberately. A diff of this folder against Vector's should show colour, not structure.
+* To re-check this ledger against the stylesheets, run from this directory:
+    grep -c @noflip jquery.ui.datepicker.css jquery.ui.resizable.css jquery.ui.dialog.css
+    grep -n "url(" *.css
+    grep -c @embed jquery.ui.theme.css jquery.ui.dialog.css jquery.ui.button.css
+    grep -n "ui-widget-content a\|ui-widget-header a" jquery.ui.theme.css
+    ls images/
+  The first must print 11, 6 and 1; the third must print 6, 1 and 1; every filename the second
+  prints must appear both in the sprite mapping above and in the output of the last; and the
+  fourth must print nothing, because those two colour rules stay removed (T85857). If the
+  stylesheets and this file ever disagree, the stylesheets are what ship: correct whichever of
+  the two is wrong, but do not leave them disagreeing.
+
+images:
+* Carries close.png (used in the customizations for jquery.ui.dialog.css), recoloured
+  to #787774, and the four ui-icons_*_256x240.png sprites mapped above. Five files, and that
+  is the whole directory.
+* Change chmod from 755 to 644.

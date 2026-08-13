@@ -1,0 +1,82 @@
+{{!
+	Site footer: the footer landmark and the three rows core builds inside it.
+
+	Rendered once per page by skin.mustache, the only caller, which wraps this partial in
+	the footer container element that supplies the surrounding page padding. Each row is
+	delegated to Footer__row.mustache, the only partial included here and included three
+	times, so the list markup lives in one place and this file owns just the landmark, the
+	language attributes and the row order.
+
+	Every name emitted below belongs to MediaWiki core rather than to this skin. The id and
+	the class written on the element are part of the platform DOM contract, and each row id
+	and portlet class is assigned by SkinComponentMenu, which retains footer ids verbatim
+	instead of prefixing them the way it does every other portlet. Gadgets, user styles,
+	extensions and the print stylesheet all select on those names, so nothing here is
+	renamed and no notion- prefix is introduced anywhere in this file. The Notion restyle
+	of the footer lives entirely in resources/skins.notion.styles/components/Footer.less,
+	which hangs off exactly these core-owned names, and the suppression of the footer on
+	paper lives in resources/skins.notion.styles/layouts/print.less. This partial therefore
+	carries no presentational class, no inline style and no print-only markup of its own,
+	and it needs no scripting: the footer is fully rendered and fully styled with
+	JavaScript disabled.
+
+	One print detail is worth knowing here even though it is not implemented here. Core's
+	portlet data does not carry the historic noprint class on the icons row, so the skin
+	class appends it to that row's class in the template data, exactly as SkinVector22 does
+	and for the reason its own comment gives. It has to arrive through the data: writing it
+	into the markup below would hardcode one row's print behaviour into a partial that is
+	otherwise driven entirely by what core supplies.
+
+	@typedef object footerItem
+	@prop string id of list item element
+	@prop string html of list item
+
+	@typedef object footerRow
+	@prop string class of list element
+	@prop string id of list element
+	@prop footerItem[] array-items
+
+	string|null html-user-language-attributes a string of attribute HTML
+	footerRow data-portlets.data-footer-info the info row
+	footerRow data-portlets.data-footer-places the places row
+	footerRow data-portlets.data-footer-icons the icons row
+
+	The three rows are assembled by core's footer component and surfaced as portlets, so
+	their ids are footer-info, footer-places and footer-icons and their classes are the
+	portlet pair for that id, gaining an extra emptyPortlet class while a row holds no items.
+	The skin definition in skin.json additionally lists all three in its menus array, which
+	is how a skin declares that it renders those menus itself: core then leaves items that
+	extensions contribute through the navigation hook in the portlet data for this template
+	to render, instead of folding them back into its own footer component for skins that
+	have not opted in. A row that is present but itemless is core reporting an empty
+	portlet, not a fault here, and a row missing altogether is a question for that menus
+	array and for the skin data set rather than for this file.
+
+	Each row is guarded by a section on its own dotted path, so a data set that omits a row
+	emits no list for it at all rather than an empty one. Both halves of each section name
+	the identical dotted path on purpose: the compiler treats a mismatched pair as a
+	compile error, and because templates are compiled with errors raised as exceptions that
+	would be a fatal response on every page rather than a silent gap in the footer. The
+	order info, places, icons is the reading order the stylesheet and the copyright
+	placement assume, so it is not interchangeable.
+
+	html-user-language-attributes arrives from core already serialised as attribute HTML: a
+	dir and lang pair whenever the interface language differs from the content language,
+	and an empty string otherwise. It is the one value interpolated in this file, and it is
+	emitted with a triple-brace expression because escaping a serialised attribute fragment
+	would turn it into visible text in the footer.
+
+	The element below is the native footer landmark, which is what conveys the contentinfo
+	role to assistive technology without an explicit role attribute, and exactly one such
+	landmark is emitted per page. The note kept immediately above the element records why a
+	redundant role attribute would nonetheless be tolerated; it is carried over verbatim
+	from the Vector implementation this skin mirrors component for component, is the only
+	surviving record of that decision, and must not be tidied away.
+}}
+{{! `role` is unnecessary but kept to support selectors in any gadgets or user styles and
+	to mitigate a VoiceOver bug. }}
+<footer id="footer" class="mw-footer" {{{html-user-language-attributes}}}>
+	{{#data-portlets.data-footer-info}}{{>Footer__row}}{{/data-portlets.data-footer-info}}
+	{{#data-portlets.data-footer-places}}{{>Footer__row}}{{/data-portlets.data-footer-places}}
+	{{#data-portlets.data-footer-icons}}{{>Footer__row}}{{/data-portlets.data-footer-icons}}
+</footer>
