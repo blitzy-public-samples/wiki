@@ -1,0 +1,29 @@
+{{!
+	@typedef object Indicator
+	@prop string id core-owned DOM id, pre-escaped by core as `mw-indicator-<name>`,
+		for example `mw-indicator-good-article`
+	@prop string class core-owned class list; core always sets this to `mw-indicator`
+	@prop string html the indicator's own markup, authored in wikitext or by an
+		extension, so it is emitted unescaped with a triple-brace expression
+
+	Indicator[] array-indicators the page status indicators, supplied unchanged by
+		core in SkinMustache::getTemplateData(); an empty list is the normal case and
+		still yields an empty container
+}}
+{{! Included by exactly one of two mutually exclusive callers: PageTitlebar.mustache
+	when the language button is absent, BeforeContent.mustache when it is present. Both
+	branches test the same has-buttons-in-content-top flag, so this partial renders
+	exactly once per page and needs no guard of its own. }}
+{{! DO NOT RENAME the wrapper class emitted below, nor the per-indicator mw-indicator
+	class. Both belong to the platform DOM contract, not to this skin: core refills the
+	wrapper in mediawiki.page.preview.js, mediawiki.page.ready fires the public
+	wikipage.indicators hook from its children, and gadgets and extensions select on
+	both names. The wrapper is emitted unconditionally for the same reason; an empty
+	one is inert. The Notion appearance lives entirely in
+	resources/skins.notion.styles/components/Indicators.less, which targets these very
+	names because skin.json disables the core interface-indicators feature. }}
+<div class="mw-indicators">
+{{#array-indicators}}
+<div id="{{id}}" class="{{class}}">{{{html}}}</div>
+{{/array-indicators}}
+</div>

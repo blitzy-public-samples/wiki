@@ -1,0 +1,48 @@
+{{!
+	Notion skin: the site identity block - logo icon, wordmark and tagline.
+
+	Rendered from Header.mustache inside a data-logos section, so the current context
+	is core's logo definition (LogoOptions, assembled by SkinComponentLogo through
+	ResourceLoader SkinModule::getAvailableLogos) while the surrounding skin data is
+	reached through the Mustache context stack.
+
+	LogoDefinition logo
+	string link-mainpage link to the main page (from SkinMustache in core)
+	string|null icon path to the square site icon, when the wiki configures one
+	object|null wordmark the wordmark image, when the wiki configures one
+		string src path to the wordmark image
+		string style intrinsic size, computed by core as a width and height in em (T207789)
+	object|null tagline the tagline image, when the wiki configures one
+		string src path to the tagline image
+		string width intrinsic width of the tagline image in pixels
+		string height intrinsic height of the tagline image in pixels
+		string style intrinsic size, computed by core as a width and height in em (T207789)
+	string msg-sitetitle the contents of the sitetitle message key
+	string msg-sitesubtitle the contents of the sitesubtitle message key
+
+	The class surface below is entirely core-owned, and it includes the inversion hook
+	that lets the wordmark flip correctly under the dark palette, so every class name
+	is part of the public content contract. This partial therefore renames nothing:
+	the Notion appearance is supplied entirely by the skin's components/Logo.less,
+	which the style entry point imports under `@media all` so the logo is styled on
+	screen and in print alike.
+}}
+<a href="{{link-mainpage}}" class="mw-logo">
+	{{#icon}}
+	{{! alt is provided for valid HTML but given aria-hidden not needed. }}
+	<img class="mw-logo-icon" src="{{.}}" alt="" aria-hidden="true" height="50" width="50">
+	{{/icon}}
+	<span class="mw-logo-container skin-invert">
+		{{#wordmark}}
+		{{!-- djlint:off H006 --}}
+		<img class="mw-logo-wordmark" alt="{{msg-sitetitle}}" src="{{src}}" style="{{style}}">
+		{{!-- djlint:on H006 --}}
+		{{/wordmark}}
+		{{^wordmark}}
+		<strong class="mw-logo-wordmark">{{msg-sitetitle}}</strong>
+		{{/wordmark}}
+		{{#tagline}}
+		<img class="mw-logo-tagline" alt="{{msg-sitesubtitle}}" src="{{src}}" width="{{width}}" height="{{height}}" style="{{style}}">
+		{{/tagline}}
+	</span>
+</a>

@@ -1,0 +1,28 @@
+{{!
+	Shared closing tag for both pinnable container variants.
+
+	Data dictionary supplied by NotionComponentPinnableContainer::getTemplateData(). This partial
+	deliberately reads NEITHER key -- it is entirely context-free, which is exactly what lets one
+	shared file serve every call site unchanged:
+	string id container id stem, e.g. `notion-toc`. Consumed only by the Open partials, which
+		append the `-pinned-container` / `-unpinned-container` suffixes. Those suffixes are a
+		JavaScript contract resolved with document.getElementById, so they are never altered.
+	bool is-pinned whether the pinnable element currently sits in the pinned placement. Callers
+		guard the container's CONTENT with it; the container itself is never guarded.
+
+	Closes the <div> opened by EITHER PinnableContainer/Pinned/Open.mustache OR
+	PinnableContainer/Unpinned/Open.mustache. One shared closing partial serves both variants
+	rather than duplicating a closing tag in each, which is why this file sits at the folder root
+	while Pinned/ and Unpinned/ hold only their respective Open.mustache.
+
+	Both containers are emitted on every render, regardless of the current is-pinned value.
+	resources/skins.notion.js/pinnableElement.js relocates the pinnable region between the two
+	containers at runtime with no page reload, so both move targets must already be present in
+	the DOM. Whichever placement is not currently active is therefore legitimately empty, and the
+	markup stays correct and fully styled when JavaScript is unavailable.
+
+	Never emit this partial alone. Every caller that invokes an Open variant must invoke this
+	partial exactly once, because LightnCandy will happily emit unbalanced HTML without raising
+	anything -- a missing or surplus Close corrupts the page silently instead of failing loudly.
+}}
+</div>

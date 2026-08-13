@@ -1,0 +1,12 @@
+{{!
+	Closing half of the pinnable element wrapper: closes the single div element
+	that PinnableElement/Open.mustache opens.
+	Consumes no template data keys, so this partial renders identically for every
+	context and never needs one.
+	This template must be used with PinnableElement/Open to avoid unclosed HTML tags;
+	emitted on its own it produces unbalanced HTML. Its consumers are Appearance,
+	MainMenu, PageTools and TableOfContents, each pairing exactly one Open with
+	exactly one Close. The surrounding pinned or unpinned container is a separate
+	element, closed by PinnableContainer/Close.
+}}
+</div>

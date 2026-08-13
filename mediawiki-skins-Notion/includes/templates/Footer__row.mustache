@@ -1,0 +1,49 @@
+{{!
+	Renders one row of the site footer as a list.
+
+	Called by Footer.mustache, the only consumer, once for each of the three footer
+	portlets: data-footer-info, data-footer-places and data-footer-icons. The enclosing
+	footer element, its role and the user-language attributes belong to that caller and
+	are deliberately not repeated here.
+
+	Every id below, and the row class, are owned by MediaWiki core (SkinComponentFooter
+	and SkinComponentMenu) rather than by this skin, and gadgets, user styles, extensions
+	and the print stylesheet all select on them. They are therefore passed through
+	verbatim, with no notion- prefix and no renaming of any kind. The Notion restyle of
+	the footer lives entirely in resources/skins.notion.styles/components/Footer.less,
+	which hangs off exactly these core-owned hooks.
+
+	@typedef object footerItem
+	@prop string id of list item element, assigned by core, e.g. footer-info-lastmod,
+		footer-places-privacy or footer-poweredbyico
+	@prop string html of list item: already-rendered core markup containing anchors and,
+		in the icons row, image elements, so it is emitted unescaped
+
+	@typedef object footerRow
+	@prop string id of list element: footer-info, footer-places or footer-icons
+	@prop string|null class of list element, e.g. mw-portlet mw-portlet-footer-info.
+		Rendered only when truthy, with the separating space held inside the conditional
+		section so that an empty class attribute is never emitted
+	@prop footerItem[] array-items the items of this row, in the order core built them
+
+	Deliberate and easy to break: the id expression is context-shadowed. At the top level
+	it resolves to the row id, while inside the array-items section the item is pushed
+	onto the context stack, so the very same expression resolves to the item id there.
+	Both readings are intended; do not hoist, rename or otherwise "correct" either one.
+
+	The list element is unconditional on purpose. The caller only enters this partial for
+	a row core actually produced, so a second guard here would add nothing and would risk
+	suppressing a row that is legitimately present but empty.
+
+	Two authoring constraints keep this comment inert, and both are easy to undo by accident.
+	First, expressions are described in prose because a mustache comment ends at its first
+	closing double brace, so an inline example would terminate the comment early and leak the
+	remainder into the rendered footer. Second, the comment closes tight against the list
+	element below, with no newline between them, because the caller includes this partial in
+	the middle of a line: a newline there would be emitted once per footer row. This is the
+	same whitespace-swallowing idiom the Button, Link and MenuListItem partials use.
+}}<ul id="{{id}}"{{#class}} class="{{.}}"{{/class}}>
+	{{#array-items}}
+	<li id="{{id}}">{{{html}}}</li>
+	{{/array-items}}
+</ul>

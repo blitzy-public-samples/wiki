@@ -1,0 +1,38 @@
+These stylesheets theme MediaWiki core's jquery.ui ResourceLoader module, which core marks
+deprecated in favour of Codex: resources/Resources.php declares it with 'deprecated' => 'Please
+use Codex instead.'. They exist only to keep the screens that still instantiate jQuery UI
+widgets from breaking under the Notion palette.
+
+Vector records upstream that in November 2022, after a discussion between the Growth, Editing
+and Web teams (and others), it was agreed that these styles should be considered frozen and not
+modified further. That is Wikimedia's decision rather than this skin's, and it is inherited
+here with the files. More context:
+https://www.mediawiki.org/wiki/Readers/Web/Dev_notes/jQuery_UI
+
+The rule for Notion is therefore RETHEME, DO NOT REFACTOR. Permitted: recolouring declarations
+to the Notion palette; replacing gradient background-image chrome with a flat background-color;
+reducing the icon sprite set kept in images/; and, where a recolour would otherwise leave a
+control invisible, adding one explicit fill for it. Record every such deviation in PATCHES.
+
+Not permitted: restructuring or "modernising" selectors; renaming any .ui-* class (jQuery UI's
+own JavaScript applies those names at runtime, so a rename silently unstyles the widget);
+rewriting these files against a newer upstream release; deleting the deliberate legacy hacks --
+zoom: 1, the IE filter:Alpha(Opacity=...) declarations, the ::-moz-focus-inner resets, the IE6
+.ui-datepicker-cover iframe fix, the vendor-prefixed border-radius properties; reformatting
+wholesale for style. A diff against Vector's copy should show colour, not structure.
+
+The stakes here are unusually high. Core's jquery.ui module supplies scripts, languageScripts
+and a skinStyles.default array of the bundled smoothness theme, and this skin lists its
+jquery.ui entry in ResourceModuleSkinStyles."notion" as an array with no leading "+", which
+replaces skinStyles.default instead of appending to it (FileModule::setSkinStylesOverride()).
+These 14 stylesheets are therefore the whole jQuery UI theme under Notion: a missing or
+mistyped filename leaves its widget with no CSS at all rather than merely the wrong colours.
+
+Read PATCHES, in this folder, before editing anything here. It records the per-file deviations
+from upstream jQuery UI 1.9.2 (and from 1.11.2-alpha, the release the button stylesheet was
+taken from) that must be preserved, among them the @noflip annotations that stop CSSJanus
+flipping the datepicker and resizable rules and the RTL dialog-placement fix at
+https://phabricator.wikimedia.org/T344467.
+
+This file is documentation for maintainers: it is not referenced from skin.json and is never
+served by ResourceLoader, so it must not be added to the jquery.ui array.

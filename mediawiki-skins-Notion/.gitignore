@@ -1,0 +1,76 @@
+# Git exclusions for the Notion skin, mirroring mediawiki-skins-Vector/.gitignore.
+#
+# Scope: this file governs only the mediawiki-skins-Notion/ tree. Every pattern is
+# either root-anchored with a leading slash or matches a name produced solely by
+# local tooling, so nothing here can reach mediawiki/, mediawiki-vendor/ or
+# mediawiki-skins-Vector/. The mediawiki/skins/Notion symlink and
+# mediawiki/LocalSettings.php are excluded by mediawiki/skins/.gitignore and
+# mediawiki/.gitignore respectively, so they are deliberately absent below.
+#
+# Deliberately NOT ignored - each is a committed deliverable. Do not add patterns
+# for any of these:
+#   package-lock.json      pins the resolved npm tree so the toolchain is reproducible
+#   screenshots/ and .png  the per-component capture evidence that proves the restyle
+#   NOTION_SKIN_REPORT.md  the final report assembling those captures
+#   doc/                   authored ADRs and configuration docs. Note the singular:
+#                          the GENERATED Doxygen output directory is /docs (plural)
+#                          and is the only one of the two that is ignored
+#   i18n/ and tests/       authored message files and test suites
+
+# git-deploy status file:
+/.deploy
+
+# Editors
+*.kate-swp
+*~
+\#*#
+.#*
+.*.swp
+.project
+cscope.files
+cscope.out
+## NetBeans
+nbproject*
+project.index
+## Sublime
+sublime-*
+sftp-config.json
+## Eclipse, IntelliJ and VS Code workspace metadata
+.idea
+.metadata*
+.settings
+.vscode
+
+# Building & testing
+## Resolved locally by `composer install`; only composer.json is committed.
+/composer.lock
+## Generated API documentation output (Doxygen OUTPUT_DIRECTORY), not authored doc/.
+/docs
+## Installed by `npm install` and `composer install`. Load-bearing exclusions:
+## .phpcs.xml resolves ./vendor/mediawiki/mediawiki-codesniffer/MediaWiki and
+## .phan/config.php requires ../vendor/mediawiki/mediawiki-phan-config/src/config.php,
+## both of which exist only inside these locally installed trees.
+/node_modules
+/vendor
+## Jest coverage report output.
+/coverage
+
+# Tool caches
+## Written by `eslint --cache`, `stylelint --cache` and PHPUnit respectively.
+.eslintcache
+/.stylelintcache
+/.phpunit.result.cache
+
+# Operating systems
+## Mac OS X
+.DS_Store
+## Windows
+Thumbs.db
+
+# Misc
+.buildpath
+.classpath
+/static*
+/tags
+/.htaccess
+/.htpasswd

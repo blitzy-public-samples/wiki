@@ -1,0 +1,28 @@
+{{!
+	Bottom dock: a fixed-position menu anchored to the bottom of the viewport.
+	Rendered last in skin.mustache, after the page container and the sticky header container.
+	Styled by resources/skins.notion.js/bottomDock.less, which targets the core-owned portlet
+	classes below; this partial therefore adds no presentational class of its own.
+
+	object|null data-portlets.data-dock-bottom the "dock-bottom" portlet from core's
+		standardised data-portlets structure. Its items are contributed by extensions and
+		gadgets through mw.util.addPortletLink with the p-dock-bottom target, so on a
+		default install the portlet arrives carrying no items and the list renders empty.
+		The guard below additionally means that a data set which omits the portlet
+		altogether emits no markup whatsoever, rather than an empty fixed-position shell.
+	string class core-owned portlet classes, e.g. "mw-portlet mw-portlet-dock-bottom", with
+		"emptyPortlet" appended while the dock holds no items. Passed through verbatim: the
+		class is owned by core, not by the skin, and is the styling and scripting hook.
+	string id core-owned portlet id, "p-dock-bottom". Passed through verbatim: it is the
+		public target of mw.util.addPortletLink and thus part of the DOM contract.
+	object[] array-items one record per dock item, each carrying html-item.
+	string array-items.html-item pre-rendered list-item markup for a single dock item,
+		emitted unescaped so the surrounding list keeps only list-item children.
+}}
+{{#data-portlets.data-dock-bottom}}
+<div class="{{ class }}" id="{{id}}">
+	<ul>
+		{{#array-items}}{{{html-item}}}{{/array-items}}
+	</ul>
+</div>
+{{/data-portlets.data-dock-bottom}}
