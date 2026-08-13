@@ -1,7 +1,7 @@
 {
 	"name": "mediawiki/blitzy-skin",
 	"type": "mediawiki-skin",
-	"description": "MediaWiki skin rendering content in the Blitzy web design language",
+	"description": "MediaWiki skin that renders wiki content in the Blitzy web design language",
 	"keywords": [
 		"wiki",
 		"MediaWiki",
@@ -21,23 +21,31 @@
 	"extra": {
 		"installer-name": "Blitzy"
 	},
-	"scripts": {
-		"fix": [
-			"minus-x fix .",
-			"phpcbf"
-		],
-		"test": [
-			"parallel-lint . --exclude node_modules --exclude vendor",
-			"@phpcs",
-			"minus-x check ."
-		],
-		"phan": "phan -d . --long-progress-bar",
-		"phpcs": "phpcs -sp --cache"
-	},
 	"config": {
 		"allow-plugins": {
 			"composer/installers": true,
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
+	},
+	"scripts": {
+		"test": [
+			"parallel-lint . --exclude node_modules --exclude vendor",
+			"@phpcs",
+			"minus-x check ."
+		],
+		"phpcs": "phpcs -sp --cache",
+		"fix": [
+			"minus-x fix .",
+			"phpcbf"
+		],
+		"phan": "phan -d . --long-progress-bar -k vendor/mediawiki/mediawiki-phan-config/src/config.php",
+		"test:size": "@composer -d ../../ phpunit skins/Blitzy/tests/phpunit/structure/BundleSizeTest.php"
+	},
+	"scripts-descriptions": {
+		"test": "Runs the three PHP checks of the zero-warning build gate in order: PHP syntax linting, the MediaWiki coding standard, and file-permission checking. Each step is also runnable on its own.",
+		"phpcs": "Checks PHP files against the MediaWiki coding standard defined in .phpcs.xml, showing sniff codes and progress and caching results between runs.",
+		"fix": "Applies the automatically fixable coding-standard and file-permission corrections. Run 'composer test' afterwards to confirm nothing is left.",
+		"phan": "Runs static analysis using the pinned mediawiki/mediawiki-phan-config configuration. Expects this package to sit at skins/Blitzy inside a MediaWiki checkout, or MW_INSTALL_PATH to point at one.",
+		"test:size": "Runs the ResourceLoader bundle-size structure test through the MediaWiki core Composer project, because the test extends a base class that only exists in the core tree. Requires this package at skins/Blitzy inside that checkout."
 	}
 }
