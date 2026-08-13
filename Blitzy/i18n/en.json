@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"skinname-blitzy": "Blitzy",
+	"blitzy-specialversion-name": "Blitzy",
+	"blitzy-skin-desc": "Renders MediaWiki content in the Blitzy design language, with a floating navigation card, a hero content header, card-based content surfaces and a dark mode that follows the operating system preference.",
+	"blitzy.css": "/* Styles added on this page apply only when the Blitzy skin is active. */",
+	"blitzy.js": "/* Scripts added on this page run only when the Blitzy skin is active. */",
+	"blitzy-jumptocontent": "Jump to content",
+	"blitzy-nav-toggle": "Toggle navigation menu",
+	"blitzy-personal-toggle": "Toggle user menu",
+	"blitzy-toc-toggle": "Toggle table of contents",
+	"blitzy-announcement-dismiss": "Dismiss announcement"
+}

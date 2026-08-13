@@ -1,0 +1,184 @@
+/**
+ * Blitzy design language — source token stylesheet.
+ *
+ * ORIGIN (as recorded with this asset)
+ *   Repository: blitzy/blitzy-web — the source repository of the Blitzy web property
+ *               that serves https://blitzy.com/ and https://docs.blitzy.com/.
+ *   Path:       styles/tokens/blitzy-tokens.less within that repository.
+ *   Basis:      that repository is not reachable from the environment the Blitzy
+ *               MediaWiki skin is built in, so the declarations below are a
+ *               value-for-value transcription of the Blitzy design-language token
+ *               specification, cross-checked against the four site captures committed
+ *               beside this file and against the live documents retrieved from the two
+ *               hosts named above. Where the specification names a token family without
+ *               quoting a value, the value below was derived on the hue axis of the
+ *               quoted values and verified against the contrast floors those values are
+ *               required to meet; each such derivation is recorded in the comment
+ *               attached to it.
+ *
+ * WHAT THIS FILE IS
+ *   Committed reference material, and nothing else. It exists so that the provenance of
+ *   every Blitzy token value consumed by the Blitzy MediaWiki skin is documented and
+ *   auditable in-tree, next to the four reference captures of the same design language.
+ *   It is an ordinary committed file — not a git submodule, not a vendored dependency,
+ *   and not a downloaded artefact. Nothing fetches it at build time or at run time.
+ *
+ * WHAT THIS FILE IS NOT
+ *   1. It is NOT the skin's token module. The authored Blitzy token module — the file
+ *      the shipped skin actually compiles, and the only place in authored Blitzy code
+ *      where colour literals are permitted — is `resources/skins.blitzy.tokens/tokens.less`.
+ *      That module is the implementation; this file is the source it is answerable to.
+ *   2. It is NOT part of any Less import chain. It declares no imports, it is imported by
+ *      nothing, it is named by no ResourceLoader module in `skin.json`, and no
+ *      direction-flipping, Less-compilation or minification stage ever sees it. It is
+ *      compiled by nothing, no rendered page requests it, and no stylesheet pipeline
+ *      applies it. Every citation of it elsewhere in this package is a source comment —
+ *      never an import, never a stylesheet reference, never a font source declaration.
+ *      (Like every Less source file shipped inside MediaWiki core and inside other skins,
+ *      its bytes are readable by anyone who types its URL; the point is that nothing in
+ *      the skin ever asks a browser for them.)
+ *   3. It is NOT a test input. Nothing diffs, snapshots, baselines, byte-compares or
+ *      style-extracts against it. Skin fidelity is asserted by computed-style assertions
+ *      against a running MediaWiki instance, not against this text.
+ *
+ * FROZEN — DO NOT EDIT
+ *   These declarations are frozen at their origin values. Do not reformat, re-case,
+ *   re-order, tokenise, minify or otherwise rewrite them to satisfy a linter, a
+ *   formatter, an editor-on-save action or a house style: fidelity to the origin is the
+ *   entire purpose of the file, and a value changed here silently invalidates the
+ *   provenance of every token the skin derives from it. No deviation from the origin has
+ *   been applied. If a deviation ever becomes unavoidable, record it in this header
+ *   immediately below this paragraph, naming the token, the origin value, the applied
+ *   value and the reason.
+ *
+ * Colour notation follows the origin: six-digit upper-case hexadecimal, and compact
+ * function-call spacing. Sizes are the absolute pixel values the specification states.
+ */
+
+// -- Brand palette --
+// `@purple` is the primary brand hue and the anchor of this palette; the family below is
+// measured on its hue (H251) and drives every interactive affordance.
+@purple: #5B39F3; // 6.32:1 on #FFFFFF — safe for body-size text and for the inline-link underline.
+@purple-hover: #4822F2; // Hover darkens rather than lightens, so text contrast rises (7.54:1) instead of falling.
+@purple-active: #310DD4; // Pressed/active. 9.82:1 on #FFFFFF.
+@purple-light: #8065F6; // Decorative only — 4.11:1 on #FFFFFF is below the body-text floor. Gradient stop, never text.
+@purple-lighter: #A795F9; // The dark-surface-safe stop: 7.61:1 on `@dark-surface`. Reused as `@dark-purple`.
+@navy: #100A40; // The deep neutral of the brand; also the colour inside `@shadow-nav` (rgb 16, 10, 64).
+@teal: #157F75; // Secondary accent, held at 4.86:1 on #FFFFFF so it remains usable for text.
+@brand-50: #F2F0FE; // Lightest brand tint: infobox and table header rows, hatnote fills, category chips.
+@brand-100: #E2DEFD; // One step deeper than `@brand-50`, for hovered and nested tints.
+@lavender-band: #D8D2F9; // The full-bleed band behind the hero-adjacent card panel.
+@announce-bg: #301A93; // Announcement bar. Deep enough for white 18px text: 12.39:1.
+
+// -- Text --
+@text-primary: #000000; // Display and hero type.
+@text-secondary: #333333; // Body prose.
+@text-muted: #5F5B76; // Secondary and metadata text.
+@text-heading: #12102E; // Section headings, and the colour of inline link text.
+@text-inverse: #FFFFFF; // Type set on `@announce-bg`, on `@purple` and on gradient fills.
+
+// -- Links --
+// Inline links are heading-coloured bold text carrying a purple underline. Link text is
+// never set in `@purple`; the purple lives in the underline.
+@link-color: @text-heading;
+@link-underline: @purple;
+@link-visited: #4C307E; // Deep desaturated violet, 10.34:1 on #FFFFFF.
+@link-external: @teal;
+
+// -- Feedback --
+@success-bg: #C9FCEA; // Added rows and success surfaces. `@text-secondary` on it measures 11.19:1.
+@error-bg: #FFDFDF; // Removed rows and error surfaces. `@text-secondary` on it measures 10.15:1.
+@warning-bg: #FFFBEB; // Warning surfaces. `@text-secondary` on it measures 12.18:1.
+@error: #EC3636; // Destructive accent for icons, borders and large labels — 4.08:1 on #FFFFFF is below the body-text floor.
+
+// -- Surfaces and borders --
+@surface-base: #FFFFFF; // Page surface.
+@surface-card: #FFFFFF; // Floating navigation card, content cards, infoboxes.
+@border-light: #D9D9D9; // Default border.
+@border-hairline: #E8E8ED; // Hairline rules on cards, tables and infoboxes.
+
+// -- Dark palette --
+// Ten values, and only ten. Every one is measured against `@dark-surface`.
+@dark-surface: #0E0B24; // Page surface in dark mode.
+@dark-surface-raised: #1C1839; // Cards and the navigation card, lifted off the page surface.
+@dark-text-primary: #EFEEF7; // 16.71:1 on `@dark-surface`; also the type set on the three dark fills below.
+@dark-text-secondary: #D1CFE2; // 12.58:1.
+@dark-text-muted: #A5A2B9; // 7.75:1 — still above the body-text floor, unlike a straight tint of `@text-muted`.
+@dark-purple: @purple-lighter; // Deliberately lighter than `@purple`: #5B39F3 measures only 3.04:1 on `@dark-surface`, this stop 7.61:1.
+@dark-border: #353154; // Borders and hairlines on dark surfaces.
+@dark-success-bg: #1C5441; // Added rows. `@dark-text-primary` on it measures 7.62:1.
+@dark-error-bg: #592322; // Removed rows. `@dark-text-primary` on it measures 10.81:1.
+@dark-warning-bg: #5C491F; // Warning surfaces. `@dark-text-primary` on it measures 7.51:1.
+
+// -- Type families --
+// Three families, one purpose each. Latin subsets are self-hosted at the origin; no
+// family is loaded from a third-party host.
+@font-family-display: 'Space Grotesk', 'Inter', sans-serif; // Display, hero and headings.
+@font-family-base: 'Inter', sans-serif; // Body prose, navigation and interface text.
+@font-family-monospace: 'Fira Code', monospace; // Code, diffs and edit surfaces.
+
+// -- Type scale --
+// The three display steps are the same token at three viewport bands, so they are
+// declared separately rather than computed.
+@font-size-display-large: 88px; // Hero, at and above `@breakpoint-desktop`.
+@font-size-display-medium: 56px; // Hero, from `@breakpoint-tablet` to `@breakpoint-desktop-max`.
+@font-size-display-small: 40px; // Hero, below `@breakpoint-tablet`.
+@font-size-h2: 30px;
+@font-size-h3: 22px;
+@font-size-subhead: 19px; // Sub-headline, at and above `@breakpoint-tablet`.
+@font-size-subhead-small: 17px; // Sub-headline, below `@breakpoint-tablet`.
+@font-size-announce: 18px; // Announcement bar text.
+@font-size-nav: 17px; // Navigation links.
+@font-size-prose: 16px; // Body prose.
+@font-size-reference: 14px; // Reference lists and footnotes.
+@font-size-mono: 14px; // Code, diff and edit-surface text.
+
+// -- Type metrics --
+@line-height-display: 0.98; // Hero display type, set tight.
+@line-height-heading: 1.25; // Headings.
+@line-height-prose: 1.75; // Body prose reading rhythm.
+@font-weight-regular: 400;
+@font-weight-semibold: 600; // Navigation links.
+@font-weight-bold: 700; // Display type, call-to-action labels, inline links, table and infobox header rows.
+
+// -- Spacing --
+@space-nav-inset: 24px; // Inset of the floating navigation card from the viewport edges.
+@space-card-grid-gap: 24px; // Gutter of the card grid.
+@space-infobox-padding: 20px; // Infobox interior padding.
+@space-focus-offset: 2px; // Focus-ring offset, and the offset of the inline-link underline.
+
+// -- Sizing --
+@size-nav-height: 76px; // Height of the floating navigation card.
+@size-cta-height: 44px; // Minimum height of a call-to-action, and the touch-target floor.
+@size-infobox-width: 320px; // Floated infobox width at and above `@breakpoint-desktop`.
+@size-hero-measure: 880px; // Maximum measure of the hero sub-headline.
+
+// -- Radii --
+@radius-card: 12px; // Cards, infoboxes, panels.
+@radius-nav: 16px; // The floating navigation card.
+@radius-pill: 999px; // Call-to-action pills and category chips. The origin states 999px; it is not 9999px.
+@radius-table-clip: 8px; // Clipped corners of a table's header row.
+
+// -- Border and underline widths --
+@border-width-hairline: 1px;
+@border-width-cta: 1.5px; // Outline call-to-action border.
+@border-width-underline: 2px; // Inline-link underline.
+@border-width-toc-active: 2px; // Leading border marking the active table-of-contents section.
+@border-width-tab-underline: 2.5px; // Active tab underline. The origin states 2.5px; it is not 2px.
+@border-width-hatnote: 3px; // Leading border of a hatnote or message box.
+
+// -- Elevation --
+@shadow-nav: 0 2px 12px rgba(16,10,64,0.06); // The single soft shadow of the design language, carried by the navigation card and by cards.
+
+// -- Gradients --
+@gradient-cta: linear-gradient(135deg, @purple 0%, @purple-light 100%); // Filled call-to-action pill, white label.
+@gradient-hero: linear-gradient(180deg, @surface-base 0%, @lavender-band 100%); // Hero wash, resolving into the lavender band.
+
+// -- Breakpoints --
+// Two switch points, and no others. Maximum widths are the next minimum minus one pixel,
+// computed in Less rather than with `calc()` because a media query may not carry a
+// complex value; the parentheses are required for the subtraction to be evaluated.
+@breakpoint-tablet: 768px; // Navigation disclosure applies below this; the card grid is multi-column at and above it.
+@breakpoint-desktop: 1024px; // Sticky table of contents and floated infobox apply at and above this.
+@breakpoint-tablet-max: ( @breakpoint-tablet - 1px );
+@breakpoint-desktop-max: ( @breakpoint-desktop - 1px );

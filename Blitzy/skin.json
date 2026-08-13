@@ -1,0 +1,210 @@
+{
+	"name": "Blitzy",
+	"version": "1.0.0",
+	"author": [
+		"Blitzy"
+	],
+	"namemsg": "blitzy-specialversion-name",
+	"descriptionmsg": "blitzy-skin-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.43.0"
+	},
+	"ValidSkinNames": {
+		"blitzy": {
+			"class": "MediaWiki\\Skins\\Blitzy\\SkinBlitzy",
+			"services": [
+				"MainConfig"
+			],
+			"args": [
+				{
+					"name": "blitzy",
+					"templateDirectory": "includes/templates",
+					"template": "skin",
+					"responsive": true,
+					"clientPrefEnabled": true,
+					"toc": false,
+					"bodyClasses": [
+						"skin-blitzy"
+					],
+					"menus": [
+						"user-menu",
+						"user-interface-preferences",
+						"notifications",
+						"views",
+						"actions",
+						"variants",
+						"associated-pages"
+					],
+					"styles": [
+						"skins.blitzy.tokens",
+						"skins.blitzy.styles"
+					],
+					"scripts": [
+						"skins.blitzy.js"
+					],
+					"messages": [
+						"blitzy-jumptocontent",
+						"tooltip-p-logo",
+						"navigation-heading",
+						"personaltools",
+						"search",
+						"searchbutton",
+						"searcharticle",
+						"searchsuggest-search",
+						"tagline",
+						"toc",
+						"categories",
+						"hide"
+					]
+				}
+			]
+		}
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Skins\\Blitzy\\": "includes/"
+	},
+	"TestAutoloadNamespaces": {
+		"MediaWiki\\Skins\\Blitzy\\": "includes/",
+		"MediaWiki\\Skins\\Blitzy\\Tests\\": "tests/phpunit/",
+		"MediaWiki\\Skins\\Blitzy\\Tests\\Unit\\": "tests/phpunit/unit/"
+	},
+	"MessagesDirs": {
+		"Blitzy": [
+			"i18n"
+		]
+	},
+	"SkinLessImportPaths": {
+		"blitzy": "resources/mediawiki.less/blitzy"
+	},
+	"DefaultUserOptions": {
+		"blitzy-theme": "os"
+	},
+	"HookHandlers": {
+		"BlitzyHooks": {
+			"class": "MediaWiki\\Skins\\Blitzy\\Hooks\\BlitzyHooks",
+			"services": [
+				"UserOptionsLookup"
+			]
+		}
+	},
+	"Hooks": {
+		"BeforePageDisplay": "BlitzyHooks",
+		"SkinTemplateNavigation::Universal": "BlitzyHooks"
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Blitzy"
+	},
+	"ResourceModules": {
+		"skins.blitzy.tokens": {
+			"styles": [
+				"resources/skins.blitzy.tokens/tokens.less",
+				"resources/skins.blitzy.tokens/customProperties.less"
+			]
+		},
+		"skins.blitzy.styles": {
+			"class": "MediaWiki\\ResourceLoader\\SkinModule",
+			"features": {
+				"accessibility": true,
+				"normalize": true,
+				"logo": true,
+				"content-media": true,
+				"content-links": true,
+				"content-links-external": true,
+				"content-body": true,
+				"content-tables": true,
+				"interface-category": true,
+				"interface-core": true,
+				"interface-edit-section-links": true,
+				"interface-indicators": true,
+				"interface-site-notice": true,
+				"interface-subtitle": true,
+				"interface-message-box": true,
+				"interface-user-message": true,
+				"elements": true,
+				"i18n-ordered-lists": true,
+				"i18n-headings": true,
+				"toc": true
+			},
+			"styles": [
+				"resources/skins.blitzy.styles/skin.less"
+			]
+		},
+		"skins.blitzy.js": {
+			"packageFiles": [
+				"resources/skins.blitzy.js/index.js",
+				"resources/skins.blitzy.js/announcement.js",
+				"resources/skins.blitzy.js/dropdown.js",
+				"resources/skins.blitzy.js/tableOfContents.js"
+			],
+			"dependencies": [
+				"mediawiki.storage"
+			]
+		}
+	},
+	"ResourceModuleSkinStyles": {
+		"blitzy": {
+			"+mediawiki.action.edit": "skinStyles/mediawiki.action.edit.less",
+			"+mediawiki.action.history.styles": "skinStyles/mediawiki.action.history.styles.less",
+			"+mediawiki.diff.styles": "skinStyles/mediawiki.diff.styles.less",
+			"+mediawiki.pager.styles": "skinStyles/mediawiki.pager.styles.less",
+			"+mediawiki.special": "skinStyles/mediawiki.special.less",
+			"+mediawiki.special.search.styles": "skinStyles/mediawiki.special.search.styles.less",
+			"+mediawiki.special.changeslist": "skinStyles/mediawiki.special.changeslist.less",
+			"+mediawiki.special.preferences.styles.ooui": "skinStyles/mediawiki.special.preferences.styles.ooui.less",
+			"+mediawiki.helplink": "skinStyles/mediawiki.helplink.less",
+			"+mediawiki.interface.helpers.styles": "skinStyles/mediawiki.interface.helpers.styles.less",
+			"+oojs-ui-core.styles": "skinStyles/ooui.less",
+			"+mediawiki.codex.messagebox.styles": "skinStyles/codex.less"
+		}
+	},
+	"QUnitTestModule": {
+		"localBasePath": "",
+		"remoteSkinPath": "Blitzy",
+		"dependencies": [
+			"skins.blitzy.js"
+		],
+		"scripts": [
+			"tests/qunit/announcement.test.js",
+			"tests/qunit/dropdown.test.js",
+			"tests/qunit/tableOfContents.test.js"
+		]
+	},
+	"config": {
+		"BlitzyAnnounceEnable": {
+			"value": false,
+			"description": "@var bool Whether the announcement bar is rendered above the navigation card. The shipped default is false; the verification instance sets it from the BLITZY_ANNOUNCE_ENABLE environment variable. Read by MediaWiki\\Skins\\Blitzy\\BlitzyViewModel, which omits includes/templates/AnnouncementBar.mustache entirely when this is false, so a disabled bar is absent from the DOM rather than hidden."
+		},
+		"BlitzyAnnounceText": {
+			"value": "",
+			"description": "@var string Body text of the announcement bar, anchored to the BLITZY_ANNOUNCE_TEXT environment variable. Read by BlitzyViewModel and HTML-escaped there before it reaches the template. Empty, the default, suppresses the bar even when BlitzyAnnounceEnable is true, so an empty band can never reach a rendered page."
+		},
+		"BlitzyAnnounceLabel": {
+			"value": "",
+			"description": "@var string Label of the announcement bar call-to-action button, anchored to the BLITZY_ANNOUNCE_LABEL environment variable. Read by BlitzyViewModel and HTML-escaped there. The button is rendered only when this and BlitzyAnnounceLink are both non-empty and the target passes validation; otherwise the bar shows its text alone."
+		},
+		"BlitzyAnnounceLink": {
+			"value": "",
+			"description": "@var string Link target of the announcement bar call-to-action button. Read by BlitzyViewModel and validated by MediaWiki\\Skins\\Blitzy\\BlitzyUrlValidator, which allows site-relative paths and the http and https schemes only; every other value, including a javascript: URL, is rejected and the button suppressed. Empty, the default, suppresses the button because a call to action with no target is not actionable."
+		},
+		"BlitzyPrimaryActionLabel": {
+			"value": "",
+			"description": "@var string Label of the primary, outline-styled call to action in the navigation card. Read by BlitzyViewModel and HTML-escaped there. Empty, the default, makes the view model derive the label from an existing core message: createaccount for unregistered users and mywatchlist for registered ones, so the component renders on an otherwise unconfigured wiki."
+		},
+		"BlitzyPrimaryActionLink": {
+			"value": "",
+			"description": "@var string Link target of the primary call to action, validated by BlitzyUrlValidator on the same allowlist as BlitzyAnnounceLink. Empty, the default, makes BlitzyViewModel derive the target from core: Special:CreateAccount for unregistered users and Special:Watchlist for registered ones."
+		},
+		"BlitzySecondaryActionLabel": {
+			"value": "",
+			"description": "@var string Label of the secondary, gradient-styled call to action in the navigation card. Read by BlitzyViewModel and HTML-escaped there. Empty, the default, makes the view model derive the label from the existing core message randompage."
+		},
+		"BlitzySecondaryActionLink": {
+			"value": "",
+			"description": "@var string Link target of the secondary call to action, validated by BlitzyUrlValidator on the same allowlist as BlitzyAnnounceLink. Empty, the default, makes BlitzyViewModel derive the target from core: Special:Random."
+		}
+	},
+	"manifest_version": 2
+}

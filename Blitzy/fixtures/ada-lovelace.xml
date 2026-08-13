@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+	<siteinfo>
+		<sitename>Wikipedia</sitename>
+		<dbname>enwiki</dbname>
+		<base>https://en.wikipedia.org/wiki/Main_Page</base>
+		<generator>MediaWiki 1.47.0-wmf.14</generator>
+		<case>first-letter</case>
+		<namespaces>
+			<namespace key="-2" case="first-letter">Media</namespace>
+			<namespace key="-1" case="first-letter">Special</namespace>
+			<namespace key="0" case="first-letter" />
+			<namespace key="1" case="first-letter">Talk</namespace>
+			<namespace key="2" case="first-letter">User</namespace>
+			<namespace key="3" case="first-letter">User talk</namespace>
+			<namespace key="4" case="first-letter">Wikipedia</namespace>
+			<namespace key="5" case="first-letter">Wikipedia talk</namespace>
+			<namespace key="6" case="first-letter">File</namespace>
+			<namespace key="7" case="first-letter">File talk</namespace>
+			<namespace key="8" case="first-letter">MediaWiki</namespace>
+			<namespace key="9" case="first-letter">MediaWiki talk</namespace>
+			<namespace key="10" case="first-letter">Template</namespace>
+			<namespace key="11" case="first-letter">Template talk</namespace>
+			<namespace key="12" case="first-letter">Help</namespace>
+			<namespace key="13" case="first-letter">Help talk</namespace>
+			<namespace key="14" case="first-letter">Category</namespace>
+			<namespace key="15" case="first-letter">Category talk</namespace>
+		</namespaces>
+	</siteinfo>
+	<page>
+		<title>Ada Lovelace</title>
+		<ns>0</ns>
+		<id>1001</id>
+		<revision>
+			<id>2001</id>
+			<timestamp>2026-06-22T18:42:17Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: article subset derived from https://en.wikipedia.org/w/index.php?oldid=1360639004 (CC BY-SA 4.0)</comment>
+			<origin>2001</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="47879" sha1="tf1162coui5k9tavjdkrac2m26gm5x1" xml:space="preserve">{{Short description|English mathematician (1815–1852)}}
+{{For|the computer microarchitecture|Ada Lovelace (microarchitecture)}}
+{{Pp-semi-indef}}
+{{Use British English|date=November 2019}}
+{{Use dmy dates|date=May 2024}}
+{{Infobox scientist
+| name              = The Countess of Lovelace
+| honorific_prefix  = [[The Right Honourable]]
+| image             = Ada Lovelace daguerreotype by Antoine Claudet 1843 - cropped.png
+| caption           = [[Daguerreotype]] of Lovelace ({{circa|1843}})&lt;ref&gt;{{cite web | url=https://blogs.bodleian.ox.ac.uk/adalovelace/2015/10/14/only-known-photographs-of-ada-lovelace-in-bodleian-display/ | title=Only known photographs of Ada Lovelace in Bodleian Display | date=14 October 2015 }}&lt;/ref&gt;
+| birth_name        = Augusta Ada Byron
+| birth_date        = {{birth date|df=y|1815|12|10}}
+| birth_place       = London, England
+| death_date        = {{death date and age|df=y|1852|11|27|1815|12|10}}
+| death_place       = [[Marylebone]], London, England
+| resting place     = [[Church of St Mary Magdalene, Hucknall]], Nottingham, England
+| spouse            = {{marriage|[[William King-Noel, 1st Earl of Lovelace]]|1835}}
+| children          = {{plainlist|
+* [[Byron King-Noel, Viscount Ockham]]
+* [[Anne Blunt, 15th Baroness Wentworth]]
+* [[Ralph King-Milbanke, 2nd Earl of Lovelace]]}}
+| parents           = {{Plainlist |
+* [[Lord Byron|George Byron, 6th Baron Byron]] (father)
+* [[Lady Byron|Anne Isabella Milbanke]] (mother)
+}}
+| known_for         = [[Mathematics]], [[computing]]
+| signature         = Augusta Ava Lovelace autograph.svg
+| alt               = Augusta Ada King, Countess of Lovelace, daguerrotype portrait circa 1843
+}}
+
+'''Augusta Ada King, Countess of Lovelace''' ({{née|'''Byron'''}}; 10 December 1815 – 27 November 1852), also known as '''Ada Lovelace''', was an English [[mathematician]] and [[writer]] chiefly known for work on [[Charles Babbage]]'s proposed mechanical general-purpose [[computer]], the [[analytical engine]]. She was the first to recognise the machine had applications beyond pure calculation. Lovelace is often considered the first [[computer programmer]].
+
+Lovelace was the only [[legitimate child]] of poet [[Lord Byron]] and reformer [[Lady Byron|Anne Isabella Milbanke]].&lt;ref&gt;{{cite web|url=https://www.biography.com/people/ada-lovelace-20825323|title=Ada Lovelace Biography|website=biography.com|date=6 May 2021 }}&lt;/ref&gt; Lord Byron separated from his wife a month after Ada was born, and died when she was eight. Although often ill in childhood, Lovelace pursued her studies [[assiduous]]ly. She married [[William King-Noel, 1st Earl of Lovelace|William King]] in 1835. King was a [[Baron]], and was created Viscount Ockham and 1st [[Earl of Lovelace]] in 1838. The name Lovelace was chosen because Ada was descended from the extinct [[Baron Lovelace]]s.&lt;ref&gt;{{Citation |last=Jaeger |first=Lars |chapter=Ada Lovelace (1815–1852): Inventor of Computer Algorithms |date=2023 |title=Women of Genius in Science : Whose Frequently Overlooked Contributions Changed the World |pages=71–82 |editor-last=Jaeger |editor-first=Lars |chapter-url=https://doi.org/10.1007/978-3-031-23926-7_7 |access-date=2025-09-30 |place=Cham |publisher=Springer International Publishing |language=en |doi=10.1007/978-3-031-23926-7_7 |isbn=978-3-031-23926-7|chapter-url-access=subscription }}&lt;/ref&gt; The title given to her husband thus made Ada the Countess of Lovelace.
+
+Lovelace's educational and social exploits brought her into contact with scientists such as [[Andrew Crosse]], [[Charles Babbage]], [[David Brewster]], [[Charles Wheatstone]] and [[Michael Faraday]], and the author [[Charles Dickens]], contacts which she used to further her education. Lovelace described her approach as "poetical science"{{Sfn|Toole|1998|pp=234–235}} and herself as an "Analyst (&amp; [[Metaphysics|Metaphysician]])".{{Sfn|Toole|1998|pp=156–157}}
+
+When she was eighteen, Lovelace's mathematical talents led her to a long working relationship and friendship with fellow British mathematician Charles Babbage. She was particularly interested in Babbage's work on the analytical engine. Lovelace first met him on 5 June 1833, when she and her mother attended one of [[Charles Babbage's Saturday night soirées]]&lt;ref&gt;{{Cite book |last=Toole |first=Betty Alexandra |title=Ada, the Enchantress of Numbers:Poetical Science |date=2010 |publisher=Critical Connection |edition=Kindle |pages=Location 641}}&lt;/ref&gt; with their mutual friend, and Lovelace's private tutor, [[Mary Somerville]]. Though Babbage's analytical engine was never constructed and did not influence the invention of electronic computers, it has been recognised as a [[Turing completeness|Turing-complete]] general-purpose computer, which anticipated the essential features of a modern electronic computer. Babbage is therefore known as the "father of computers," and Lovelace is credited with several computing "firsts" for her collaboration with him. Lovelace translated [[wikisource:Scientific Memoirs/3/Sketch of the Analytical Engine invented by Charles Babbage, Esq.|an article]] by the military engineer [[Luigi Menabrea]] about the analytical engine, supplementing it with [[wikisource:Scientific Memoirs/3/Sketch of the Analytical Engine invented by Charles Babbage, Esq./Notes by the Translator|seven long explanatory notes]].&lt;!--this is an inappropriate way of linking this material -- maybe a marginal box or something, but that can't be in the lead--&gt; These described a method of using the machine to calculate [[Bernoulli number]]s which is often called the first published [[computer program]].
+
+She developed a vision of the capability of computers to go beyond mere [[Calculation|calculating]] or number-crunching, while many others, including Babbage, focused only on those capabilities.{{Sfn|Fuegi|Francis|2003|pp=19, 25}} Lovelace was the first to point out the possibility of encoding information besides mere [[arithmetic]]al figures, such as [[music]], and manipulating it with such a machine. Her mindset of "poetical science" led her to ask questions about the analytical engine, examining how individuals and society relate to technology as a collaborative tool.&lt;ref name="ABCL"&gt;{{Citation|last=Toole|first=Betty Alexandra|title=Poetical Science|journal=The Byron Journal|volume=15|year=1987|pages=55–65|doi=10.3828/bj.1987.6}}.&lt;/ref&gt; Ada is widely commemorated, including in the names of a [[Ada (programming language)|programming language]], roads, buildings and institutes, as well as programmes, lectures and courses. There are plaques, statues, paintings, literary and non-fiction works about her.
+
+==Biography==
+===Childhood===
+[[Lord Byron]] expected his child to be a "glorious boy" and was disappointed when [[Lady Byron]] gave birth to a girl.{{Sfn|Turney|1972|p=35}} The child was named after Byron's half-sister, [[Augusta Leigh]], and was called "Ada" by Byron himself.{{Sfn|Stein|1985|p=17}} On 16 January 1816, at Lord Byron's command, Lady Byron left for her parents' home at [[Kirkby Mallory]], taking their five-week-old daughter with her.{{Sfn|Turney|1972|p=35}} Although English law at the time granted full custody of children to the father in cases of separation, Lord Byron made no attempt to claim his parental rights,{{Sfn|Stein|1985|p=16}} but did request that his sister keep him informed of Ada's welfare.{{Sfn|Woolley|1999|p=80}}
+
+[[File:Miniature of Ada Byron.jpg|thumb|Ada Byron, aged four|alt=portrait of a young girl]]
+
+On 21 April, Lord Byron signed the [[deed of separation]], although very reluctantly, and left England for good a few days later.{{Sfn|Turney|1972|pp=36–38}} Aside from an acrimonious separation, Lady Byron continued throughout her life to make allegations about her husband's immoral behaviour.{{Sfn|Woolley|1999|pp=74–77}} This set of events made Lovelace infamous in Victorian society. Ada did not have a relationship with her father. He died in April 1824 when she was eight years old. Her mother was the only significant parental figure in her life.&lt;ref name="Turney p. 138"&gt;{{Harvnb|Turney|1972|p=138}}.&lt;/ref&gt; Lovelace was not shown the family portrait of her father until her 20th birthday.{{Sfn|Woolley|1999|p=10}}
+
+[[File:Ada Lovelace child portrait Somerville College.jpg|thumb|left|Ada Byron, aged seven, by [[Alfred d'Orsay]], 1822, [[Somerville College, Oxford]]|alt=Ada Byron, portrait at age 7]]
+
+Lovelace did not have a close relationship with her mother. She was often left in the care of her maternal grandmother Judith, Hon. Lady Milbanke, who doted on her. However, because of societal attitudes of the time—which favoured the husband in any separation, with the welfare of any child acting as mitigation—Lady Byron had to present herself as a loving mother to the rest of society. This included writing anxious letters to Lady Milbanke about her daughter's welfare, with a cover note saying to retain the letters in case she had to use them to show maternal concern.{{Sfn|Woolley|1999|pp=85–87}} In one letter to Lady Milbanke, she referred to her daughter as "it": "I talk to it for your satisfaction, not my own, and shall be very glad when you have it under your own."{{Sfn|Woolley|1999|p=86}} Lady Byron had her teenage daughter watched by close friends for any sign of moral deviation. Lovelace dubbed these observers the "Furies" and later complained they exaggerated and invented stories about her.{{Sfn|Woolley|1999|p=119}}
+
+[[File:Ada Byron aged seventeen (1832).jpg|thumb|upright=0.9|Ada Byron, aged seventeen, 1832|alt=Ada Byron, portrait drawn at age 17]]
+
+Lovelace was often ill, beginning in early childhood. At the age of eight, she experienced headaches that obscured her vision.{{Sfn | Stein|1985|p=17}} In June 1829, she was paralyzed after a bout of [[measles]]. She was subjected to continuous bed rest for nearly a year, something which may have extended her period of disability. By 1831, she was able to walk with crutches. Despite the illnesses, she developed her mathematical and technological skills.
+
+{{Blockquote|text=When Ada was twelve years old, this future "Lady Fairy", as Charles Babbage affectionately called her, decided she wanted to fly. Ada Byron went about the project methodically, thoughtfully, with imagination and passion. Her first step, in February 1828, was to construct wings. She investigated different material and sizes. She considered various materials for the wings: paper, oilsilk, wires, and feathers. She examined the [[anatomy of birds]] to determine the right proportion between the wings and the body. She decided to write a book, ''Flyology,'' illustrating, with plates, some of her findings. She decided what equipment she would need; for example, a compass, to "cut across the country by the most direct road", so that she could surmount mountains, rivers, and valleys. Her final step was to integrate steam with the "art of flying".&lt;ref name=ABCL/&gt;}}
+
+Ada Byron had an affair with a tutor in early 1833. She tried to elope with him after she was caught, but the tutor's relatives recognised her and contacted her mother. Lady Byron and her friends covered the incident up to prevent a public scandal.{{Sfn|Woolley|1999|pp=120–21}} Lovelace never met her younger half-sister, [[Allegra Byron|Allegra]], the daughter of Lord Byron and [[Claire Clairmont]]. Allegra died in 1822 at the age of five. Lovelace did have some contact with [[Elizabeth Medora Leigh]], the daughter of Byron's half-sister Augusta Leigh, who purposely avoided Lovelace as much as possible when introduced at court.{{Sfn|Turney|1972|p=155}}
+
+===Adult years===
+[[File:Ada Lovelace portrait.jpg|thumb|Watercolour portrait of Ada King, Countess of Lovelace, {{Circa|1840}}, possibly by [[Alfred Edward Chalon]]|alt=Ada King, Countess of Lovelace. Watercolour portrait circa 1840]]
+
+Lovelace became close friends with her tutor [[Mary Somerville]], who introduced her to Charles Babbage in 1833. She had a strong respect and affection for Somerville,{{Sfn|Woolley|1999|pp=138–40}} and they corresponded for many years. Other acquaintances included the scientists [[Andrew Crosse]], [[David Brewster|Sir David Brewster]], [[Charles Wheatstone]], [[Michael Faraday]] and the author [[Charles Dickens]]. She was [[debutante|presented at Court]] at the age of seventeen "and became a popular belle of the season" in part because of her "brilliant mind".{{Sfn|Turney|1972|p=138}} By 1834 Ada was a regular at Court and started attending various events. She danced often and was able to charm many people, and was described by most people as being dainty, although [[John Hobhouse, 1st Baron Broughton|John Hobhouse]], Byron's friend, described her as "a large, coarse-skinned young woman but with something of my friend's features, particularly the mouth".{{Sfn|Turney|1972|pp=138–39}} This description followed their meeting on 24 February 1834 in which Ada made it clear to Hobhouse that she did not like him, probably due to her mother's influence, which led her to dislike all of her father's friends. This first impression was not to last, and they later became friends.{{Sfn|Turney|1972|p=139}}
+[[File:Ada Lovelace's husband William King in uniform.webp|thumb|William King, 1st Earl of Lovelace in uniform]]
+On 8 July 1835, she married [[William King, 1st Earl of Lovelace|William, 8th Baron King]], becoming Lady King. They had three homes: [[Ockham Park]], Surrey; a Scottish estate on [[Torridon|Loch Torridon]] in [[Ross-shire]]; and a house in London. They spent their honeymoon at Ashley Combe near [[Porlock Weir]], Somerset, which had been built as a hunting lodge in 1799 and was improved by King in preparation for their honeymoon. It later became their summer retreat and was further improved during this time. From 1845, the family's main house was [[Horsley Towers]], built in the [[Tudor Revival architecture|Tudorbethan]] fashion by the architect of the Houses of Parliament, [[Charles Barry]],&lt;ref&gt;{{cite book |url=http://www.british-history.ac.uk/vch/surrey/vol3/pp349-352 |title=A History of the County of Surrey: Volume 3. Parishes: East Horsley|access-date=26 February 2017 |quote=Horsley Towers is a large house standing in a park of 300 acres, the seat of the Earl of Lovelace. The old house was rebuilt about 1745. The present house was built by Sir Charles Barry for Mr. Currie on a new site, between 1820 and 1829, in Elizabethan style. Mr. Currie, who owned the combined manors, 1784–1829, rebuilt most of the houses in the village and restored the church.}}&lt;/ref&gt;&lt;ref&gt;{{cite book|title=Andrew Crosse and the mite that shocked the world: The life and work of an electrical pioneer |last=Wright |first=Brian |isbn=978-1-78462-438-5 |page=262 |year=2015 |publisher=Matador }}&lt;/ref&gt; and later greatly enlarged to Lovelace's own designs.
+
+They had three children: [[Byron King-Noel, Viscount Ockham|Byron]] (born 1836); [[Lady Anne Blunt|Anne Isabella]] (called Annabella, born 1837); and [[Ralph King-Milbanke, 2nd Earl of Lovelace|Ralph Gordon]] (born 1839). Immediately after the birth of Annabella, Lady King experienced "a tedious and suffering illness, which took months to cure".{{Sfn|Turney|1972|p=139}} Ada was a descendant of the extinct [[Baron Lovelace|Barons Lovelace]] and in 1838, her husband was made [[Earl of Lovelace]] and Viscount Ockham, meaning Ada became the Countess of Lovelace.&lt;ref&gt;{{cite news |via=[[NewspaperArchive.com]] |url=https://newspaperarchive.com/entertainment-clipping-apr-09-1841-1422479/ |work=[[Macon Georgia Telegraph]] |location=[[Macon, Georgia|Macon]], Georgia |date=9 April 1841 |page=3 |title=New York Fifty Years Ago }}&lt;/ref&gt; In 1843–44, Ada's mother assigned [[William Benjamin Carpenter]] to teach Ada's children and to act as a "moral" instructor for Ada.{{Sfn|Woolley|1999|pp=285–86}} He quickly fell for her and encouraged her to express any frustrated affections, claiming that his marriage meant he would never act in an "unbecoming" manner. When it became clear that Carpenter was trying to start an affair, Ada cut it off.{{Sfn|Woolley|1999|pp=289–96}}
+
+In 1841, Lovelace and [[Elizabeth Medora Leigh|Medora Leigh]] (the daughter of Lord Byron's half-sister Augusta Leigh) were told by Ada's mother that Ada's father was also Medora's father.{{Sfn|Turney|1972|p=159}} On 27 February 1841, Ada wrote to her mother: "I am not in the least ''astonished''. In fact, you merely ''confirm'' what I have for ''years and years'' felt scarcely a doubt about, but should have considered it most improper in me to hint to you that I in any way suspected."{{Sfn|Turney|1972|p=160}} She did not blame the incestuous relationship on Byron, but instead blamed Augusta Leigh: "I fear she is more inherently wicked than he ever was."{{Sfn|Moore|1961|p=431}} In the 1840s, Ada flirted with scandals: firstly, from a relaxed approach to extra-marital relationships with men, leading to rumours of affairs;{{Sfn|Woolley|1999|p=302}} and secondly, from her love of gambling. She apparently lost more than £3,000 on the horses during the later 1840s.&lt;ref&gt;{{cite web|url=http://www.hrc.wmin.ac.uk/theory-babbagesdancer-print.html|archive-url=https://web.archive.org/web/20030628211849/http://www.hrc.wmin.ac.uk/theory-babbagesdancer-print.html|url-status=dead|archive-date=28 June 2003|title=Babbage's Dancer|first=Simon|last=Schaffer|publisher=the hypermedia research centre|access-date=4 August 2017}}&lt;/ref&gt; The gambling led to her forming a syndicate with male friends, and an ambitious attempt in 1851 to create a mathematical model for successful large bets. This went disastrously wrong, leaving her thousands of pounds in debt to the syndicate, forcing her to admit it all to her husband.{{Sfn|Woolley|1999|pp=340–42}} She had a shadowy relationship with Andrew Crosse's son John from 1844 onwards. John Crosse destroyed most of their correspondence after her death as part of a legal agreement. She bequeathed him the only heirlooms her father had personally left to her.{{Sfn|Woolley|1999|pp=336–37}} During her final illness, she would panic at the idea of the younger Crosse being kept from visiting her.{{Sfn|Woolley|1999|p=361}}
+
+===Education===
+[[File:Ada Lovelace sonnet The Rainbow Somerville College.JPG|thumb|Sonnet titled ''The Rainbow'' in Lovelace's own hand ([[Somerville College Library|Somerville College]])]]
+From 1832, when she was seventeen, her mathematical abilities began to emerge,{{Sfn|Turney|1972|p=138}} and her interest in mathematics dominated the majority of her adult life.{{Sfn|Stein|1985|pp=28–30}} Her mother's obsession with rooting out any of the insanity of which she accused Byron was one of the reasons that Ada was taught mathematics from an early age. She was privately educated in mathematics and science by [[William Frend (social reformer)|William Frend]], [[William King (physician)|William King]],&lt;ref name=williamkings group=lower-alpha&gt;William King, her tutor, and William King, her future husband, were not related.&lt;/ref&gt; and [[Mary Somerville]], the noted 19th-century researcher and scientific author. In the 1840s, the mathematician [[Augustus De Morgan]] extended her "much help in her mathematical studies" including study of advanced calculus topics including the "[[Bernoulli number|numbers of Bernoulli]]" (that formed her celebrated algorithm for Babbage's Analytical Engine).&lt;ref&gt;Thomas J. Misa, "Charles Babbage, Ada Lovelace, and the Bernoulli Numbers" in ''Ada's Legacy: Cultures of Computing from the Victorian to the Digital Age'', edited by Robin Hammerman and Andrew L. Russell (ACM Books, 2015), pp. 18–20, {{doi|10.1145/2809523}}.&lt;/ref&gt; In a letter to Lady Byron, De Morgan suggested that Ada's skill in mathematics might lead her to become "an original mathematical investigator, perhaps of first-rate eminence".{{Sfn|Stein|1985|p=82}}
+
+Lovelace often questioned basic assumptions through integrating poetry and science. Whilst studying [[differential calculus]], she wrote to De Morgan:
+
+&lt;blockquote&gt;I may remark that the curious transformations many formulae can undergo, the unsuspected and to a beginner apparently impossible identity of forms exceedingly dissimilar at first sight, is I think one of the chief difficulties in the early part of mathematical studies. I am often reminded of certain sprites and fairies one reads of, who are at one's elbows in ''one'' shape now, and the next minute in a form most dissimilar.{{Sfn|Toole|1998|p=99}}&lt;/blockquote&gt;
+
+Lovelace believed that intuition and imagination were critical to effectively applying mathematical and scientific concepts. She valued [[metaphysics]] as much as mathematics, viewing both as tools for exploring "the unseen worlds around us".{{Sfn|Toole|1998|pp=91–100}}
+
+===Death===
+[[File:Ada Lovelace in 1852.jpg|thumb|Painting of Lovelace seated at a piano, by [[Henry Wyndham Phillips|Henry Phillips]] (1852). Although in great pain at the time, she agreed to sit for the painting as her father, [[Lord Byron]], had been painted by Phillips' father, [[Thomas Phillips]].|alt=Ada Lovelace, painted portrait circa 1852]]
+
+Lovelace died at the age of 36 on 27 November 1852&lt;ref&gt;{{Citation |publisher=GRO |title=Register of Deaths |contribution=December 1852 1a * MARYLEBONE&amp;nbsp;– Augusta Ada Lovelace}}.&lt;/ref&gt; from [[cervical cancer]] (which contemporary accounts called uterine cancer, since a distinction between the two was not made at that time).{{Sfn|Baum|1986|pp=99–100}}&lt;ref&gt;{{Cite book |last=Lowy |first=Ilana |url=https://books.google.com/books?id=b0vgZtfspJMC&amp;dq=ada+lovelace+cervical+cancer&amp;pg=PP1 |title=A Woman's Disease: The History of Cervical Cancer |date=2011-11-10 |publisher=OUP Oxford |isbn=978-0-19-954881-1 |language=en}}&lt;/ref&gt; The illness lasted several months, in which time Lady Byron took command over whom Ada saw, and excluded all of her friends and confidants. Under her mother's influence, Ada had a religious transformation and was coaxed into repenting of her previous conduct and making Lady Byron her [[executor#Executor of will|executor]].{{Sfn|Woolley|1999|p=370}} She lost contact with her husband after confessing something to him on 30 August which caused him to abandon her bedside. It is not known what she told him.{{Sfn|Woolley|1999|p=369}} She was buried, at her request, next to her father at the [[Church of St. Mary Magdalene, Hucknall|Church of St. Mary Magdalene]] in Hucknall, Nottinghamshire.&lt;ref name="Nast Wolfram 2015 d713"&gt;{{cite magazine  |last=Wolfram | first=Stephen | title=Untangling the Tale of Ada Lovelace | magazine=WIRED | date=22 December 2015 | url=https://www.wired.com/2015/12/untangling-the-tale-of-ada-lovelace/ | access-date=6 April 2024}}&lt;/ref&gt;
+
+==Work==
+Throughout her life, Lovelace was strongly interested in scientific developments and fads of the day, including [[phrenology]]{{Sfn|Woolley|1999|p=198}} and [[mesmerism]].{{Sfn|Woolley|1999|pp=232–33}} After her work with Babbage, Lovelace continued to work on other projects. In 1844, she commented to a friend Woronzow Greig about her desire to create a mathematical model for how the brain gives rise to thoughts and nerves to feelings ("a calculus of the nervous system").{{Sfn|Woolley|1999|p=305}} She never achieved this, however. In part, her interest in the brain came from a long-running preoccupation, inherited from her mother, about her "potential" madness. As part of her research into this project, she visited the electrical engineer Andrew Crosse in 1844 to learn how to carry out electrical experiments.{{Sfn|Woolley|1999|pp=310–14}} In the same year, she wrote a review of a paper by Baron [[Karl von Reichenbach]], ''Researches on Magnetism'', but this was not published and does not appear to have progressed past the first draft.{{Sfn|Woolley|1999|pp=315–17}} In 1851, the year before her cancer struck, she wrote to her mother mentioning "certain productions" she was working on regarding the relation of maths and music.{{Sfn|Woolley|1999|p=335}}
+
+[[File:Ada Lovelace.jpg|thumb|left|''[[Portrait of Ada Lovelace]]'' by the British painter [[Margaret Sarah Carpenter]] (1836)|alt=Ada Lovelace, painted portrait circa 1836]]
+
+Lovelace first met [[Charles Babbage]] in June 1833, through their mutual friend Mary Somerville. Later that month, Babbage invited Lovelace to see the prototype for his [[difference engine]].{{Sfn|Toole|1998|pp=36–38}} She became fascinated with the machine and used her relationship with Somerville to visit Babbage as often as she could. Babbage was impressed by Lovelace's intellect and analytic skills. He called her "The Enchantress of Number".&lt;ref name="Number"&gt;{{cite journal |url=http://blog.stephenwolfram.com/2015/12/untangling-the-tale-of-ada-lovelace/ |first=Stephen |last=Wolfram |author-link=Stephen Wolfram |title=Untangling the Tale of Ada Lovelace |journal=Stephen Wolfram Writings |date=10 December 2015 |quote=Then, on Sept. 9, Babbage wrote to Ada, expressing his admiration for her and (famously) describing her as 'Enchantress of Number' and 'my dear and much admired Interpreter'. (Yes, despite what's often quoted, he wrote 'Number' not 'Numbers'.)}}&lt;/ref&gt;&lt;ref name=enchantress group=lower-alpha&gt;Some writers give it as "Enchantress of Numbers".&lt;/ref&gt; In 1843, he wrote to her:
+
+{{Blockquote|Forget this world and all its troubles and if possible its multitudinous Charlatans—every thing in short but the Enchantress of Number.&lt;ref name="Number"/&gt;&lt;!--part of quote in Wolfram's text, full quote in picture below, of Ada's letter--&gt;}}
+
+&lt;ref&gt;{{Cite journal |last1=Füegi |first1=John |last2=Francis |first2=Jo |date=2015-08-14 |title=Lovelace &amp; Babbage and the creation of the 1843 'notes' |url=https://doi.org/10.1145/2810201 |journal=ACM Inroads |volume=6 |issue=3 |pages=78–86 |doi=10.1145/2810201 |s2cid=7666218 |issn=2153-2184 |archive-url=https://web.archive.org/web/20200215003909/https://pdfs.semanticscholar.org/81bb/f32d2642a7a8c6b0a867379a4e9e99d872bc.pdf |archive-date=2020-02-15 |quote="She became the first person known to have crossed the intellectual threshold between conceptualizing computing as only for calculation on the one hand, and on the other hand, computing as we know it today: with wider applications made possible by symbolic substitution."|url-access=subscription }}&lt;/ref&gt;
+
+===First published computer program===
+{{main|Note G}}
+
+[[File:Diagram for the computation of Bernoulli numbers.jpg|thumb|Lovelace's diagram from "[[Note G]]", the first published computer [[algorithm]]|alt=Diagram for the computation by the Engine of the Numbers of Bernoulli]]
+
+The notes are important in the early [[history of computers]], especially since [[Note G]]&lt;ref name="fourmilab.ch"&gt;{{Cite web|url=http://www.fourmilab.ch/babbage/sketch.html|title=Sketch of ''The Analytical Engine'', with notes upon the Memoir by the Translator|publisher=fourmilab.ch|place=Switzerland|date=October 1842|access-date=28 March 2014}}&lt;/ref&gt; described, in complete detail, a method for calculating a sequence of [[Bernoulli numbers]] using the Analytical Engine, which might have run correctly had it ever been built.&lt;ref name="adaslegacy" /&gt; Though Babbage's personal notes from 1837 to 1840 contain the first programs for the engine,{{sfn|Bromley|1982|p=215}}{{sfn|Bromley|1990|p=89}}&lt;ref&gt;{{cite web|author=Ventana al Conocimiento |url=https://www.bbvaopenmind.com/en/ada-lovelace-original-and-visionary-but-no-programmer/ |title=Ada Lovelace: Original and Visionary, but No Programmer |date=9 December 2015|archive-date=March 25, 2016 | archive-url=https://web.archive.org/web/20160325214741/https://www.bbvaopenmind.com/en/ada-lovelace-original-and-visionary-but-no-programmer/}}&lt;/ref&gt; the [[algorithm]] in Note G is often called the first published computer program. The engine was never completed and so the program was never tested.{{sfn|Kim|Toole|1999}}
+
+In 1953, more than a century after her death, Ada Lovelace's notes on Babbage's Analytical Engine were republished as an appendix to [[B. V. Bowden]]'s ''Faster than Thought: A Symposium on Digital Computing Machines''.&lt;ref&gt;{{Cite book |editor=Bowden, B.V. |date=1953 |title=Faster than Thought: A Symposium on Digital Computing Machines |url=https://archive.org/details/fasterthanthough00bvbo |publisher=Pitman |place=London |oclc=1053355 |ol=13581728M}}&lt;/ref&gt; The engine has now been recognised as an early model for a computer and her notes as a description of a computer and software.&lt;ref name="adaslegacy"&gt;{{cite book |editor1-first= Robin |editor1-last= Hammerman |editor2-first=Andrew L. |editor2-last= Russell| title=Ada's Legacy: Cultures of Computing from the Victorian to the Digital Age |publisher=Morgan &amp; Claypool |year=2015 |isbn=978-1-97000-149-5 |doi=10.1145/2809523|s2cid= 62018931 }}&lt;/ref&gt;
+
+====Controversy over contribution====
+Based on this work, Lovelace is often called the first computer programmer&lt;ref&gt;{{Cite journal |last1=Haugtvedt |first1=Erica |last2=Abata |first2=Duane |date=2021 |title=Ada Lovelace: First Computer Programmer and Hacker? |url=http://peer.asee.org/36646 |journal=ASEE Virtual Annual Conference Content Access |publisher=ASEE Conferences |doi=10.18260/1-2--36646}}&lt;/ref&gt;&lt;ref&gt;{{Cite book |last=Adams |first=Beverley |title=Ada Lovelace: The World's First Computer Programmer |publisher=Pen &amp; Sword History |year=2023 |isbn=9781399082532 |location=Philadelphia, USA}}&lt;/ref&gt; and her method has been called the world's first computer program.&lt;ref&gt;{{cite book |last=Gleick |first=James |author-link=James Gleick |year=2011 |title=[[The Information: A History, a Theory, a Flood]] |location=London |publisher=Fourth Estate |pages=116–118}}&lt;/ref&gt;&lt;ref&gt;{{cite web|last=Simonite|first=Tom|url=https://www.newscientist.com/blogs/shortsharpscience/2009/03/ada-lovelace-day.html|title=Short Sharp Science: Celebrating Ada Lovelace: the 'world's first programmer'| work=[[New Scientist]] |date=24 March 2009|archive-date=27 March 2009 |archive-url=https://web.archive.org/web/20090327073325/https://www.newscientist.com/blogs/shortsharpscience/2009/03/ada-lovelace-day.html |url-status=dead}}&lt;/ref&gt;&lt;ref&gt;{{cite book|last1=Parker|first1=Matt|title=Things to Make and Do in the Fourth Dimension|date=2014|publisher=Farrar, Straus &amp; Giroux|isbn=978-0-374-27565-5|page=261}}&lt;/ref&gt;
+
+Eugene Eric Kim and Lovelace biographer, Betty Alexandra Toole, argued it was "incorrect" to regard Lovelace as the first computer programmer in an article for [[Scientific American]].{{sfn|Kim|Toole|1999}} Babbage claims credit in his autobiography for the algorithm in Note G,&lt;ref&gt;{{Cite book |last=Babbage |first=Charles |url=https://archive.org/details/passagesfromlife0000babb/mode/2up |title=Passages from the life of a philosopher |date=1864 |publisher=New Brunswick, N.J. : Rutgers University Press; Piscataway, N.J. : IEEE Press |others=Internet Archive |quote=We discussed together the various illustrations that might be introduced: I suggested several, but the selection was entirely her own. So also was the algebraic working out of the different problems, except, indeed, that relating to the numbers of Bernouilli, which I had offered to do to save Lady Lovelace the trouble. This she sent back to me for an amendment, having detected a grave mistake which I had made in the process.}} New edition 1994.{{isbn|978-0-8135-2066-7}}&lt;/ref&gt; and regardless of the extent of Lovelace's contribution to it, she was not the very first person to write a program for the Analytical Engine, as Babbage had written the initial programs for it, although the majority were never published.{{sfn|Kim|Toole|1999}} Bromley notes several dozen sample programs prepared by Babbage between 1837 and 1840, all substantially predating Lovelace's notes.&lt;ref&gt;{{cite journal |last=Bromley |first=Allan G. |date=July–September 1982 |title=Charles Babbage's Analytical Engine, 1838 |journal=IEEE Annals of the History of Computing |url=http://athena.union.edu/~hemmendd/Courses/cs80/an-engine.pdf |pages=197–217 |volume=4 |issue=3 |doi=10.1109/mahc.1982.10028 |bibcode=1982IAHC....4c.196B |s2cid=2285332 |access-date=25 December 2015 |archive-date=26 February 2021 |archive-url=https://web.archive.org/web/20210226094829/http://athena.union.edu/~hemmendd/Courses/cs80/an-engine.pdf |url-status=dead }} p. 197.&lt;/ref&gt; [[Dorothy K. Stein]] regards Lovelace's notes as "more a reflection of the mathematical uncertainty of the author, the political purposes of the inventor, and, above all, of the social and cultural context in which it was written, than a blueprint for a scientific development".&lt;ref&gt;{{cite journal |last=Stein |first=Dorothy K. |author-link=Dorothy Stein |year=1984 |title=Lady Lovelace's Notes: Technical Text and Cultural Context |journal=Victorian Studies |pages=33–67 |volume=28 |issue=1}} p. 34.&lt;/ref&gt;
+
+[[Allan Bromley (historian)|Allan G. Bromley]], in the 1990 article ''Difference and Analytical Engines'':
+{{Blockquote|All but one of the programs cited in her notes had been prepared by Babbage from three to seven years earlier. The exception was prepared by Babbage for her, although she did detect a "bug" in it. Not only is there no evidence that Ada ever prepared a program for the Analytical Engine, but her correspondence with Babbage shows that she did not have the knowledge to do so.&lt;ref&gt;{{cite book |last=Bromley |first=Allan G. |author-link=Allan G. Bromley |contribution=Difference and Analytical Engines |title=Computing Before Computers |editor-first=William |editor-last=Aspray |publisher=Iowa State University Press |location=Ames |pages=59–98 |chapter-url=http://ed-thelen.org/comp-hist/CBC-Ch-02.pdf |archive-url=https://ghostarchive.org/archive/20221009/http://ed-thelen.org/comp-hist/CBC-Ch-02.pdf |archive-date=2022-10-09 |url-status=live |date=1990 |isbn=0-8138-0047-1}} p. 89.&lt;/ref&gt;}}
+
+Bruce Collier wrote that Lovelace "made a considerable contribution to publicizing the Analytical Engine, but there is no evidence that she advanced the design or theory of it in any way".&lt;ref name="Collier 1990 p."&gt;{{cite book |last=Collier |first=Bruce |title=The Little Engines that Could've: The Calculating Machines of Charles Babbage |date=1990 |publisher=[[Garland Science]]  |isbn=0-8240-0043-9 |page=181}}&lt;/ref&gt;
+
+[[Doron Swade]] has said that Ada only published the first computer program instead of actually writing it, but agrees that she was the only person to see the potential of the analytical engine as a machine capable of expressing entities other than quantities.&lt;ref&gt;{{cite speech |last=Swade |first=Doron |author-link=Doron Swade |title=Charles Babbage and Difference Engine No. 2 |event=Talks at Google |date=12 May 2008 |location=Mountain View, CA |publisher=Talks at Google via YouTube |url=https://www.youtube.com/watch?v=7K5p_tBcrd0&amp;t=36m29s | archive-url=https://ghostarchive.org/varchive/youtube/20211122/7K5p_tBcrd0| archive-date=2021-11-22 | url-status=live|access-date=29 November 2018}}{{cbignore}}&lt;/ref&gt;
+
+In his book, ''Idea Makers'', [[Stephen Wolfram]] defends Lovelace's contributions. While acknowledging that Babbage wrote several unpublished algorithms for the Analytical Engine prior to Lovelace's notes, Wolfram argues that "there's nothing as sophisticated—or as clean—as Ada's computation of the Bernoulli numbers. Babbage certainly helped and commented on Ada's work, but she was definitely the driver of it." Wolfram then suggests that Lovelace's main achievement was to distill from Babbage's correspondence "a clear exposition of the abstract operation of the machine—something which Babbage never did".&lt;ref name="Wolfram"&gt;{{cite book |last=Wolfram |first=Stephen |title=Idea Makers: Personal Perspectives on the Lives &amp; Ideas of Some Notable People |date=2016 |publisher=Wolfram Media |isbn=978-1-57955-003-5 |pages=45–98}}&lt;/ref&gt;
+
+===Insight into potential of computing devices===
+In her notes, Ada Lovelace emphasised the difference between the Analytical Engine and previous calculating machines, particularly its ability to be programmed to solve problems of any complexity.{{Sfn|Toole|1998|pp=175–82}} She realised the potential of the device extended far beyond mere number crunching. In her notes, she wrote:
+
+{{Blockquote|[The Analytical Engine] might act upon other things besides ''number'', were objects found whose mutual fundamental relations could be expressed by those of the abstract science of operations, and which should be also susceptible of adaptations to the action of the operating notation and mechanism of the engine...Supposing, for instance, that the fundamental relations of pitched sounds in the science of harmony and of musical composition were susceptible of such expression and adaptations, the engine might compose elaborate and scientific pieces of music of any degree of complexity or extent.&lt;ref&gt;{{cite journal|last1=Lovelace|first1=Ada|last2=Menabrea|first2=Luigi|title=Sketch of the Analytical Engine invented by Charles Babbage Esq.|year=1842|journal=[[Scientific Memoirs]]|publisher=Richard Taylor|page=694}}&lt;/ref&gt;&lt;ref&gt;{{cite web|last=Hooper|first=Rowan|url=https://www.newscientist.com/article/dn22385-ada-lovelace-my-brain-is-more-than-merely-mortal.html|title=Ada Lovelace: My brain is more than merely mortal| work=[[New Scientist]] |date=16 October 2012|access-date=16 October 2012}}&lt;/ref&gt;}}
+
+This analysis was an important development from previous ideas about the capabilities of computing devices and anticipated the implications of modern computing one hundred years before they were realised. [[Walter Isaacson]] ascribes Ada's insight regarding the application of computing to ''any'' process based on logical symbols to an observation about textiles: "When she saw some [[Jacquard machine|mechanical looms]] that used [[punched cards|punchcards]] to direct the weaving of beautiful [[pattern]]s, it reminded her of how Babbage's engine used punched cards to make calculations."&lt;ref name="Isaacson"&gt;{{cite web|url=http://fortune.com/2014/09/18/walter-isaacson-the-women-of-eniac/ |title=Walter Isaacson on the Women of ENIAC |last=Isaacson |first=Walter | authorlink=Walter Isaacson |date=18 September 2014 |work=[[Fortune (magazine)|Fortune]]}}&lt;/ref&gt; This insight is seen as significant by writers such as Betty Toole and Benjamin Woolley, as well as the programmer [[John Graham-Cumming]], whose project Plan 28 has the aim of constructing the first complete Analytical Engine.{{Sfn|Toole|1998|pp=2–3, 14}}{{Sfn|Woolley|1999|pp=272–77}}&lt;ref&gt;{{cite web |last=Ken t|first=Leo |url=http://www.humansinvent.com/#!/8947/the-10-year-plan-to-build-babbages-analytical-engine |title=The 10-year-plan to build Babbage's Analytical Engine |publisher=Humans Invent |date=17 September 2012 |access-date=16 October 2012 |archive-url=https://web.archive.org/web/20121014123843/http://www.humansinvent.com/#!/8947/the-10-year-plan-to-build-babbages-analytical-engine |archive-date=14 October 2012 |url-status=usurped}}&lt;/ref&gt;
+
+According to the historian of computing and Babbage specialist [[Doron Swade]]:
+
+&lt;blockquote&gt;Ada saw something that Babbage in some sense failed to see. In Babbage's world his engines were bound by number...What Lovelace saw...was that number could represent entities other than quantity. So once you had a machine for manipulating numbers, if those numbers represented other things, letters, musical notes, then the machine could manipulate symbols of which number was one instance, according to rules. It is this fundamental transition from a machine which is a number cruncher to a machine for manipulating symbols according to rules that is the fundamental transition from calculation to computation—to general-purpose computation—and looking back from the present high ground of modern computing, if we are looking and sifting history for that transition, then that transition was made explicitly by Ada in that 1843 paper.{{Sfn|Fuegi|Francis|2003}}&lt;/blockquote&gt;
+
+''[[Note G]]'' also contains what came to be known as "Lady Lovelace's Objection" to the concept of [[artificial intelligence]], so named by [[Alan Turing]] in his paper "[[Computing Machinery and Intelligence]]"&lt;ref&gt;{{cite journal |url=https://books.google.com/books?id=CEMYUU_HFMAC&amp;pg=PA67 |journal=The Turing Test: Verbal Behavior as the Hallmark of Intelligence |editor=Stuart Shieber |title=Computing Machinery and Intelligence |author=Turing, Alan |pages=67–104 |publisher=MIT Press |year=2004|isbn=978-0-262-26542-3 }}&lt;/ref&gt;&lt;ref name="s191"&gt;{{Cite journal |last=Gonçalves |first=Bernardo |date=January 2024 |title=Lady Lovelace’s Objection: The Turing–Hartree Disputes Over the Meaning of Digital Computers, 1946–1951 |url=https://ieeexplore.ieee.org/document/10290980/ |journal=IEEE Annals of the History of Computing |volume=46 |issue=1 |pages=6–18 |doi=10.1109/MAHC.2023.3326607 |issn=1058-6180}}&lt;/ref&gt; The objection is Lovelace's statement that: &lt;blockquote&gt;The Analytical Engine has no pretensions whatever to ''originate'' anything. It can do ''whatever we know how to order it'' to perform. It can follow analysis; but it has no power of anticipating any analytical relations or truths. &lt;/blockquote&gt;This objection has been the subject of much debate and rebuttal, including in the paper that originally coined it.&lt;ref name="s191" /&gt;
+
+==See also==
+{{cols}}
+* [[Ai-Da]] – humanoid robot, completed in 2019
+* ''[[Code: Debugging the Gender Gap]]''
+* [[List of pioneers in computer science]]
+* [[Timeline of women in science]]
+* [[Women in computing]]
+* [[Women in STEM fields]]
+{{colend}}
+
+==Explanatory notes==
+{{Notelist}}
+
+==References==
+===Citations===
+{{Reflist}}
+
+===General and cited sources===
+{{Refbegin|30em}}
+* {{Citation | last=Baum | first=Joan | title=The Calculating Passion of Ada Byron | publisher=Archon | year=1986 | isbn=978-0-208-02119-9 | url=https://archive.org/details/calculatingpassi00baum }}.
+* {{Citation | last1=Elwin | first1=Malcolm | title=Lord Byron's Family | publisher=John Murray | year=1975}}.
+* {{Citation | last=Essinger | first=James | title=Ada's algorithm: How Lord Byron's daughter Ada Lovelace launched the digital age | publisher=Melville House Publishing | year=2014 | isbn=978-1-61219-408-0}}.
+* {{Citation | last1=Fuegi | first1=J | last2=Francis | first2=J | title=Lovelace &amp; Babbage and the creation of the 1843 'notes' | journal=Annals of the History of Computing | volume=25 | pages=16–26 | number=4 |date=October–December 2003 | doi=10.1109/MAHC.2003.1253887| bibcode=2003IAHC...25d..16F | s2cid=40077111 | url=https://pdfs.semanticscholar.org/81bb/f32d2642a7a8c6b0a867379a4e9e99d872bc.pdf | archive-url=https://web.archive.org/web/20200215003909/https://pdfs.semanticscholar.org/81bb/f32d2642a7a8c6b0a867379a4e9e99d872bc.pdf | url-status=dead | archive-date=2020-02-15 }}.
+* {{Citation | last1=Hammerman | first1=Robin | last2=Russell | first2=Andrew L. | editor-first1=Robin | editor-first2=Andrew L. | editor-last1=Hammerman | editor-last2=Russell | title=Ada's Legacy: Cultures of Computing from the Victorian to the Digital Age | publisher=Association for Computing Machinery and Morgan &amp; Claypool |year=2015 | doi=10.1145/2809523| isbn=978-1-970001-51-8 | s2cid=62018931 }}.
+* {{Citation | last=Isaacson | first=Walter |year=2014 | title= The Innovators: How a Group of Hackers, Geniuses, and Geeks Created the Digital Revolution | publisher=Simon &amp; Schuster}}.
+* {{Cite journal | last1=Kim | first1=Eugene | last2=Toole | first2=Betty Alexandra | title=Ada and the First Computer | journal=Scientific American | volume=280 | issue=5 | pages=66–71 |year=1999 | bibcode=1999SciAm.280e..76E | doi=10.1038/scientificamerican0599-76 }}
+* {{Cite journal | last=Lewis | first=Judith S. | title=Princess of Parallelograms and her daughter: Math and gender in the nineteenth century English aristocracy | journal=[[Women's Studies International Forum]] | volume=18 | issue=4 | pages=387–394 | doi=10.1016/0277-5395(95)80030-S | date=July–August 1995 }}
+* {{Citation | last1=Marchand | first1=Leslie | title=Byron A Portrait | publisher=John Murray | year=1971}}.
+* {{Citation |last=Menabrea |first= Luigi Federico |author-link= Luigi Federico Menabrea |year= 1843 | title=Sketch of the Analytical Engine Invented by Charles Babbage | journal= [[Scientific Memoirs]] | volume=3 | url=http://www.fourmilab.ch/babbage/sketch.html | access-date=29 August 2008 | archive-url=https://web.archive.org/web/20080915134651/http://www.fourmilab.ch/babbage/sketch.html | archive-date=15 September 2008 | url-status=live}} With notes upon the memoir by the translator.
+* Miller, Clair Cain. [https://www.nytimes.com/interactive/2018/obituaries/overlooked-ada-lovelace.html "Ada Lovelace, 1815–1852,"] ''New York Times,'' 8 March 2018.
+* {{Citation | last1=Moore | first1=Doris Langley | title=Ada, Countess of Lovelace | publisher=John Murray | year=1977|isbn=0-7195-3384-8}}.
+* {{Citation |last=Moore |first=Doris Langley |title=The Late Lord Byron |year= 1961 |publisher=Lippincott | location =Philadelphia |oclc=358063 }}.1977 edition {{isbn|978-0-06-013013-8}}
+* {{Citation |last=Stein |first=Dorothy |title=Ada: A Life and a Legacy |year=1985 |publisher=The MIT Press |location=Cambridge, [[Massachusetts|MA]] |series=MIT Press Series in the History of Computing |isbn=978-0-262-19242-2 |url=https://archive.org/details/adalifeandlegacy00stei }}.
+* {{Citation | first=Betty Alexandra | last=Toole | title=Ada, the Enchantress of Numbers: A Selection from the Letters of Ada Lovelace, and her Description of the First Computer | year=1992 | publisher=Strawberry Press | url=https://books.google.com/books?id=wlZQAAAAMAAJ | isbn=978-0-912647-09-8}}.
+* {{Citation | first=Betty Alexandra | last=Toole | title=Ada, the Enchantress of Numbers: Prophet of the Computer Age | year=1998 | publisher=Strawberry Press | url=https://books.google.com/books?id=gnvZAAAAMAAJ | isbn=978-0-912647-18-0}}.
+* {{Citation | first=Catherine | last=Turney | title=Byron's Daughter: A Biography of Elizabeth Medora Leigh | year=1972 | publisher=Scribner | url=https://books.google.com/books?id=eE1aAAAAMAAJ | isbn=978-0-684-12753-8}}
+* {{Citation | last=Woolley | first=Benjamin |date=February 1999 | title= The Bride of Science: Romance, Reason, and Byron's Daughter | publisher=Pan Macmillan | place=AU | url= https://books.google.com/books?id=K8-sQgAACAAJ | access-date= 7 April 2013 | isbn=978-0-333-72436-1}}.
+* {{Citation | last=Woolley | first=Benjamin |date=February 2002 | orig-year=1999 | title= The Bride of Science: Romance, Reason, and Byron's Daughter | publisher=McGraw-Hill Ryerson | url= https://books.google.com/books?id=VGMFAAAACAAJ | access-date= 7 April 2013 | isbn=978-0-07-138860-3}}.
+{{Refend}}
+
+{{DEFAULTSORT:Lovelace, Ada}}
+[[Category:Ada Lovelace| ]]
+[[Category:1815 births]]
+[[Category:1852 deaths]]
+[[Category:19th-century British women mathematicians]]
+[[Category:19th-century English writers]]
+[[Category:19th-century English mathematicians]]
+[[Category:19th-century English women writers]]
+[[Category:19th-century English inventors]]
+[[Category:British women inventors]]
+[[Category:19th-century English nobility]]
+[[Category:Ada (programming language)]]
+[[Category:Amateur mathematicians]]
+[[Category:British countesses by marriage]]
+[[Category:British women computer scientists]]
+[[Category:Burials in Nottinghamshire]]
+[[Category:Byron family|Ada]]
+[[Category:Computer designers]]
+[[Category:Daughters of barons]]
+[[Category:Deaths from cancer in England]]
+[[Category:Deaths from uterine cancer in the United Kingdom]]
+[[Category:English computer programmers]]
+[[Category:English people of Scottish descent]]
+[[Category:English women poets]]
+[[Category:Godwin family]]
+[[Category:Family of Lord Byron|Ada]]
+[[Category:Mathematicians from London]]
+[[Category:Women of the Victorian era]]
+[[Category:Burials at the Church of St Mary Magdalene, Hucknall]]
+[[Category:19th-century women inventors]]</text>
+			<sha1>tf1162coui5k9tavjdkrac2m26gm5x1</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Birth date</title>
+		<ns>10</ns>
+		<id>1002</id>
+		<revision>
+			<id>2002</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2002</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="690" sha1="ia99jsdi5vqwiqukr6rhemmmwsi6aka" xml:space="preserve">{{#if:{{{df|}}}|{{{3|}}} {{#switch:{{{2|}}}|1|01=January|2|02=February|3|03=March|4|04=April|5|05=May|6|06=June|7|07=July|8|08=August|9|09=September|10=October|11=November|12=December|#default={{{2|}}}}} {{{1|}}}|{{#switch:{{{2|}}}|1|01=January|2|02=February|3|03=March|4|04=April|5|05=May|6|06=June|7|07=July|8|08=August|9|09=September|10=October|11=November|12=December|#default={{{2|}}}}} {{{3|}}}, {{{1|}}}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>ia99jsdi5vqwiqukr6rhemmmwsi6aka</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Blockquote</title>
+		<ns>10</ns>
+		<id>1003</id>
+		<revision>
+			<id>2003</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2003</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="511" sha1="aultg5lzd1hwshgvm1m08q1t6nfjf2z" xml:space="preserve">&lt;blockquote class="templatequote"&gt;{{#if:{{{text|}}}|{{{text}}}|{{{1|}}}}}{{#if:{{{author|}}}{{{sign|}}}{{{source|}}}|&lt;div class="templatequotecite"&gt;— {{{author|{{{sign|}}}}}}{{#if:{{{source|}}}|, {{{source}}}}}&lt;/div&gt;}}&lt;/blockquote&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>aultg5lzd1hwshgvm1m08q1t6nfjf2z</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cbignore</title>
+		<ns>10</ns>
+		<id>1004</id>
+		<revision>
+			<id>2004</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2004</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Circa</title>
+		<ns>10</ns>
+		<id>1005</id>
+		<revision>
+			<id>2005</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2005</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="406" sha1="4rzj8r4eti1vy9be0ta97ugcqv0fcsb" xml:space="preserve">&lt;abbr title="circa"&gt;c.&lt;/abbr&gt;{{#if:{{{1|}}}|&amp;nbsp;{{{1}}}}}{{#if:{{{2|}}}|&amp;nbsp;– &lt;abbr title="circa"&gt;c.&lt;/abbr&gt;&amp;nbsp;{{{2}}}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>4rzj8r4eti1vy9be0ta97ugcqv0fcsb</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Citation</title>
+		<ns>10</ns>
+		<id>1006</id>
+		<revision>
+			<id>2006</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2006</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="3469" sha1="ddyf5e9v74lehtx7oj3feq139k3x6m3" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation cs1"&gt;|&lt;cite class="citation cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{chapter|{{{contribution|}}}}}}|{{#if:{{{chapter-url|}}}|[{{{chapter-url}}} "{{{chapter|{{{contribution|}}}}}}"]|"{{{chapter|{{{contribution|}}}}}}"}}.}} {{#if:{{{journal|}}}|{{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}.|{{#if:{{{url|}}}|[{{{url}}} ''{{{title|}}}'']|''{{{title|}}}''}}.}} {{#if:{{{edition|}}}|{{{edition}}}&amp;nbsp;ed.}} {{#if:{{{others|}}}|{{{others}}}.}} {{#if:{{{language|}}}|(in {{{language}}}).}} {{#if:{{{editor|}}}{{{editor-last|}}}{{{editor1-last|}}}{{{editor-last1|}}}|Edited by {{#if:{{{editor|}}}|{{{editor}}}|{{#if:{{{editor2-last|{{{editor-last2|}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}; {{{editor2-last|{{{editor-last2|}}}}}}{{#if:{{{editor2-first|{{{editor-first2|}}}}}}|, {{{editor2-first|{{{editor-first2|}}}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}}}}}.}} {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>ddyf5e9v74lehtx7oj3feq139k3x6m3</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite book</title>
+		<ns>10</ns>
+		<id>1007</id>
+		<revision>
+			<id>2007</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2007</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="3394" sha1="dofvg44pjfmzwu5zs0n3neph93ntccu" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation book cs1"&gt;|&lt;cite class="citation book cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{chapter|{{{contribution|}}}}}}|{{#if:{{{chapter-url|}}}|[{{{chapter-url}}} "{{{chapter|{{{contribution|}}}}}}"]|"{{{chapter|{{{contribution|}}}}}}"}}.}} {{#if:{{{url|}}}|[{{{url}}} ''{{{title|}}}'']|''{{{title|}}}''}}. {{#if:{{{edition|}}}|{{{edition}}}&amp;nbsp;ed.}} {{#if:{{{others|}}}|{{{others}}}.}} {{#if:{{{language|}}}|(in {{{language}}}).}} {{#if:{{{editor|}}}{{{editor-last|}}}{{{editor1-last|}}}{{{editor-last1|}}}|Edited by {{#if:{{{editor|}}}|{{{editor}}}|{{#if:{{{editor2-last|{{{editor-last2|}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}; {{{editor2-last|{{{editor-last2|}}}}}}{{#if:{{{editor2-first|{{{editor-first2|}}}}}}|, {{{editor2-first|{{{editor-first2|}}}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}}}}}.}} {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>dofvg44pjfmzwu5zs0n3neph93ntccu</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite journal</title>
+		<ns>10</ns>
+		<id>1008</id>
+		<revision>
+			<id>2008</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2008</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="3107" sha1="0e57eo4k3dlrfxpyhrs35cwvl07ow2n" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation journal cs1"&gt;|&lt;cite class="citation journal cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{editor|}}}{{{editor-last|}}}{{{editor1-last|}}}{{{editor-last1|}}}|Edited by {{#if:{{{editor|}}}|{{{editor}}}|{{#if:{{{editor2-last|{{{editor-last2|}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}; {{{editor2-last|{{{editor-last2|}}}}}}{{#if:{{{editor2-first|{{{editor-first2|}}}}}}|, {{{editor2-first|{{{editor-first2|}}}}}}}}|{{{editor-last|{{{editor1-last|{{{editor-last1|}}}}}}}}}{{#if:{{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}|, {{{editor-first|{{{editor1-first|{{{editor-first1|}}}}}}}}}}}}}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>0e57eo4k3dlrfxpyhrs35cwvl07ow2n</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite magazine</title>
+		<ns>10</ns>
+		<id>1009</id>
+		<revision>
+			<id>2009</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2009</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="2435" sha1="l0an0npe7spg4f2qyalqcbja76cb06j" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation magazine cs1"&gt;|&lt;cite class="citation magazine cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>l0an0npe7spg4f2qyalqcbja76cb06j</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite news</title>
+		<ns>10</ns>
+		<id>1010</id>
+		<revision>
+			<id>2010</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2010</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="2427" sha1="d4zqbrvb933plyus9ov610qxk5v5jil" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation news cs1"&gt;|&lt;cite class="citation news cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>d4zqbrvb933plyus9ov610qxk5v5jil</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite speech</title>
+		<ns>10</ns>
+		<id>1011</id>
+		<revision>
+			<id>2011</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2011</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="1924" sha1="bmgfdl5twa9j2mdtymgpe6f1ljybri4" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation speech cs1"&gt;|&lt;cite class="citation speech cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{event|}}}|{{{event}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>bmgfdl5twa9j2mdtymgpe6f1ljybri4</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cite web</title>
+		<ns>10</ns>
+		<id>1012</id>
+		<revision>
+			<id>2012</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2012</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="2425" sha1="mc1d57tfn6ao5yqnj5lv946jstzr8t1" xml:space="preserve">{{#if:{{#if:{{{last1|{{{last|}}}}}}|{{#if:{{{year|{{{orig-year|}}}}}}|Y}}}}|&lt;cite id="CITEREF{{{last1|{{{last|}}}}}}{{{last2|}}}{{{year|{{{orig-year|}}}}}}" class="citation web cs1"&gt;|&lt;cite class="citation web cs1"&gt;}}{{#if:{{{author|}}}|{{{author}}}.|{{#if:{{{last2|}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}; {{{last2}}}{{#if:{{{first2|}}}|, {{{first2}}}}}.|{{#if:{{{last1|{{{last|}}}}}}|{{{last1|{{{last|}}}}}}{{#if:{{{first1|{{{first|}}}}}}|, {{{first1|{{{first|}}}}}}}}.}}}}}} {{#if:{{{url|}}}|[{{{url}}} "{{{title|}}}"]|"{{{title|}}}"}}. {{#if:{{{website|}}}|''{{{website}}}''.}} {{#if:{{{work|}}}|''{{{work}}}''.}} {{#if:{{{newspaper|}}}|''{{{newspaper}}}''.}} {{#if:{{{magazine|}}}|''{{{magazine}}}''.}} {{#if:{{{journal|}}}|''{{{journal}}}''.}} {{#if:{{{series|}}}|{{{series}}}.}} {{#if:{{{publisher|}}}|{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}:}} {{{publisher}}}.}} {{#if:{{{publisher|}}}||{{#if:{{{location|{{{place|}}}}}}|{{{location|{{{place|}}}}}}.}}}} {{#if:{{{date|}}}|{{{date}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.|{{#if:{{{year|}}}|{{{year}}}{{#if:{{{orig-year|}}}|&amp;nbsp;[{{{orig-year}}}]}}.}}}} {{#if:{{{volume|}}}|Vol.&amp;nbsp;'''{{{volume}}}'''{{#if:{{{issue|{{{number|}}}}}}|&amp;nbsp;({{{issue|{{{number|}}}}}})}}.}} {{#if:{{{issue|{{{number|}}}}}}|{{#if:{{{volume|}}}||No.&amp;nbsp;{{{issue|{{{number|}}}}}}.}}}} {{#if:{{{pages|}}}|pp.&amp;nbsp;{{{pages}}}.}} {{#if:{{{page|}}}|p.&amp;nbsp;{{{page}}}.}} {{#if:{{{isbn|}}}|ISBN&amp;nbsp;[[Special:BookSources/{{{isbn}}}|{{{isbn}}}]].}} {{#if:{{{issn|}}}|ISSN&amp;nbsp;{{{issn}}}.}} {{#if:{{{oclc|}}}|OCLC&amp;nbsp;{{{oclc}}}.}} {{#if:{{{ol|}}}|OL&amp;nbsp;{{{ol}}}.}} {{#if:{{{doi|}}}|[https://doi.org/{{{doi}}} doi:{{{doi}}}].}} {{#if:{{{bibcode|}}}|Bibcode:&amp;nbsp;{{{bibcode}}}.}} {{#if:{{{s2cid|}}}|S2CID&amp;nbsp;{{{s2cid}}}.}} {{#if:{{{archive-url|}}}|{{#if:{{{archive-date|}}}|[{{{archive-url}}} Archived] from the original on {{{archive-date}}}.|[{{{archive-url}}} Archived] from the original.}}}} {{#if:{{{via|}}}|Via {{{via}}}.}} {{#if:{{{access-date|}}}|Retrieved {{{access-date}}}.}} {{#if:{{{quote|}}}|"{{{quote}}}"}}&lt;/cite&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>mc1d57tfn6ao5yqnj5lv946jstzr8t1</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Colend</title>
+		<ns>10</ns>
+		<id>1013</id>
+		<revision>
+			<id>2013</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2013</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="284" sha1="4od62ewpgul91cpwnkq5engklbwxc3y" xml:space="preserve">&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>4od62ewpgul91cpwnkq5engklbwxc3y</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Cols</title>
+		<ns>10</ns>
+		<id>1014</id>
+		<revision>
+			<id>2014</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2014</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="357" sha1="4wi2cf651erxzmwrs9vjx4pab24u60z" xml:space="preserve">&lt;div class="columns-container" style="column-count:{{{1|2}}}; column-gap:2em;"&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>4wi2cf651erxzmwrs9vjx4pab24u60z</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Death date and age</title>
+		<ns>10</ns>
+		<id>1015</id>
+		<revision>
+			<id>2015</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2015</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="837" sha1="pydy8fcgc8qwaasv4q69gp7bocclfob" xml:space="preserve">{{#if:{{{df|}}}|{{{3|}}} {{#switch:{{{2|}}}|1|01=January|2|02=February|3|03=March|4|04=April|5|05=May|6|06=June|7|07=July|8|08=August|9|09=September|10=October|11=November|12=December|#default={{{2|}}}}} {{{1|}}}|{{#switch:{{{2|}}}|1|01=January|2|02=February|3|03=March|4|04=April|5|05=May|6|06=June|7|07=July|8|08=August|9|09=September|10=October|11=November|12=December|#default={{{2|}}}}} {{{3|}}}, {{{1|}}}}}{{#if:{{{4|}}}|&amp;nbsp;(aged&amp;nbsp;{{#expr: {{{1}}} - {{{4}}} - ( ( {{{2}}} &lt; {{{5}}} ) or ( ( {{{2}}} = {{{5}}} ) and ( {{{3}}} &lt; {{{6}}} ) ) ) }})}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>pydy8fcgc8qwaasv4q69gp7bocclfob</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Doi</title>
+		<ns>10</ns>
+		<id>1016</id>
+		<revision>
+			<id>2016</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2016</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="317" sha1="jj9jp4p3saz8p87mh4zpinq58skt7a1" xml:space="preserve">[https://doi.org/{{{1|}}} doi:{{{1|}}}]&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>jj9jp4p3saz8p87mh4zpinq58skt7a1</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:For</title>
+		<ns>10</ns>
+		<id>1017</id>
+		<revision>
+			<id>2017</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2017</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="407" sha1="t7hjdxk3gtbvowxzdy0cunlqkcqh1hp" xml:space="preserve">&lt;div class="hatnote navigation-not-searchable" role="note"&gt;For {{{1|}}}, see [[{{{2|}}}]] {{#if:{{{3|}}}|and [[{{{3}}}]]}}.&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>t7hjdxk3gtbvowxzdy0cunlqkcqh1hp</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Harvnb</title>
+		<ns>10</ns>
+		<id>1018</id>
+		<revision>
+			<id>2018</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2018</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="617" sha1="6qfgd9zkkzoltu7y12ls0e142nx5yns" xml:space="preserve">{{#if:{{{4|}}}|[[#CITEREF{{{1|}}}{{{2|}}}{{{3|}}}{{{4|}}}|{{{1|}}}, {{{2|}}} &amp;amp; {{{3|}}} {{{4|}}}]]|{{#if:{{{3|}}}|[[#CITEREF{{{1|}}}{{{2|}}}{{{3|}}}|{{{1|}}} &amp;amp; {{{2|}}} {{{3|}}}]]|[[#CITEREF{{{1|}}}{{{2|}}}|{{{1|}}} {{{2|}}}]]}}}}{{#if:{{{p|}}}|, p.&amp;nbsp;{{{p}}}}}{{#if:{{{pp|}}}|, pp.&amp;nbsp;{{{pp}}}}}{{#if:{{{loc|}}}|, {{{loc}}}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>6qfgd9zkkzoltu7y12ls0e142nx5yns</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Infobox scientist</title>
+		<ns>10</ns>
+		<id>1019</id>
+		<revision>
+			<id>2019</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2019</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="2427" sha1="tdmh4bbyz1w1oa5d9ir7g5u4r54cfui" xml:space="preserve">&lt;table class="infobox biography vcard"&gt;&lt;caption class="infobox-title"&gt;{{#if:{{{honorific_prefix|}}}|&lt;span class="infobox-honorific"&gt;{{{honorific_prefix}}}&lt;/span&gt;&lt;br /&gt;}}&lt;span class="fn"&gt;{{{name|{{PAGENAME}}}}}&lt;/span&gt;&lt;/caption&gt;{{#if:{{{image|}}}|&lt;tr&gt;&lt;td colspan="2" class="infobox-image"&gt;[[File:{{{image}}}|frameless|upright=1|alt={{{alt|}}}]]{{#if:{{{caption|}}}|&lt;div class="infobox-caption"&gt;{{{caption}}}&lt;/div&gt;}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{birth_name|}}}{{{birth_date|}}}{{{birth_place|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Born&lt;/th&gt;&lt;td class="infobox-data"&gt;{{#if:{{{birth_name|}}}|{{{birth_name}}}&lt;br /&gt;}}{{{birth_date|}}}{{#if:{{{birth_place|}}}|&lt;br /&gt;{{{birth_place}}}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{death_date|}}}{{{death_place|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Died&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{death_date|}}}{{#if:{{{death_place|}}}|&lt;br /&gt;{{{death_place}}}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{resting place|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Resting&amp;nbsp;place&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{resting place|}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{other_names|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Other&amp;nbsp;names&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{other_names|}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{spouse|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Spouse&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{spouse|}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{children|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Children&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{children|}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{parents|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Parents&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{parents|}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{fields|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Fields&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{fields|}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{known_for|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Known&amp;nbsp;for&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{known_for|}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{awards|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Awards&lt;/th&gt;&lt;td class="infobox-data"&gt;{{{awards|}}}&lt;/td&gt;&lt;/tr&gt;}}{{#if:{{{signature|}}}|&lt;tr&gt;&lt;th scope="row" class="infobox-label"&gt;Signature&lt;/th&gt;&lt;td class="infobox-data"&gt;[[File:{{{signature|}}}|frameless|upright=0.7|alt=Signature of {{{name|{{PAGENAME}}}}}]]&lt;/td&gt;&lt;/tr&gt;}}&lt;/table&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>tdmh4bbyz1w1oa5d9ir7g5u4r54cfui</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Isbn</title>
+		<ns>10</ns>
+		<id>1020</id>
+		<revision>
+			<id>2020</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2020</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="329" sha1="3hlbh5kwcmhcdy53dds081995x441yj" xml:space="preserve">ISBN&amp;nbsp;[[Special:BookSources/{{{1|}}}|{{{1|}}}]]&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>3hlbh5kwcmhcdy53dds081995x441yj</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Main</title>
+		<ns>10</ns>
+		<id>1021</id>
+		<revision>
+			<id>2021</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2021</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="402" sha1="l1ga61xjub36p0ubvnpb4vwo20djn9g" xml:space="preserve">&lt;div class="hatnote navigation-not-searchable" role="note"&gt;Main article: [[{{{1|}}}]] {{#if:{{{2|}}}|and [[{{{2}}}]]}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>l1ga61xjub36p0ubvnpb4vwo20djn9g</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Marriage</title>
+		<ns>10</ns>
+		<id>1022</id>
+		<revision>
+			<id>2022</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2022</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="395" sha1="ii982u97t1gs27zg6qkdmtvnxpyzpnm" xml:space="preserve">{{{1|}}}{{#if:{{{2|}}}|&lt;br /&gt;&lt;span class="marriage-info"&gt;(m.&amp;nbsp;{{{2}}}{{#if:{{{3|}}}|&amp;nbsp;– {{{3}}}}})&lt;/span&gt;}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>ii982u97t1gs27zg6qkdmtvnxpyzpnm</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Notelist</title>
+		<ns>10</ns>
+		<id>1023</id>
+		<revision>
+			<id>2023</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2023</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="339" sha1="d30q0gaczuy9unkzl8npsgxd2dz158a" xml:space="preserve">&lt;div class="reflist"&gt;&lt;references group="lower-alpha" /&gt;&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>d30q0gaczuy9unkzl8npsgxd2dz158a</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Née</title>
+		<ns>10</ns>
+		<id>1024</id>
+		<revision>
+			<id>2024</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2024</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="295" sha1="bya2nghudilw912awdk12x52rnxme1y" xml:space="preserve">''née'' {{{1|}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>bya2nghudilw912awdk12x52rnxme1y</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Plainlist</title>
+		<ns>10</ns>
+		<id>1025</id>
+		<revision>
+			<id>2025</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2025</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="316" sha1="rvy0kh0ufmpzjpfgvle3wyxhvbc1g7t" xml:space="preserve">&lt;div class="plainlist"&gt;{{{1|}}}
+&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>rvy0kh0ufmpzjpfgvle3wyxhvbc1g7t</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Pp-semi-indef</title>
+		<ns>10</ns>
+		<id>1026</id>
+		<revision>
+			<id>2026</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2026</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Refbegin</title>
+		<ns>10</ns>
+		<id>1027</id>
+		<revision>
+			<id>2027</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2027</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="381" sha1="s5o5ygcy5pt0o08b60uv3juym6w5su8" xml:space="preserve">&lt;div class="refbegin {{#if:{{{1|}}}|refbegin-columns}}" {{#if:{{{1|}}}|style="column-width:{{{1}}};"}}&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>s5o5ygcy5pt0o08b60uv3juym6w5su8</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Refend</title>
+		<ns>10</ns>
+		<id>1028</id>
+		<revision>
+			<id>2028</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2028</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="284" sha1="4od62ewpgul91cpwnkq5engklbwxc3y" xml:space="preserve">&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>4od62ewpgul91cpwnkq5engklbwxc3y</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Reflist</title>
+		<ns>10</ns>
+		<id>1029</id>
+		<revision>
+			<id>2029</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2029</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="399" sha1="l9ylybzi2b6ikctxe01xkvpbc23aqnt" xml:space="preserve">&lt;div class="reflist {{#if:{{{1|}}}|reflist-columns}}" {{#if:{{{1|}}}|style="column-width:{{{1}}};"}}&gt;&lt;references /&gt;&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>l9ylybzi2b6ikctxe01xkvpbc23aqnt</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Sfn</title>
+		<ns>10</ns>
+		<id>1030</id>
+		<revision>
+			<id>2030</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2030</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="704" sha1="p4ny71nforo2osiivtda2lmuy3az14m" xml:space="preserve">{{#tag:ref|{{#if:{{{4|}}}|[[#CITEREF{{{1|}}}{{{2|}}}{{{3|}}}{{{4|}}}|{{{1|}}}, {{{2|}}} &amp;amp; {{{3|}}} {{{4|}}}]]|{{#if:{{{3|}}}|[[#CITEREF{{{1|}}}{{{2|}}}{{{3|}}}|{{{1|}}} &amp;amp; {{{2|}}} {{{3|}}}]]|[[#CITEREF{{{1|}}}{{{2|}}}|{{{1|}}} {{{2|}}}]]}}}}{{#if:{{{p|}}}|, p.&amp;nbsp;{{{p}}}}}{{#if:{{{pp|}}}|, pp.&amp;nbsp;{{{pp}}}}}{{#if:{{{loc|}}}|, {{{loc}}}}}.|name=FOOTNOTE{{{1|}}}{{{2|}}}{{{3|}}}{{{4|}}}{{{p|}}}{{{pp|}}}{{{loc|}}}}}&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>p4ny71nforo2osiivtda2lmuy3az14m</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Short description</title>
+		<ns>10</ns>
+		<id>1031</id>
+		<revision>
+			<id>2031</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2031</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="380" sha1="qjymop9xtnszbvpzkue7skwexbdhb8v" xml:space="preserve">&lt;div class="shortdescription nomobile noexcerpt noprint searchaux" style="display:none"&gt;{{{1|}}}&lt;/div&gt;&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>qjymop9xtnszbvpzkue7skwexbdhb8v</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Use British English</title>
+		<ns>10</ns>
+		<id>1032</id>
+		<revision>
+			<id>2032</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2032</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+	<page>
+		<title>Template:Use dmy dates</title>
+		<ns>10</ns>
+		<id>1033</id>
+		<revision>
+			<id>2033</id>
+			<timestamp>2026-06-22T18:00:00Z</timestamp>
+			<contributor>
+				<username>Blitzy Fixture Import</username>
+			</contributor>
+			<comment>Blitzy verification fixture: local wikitext-only template implementation (no Scribunto, no Wikidata, no date-dependent output)</comment>
+			<origin>2033</origin>
+			<model>wikitext</model>
+			<format>text/x-wiki</format>
+			<text bytes="278" sha1="8t7bnvvnw46beoyogqsqwkc8s2n1dpd" xml:space="preserve">&lt;noinclude&gt;
+''Blitzy verification fixture.''  Local wikitext-only implementation of the English Wikipedia template of the same name, written so that the fixture export is closed under transclusion without Scribunto modules, Wikidata access or date-dependent output.
+&lt;/noinclude&gt;</text>
+			<sha1>8t7bnvvnw46beoyogqsqwkc8s2n1dpd</sha1>
+		</revision>
+	</page>
+</mediawiki>
