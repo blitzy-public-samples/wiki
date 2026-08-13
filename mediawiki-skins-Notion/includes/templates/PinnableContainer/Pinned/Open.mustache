@@ -1,0 +1,18 @@
+{{!
+	Opening tag of the pinned placement of a pinnable region.
+
+	Data from NotionComponentPinnableContainer::getTemplateData(), two keys and no others:
+	string id container id stem, e.g. `notion-toc`. The rendered id appends `-pinned-container`,
+		the same suffix NotionComponentPinnableHeader derives for data-pinned-container-id and
+		pinnableElement.js resolves with document.getElementById, so it is never altered. Six
+		stems reach the container family, so never branch on a particular id.
+	bool is-pinned deliberately not read. Both containers are always emitted, because the script
+		relocates the region between them without a reload and so needs both move targets in the
+		DOM; whichever placement is inactive is legitimately empty. Callers guard only the
+		CONTENT with this flag, never the container, which is what keeps the pinned region
+		correct and fully styled when JavaScript is unavailable.
+
+	Must be used with PinnableContainer/Close.mustache to avoid unclosed HTML tags. That closer
+	is shared with the Unpinned variant, hence its position one directory up.
+}}
+<div id="{{id}}-pinned-container" class="notion-pinned-container">

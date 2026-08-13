@@ -1,0 +1,499 @@
+{
+	"name": "Notion",
+	"version": "1.0.0",
+	"author": [
+		"Blitzy Agent"
+	],
+	"descriptionmsg": "notion-skin-desc",
+	"namemsg": "notion-specialversion-name",
+	"license-name": "GPL-2.0-or-later",
+	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.47.0"
+	},
+	"@note-dark-mode": "Dark mode is deliberately left ENABLED for this skin. Unlike Vector, 'notion' is intentionally absent from attributes.DarkMode.Disabled, because the Notion palette ships explicit night-mode values through .cdx-mode-dark() in resources/skins.notion.styles/CSSCustomProperties.less. Recorded in doc/adr/0001-notion-design-token-layer.md; do not add a DarkMode.Disabled entry without amending that ADR.",
+	"attributes": {
+		"VisualEditor": {
+			"IconSkins": [
+				"notion"
+			]
+		}
+	},
+	"ValidSkinNames": {
+		"notion": {
+			"class": "MediaWiki\\Skins\\Notion\\SkinNotion",
+			"services": [
+				"LanguageConverterFactory",
+				"Notion.FeatureManagerFactory"
+			],
+			"args": [
+				{
+					"name": "notion",
+					"wrapSiteNotice": true,
+					"templateDirectory": "includes/templates",
+					"template": "skin",
+					"responsive": true,
+					"toc": false,
+					"link": {
+						"text-wrapper": {
+							"tag": "span"
+						}
+					},
+					"bodyClasses": [
+						"skin--responsive",
+						"skin-notion",
+						"skin-notion-search-vue"
+					],
+					"clientPrefEnabled": true,
+					"menus": [
+						"user-interface-preferences",
+						"user-page",
+						"user-menu",
+						"notifications",
+						"views",
+						"actions",
+						"variants",
+						"associated-pages",
+						"footer-info",
+						"footer-places",
+						"footer-icons"
+					],
+					"scripts": [
+						"skins.notion.js"
+					],
+					"styles": [
+						"skins.notion.search.codex.styles",
+						"skins.notion.styles",
+						"skins.notion.icons"
+					],
+					"messages": [
+						"tooltip-p-logo",
+						"notion-action-toggle-sidebar",
+						"notion-main-menu-tooltip",
+						"notion-jumptosearch",
+						"notion-jumptocontent",
+						"notion-toc-beginning",
+						"notion-toc-label",
+						"notion-toc-menu-tooltip",
+						"notion-toc-collapsible-button-label",
+						"notion-pin-element-label",
+						"notion-unpin-element-label",
+						"notion-site-nav-label",
+						"search",
+						"searchbutton",
+						"searcharticle",
+						"searchsuggest-search",
+						"sitesubtitle",
+						"sitetitle",
+						"tagline",
+						"personaltools",
+						"namespaces",
+						"views",
+						"notion-page-tools-nav-label",
+						"empty-language-selector-body",
+						"notion-appearance-label"
+					]
+				}
+			]
+		}
+	},
+	"SkinLessImportPaths": {
+		"notion": "resources/mediawiki.less/notion"
+	},
+	"MessagesDirs": {
+		"Notion": [
+			"i18n"
+		]
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Skins\\Notion\\": "includes/"
+	},
+	"TestAutoloadNamespaces": {
+		"MediaWiki\\Skins\\Notion\\": "includes/",
+		"MediaWiki\\Skins\\Notion\\Tests\\": "tests/phpunit/",
+		"MediaWiki\\Skins\\Notion\\Tests\\Unit\\": "tests/phpunit/unit/"
+	},
+	"DefaultUserOptions": {
+		"notion-limited-width": 1,
+		"notion-page-tools-pinned": 1,
+		"notion-main-menu-pinned": 1,
+		"notion-toc-pinned": 1,
+		"notion-appearance-pinned": 1,
+		"notion-font-size": 0,
+		"notion-theme": "day"
+	},
+	"HookHandlers": {
+		"NotionHooks": {
+			"class": "MediaWiki\\Skins\\Notion\\Hooks",
+			"services": [
+				"MainConfig",
+				"UserOptionsManager",
+				"Notion.FeatureManagerFactory"
+			]
+		}
+	},
+	"Hooks": {
+		"GetPreferences": "NotionHooks",
+		"SkinPageReadyConfig": "NotionHooks"
+	},
+	"@note": "When modifying the skins.notion.styles definition, make sure the installer still works. Core's Installer::getDefaultSkin() special-cases Vector, so this skin must never be set as $wgDefaultSkin in tracked configuration; select it per request with ?useskin=notion instead.",
+	"ResourceModules": {
+		"skins.notion.search.codex.styles": {
+			"class": "MediaWiki\\ResourceLoader\\CodexModule",
+			"codexStyleOnly": true,
+			"codexComponents": [
+				"CdxSearchInput",
+				"CdxButton",
+				"CdxRadio",
+				"CdxMessage"
+			]
+		},
+		"skins.notion.search": {
+			"dependencies": [
+				"web2017-polyfills",
+				"mediawiki.util",
+				"mediawiki.skinning.typeaheadSearch"
+			],
+			"packageFiles": [
+				"resources/skins.notion.search/skins.notion.search.js",
+				{
+					"name": "resources/skins.notion.search/searchConfig.json",
+					"config": [
+						"NotionTypeahead"
+					]
+				}
+			]
+		},
+		"skins.notion.styles": {
+			"class": "MediaWiki\\ResourceLoader\\SkinModule",
+			"features": {
+				"normalize": true,
+				"elements": true,
+				"content-links": false,
+				"content-links-external": false,
+				"content-media": true,
+				"content-media-dark": true,
+				"content-tables": true,
+				"interface": false,
+				"interface-category": true,
+				"interface-edit-section-links": true,
+				"interface-indicators": false,
+				"interface-site-notice": false,
+				"interface-subtitle": false,
+				"interface-user-message": true,
+				"i18n-ordered-lists": true,
+				"i18n-headings": true,
+				"toc": false
+			},
+			"styles": [
+				"resources/skins.notion.styles/CSSCustomProperties.less",
+				"resources/skins.notion.styles/skin.less"
+			],
+			"lessMessages": [
+				"parentheses-start",
+				"parentheses-end",
+				"brackets-start",
+				"brackets-end"
+			]
+		},
+		"skins.notion.icons.js": {
+			"selectorWithVariant": ".notion-icon.mw-ui-icon-wikimedia-{name}-{variant}",
+			"selectorWithoutVariant": ".notion-icon.mw-ui-icon-wikimedia-{name}",
+			"useDataURI": false,
+			"defaultColor": "#000",
+			"class": "MediaWiki\\ResourceLoader\\OOUIIconPackModule",
+			"useMaskImage": true,
+			"icons": [
+				"article",
+				"edit",
+				"editLock",
+				"exitFullscreen",
+				"fullScreen",
+				"history",
+				"speechBubbles",
+				"speechBubbleAdd",
+				"wikiText",
+				"appearance"
+			]
+		},
+		"skins.notion.icons": {
+			"selectorWithVariant": ".notion-icon.mw-ui-icon-wikimedia-{name}-{variant}",
+			"selectorWithoutVariant": ".notion-icon.mw-ui-icon-wikimedia-{name}",
+			"useDataURI": false,
+			"defaultColor": "#000",
+			"class": "MediaWiki\\ResourceLoader\\OOUIIconPackModule",
+			"useMaskImage": true,
+			"icons": [
+				"eye",
+				"trash",
+				"move",
+				"lock",
+				"unLock",
+				"tray",
+				"bell",
+				"bellOutline",
+				"menu",
+				"heart",
+				"language",
+				"ellipsis",
+				"verticalEllipsis",
+				"userAvatar",
+				"userAdd",
+				"userTemporary",
+				"userTalk",
+				"sandbox",
+				"search",
+				"settings",
+				"labFlask",
+				"star",
+				"halfStar",
+				"unStar",
+				"watchlist",
+				"userContributions",
+				"logIn",
+				"logOut",
+				"imageGallery",
+				"userGroup",
+				"listBullet",
+				"close"
+			]
+		},
+		"skins.notion.clientPreferences": {
+			"packageFiles": [
+				"resources/skins.notion.clientPreferences/clientPreferences.js"
+			],
+			"messages": [
+				"skin-theme-name",
+				"skin-theme-description",
+				"skin-theme-day-label",
+				"skin-theme-night-label",
+				"skin-theme-os-label",
+				"skin-theme-exclusion-notice",
+				"notion-feature-limited-width-name",
+				"notion-feature-limited-width-0-label",
+				"notion-feature-limited-width-1-label",
+				"notion-feature-limited-width-exclusion-notice",
+				"notion-feature-custom-font-size-name",
+				"notion-feature-custom-font-size-0-label",
+				"notion-feature-custom-font-size-1-label",
+				"notion-feature-custom-font-size-2-label",
+				"notion-feature-custom-font-size-exclusion-notice"
+			],
+			"dependencies": [
+				"mediawiki.api",
+				"mediawiki.user"
+			],
+			"styles": [
+				"resources/skins.notion.clientPreferences/clientPreferences.less"
+			]
+		},
+		"skins.notion.js": {
+			"styles": [
+				"resources/skins.notion.js/index.less"
+			],
+			"packageFiles": [
+				"resources/skins.notion.js/skin.js",
+				"resources/skins.notion.js/setupIntersectionObservers.js",
+				"resources/skins.notion.js/searchToggle.js",
+				"resources/skins.notion.js/stickyHeader.js",
+				"resources/skins.notion.js/scrollObserver.js",
+				"resources/skins.notion.js/tableOfContents.js",
+				"resources/skins.notion.js/sectionObserver.js",
+				"resources/skins.notion.js/deferUntilFrame.js",
+				"resources/skins.notion.js/pinnableElement.js",
+				"resources/skins.notion.js/userPreferences.js",
+				"resources/skins.notion.js/features.js",
+				"resources/skins.notion.js/popupNotification.js",
+				"resources/skins.notion.js/clientPreferences.json",
+				{
+					"name": "resources/skins.notion.js/config.json",
+					"config": [
+						"NotionWrapTablesTemporary"
+					]
+				},
+				{
+					"name": "resources/skins.notion.js/tableOfContentsConfig.json",
+					"config": [
+						"NotionTableOfContentsCollapseAtCount"
+					]
+				},
+				{
+					"name": "resources/skins.notion.js/templates/TableOfContents__list.mustache",
+					"file": "includes/templates/TableOfContents__list.mustache",
+					"type": "text"
+				},
+				{
+					"name": "resources/skins.notion.js/templates/TableOfContents__line.mustache",
+					"file": "includes/templates/TableOfContents__line.mustache",
+					"type": "text"
+				},
+				"resources/skins.notion.js/watchstar.js",
+				"resources/skins.notion.js/portlets.js",
+				"resources/skins.notion.js/dropdownMenus.js",
+				"resources/skins.notion.js/tables.js",
+				"resources/skins.notion.js/languageButton.js",
+				"resources/skins.notion.js/menuTabs.js"
+			],
+			"dependencies": [
+				"skins.notion.clientPreferences",
+				"mediawiki.user",
+				"mediawiki.page.watch.ajax",
+				"mediawiki.storage",
+				"mediawiki.cookie",
+				"skins.notion.icons.js",
+				"mediawiki.util",
+				"mediawiki.jqueryMsg",
+				"web2017-polyfills"
+			],
+			"messages": [
+				"notion-toc-beginning",
+				"notion-toc-label",
+				"notion-pin-element-label",
+				"notion-unpin-element-label",
+				"notion-toc-unpinned-popup",
+				"notion-page-tools-unpinned-popup",
+				"notion-main-menu-unpinned-popup",
+				"notion-appearance-unpinned-popup"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Notion"
+	},
+	"ResourceModuleSkinStyles": {
+		"notion": {
+			"ext.echo.styles.badge": "skinStyles/ext.echo.styles.badge.less",
+			"+ext.echo.styles.alert": "skinStyles/ext.echo.styles.alert.less",
+			"+mediawiki.action.edit": "skinStyles/mediawiki.action.edit.less",
+			"+mediawiki.action.view.redirectPage": "skinStyles/mediawiki.action.view.redirectPage.less",
+			"+mediawiki.notification": "skinStyles/mediawiki.notification.less",
+			"+mediawiki.page.ready": "skinStyles/teleportTarget.less",
+			"+oojs-ui-core.styles": "skinStyles/ooui.less",
+			"mediawiki.special.search.interwikiwidget.styles": "skinStyles/mediawiki.special.search.interwikiwidget.less",
+			"+ext.relatedArticles.readMore": "skinStyles/ext.relatedArticles.readMore.less",
+			"+ext.uls.compactlinks": "skinStyles/ext.uls.compactlinks.less",
+			"+ext.uls.interface": "skinStyles/ext.uls.interface.less",
+			"+ext.uls.pt": "skinStyles/ext.uls.pt.less",
+			"jquery.ui": [
+				"skinStyles/jquery.ui/jquery.ui.core.css",
+				"skinStyles/jquery.ui/jquery.ui.theme.css",
+				"skinStyles/jquery.ui/jquery.ui.accordion.css",
+				"skinStyles/jquery.ui/jquery.ui.autocomplete.css",
+				"skinStyles/jquery.ui/jquery.ui.button.css",
+				"skinStyles/jquery.ui/jquery.ui.datepicker.css",
+				"skinStyles/jquery.ui/jquery.ui.dialog.css",
+				"skinStyles/jquery.ui/jquery.ui.menu.css",
+				"skinStyles/jquery.ui/jquery.ui.progressbar.css",
+				"skinStyles/jquery.ui/jquery.ui.resizable.css",
+				"skinStyles/jquery.ui/jquery.ui.selectable.css",
+				"skinStyles/jquery.ui/jquery.ui.slider.css",
+				"skinStyles/jquery.ui/jquery.ui.tabs.css",
+				"skinStyles/jquery.ui/jquery.ui.tooltip.css"
+			]
+		}
+	},
+	"QUnitTestModule": {
+		"localBasePath": "",
+		"remoteSkinPath": "Notion",
+		"dependencies": [
+			"skins.notion.clientPreferences"
+		],
+		"scripts": [
+			"tests/integration-qunit/integration.test.js"
+		]
+	},
+	"config": {
+		"NotionWrapTablesTemporary": {
+			"value": false,
+			"description": "@var bool temporary config variable for controlling roll out of tables. When enabled certain tables will be wrapped with a div so that they can scroll horizontally inside the Notion reading column."
+		},
+		"NotionFontSizeConfigurableOptions": {
+			"value": {
+				"exclude": {
+					"mainpage": false,
+					"pagetitles": [],
+					"namespaces": [
+						-1,
+						6,
+						14,
+						100,
+						710
+					],
+					"querystring": {
+						"action": "info|protect|delete|undelete|action|history"
+					}
+				},
+				"include": []
+			},
+			"description": "@var array determines on which pages the font size is configurable."
+		},
+		"NotionTypeahead": {
+			"value": {
+				"apiUrl": null,
+				"recommendationApiUrl": null,
+				"options": {
+					"showThumbnail": true,
+					"showDescription": true
+				}
+			},
+			"description": "apiUrl - To override the default search API, set this to the URL to rest.php on another wiki. Can be used with $wgDisableTextSearch and $wgSearchForwardUrl to mimic user experience on production. recommendationApiUrl - Provides a recommendation service. $1 will be substituted with pagetitle e.g. '/w/rest.php/v1/search/page?q=$1&limit=20'"
+		},
+		"NotionUseIconWatch": {
+			"value": true,
+			"description": "@var bool renders the watch/unwatch page action as a star icon rather than a text link."
+		},
+		"NotionMaxWidthOptions": {
+			"value": {
+				"exclude": {
+					"mainpage": true,
+					"querystring": {
+						"action": "(history|edit|submit)",
+						"diff": ".+"
+					},
+					"namespaces": [
+						-1,
+						14
+					]
+				},
+				"include": [
+					"Special:Preferences"
+				]
+			},
+			"description": "@var array options for configuring where max-width should and should not apply. More details can be found in the Hooks::shouldDisableMaxWidth PHP documentation."
+		},
+		"NotionResponsive": {
+			"value": false,
+			"description": "@var bool turns the Notion skin into a responsive skin by applying a viewport and disabling the min-width."
+		},
+		"NotionLanguageInMainMenu": {
+			"value": {
+				"logged_in": false,
+				"logged_out": false
+			},
+			"description": "@var array Use to force the languages to show in the sidebar as well, even when $wgNotionLanguageInHeader is set."
+		},
+		"NotionLanguageInHeader": {
+			"value": {
+				"logged_in": true,
+				"logged_out": true
+			},
+			"description": "@var array Moves the language links from the sidebar into a menu beside the page title. Also moves the indicators to the line below, next to the tagline (siteSub)."
+		},
+		"NotionLanguageInMainPageHeader": {
+			"value": {
+				"logged_in": false,
+				"logged_out": false
+			},
+			"description": "@var array When `NotionLanguageInHeader` is enabled, determines whether the Main Page's language button should be at the top or bottom of the content. The default position on the main page is at the bottom."
+		},
+		"NotionTableOfContentsCollapseAtCount": {
+			"value": 28,
+			"description": "@var int The minimum number of headings required to collapse all headings in the sticky table of contents by default."
+		}
+	},
+	"ServiceWiringFiles": [
+		"includes/ServiceWiring.php"
+	],
+	"manifest_version": 2
+}

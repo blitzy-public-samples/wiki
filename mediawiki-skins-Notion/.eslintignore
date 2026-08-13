@@ -1,0 +1,48 @@
+# ESLint path exclusions for the Notion skin.
+#
+# `npm run lint:js` runs `eslint --cache .` from this directory, so ESLint walks the
+# entire skin tree and this file is the only thing keeping generated, installed and
+# non-JavaScript directories out of the run. Patterns use .gitignore syntax and are
+# resolved relative to this file, which is why every entry is anchored with a leading
+# slash and directories carry a trailing slash.
+#
+# eslint-config-wikimedia lints more than .js: its common.json declares `overrides`
+# for **/*.json, **/*.jsonc, **/*.yaml, **/*.yml and **/*.ts, and the ./json profile
+# it pulls in enforces `indent: tab`. Machine-written JSON therefore has to be named
+# explicitly below, or the lint gate fails on formatting nobody authored.
+#
+# Every entry must be justified as generated, installed, or not JavaScript. Excluding
+# authored source to silence a warning is not acceptable - which is why resources/ and
+# tests/jest/ appear nowhere in this file. Every JavaScript file this skin writes is
+# linted, and no blanket pattern (*.js and friends) is used.
+#
+# Two deliberate divergences from mediawiki-skins-Vector/.eslintignore. Both are
+# corrections rather than preferences, so please do not re-sync them away:
+#   * Vector's `/a11y/` entry is dropped. No a11y/ directory exists in this skin - nor,
+#     as it happens, in Vector - so that entry only ever matched nothing.
+#   * Vector spells the snapshot directory `tests/phpunit/unit/components/__snapshots__/`
+#     in lower case while the directory on disk is `Components`, so Vector's entry never
+#     matches either. The correctly cased path is used below.
+
+# Generated Doxygen output (OUTPUT_DIRECTORY); also git-ignored. Note the plural: the
+# authored ADR and configuration tree is doc/, and that one is deliberately left linted.
+/docs/
+
+# JSON message catalogues. Checked by `npm run lint:i18n` (banana-checker) and
+# maintained upstream by translatewiki.net, so ESLint has no business in here.
+/i18n/
+
+# Installed by `npm install` / `npm ci`.
+/node_modules/
+
+# Installed by `composer install`.
+/vendor/
+
+# Jest coverage report output.
+/coverage/
+
+# PHPUnit component snapshots, rewritten wholesale by
+# `PHPUNIT_UPDATE_SNAPSHOTS=1 composer phpunit:unit` through
+# json_encode( $data, JSON_PRETTY_PRINT ), which emits four-space indentation and so can
+# never satisfy the ./json profile's `indent: tab`.
+/tests/phpunit/unit/Components/__snapshots__/
