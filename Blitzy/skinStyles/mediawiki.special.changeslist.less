@@ -1,0 +1,369 @@
+/*!
+ * Blitzy override for MediaWiki's `mediawiki.special.changeslist` module.
+ * Serves Special:RecentChanges (capture 12) and the page history (capture 9).
+ * Registered as `+mediawiki.special.changeslist`; the `+` is load-bearing and preserves
+ * core's functional `default.less` rules. See the notes in the source for details.
+ */
+
+//
+// == Changes list: Special:RecentChanges, and the changes-list layer of the page history ==
+//
+// This file exists because of the skinStyles rule (R7): `mediawiki.special.changeslist` is a
+// core-owned module that ships its own CSS, so the only lawful way to restyle it is a
+// `ResourceModuleSkinStyles` entry. No selector named below may appear in
+// `../resources/skins.blitzy.styles/**`, and nothing here requires an edit to a core file (R1).
+//
+// -- WHERE THIS FILE IS DELIVERED --
+//
+//   * `ChangesListSpecialPage::addModules()` adds
+//     `[ mediawiki.interface.helpers.styles, mediawiki.special.changeslist.legend,
+//     mediawiki.special.changeslist ]` -> Special:RecentChanges, CAPTURE 12.
+//     (reference checkout L1560-1564; LTS target L1775-1779)
+//   * `HistoryAction::onView()` adds
+//     `[ mediawiki.interface.helpers.styles, mediawiki.action.history.styles,
+//     mediawiki.special.changeslist ]` -> page history, CAPTURE 9.
+//     (reference checkout L199-203; LTS target L194-198)
+//
+// Both arrive through `addModuleStyles`, so every rule below is present with scripting off (R4).
+//
+// -- TWO CORE TREES, AND WHAT THE LINE CITATIONS MEAN --
+//
+// The tree read for API conformance is the reference checkout, `MW_VERSION` 1.47.0-alpha; the
+// runtime target is the 1.43 LTS line the package pins by digest. NAMES AND VALUES GOVERN AND THE
+// LINE NUMBERS DO NOT: if a citation stops matching, correct the number rather than the rule.
+// Every selector and every core declaration this file depends on was checked against BOTH trees
+// and is present in both -- the legend being a `details` element, `table.mw-enhanced-rc`'s
+// `border: 0`, core's generic monospace on the two timestamp selectors, and core's simulated focus
+// ring on the disclosure arrow. The two places the trees differ are noted where they matter below,
+// and neither changes a rule.
+//
+// -- THE `+` PREFIX IS LOAD-BEARING, AND NOTHING BELOW MAY DUPLICATE WHAT IT PRESERVES --
+//
+// `includes/ResourceLoader/FileModule.php` L908-930: when the `ResourceModuleSkinStyles` key is
+// spelled `+mediawiki.special.changeslist`, the skin's file is APPENDED to the module's `default`
+// skinStyles; spelled without the `+`, `default` is DISCARDED ENTIRELY. Verified present in
+// `../skin.json`. Four rules in core's `default.less` are functional rather than decorative and
+// are deliberately NOT re-declared here:
+//
+//   * its collapsed-legend guard, which keeps the collapsible content out of view while the
+//     legend is collapsed. Core's own comment calls it a guard against a flash of unstyled
+//     content, and such a flash is a rendering-timing artefact, so keeping the rule also protects
+//     byte-identity (R9).
+//   * its suppression of the empty highlight containers every row emits for the script-driven
+//     filter UI when that UI is not enabled. Nothing here may assume it IS enabled (R4, R12).
+//   * `.mw-plusminus-pos / -neg / -null { color: ... }` -- see the byte-indicator note below.
+//   * its screen-reader-only treatment of the pager's list header, applied through core's one
+//     approved visually-hidden mixin. That is an accessibility affordance, not an oversight: a
+//     heading present for assistive technology rather than for sighted layout. Revealing it would
+//     be an R10 regression, so it is left untouched.
+//
+// CROSS-FILE CONSEQUENCE, VERIFIED ON A RUNNING INSTANCE. Because `HistoryAction` loads this
+// module too, that last rule keeps the pager's list header visually hidden on the PAGE HISTORY as
+// well as on Special:RecentChanges -- the history page does render that element, twice, and core
+// hides it through this module. `skinStyles/mediawiki.pager.styles.less` must therefore NOT give
+// that header a visible treatment and must NOT use it as a Gate 9 assertion target, or the
+// treatment is dead code and the assertion can never pass. The pager body container
+// (`mw-pager-body`), which the history page also renders, is the correct target there.
+//
+// -- CASCADE ORDER: MEASURED, DETERMINISTIC, AND THE MAIN REASON FOR THE SELECTORS BELOW --
+//
+// The changes list is painted by THREE separate core modules, and only one of them is the module
+// this file is merged into:
+//
+//   mediawiki.special.changeslist            <- styles + skinStyles.default + THIS FILE
+//   mediawiki.special.changeslist.enhanced   <- separate module, no skinStyles hook
+//   mediawiki.special.changeslist.legend     <- separate module, no skinStyles hook
+//
+// ResourceLoader emits module CSS in alphabetical module-name order, which was confirmed by
+// reading the real `load.php` request on a rendered Special:RecentChanges page. Alphabetically
+// `mediawiki.special.changeslist` sorts BEFORE both `.enhanced` and `.legend`, so CORE'S
+// `.enhanced` AND `.legend` CSS IS ALWAYS EMITTED AFTER THIS FILE. That ordering is
+// deterministic, not incidental.
+//
+// So for any property core declares in those two stylesheets, a matching-specificity rule here
+// would LOSE and become silent dead code -- which would also fail Gate 9 obligation 3, since
+// that gate requires each override be confirmed to APPLY rather than merely to exist. Every rule
+// below that touches a `.legend` or `.enhanced` declaration is therefore authored one step more
+// specific than core's, using element qualifiers that are accurate to the real markup rather
+// than padding. All stay inside the `selector-max-specificity: "1,5,2"` ceiling.
+//   Inside this module the ordering is the opposite and needs no help:
+//   `FileModule::getStyleFiles()` concatenates `styles` then `skinStyles`, and the `+` merge
+//   appends this file after core's `default.less`, so `changeslist.less` and `default.less` are
+//   both overridden at equal specificity.
+//
+// -- ASSERTION TARGETS FOR `tests/playwright/fidelity.spec.ts` (R11, Gate 9) --
+//
+// Assert BOTH on Special:RecentChanges, never on the page history: verified on a running
+// instance, the history page renders NEITHER `.mw-changeslist-legend` NOR `.mw-changeslist-line`
+// (nor `.mw-changeslist` itself), and R11 requires an assertion against an absent element to
+// FAIL rather than skip, so asserting these on history would break the gate rather than tighten
+// it.
+//
+//   * `.mw-changeslist-legend` -> `border-radius` equals the Blitzy card radius (12px) and
+//     `border-color` equals the hairline token. Both come from `.blitzy-mixin-card-surface()`.
+//     ASSERT THE RADIUS, NOT ONLY THE COLOUR, AND THIS IS A MEASURED WARNING RATHER THAN A
+//     PREFERENCE. The script-injected competitor described at that rule declares
+//     `border: 1px solid var( --border-color-subtle, ... )` too, so once the token layer publishes
+//     that property BOTH rules compute the same border colour -- a colour-only assertion would
+//     pass even if the injected rule had won and the card treatment had been lost. Only
+//     `border-radius`, `box-shadow`, `padding` and `font-size` are declared here and nowhere else,
+//     so those four are what actually prove this rule is the effective one.
+//   * `.mw-changeslist-line`   -> `font-family` resolves to the Blitzy base stack (Inter).
+//
+// Both selectors are present in BOTH changes-list rendering modes, which is why they are the
+// primary targets: no enhanced-view selector is used as a primary target, so a change to the
+// account's `usenewrc` preference cannot make the gate flaky.
+//
+// -- SCOPE, AND WHAT IS DELIBERATELY LEFT ALONE (R12) --
+//
+// Only the two captured surfaces are addressed. Special:Watchlist and Special:Contributions
+// chrome is untouched, and the script-driven RCFilters UI is not built out. Every selector
+// written below appears verbatim in one of core's four changes-list stylesheets; nothing is
+// invented. Not written, each for a stated reason:
+//
+//   * `.mw-plusminus-pos / -neg / -null` -- core colours these from `@color-content-added`,
+//     `@color-content-removed` and `@color-disabled`, and NONE of those three names is in
+//     Blitzy's variable remap, so they keep core's accessible defaults. Considered and left
+//     alone deliberately: the design remaps the success and error fills for DIFF ROWS, not for
+//     these numbers; the magnitude is additionally carried by the literal `+` / `-` sign in the
+//     text, so the meaning is not colour-only (R10); and core's `unicode-bidi: isolate` on all
+//     three (T93484) must survive. Changing them would need a contrast re-measurement first and
+//     buys nothing the design asks for.
+//   * core's four add / subtract / update / merge indicator icons -- Codex CSS mask-image icons
+//     wired to core's own icon tokens on the reference checkout, and ABSENT ALTOGETHER on the LTS
+//     runtime target (the first of the two tree differences). Re-declaring any of them risks
+//     breaking the mask, recolouring them is a variable-layer question rather than a rule for this
+//     file, and naming them at all would be dead code on the tree this skin actually runs on.
+//   * `.mw-title` -- no rule at all, which is what preserves whatever the running core gives it:
+//     the bidi embedding both trees apply through `.mw-changeslist .mw-title`, plus the
+//     `word-break` / `overflow-wrap` pair that stops a long title breaking the layout, which the
+//     reference checkout adds and the LTS target does not (the second tree difference). Declaring
+//     nothing is correct on both.
+//     No `font-weight` is set on it either, and that is the point: core bolds
+//     `.mw-changeslist-line-watched .mw-title`, so weighting every title would narrow the gap
+//     between watched and unwatched and weaken a non-colour cue (R10). Normal-versus-bold keeps
+//     it at full strength.
+//   * `.mw-tag-marker` -- its tag content and separators belong to
+//     `mediawiki.interface.helpers.styles.less` (the tightest boundary in this folder, since the
+//     two modules paint every row side by side), core's only declaration for it here is the
+//     bidi isolation that must survive, and it renders on no captured page.
+//   * `.mw-label.mw-namespace-label` -- core's `vertical-align: top` aligns it against the
+//     mobile checkboxes; there is no typography left to add once the container sets the type
+//     step, so it is preserved by omission.
+//   * `td.mw-enhanced-rc-nested` -- core indents nested rows by `1em` at a specificity that would
+//     take a third class to beat. The indent already reads correctly at the type step below, so
+//     deepening it is cosmetic escalation, not fidelity.
+//   * `.mw-enhancedchanges-checkbox`'s own `position` / `opacity` / `z-index`, and the
+//     `[dir='ltr']` / `[dir='rtl']` arrow rotations -- the first three are what make the checkbox
+//     invisible yet still keyboard-focusable, and the rotations are core's own directional
+//     handling for a transform CSSJanus cannot flip (T353099). Both are load-bearing for
+//     operability (R2) and are left exactly as core wrote them.
+//
+// -- INVARIANTS THIS FILE HOLDS --
+//
+// Not one colour literal and not one colour-function call: every colour resolves either to a core
+// variable that `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less` remaps or to a
+// `@blitzy-*` token (R3). Core names are preferred wherever a value must follow the page into
+// night mode, because those are remapped to `var( --core-name, <blitzy token> )` and are
+// therefore mode-aware for free.
+//   No external asset is referenced from here, so no request can leave the wiki origin (R5).
+//   No motion property of any kind is introduced: capture determinism is protected by adding no
+//   motion at all rather than by leaning on the harness stylesheet to zero one out (R9). No
+//   rule's geometry depends on row count or on child position either, which matters because
+//   Special:RecentChanges content is time-dependent.
+//   Nothing is hidden, clipped or made unclickable, and no control is shrunk: the legend still
+//   expands and collapses and the grouped-changes disclosure still toggles, with scripting on or
+//   off (R2, R4).
+//   Every property emitted is either non-directional or block-axis (`padding-block`,
+//   `border-block-end`), and CSSJanus rewrites only the inline axis, so no flip annotation is
+//   required anywhere in this file. Core's own `float`, `clear` and inline margin on the legend
+//   are left in place and flip in core's own compile exactly as they always did (R6).
+//   No night-mode selector and no operating-system colour-preference query appears here: night
+//   mode is owned by `../resources/skins.blitzy.tokens/customProperties.less`, which remaps the
+//   same core-named custom properties the variables above fall back from.
+//   R13 and R15 do not apply here -- this file renders no configuration-sourced string or link
+//   target and declares no dependency. Recorded so both read as decisions rather than omissions.
+//
+// @see ../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less for the core-name remap
+// @see ../resources/skins.blitzy.tokens/tokens.less for every `@blitzy-*` value used below
+// @see ../skin.json for the `+mediawiki.special.changeslist` registration
+//
+
+// Resolves through `SkinLessImportPaths.blitzy` to
+// `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less`, which imports core's
+// defaults first and the Blitzy tokens second -- so this one bare import supplies BOTH core's
+// variable API and the whole `@blitzy-*` surface. Core's own `changeslist.less` and
+// `default.less` open with the identical import.
+@import 'mediawiki.skin.variables.less';
+
+// The shared `.blitzy-mixin-*()` library, reached by relative path because it lives in the
+// styles module rather than on the Less import path. It re-exports core's `mediawiki.mixins.less`,
+// so core's public mixins are in scope here as well.
+@import '../resources/skins.blitzy.styles/mixins.less';
+
+// The list container. Carrying the type step here sets it once for BOTH rendering modes -- the
+// flat list's `li` rows and the grouped view's `table` rows -- instead of once per row shape.
+// `@blitzy-font-size-reference` is the design's small type step, the same 14px the diff and the
+// reference list use, which is what makes this list read as a sibling of those surfaces rather
+// than as body prose.
+.mw-changeslist {
+	font-size: @blitzy-font-size-reference;
+	line-height: @line-height-xx-small;
+}
+
+// One change row. In the grouped view this is the `table` that
+// `EnhancedChangesList::recentChangesBlockGroup()` builds (L148 / LTS L159) as
+// `class="mw-enhanced-rc mw-changeslist-line ..."`, so the element is a table rather than a list
+// item -- which is exactly why `font-family` is declared explicitly instead of being left to
+// inherit: a table is the one element where inheriting the page's typeface has historically been
+// unreliable, and core hardcodes a family on its own cells for the same reason.
+//   This is also the R11 / Gate 9 assertion target named above. `@font-family-base` is remapped
+//   to the Blitzy base stack, so a computed `font-family` of Inter proves both that this override
+//   is delivered and that the variable layer is in effect.
+.mw-changeslist-line {
+	font-family: @font-family-base;
+	padding-block: @spacing-50;
+}
+
+// The hairline that separates one row from the next.
+//
+// THE SPECIFICITY HERE IS REQUIRED, NOT DECORATION. Core's `.enhanced` stylesheet declares
+// `table.mw-enhanced-rc { border: 0; }` and, per the cascade note above, that stylesheet is
+// always emitted after this file -- so the same declaration written on a bare
+// `.mw-changeslist-line` would be wiped and the separator would silently never render. Naming
+// both classes that genuinely sit on the element clears core's rule by one class.
+//   `border-block-end` is a block-axis property, so CSSJanus leaves it alone and it needs no flip
+//   annotation. `@border-color-muted` is remapped to the Blitzy hairline and so follows the page
+//   into night mode.
+//   Every row is given the rule, including the last in a date group, deliberately: R9 forbids
+//   geometry that depends on row count or child position, and a trailing hairline closes the
+//   group cleanly in any case.
+table.mw-enhanced-rc.mw-changeslist-line {
+	border-block-end: @border-width-base @border-style-base @border-color-muted;
+}
+
+// The abbreviations key, which `ChangesListSpecialPage::doHeader()` builds (L1543 / LTS L1758) as
+// `<details class="mw-changeslist-legend"><summary>...`. It becomes a Blitzy card: hairline
+// border, card radius and the one soft elevation of the design language, all from the shared
+// mixin so the treatment matches the infobox, the sticky table of contents and the search-result
+// cards rather than being described a second time here.
+//
+// THE SELECTOR IS QUALIFIED TWICE OVER, AND BOTH STEPS WERE MEASURED RATHER THAN GUESSED.
+// `details` clears core's `.legend` stylesheet, which sets `background-color`, `border`, `padding`
+// and `font-size` on the bare class and is emitted after this file -- unqualified, this rule would
+// lose all four. The `.mw-changeslist` ancestor clears a SECOND competitor that exists only at run
+// time: the structured-filter UI injects, from a script-built stylesheet, a rule pairing its
+// changes-list wrapper-widget class with the bare legend class -- specificity (0,2,0), declaring
+// `background-color`, `border: 1px solid ...`, `position: relative` and `z-index: 1`. In devtools it
+// is the only two-class rule targeting the legend, so it is easy to find; it is deliberately not
+// spelled out here, because nothing in this file may reference that UI (R4, R12) -- only out-rank it.
+// The element it matches is the SAME node as `.mw-changeslist`: the container carries both that
+// wrapper-widget class and `mw-changeslist`, and `mw-changeslist` is server-rendered, so
+// `.mw-changeslist details.mw-changeslist-legend` at (0,2,1) wins whether or not scripting runs.
+// Measured on a live instance: at (0,1,1) the injected rule took the border and the fill while the
+// radius, shadow, padding and type size still came from here, which is the most misleading kind of
+// partial failure -- the card LOOKS applied. Both are the assertion target Gate 9 obligation 3
+// requires be confirmed to APPLY, so both must resolve to this rule.
+//   Core's `float`, `clear` and `margin-left` are its layout decision and are deliberately left
+//   in place, as are the `dl` / `dt` / `dd` spacings inside: none of them fights the card, and
+//   restyling them would be change without purpose (R12). The collapsed-state rules stay core's
+//   too, so the disclosure keeps working with scripting off (R2, R4).
+//   `padding` is one value on all four sides, so it is non-directional. `@border-color-subtle` is
+//   passed rather than the mixin's `@border-color-muted` default because it is the very name
+//   core's own legend rule uses; Blitzy remaps both to the same hairline, so tracking core's
+//   name costs nothing and keeps the two in step if they ever diverge.
+.mw-changeslist details.mw-changeslist-legend {
+	.blitzy-mixin-card-surface( @border-colour: @border-color-subtle );
+	padding: @spacing-75;
+	font-size: @blitzy-font-size-reference;
+}
+
+// The key's disclosure control. Core gives it `cursor: pointer` and nothing else, so it is
+// keyboard-focusable with only the browser's default ring. Routing focus through the shared mixin
+// makes it the same 2px purple ring at 2px offset the rest of the skin uses, and that mixin never
+// emits an outline reset, so the indicator can only get stronger, never weaker (R10).
+//
+// `:focus` RATHER THAN `:focus-visible`, DELIBERATELY AND ON MEASURED GROUNDS. The package's
+// browser-support lint check reports `:focus-visible` as unsupported on the older Safari and iOS
+// Safari versions still inside the configured browser set, and the zero-warning build (Gate 2)
+// forbids the suppression that would silence it -- `../.stylelintrc.json` enables
+// `reportNeedlessDisables`, so an inline disable is itself a failure, and the config grants no
+// browser-feature exemption for this folder. Core uses `:focus-visible` nowhere in its own Less,
+// which is the same conclusion reached independently.
+//   The accessibility outcome is better this way, not merely compliant: `:focus` matches in every
+//   browser in the target set, so all of them get the purple ring, whereas under `:focus-visible`
+//   the older ones would have matched nothing and fallen back to the user agent's own ring. The
+//   only cost is that the ring also appears after a pointer click, which is long-standing
+//   behaviour for a disclosure control. It also matches the trigger used by the grouped-changes
+//   disclosure at the foot of this file, so both focusable controls on this page behave alike.
+.mw-changeslist details.mw-changeslist-legend summary {
+	color: @color-emphasized;
+
+	&:focus {
+		.blitzy-mixin-focus-ring();
+	}
+}
+
+// Timestamps in the grouped view. Core sets the generic `monospace, monospace` on both of these,
+// which is a determinism hazard as well as a fidelity gap: a generic family resolves to whatever
+// face the host happens to ship, so the same page renders differently in two environments and
+// byte-identical capture (R9) cannot hold. `@font-family-monospace` is remapped to the skin's
+// self-hosted stack, which renders identically everywhere, and the mixin brings the 14px step and
+// tight leading with it so these cells sit on the same rhythm as the diff.
+//   Both selectors clear core's by one step -- core writes `td.mw-enhanced-rc` and a bare
+//   `.mw-enhanced-rc-time`, and its stylesheet is emitted after this one. Core's
+//   `white-space: nowrap` on the cell is preserved by omission, and no `font-weight` is set, so
+//   the bold that core puts on `.mw-enhanced-watched .mw-enhanced-rc-time` to mark a watched
+//   entry survives as a non-colour cue (R10).
+table.mw-enhanced-rc td.mw-enhanced-rc,
+table.mw-enhanced-rc .mw-enhanced-rc-time {
+	.blitzy-mixin-monospace-block();
+}
+
+// The "changed by" attribution on a grouped entry: secondary metadata, so it takes the muted
+// text colour. Core sets only a relative `font-size` on this selector, which is left alone.
+span.changedby {
+	color: @color-subtle;
+}
+
+// The filter form's label-and-control pairs, which are the no-script path's visible filter UI and
+// therefore must stay legible when RCFilters has not replaced them (R4). Typography only: core's
+// `white-space: nowrap` and `display: inline-block` keep the pair from breaking across lines and
+// are preserved by omission.
+.mw-input-with-label {
+	font-size: @blitzy-font-size-reference;
+}
+
+// The grouped-changes disclosure, which is a checkbox-hack primitive that works with no JavaScript
+// at all -- the same technique the skin uses for its own mobile navigation and inline table of
+// contents. The checkbox is deliberately invisible yet keyboard-focusable, so it needs a focus
+// indicator drawn on something else.
+//
+// THE RING GOES ON THE ROW TABLE, NOT ON THE ARROW LABEL, AND THAT IS A MEASURED CORRECTION.
+// Core aims its own simulated ring at the arrow label, and the obvious move is to restyle that
+// same target. It does not work, and it fails silently. The arrow label is a Codex CSS icon: core
+// paints the triangle by combining a `background-color` with a `mask-image`, and in Chromium a mask
+// clips the element's ENTIRE painted output -- its outline included. The ring sits 2px outside the
+// border box, where the centred 12px mask has zero alpha, so it is erased.
+//   This was proven rather than inferred. Focusing the checkbox on a live instance changed ZERO
+//   pixels: the focused capture was byte-identical to the unfocused one, an A/B image diff returned
+//   an empty bounding box for two different disclosures, and a colour scan of the arrow region
+//   found not one ring pixel -- while the same test on the legend summary produced a clean diff as
+//   a positive control. An isolated three-case probe then separated the cause: same outline with
+//   the mask present painted nothing, and without the mask painted normally.
+//   Core's own `outline: auto` on that label is defeated by exactly the same mechanism, so the
+//   control has never had a visible indicator. Leaving a rule there would have satisfied a
+//   computed-style check while giving keyboard users nothing, which is the most dangerous kind of
+//   accessibility pass -- and R10 requires the indicator to be VISIBLE, not merely declared.
+//   `table.mw-enhanced-rc` carries no mask, so the ring paints. Ringing the whole group the
+//   disclosure controls is also the clearer affordance, and the purple clears the 3:1 minimum for a
+//   focus indicator against the page surface with room to spare.
+//
+// `:focus` MATCHES CORE'S OWN TRIGGER ON PURPOSE, for the reason given at the legend summary above:
+// the browser-support lint check rejects `:focus-visible` on the older Safari versions in the
+// configured browser set, and core itself uses `:focus` here. The control's own size stays core's --
+// an enforced width aligns the arrow to the timestamp column, and enlarging it would break that
+// alignment on a captured page.
+.mw-enhancedchanges-checkbox:focus + table.mw-enhanced-rc {
+	.blitzy-mixin-focus-ring();
+}

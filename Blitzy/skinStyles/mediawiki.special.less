@@ -1,0 +1,191 @@
+/*!
+ * Blitzy -- skinStyles override for core's mediawiki.special module.
+ *
+ * Shared special-page chrome only, and deliberately the shortest file in skinStyles/.
+ * Within the capture matrix this module reaches exactly one surface, Special:Search, so the
+ * per-special-page rules core's own eighteen stylesheets carry have no counterpart here:
+ * restyling a surface no capture exercises is scope expansion (R12).
+ */
+
+// THE BANNER ABOVE IS THE ONLY COMMENT IN THIS FILE THAT SHIPS, AND IT IS DELIBERATELY BOTH
+// SHORT AND FREE OF BACKTICKS. Short, because Less preserves block comments and strips `//` line
+// comments, so every character up there is copied into the `mediawiki.special` payload while
+// everything below this line costs nothing -- measured, not assumed: editing the notes below
+// leaves the compiled output byte-for-byte unchanged. Backtick-free, because the
+// direction-flipping stage reserves backtick-delimited placeholders and therefore rewrites every
+// literal backtick in its input to `%60` without restoring it (CSSJanus.php L176-177), so a
+// backtick in the banner would ship mangled in the right-to-left build. Verified by running that
+// stage over this file's compiled output: byte-identical in, byte-identical out. Backticks below
+// are safe and are used freely.
+//
+// == Blitzy design language -- core `mediawiki.special` module override ==
+//
+// -- WHY THIS FILE EXISTS --
+//
+// `mediawiki.special` is a core-owned ResourceLoader module that ships its own CSS, so the one
+// lawful way for a skin to change how it renders is a `ResourceModuleSkinStyles` entry (R7).
+// `../skin.json` registers this file additively as `"+mediawiki.special"`, which layers it over
+// core's stylesheets rather than replacing them. Core immutability (R1) is satisfied by
+// construction: nothing outside the skin directory is touched, and the palette and typography
+// this module inherits arrive from `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less`
+// rather than from any edit to core.
+//   The additive `+` is not strictly load-bearing for this particular key -- the module block in
+//   core's `resources/Resources.php` declares eighteen `styles` files and NO `skinStyles` key at
+//   all, so there is no `default` entry for a bare key to displace. It is written additively
+//   anyway, so all twelve entries in the manifest read the same way and none is a special case a
+//   reviewer has to stop and reason about.
+//
+// -- THE SCOPE FINDING, MEASURED ON THE RUNTIME TARGET RATHER THAN ASSUMED --
+//
+// This is the shortest file in the folder, and that is the correct outcome rather than an
+// unfinished one. The reasoning is recorded here because brevity is otherwise indistinguishable
+// from an omission.
+//   The module is loaded through `addModuleStyles` by roughly thirty special pages. Exactly ONE
+//   of them is in the capture matrix: `Special:Search`, which supplies captures 5 and 6
+//   (`reading-search-1440-light-anon` and `reading-search-390-light-anon`) and adds this module
+//   alongside `mediawiki.special.search.styles`, `mediawiki.widgets.SearchInputWidget.styles` and
+//   `mediawiki.codex.messagebox.styles`. Confirmed delivered on that page: the served stylesheet
+//   request carries the packed pair `mediawiki.helplink,special`, which is Gate 9's second
+//   obligation -- a declared module confirmed in effect on a captured page -- discharged.
+//   The module does NOT reach the other captured special surfaces, and the plan's per-file
+//   ownership depends on that being true rather than assumed, so it was verified directly:
+//   `SpecialPreferences`, `SpecialRecentChanges` and `ChangesListSpecialPage` never name this
+//   module. Captures 11 and 12 are therefore owned by `mediawiki.special.preferences.styles.ooui.less`
+//   and `mediawiki.special.changeslist.less`. Captures 13 and 14 are an ordinary category page
+//   and an ordinary talk page -- not `Special:` pages at all -- so nothing here reaches them
+//   either. Anyone assuming otherwise would write dead code in this file and leave those two
+//   captures depending on rules that never load.
+//
+// -- WHAT IS DELIBERATELY ABSENT, AND THE EVIDENCE FOR EACH --
+//
+// Every candidate below was checked against the live 1.43 runtime target before being dropped.
+// A rule that no capture exercises restyles a surface outside the capture matrix, which the
+// minimal-change mandate forbids outright, and it can never satisfy Gate 9 either, because no
+// capture would ever confirm it applies.
+//
+//   * The per-special-page rules -- the tables, list columns, action columns, radio spacing and
+//     italic redirect markers core writes for `Special:AllMessages`, `Special:BlockList`,
+//     `Special:Statistics`, `Special:ListGroupRights`, `Special:PrefixIndex`, `Special:AllPages`,
+//     `Special:ProtectedPages`, `Special:PasswordPolicies`, `Special:EmailUser`,
+//     `Special:Version`, `Special:WhatLinksHere`, `Special:Contributions`, `Special:Watchlist`,
+//     `Special:MergeHistory`, `Special:RevisionDelete`, `Special:FileDuplicateSearch` and
+//     `Special:SpecialPages`. None of those pages is captured. Absent.
+//
+//   * The HTMLForm-in-OOUI fieldset rhythm hook. Its premise does not hold: `Special:Search`
+//     renders NO `mw-htmlform`-prefixed element on any of its three profiles, `default`,
+//     `advanced` (power search) or `images`. The advanced search options are built by hand from
+//     an OOUI action-field layout, not from HTMLForm, so a rule keyed on the HTMLForm wrapper
+//     would match nothing on the only captured surface. Absent. Should a future capture need
+//     widget geometry, `ooui.less` owns it -- the widget interiors were never this file's to
+//     write.
+//
+//   * The `Special:SpecialPages` list chrome -- the restricted-entry marker, the group heading
+//     and the multi-column list. `Special:SpecialPages` is not captured, and `Special:Search`
+//     renders none of the three. Absent.
+//
+//   * Anything already owned by a sibling entry. `Special:Search` renders search-specific
+//     selectors, OOUI widget classes and a help link, and those belong to
+//     `mediawiki.special.search.styles.less`, `ooui.less` and `mediawiki.helplink.less`
+//     respectively. Declaring one of them here as well would make the result depend on which of
+//     two skinStyles files the cascade happened to reach last. The clearest instance is the
+//     contributions top-revision marker `mw-uctop`, which core declares in BOTH this module and
+//     `mediawiki.interface.helpers.styles`: it is a link helper, so it is written once, in
+//     `mediawiki.interface.helpers.styles.less`, and not here.
+//
+// Measured consequence of all of the above, and the reason the single rule below is what it is:
+// the intersection of {selectors core's eighteen `mediawiki.special` stylesheets declare} with
+// {selectors `Special:Search` actually renders} is EMPTY. The one element this module's remit
+// genuinely owns across every special page it serves is the summary block, and that is exactly
+// what this file styles.
+//
+// @see ../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less for the variable remapping
+// @see ../skin.json for the `ResourceModuleSkinStyles` registration that loads this file
+//
+
+// Resolves through `SkinLessImportPaths.blitzy` to
+// `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less`, which imports core's
+// `mediawiki.skin.defaults.less` first and `../resources/skins.blitzy.tokens/tokens.less`
+// second. This ONE bare import therefore supplies both the full core variable API and the
+// entire Blitzy token surface. Never reach into `mediawiki/` by relative path -- that would
+// breach core immutability (R1) and would break the moment the package is bind-mounted at
+// `$IP/skins/Blitzy`.
+@import 'mediawiki.skin.variables.less';
+
+// The package's shared mixin library, by the relative shape the reference skin uses at line 1
+// of its own `skinStyles/mediawiki.action.edit.less`.
+//   IT LOOKS UNUSED. IT IS NOT DEAD -- DO NOT DELETE IT. The rule below calls no mixin, because
+//   no shared definition describes body prose and inventing one for a single consumer would be
+//   a definition no other file wants. What this import provides is vocabulary: it re-exports
+//   core's flip-aware `.margin-inline()` and `.padding-inline()` emitters and
+//   `.mixin-screen-reader-text()`, the one approved visually-hidden helper (R10 forbids a
+//   bespoke replacement). Any future rule here needs them in scope, and keeping the import
+//   matches the other eleven entries in this folder.
+//   It costs nothing. Both imported files are definition-only -- every mixin is declared in the
+//   empty-paren form that emits no CSS until called -- so this contributes zero bytes to the
+//   `mediawiki.special` payload.
+@import '../resources/skins.blitzy.styles/mixins.less';
+
+// The summary block core emits above the body of a special page, from
+// `SpecialPage::outputHeader()`, whenever the page's `<name>-summary` message is defined. It is
+// the one genuinely SHARED special-page element -- every other selector in this module is bound
+// to a single page -- which is why the shared-chrome entry in the plan's component mapping
+// resolves to precisely this rule and no more.
+//   EXPECT A GREP FOR THIS SELECTOR ACROSS THE MODULE'S OWN EIGHTEEN STYLESHEETS TO FIND NOTHING,
+//   AND READ THAT AS CORRECT RATHER THAN AS AN INVENTED SELECTOR. Core emits the element from
+//   `SpecialPage.php` but styles it in exactly one place, `mediawiki.special.preferences.styles.ooui`,
+//   and there only as `.mw-special-Preferences .mw-specialpage-summary` -- a different module,
+//   scoped to a page this module never loads on. So there is no duplicate declaration to order
+//   against and no cascade interaction with the sibling preferences entry: the two selectors can
+//   never meet on one page. Confirmed on a rendered page, where the only rule anywhere in the
+//   document matching this selector was this one.
+//
+// The treatment is Blitzy body prose, consistent with the content header: the base family at the
+// prose size and the prose reading rhythm, in the muted text colour, with one step of vertical
+// space separating the explanation from the content it introduces. Reading it as secondary text
+// follows core's own convention inside this very module, where the watchlist-expiry note and the
+// unknown-length marker on protected pages are both drawn in the subtle colour; the summary is
+// explanatory chrome above the page, not the page's own content.
+//
+// R2: this rule only paints. It never hides, collapses or removes the element -- core renders
+// editor-facing explanatory text into it, and suppressing that would break a provided contract.
+//
+// R3: not one colour literal. Every value is a variable, and the colour is deliberately core's
+// `@color-subtle` rather than a raw Blitzy design value, because the variable file writes that
+// name in the `var( --core-name, <fallback> )` form, so it follows the page into night mode with no
+// mode-conditional rule anywhere in this file. Night mode is published once, by
+// `../resources/skins.blitzy.tokens/customProperties.less`, and consumed here for free.
+//
+// R10: both resolved pairings clear the body-text minimum with room to spare, and the ratios are
+// MEASURED in a real browser rather than estimated -- 6.47:1 against the light page surface and
+// 7.75:1 against the night surface, on a 4.5:1 floor, with the night pairing clearing the 7:1
+// enhanced threshold as well. No focus indicator is touched and no visually-hidden helper is
+// authored.
+//
+// R6: `margin-bottom` is a block-axis property. The direction-flipping stage rewrites the inline
+// axis, so this value cannot flip and needs no annotation; the physical spelling is what core's
+// own stylesheets in this module use. Nothing else here is directional.
+//
+// GATE 9 / R11 -- THE NAMED ASSERTION TARGET FOR `tests/playwright/fidelity.spec.ts`.
+// Confirm this override applies by asserting the computed style of `.mw-specialpage-summary` on
+// `Special:ListGroupRights`, which both loads `mediawiki.special` and renders a summary. Assert
+// `color` and `margin-bottom`: those two differ from what the element resolves to without this
+// file (an inherited base text colour, and a zero margin on a bare `div`), so they prove the
+// override is in effect rather than restating an inherited value. `font-family` -- Inter, via
+// `@font-family-base` -- and `line-height` are asserted alongside them as the type contract.
+//   ASSERT IT THERE AND NOT ON `Special:Search`, and this is measured rather than preferred:
+//   core defines no `search-summary` message, so `Message::isDisabled()` is true and the element
+//   is NEVER emitted on the captured search page. An assertion pointed at it there would fail
+//   against an absent element, which is the correct outcome for a missing element and the wrong
+//   outcome for this override. Gate 9's second obligation -- module confirmed loaded on a
+//   captured page -- is already discharged on `Special:Search` as recorded above, and its third
+//   obligation is not restricted to captured pages, so asserting on a page the suite merely
+//   loads adds no capture and expands no scope.
+//   `Special:PasswordPolicies`, `Special:ProtectedPages` and `Special:ListFiles` were verified
+//   to work equally well if the primary target ever becomes unavailable.
+.mw-specialpage-summary {
+	color: @color-subtle;
+	font-family: @font-family-base;
+	font-size: @blitzy-font-size-prose;
+	line-height: @line-height-content;
+	margin-bottom: @spacing-100;
+}

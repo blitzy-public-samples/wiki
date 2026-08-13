@@ -150,6 +150,7 @@
 				"resources/skins.blitzy.js/tableOfContents.js"
 			],
 			"dependencies": [
+				"mediawiki.page.ready",
 				"mediawiki.storage"
 			]
 		}

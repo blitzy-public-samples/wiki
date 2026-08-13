@@ -1,0 +1,244 @@
+{{!--
+	skin.mustache -- the Blitzy skin's root template, and the only entry point into
+	includes/templates/.
+
+	MediaWiki\Skin\SkinMustache::generateHTML() renders the template named by the `template`
+	argument of ValidSkinNames.blitzy, falling back to `skin`, resolved against the directory
+	named by `templateDirectory` (includes/Skin/SkinMustache.php L46-53). skin.json sets those
+	two to "skin" and "includes/templates", so this file's name is part of the manifest
+	contract rather than a convention: rename it and the skin stops rendering entirely.
+	Partials resolve by filename the same way, and TemplateParser's resolver throws "Could not
+	find partial" rather than rendering a blank when a name matches no file
+	(includes/Html/TemplateParser.php L217-226). Every reference below is therefore spelled
+	exactly as its file is, PascalCase included.
+
+	This block comment uses the `--` delimited form. LightnCandy strips that form with a
+	single non-greedy pattern before it tokenises anything (SafeString::EXTENDED_COMMENT_SEARCH,
+	applied from Validator::verify(), which Compiler::compileTemplate() calls first), so a
+	delimited comment may quote a template expression. The plain form cannot: it ends at the
+	first closing double brace it meets, which truncates the comment and compiles the rest of
+	the prose as markup. Bundled Vector uses the delimited form in Logo.mustache for exactly
+	this reason. The one sequence this comment must never contain is the delimited form's own
+	terminator.
+
+	================================================================================
+	INVOCATION GRAPH -- the whole reason this file exists (Gate 9)
+
+	    skin.mustache
+	      |-- {{#data-blitzy-announcement}} {{>AnnouncementBar}} {{/data-blitzy-announcement}}
+	      |-- {{>NavCard}}                            ---> {{>PersonalMenu}}
+	      |-- {{>ContentHeader}}
+	      |-- {{#is-blitzy-toc-available}} {{#data-toc}} {{>TableOfContents}} ... ---> itself
+	      |-- {{>ContentBody}}                        ---> {{>CategoryFooter}}
+	      `-- {{>SiteFooter}}
+
+	Six references leave this file. PersonalMenu is reached through NavCard, CategoryFooter
+	through ContentBody, and TableOfContents recurses into itself for every nesting level
+	below the first -- which is sanctioned rather than tolerated, because
+	SkinMustache::getTemplateParser() calls enableRecursivePartials( true ) and annotates it
+	"For table of contents rendering." (includes/Skin/SkinMustache.php L31-38). Nine files in
+	this directory, nine reachable partials, no orphan and no tenth file (R12). Gate 9 counts
+	an unreachable partial as a wiring failure even when the orphaned file is perfect in
+	isolation, so adding a partial without adding it to the graph above breaks the gate.
+
+	No partial is referenced twice. Each one puts at least one fixed id on the page: its own
+	in six of them, and one of core's -- #firstHeading with the portlet ids, or #catlinks --
+	by way of the markup ContentHeader and CategoryFooter pass through. A second reference
+	would therefore duplicate ids page-wide, which is a blocking R10 failure across all
+	twenty-one captures rather than a local defect.
+
+	Landmarks follow from that arithmetic: exactly one <header> (NavCard), one <main>
+	(ContentBody), one <footer> (SiteFooter) and one <h1> (core's #firstHeading, arriving
+	through ContentHeader). Because each landmark is unique, none of the three needs an
+	accessible name; the several <nav> elements inside the partials are named there.
+
+	================================================================================
+	TEMPLATE DATA CONSUMED -- four keys, and nothing else
+
+	One thing about the skip link is worth knowing before writing an assertion against it.
+	It is the first element THIS FILE emits, but not the first element inside the rendered
+	body: OutputPage::headElement() appends an empty div#mw-aria-live-region[aria-live=polite]
+	immediately after the body start tag (includes/Output/OutputPage.php L3755-3764), before
+	any skin markup, and no Mustache skin can reach it. Measured on a rendered page. So the
+	precise contract is "first skin-emitted element, immediately after core's ARIA live
+	region" -- a `body > *:first-child` assertion would fail here and in every other skin
+	alike. The affordance is unaffected: core's container is empty and not focusable, so the
+	skip link is still the first thing a keyboard user reaches.
+
+	  string   msg-blitzy-jumptocontent
+	           The skip link's text. SkinMustache::getTemplateData() creates every msg- key
+	           from the `messages` argument of skin.json through Message::text(), so it
+	           arrives as plain text and is interpolated escaped. This is the only message
+	           key this file references and the only new key it needs documented in
+	           i18n/qqq.json for the banana checker (Gate 2).
+
+	           It is `blitzy-jumptocontent` and not `jumptocontent` because core has no
+	           `jumptocontent` message -- verified directly against
+	           mediawiki/languages/i18n/en.json, which offers `jumpto`, `jumptonavigation`
+	           and `jumptosearch` and nothing that reads "jump to content". Vector likewise
+	           defines its own `vector-jumptocontent`.
+
+	  object   data-blitzy-announcement
+	           MediaWiki\Skins\Blitzy\BlitzyViewModel's announcement payload, used here ONLY
+	           as a section key. The view model omits the key altogether when the bar is
+	           disabled or has no text, so the section is the enable gate and AnnouncementBar
+	           is entered with the payload as its context, which is what lets that file read
+	           `text`, `label` and `href` unqualified.
+
+	  string|null html-site-notice
+	           Skin::getSiteNotice() (includes/Skin/Skin.php L1918-1962), or null when there
+	           is nothing to show -- SkinMustache passes it through `?: null`. Finished HTML
+	           built by core, so it is interpolated raw; that is one of the reserved lawful
+	           uses of an unescaped tag, and escaping it would print core's markup as visible
+	           text. MediaWiki:Sitenotice content arrives inside div#localNotice[data-nosnippet]
+	           and CentralNotice injects its banners through the same key.
+
+	  bool     is-blitzy-toc-available
+	           BlitzyViewModel's flag, true only when core reported at least one section.
+	           Used here ONLY as a section key.
+
+	`data-toc` is entered as a context rather than read as a value; see the ruling below.
+	No other key is touched. In particular no configuration value is interpolated anywhere in
+	this file, which is why R13's escaping obligation lives entirely in AnnouncementBar.mustache
+	and NavCard.mustache and nothing here can become an injection site.
+
+	================================================================================
+	TWO PLACEMENTS THAT ARE STRUCTURAL, NOT COSMETIC
+
+	1. TableOfContents and ContentBody are SIBLINGS inside one div.blitzy-content-layout,
+	   with the table of contents first in source order.
+
+	   That order is what lets components/TableOfContents.less stick the card beside the
+	   content at 1024px and up and reorder it below the content at narrower widths from ONE
+	   DOM instance. Nesting it inside ContentBody, or including it from
+	   ContentBody.mustache, makes the sticky-then-reorder behaviour unimplementable without
+	   a second copy of the list -- and a second copy duplicates every blitzy-toc-<anchor>
+	   id, which is a blocking R10 failure. The markup is identical at every width; only the
+	   stylesheet changes, which is also what keeps the two presentations byte-identical
+	   inputs to the capture pass (R9).
+
+	   Being first in source order is not a statement about which side it sits on. Which side
+	   is flip-aware stylesheet work under R6, so nothing here encodes a direction.
+
+	2. AnnouncementBar is invoked inside a section on the announcement OBJECT, never behind
+	   an is- boolean.
+
+	   A falsy section renders nothing at all, so a disabled bar is ABSENT from the document's
+	   flow rather than hidden: `display: none` is explicitly non-compliant, and the assertion
+	   is made against the HTML source, not against visibility. Together with
+	   is-blitzy-toc-available these are the only two conditionals in this file, and they are
+	   the specification's only sanctioned conditional absences. A third one would put a
+	   fidelity assertion at risk of failing against an element that was never rendered
+	   rather than reporting a difference (R11), so do not add one.
+
+	================================================================================
+	RULING -- WHY THE TABLE OF CONTENTS IS ENTERED THROUGH {{#data-toc}}
+
+	TableOfContents.mustache states an invocation contract: it must be entered with the
+	`data-toc` object as its context. Its root branch is {{^anchor}} and its leaf branch is
+	{{^array-sections}}, and `array-sections` lives INSIDE `data-toc`. Entered at the top
+	level, the list renders empty and the leaf branch also fires, emitting one stray <li> with
+	an empty id and href="#" -- an anchor with no accessible name, which the blocking
+	accessibility gate rejects (R10). That file records the extra <li> as measured rather than
+	assumed, and MediaWiki compiles with LightnCandy's FLAG_MUSTACHELOOKUP but not
+	FLAG_PARENT, so no parent path could rescue it from the wrong context.
+
+	The push adds no gate. Core's SkinComponentTableOfContents returns an empty array for a
+	page with no table of contents, for __NOTOC__ and for a parse with no sections, and
+	otherwise sets number-section-count above zero; BlitzyViewModel derives
+	is-blitzy-toc-available from that same count. So `data-toc` is non-empty exactly when the
+	flag is true, and the inner section only changes the context -- it never suppresses
+	anything the flag permitted. Inside it, msg-toc and msg-blitzy-toc-toggle still resolve,
+	because FLAG_MUSTACHELOOKUP walks up the context stack for a key the current context does
+	not hold.
+
+	================================================================================
+	WHAT THIS FILE CANNOT EMIT, AND WHAT IT WILL NOT
+
+	A Mustache skin templates the content of the body element and nothing outside it, so this
+	file emits no html, head, body, title, meta or link element -- and has no way to reach one
+	even if it tried. Anything reaching further has a seam of its own:
+
+	  the theme class    Hooks\BlitzyHooks applies skin-theme-clientpref-night / -day / -os
+	                     to the root html element through OutputPage::addHtmlClasses()
+	                     (includes/Output/OutputPage.php L736-738). Emitting a theme class
+	                     here would be a silent no-op that an isolated template test cannot
+	                     catch, which is why Gate 13 asserts it through a real page render.
+	  body classes       skin.json's `bodyClasses` argument supplies skin-blitzy.
+	  stylesheets        the ResourceModules declared in skin.json, delivered by
+	  and scripts        ResourceLoader. No script element, no inline event-handler attribute
+	                     and no subresource of any kind is emitted here: no image, icon,
+	                     font, preload or preconnect, so this file cannot originate the
+	                     foreign-origin request the external-origins guard fails on (R5).
+	  colours and        every value resolves in layouts/screen.less against tokens.less.
+	  measures           No style attribute and no colour literal appears below (R3).
+
+	Nothing here is generated, random, timed or request-dependent, and the DOM order below
+	never varies, which is what makes two renders of one revision byte-identical (R9). There
+	is no positive tabindex, no aria-* attribute that native semantics already carry, and
+	nothing that needs the client script to work: with scripting disabled this skeleton is
+	complete, and every disclosure inside the partials is core's documented checkbox hack
+	(R4).
+
+	================================================================================
+	CLASS HOOKS DEFINED HERE -- the contract with layouts/screen.less
+
+	  .mw-jump-link          core's own class, kept verbatim (R2). Core styles it in no skin
+	                         feature -- accessibility.less covers reduced motion and image
+	                         sizing only -- so the skin's stylesheet owes it the treatment
+	                         its message documentation promises: visually hidden until it
+	                         takes keyboard focus, never display: none, which would take it
+	                         out of the focus order and defeat the affordance.
+	  .blitzy-page           the full-width page surface. Background and vertical rhythm.
+	  .blitzy-page__inner    the content measure and its gutters, centred with auto inline
+	                         margins. Two elements rather than one so that a full-bleed
+	                         surface and a constrained measure are each assertable on their
+	                         own element.
+	  .blitzy-site-notice    the site-notice band. A class and no id: core owns
+	                         div#siteNotice, and it wraps the notice in one itself when a
+	                         skin sets the `wrapSiteNotice` option, so emitting that id here
+	                         would risk a duplicate rather than add a hook.
+	  .blitzy-content-layout the two-column relationship between the table of contents and
+	                         the content body, and the single place their responsive
+	                         behaviour is authored.
+
+	The announcement band and the navigation card sit OUTSIDE .blitzy-page on purpose: the
+	band is full-bleed and the card is inset from the viewport edge, so both are positioned
+	against the viewport rather than against the content measure.
+
+	================================================================================
+	DELIBERATELY ABSENT (R12)
+
+	No sticky header, no breadcrumb bar, no back-to-top control, no cookie banner, no
+	reading-progress indicator, no invented sidebar and no search field of this file's own --
+	the navigation card owns the search box. Bundled Vector's forty-eight templates, its
+	Footer__row sub-parts and its Dropdown/ subdirectory show what MediaWiki permits; R12
+	fixes what this skin ships, which is nine flat files and the regions below.
+
+	Rendered output, in full: the skip link; then, when configured, the announcement band;
+	then the navigation card; then div.blitzy-page wrapping div.blitzy-page__inner, which
+	holds the optional site-notice band, the content header, div.blitzy-content-layout with
+	the table of contents and the content body as siblings, and the site footer.
+--}}
+<a class="mw-jump-link" href="#bodyContent">{{msg-blitzy-jumptocontent}}</a>
+{{#data-blitzy-announcement}}
+{{>AnnouncementBar}}
+{{/data-blitzy-announcement}}
+{{>NavCard}}
+<div class="blitzy-page">
+	<div class="blitzy-page__inner">
+		{{#html-site-notice}}
+		<div class="blitzy-site-notice">{{{.}}}</div>
+		{{/html-site-notice}}
+		{{>ContentHeader}}
+		<div class="blitzy-content-layout">
+			{{#is-blitzy-toc-available}}
+			{{#data-toc}}
+			{{>TableOfContents}}
+			{{/data-toc}}
+			{{/is-blitzy-toc-available}}
+			{{>ContentBody}}
+		</div>
+		{{>SiteFooter}}
+	</div>
+</div>

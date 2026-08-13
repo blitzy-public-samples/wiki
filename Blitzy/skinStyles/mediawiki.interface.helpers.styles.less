@@ -1,0 +1,529 @@
+/*!
+ * Blitzy -- skinStyles override for the core `mediawiki.interface.helpers.styles` module.
+ * Registered additively as `+mediawiki.interface.helpers.styles` and delivered by
+ * `addModuleStyles` on four surfaces: the wikitext edit form, the page history, the diff
+ * view and `Special:RecentChanges`.
+ */
+
+//
+// == Blitzy skinStyles -- mediawiki.interface.helpers.styles ==
+//
+// Core's `mediawiki.interface.helpers.styles` is the module that styles the helper classes
+// emitted by the `Linker`, `ChangesList`, `CommentFormatter` and `LogEventsList` classes:
+// user links, edit summaries, revision-deletion markers, changes-list flags and the
+// punctuation that separates them. This file is Blitzy's additive override of it, and it is
+// the BROADEST-REACH file in `../skinStyles/`. Core attaches the module with
+// `addModuleStyles`, so it is present with scripting disabled, on:
+//
+//   * the wikitext edit form        -> captures 7, 10, 17
+//   * the page history             -> capture 9
+//   * the diff view                -> captures 8, 18
+//   * `Special:RecentChanges`      -> capture 12
+//
+// Four surfaces, six of the twenty-one captures. A mistake here is visible in more captures
+// than a mistake anywhere else in this folder, which is why the file is deliberately narrow
+// and every declaration below is justified individually.
+//
+// -- THE `+` PREFIX, WHICH MATTERS MORE HERE THAN IN ANY SIBLING FILE --
+//
+// This is the ONLY one of the twelve whose core module contributes BOTH a `styles` entry
+// (`linker.styles.less`) AND a `default` skinStyles entry (`skinStyles.less`).
+// `ResourceLoader\FileModule::setSkinStylesOverride()` seeds the file list with the module's
+// `default` skinStyles ONLY when the `ResourceModuleSkinStyles` key is preceded by `+`;
+// without it, `default` is discarded outright. Core's `skinStyles.less` is where the
+// separator CONTENT lives -- the `'. .'` changes-list separator, the rollback brackets, the
+// parentheses around the diff, undo, byte-count, tag-marker and `mw-uctop` helpers, the
+// tag-marker comma, the changes-list pipe, and the screen-reader-text treatment of
+// `.mw-comment-none`. Registered without the `+`, every one of those disappears and the
+// history, diff and recent-changes captures silently lose their punctuation.
+//   VERIFIED, NOT ASSUMED: `../skin.json` registers this file as
+//   `"+mediawiki.interface.helpers.styles"`. Nothing here compensates for a missing `+`,
+//   because re-implementing core's `content` values would double them the moment the
+//   registration were corrected. NOT ONE `content` DECLARATION APPEARS BELOW.
+//
+// -- CASCADE POSITION: THIS FILE IS LAST, WHICH IS BOTH THE POWER AND THE HAZARD --
+//
+// `FileModule::getStyleFiles()` merges the module's `styles` ahead of its skinStyles, and
+// `setSkinStylesOverride()` appends the skin's file after the seeded `default`. The emitted
+// order is therefore fixed:
+//
+//   1. core `linker.styles.less`      (the module's own `styles`)
+//   2. core `skinStyles.less`         (the module's `default` skinStyles, kept by the `+`)
+//   3. THIS FILE                      (appended last)
+//
+// So an equal-specificity declaration here WINS over core's. That is what lets the file stay
+// this short -- but it also means any property declared here can silently delete a core cue.
+// Three declarations were rejected outright for exactly that reason, and each rejection is
+// recorded at the selector it would have applied to rather than left to be rediscovered.
+//
+// -- THE ONE INVARIANT THAT EXPLAINS MOST OF THE DECISIONS BELOW --
+//
+// THIS FILE NEVER REPAINTS A LINK'S OWN COLOUR. Not one rule below sets `color` on an element
+// that is itself an anchor, or on a selector that would beat core's `a` rule at the anchor.
+// The reason is that a link's colour is load-bearing state in MediaWiki -- blue for a page that
+// exists, red for one that does not, a third value once visited -- and this module's classes sit
+// on exactly those links: `.mw-userlink` is routinely a red link, and so is the `talk` entry in
+// the tool cluster beside it. Repainting them would delete a state distinction that the reader
+// has no other way to recover, which R2 forbids structurally and R10 forbids as
+// meaning-carried-by-colour. The Blitzy link colour reaches all of them anyway, without a
+// single declaration here, because the variable layer has already remapped `@color-link`.
+//   What the file adjusts instead is everything AROUND the links: weight, size, the muted
+// colour of separators, punctuation and non-link text, and one chip surface. Every rule below
+// is an instance of that, and the two apparent exceptions are not exceptions:
+// `.mw-usertoollinks` and `span.mw-revdelundel-link` set `color` on a SPAN that contains links,
+// which reaches the span's own punctuation and never the anchors inside it, and
+// `.mw-tempuserlink` passes `@color-link` to the pill mixin purely to suppress the mixin's
+// purple default -- it assigns a link the colour it already had.
+//
+// -- TWO CORE TREES, AND WHY SOME SELECTORS BELOW MATCH ONLY ONE OF THEM --
+//
+// The runtime target is the 1.43 LTS line (`MW_VERSION 1.43.9`); the checkout read for API
+// conformance is `1.47.0-alpha`. Their copies of this module differ, and `../skin.json`
+// declares an open-ended `"requires": { "MediaWiki": ">= 1.43.0" }`, so this file is authored
+// against BOTH. `.mw-tempuserlink-expired`, its tooltip part and the log-event and pager tool
+// clusters exist only on 1.47; a selector that matches nothing costs nothing and keeps the
+// skin correct as the target moves. Both Gate 9 assertion targets -- `span.comment` and
+// `.mw-userlink` -- exist on both trees.
+//   Every selector below was checked character for character against core's
+//   `linker.styles.less` and `skinStyles.less` on BOTH trees, and there is exactly ONE
+//   exception, named here so a reviewer running that check does not have to wonder: the bare
+//   `.mw-usertoollinks`. Core emits it from `Linker::userToolLinks` but styles it nowhere in
+//   this module -- the only near-match in those files is the longer
+//   `.mw-usertoollinks-contribs-no-edits`, which is a different class. It is nevertheless
+//   squarely this module's property: `linker.styles.less` describes itself as the home for the
+//   classes the `Linker` class emits, and a skinStyles entry is the only lawful place to style
+//   a core-emitted class at all. Its rule below is therefore an addition to unclaimed
+//   territory rather than an override, which is also why it can never collide with core.
+//
+// -- WHAT THIS FILE MAY NOT CONTAIN, AND WHY NONE OF IT IS SPELLED OUT BELOW --
+//
+// EVERY PROHIBITION IN THIS LIST IS VERIFIED BY A PLAIN GREP OVER THE WHOLE FILE, so this
+// paragraph names each forbidden construct by its rule and its effect rather than by its
+// literal spelling. That is deliberate and must stay that way: spelling the token here would
+// make this very note a false positive in the sweep that is supposed to prove its absence, and
+// a check that needs a human to adjudicate its own hits is a weaker check than one that does
+// not. `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less` records the identical
+// discipline for the identical reason. Do not "improve" the readability of this list by
+// quoting the property names.
+//
+//   * No separator string of any kind. Core owns all ten of them and the `+` prefix keeps
+//     them; re-stating one would double it. (Verified by sweeping for a `content` declaration.)
+//   * No colour literal -- no hexadecimal notation, no named colour, and none of the
+//     functional colour notations. `../.stylelintrc.json` denies all three package-wide and
+//     grants exactly one exemption, `resources/skins.blitzy.tokens/tokens.less`, which is a
+//     different directory. Every colour below is a variable name. (R3)
+//   * No external reference. Nothing here may cause a subresource to be fetched, so the file
+//     contains no functional reference to any asset path. (R5)
+//   * No motion. Neither of the two CSS property families that interpolate a value over time
+//     appears here. The determinism support module forces their durations to zero during
+//     capture, but the safe posture is to introduce none at all. (R9)
+//   * No call to core's dark-mode override mixin. `../.stylelintrc.json` raises the Wikimedia
+//     lint rule that forbids that mixin to error severity for every stylesheet in the package,
+//     so every call site would need a suppression -- and the zero-warning build forbids
+//     suppressions. Core itself calls the mixin on `.mw-tempuserlink` on the 1.47 tree; this
+//     file pointedly does not follow, and gets its night-mode behaviour from the custom
+//     properties instead. (Gate 2)
+//   * No dark-mode selector and no colour-scheme media query. Both are the token module's, and
+//     the next note explains why this file needs neither.
+//   * No inline lint suppression. `../.stylelintrc.json` reports needless disables, so a
+//     speculative one is itself a build failure. Core's own copies of this module's two
+//     stylesheets each open by disabling the class-name-pattern rule, because helper classes
+//     such as `.autocomment`, `.unpatrolled`, `.newpage`, `.minoredit`, `.botedit` and
+//     `.comment--without-parentheses` do not match it. Blitzy resolves that hazard at config
+//     level instead -- the rule is switched off for the whole package -- so not one
+//     suppression is needed anywhere below. (Gate 2)
+//
+// -- DARK MODE IS INHERITED, AND THAT IS WHY EVERY COLOUR BELOW IS A CORE VARIABLE NAME --
+//
+// `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less` assigns each core colour
+// name the form `var( --<core-name>, <blitzy token> )`, and
+// `../resources/skins.blitzy.tokens/customProperties.less` republishes those custom properties
+// under the night root class and under the operating-system-preference variant of it. Reading
+// `@color-subtle` therefore compiles to a `var()` whose fallback is the light muted value, and
+// the property behind it is remapped to the dark muted value on a night page -- so the colour
+// follows the page into night mode with NO dark selector anywhere in this file, which is what
+// makes the dark edit-form and diff captures correct for free. Spelling a raw `@blitzy-*`
+// colour where a core name exists is exactly what would break them, so no colour below does.
+//   Non-colour tokens are a different matter and are read directly where the design specifies
+// an absolute value core has no equivalent for.
+//
+// -- FLIP SAFETY (R6) --
+//
+// Satisfied by construction rather than by annotation: not one declaration below is
+// directional. No margin, no padding, no float, no text alignment and no per-side border
+// appears anywhere, so the direction-flipping stage has nothing to rewrite and this file
+// carries no non-flipping annotation at all. Core's own directional declarations in this
+// module -- the 1.47 tooltip's inline-start offset -- stay core's.
+//   IF A FUTURE AUTHOR ADDS A PER-SIDE VALUE HERE, THE ANNOTATION FORM IS LOAD-BEARING. The
+//   exemption comment the flipping stage recognises must be written as a CSS block comment;
+//   written as a Less line comment it is stripped before that stage ever runs, so the
+//   annotation vanishes without a warning and the declaration flips anyway. Prefer core's
+//   logical-property mixins to a physical side in the first place -- though note they were NOT
+//   reachable here, because they live in `mediawiki.mixins.less`, which is not one of this
+//   file's two permitted imports.
+//
+// -- COMMENT FORM --
+//
+// Only the `/*! ... */` banner above is a block comment. Less preserves block comments into
+// its output and strips `//` line comments, and this file is compiled into a core module's
+// payload that `../tools/perf-baseline.js` measures against the 60KB gzipped budget, so every
+// note in this file is a line comment. `../resources/skins.blitzy.styles/mixins.less` and the
+// token module record the same measurement for the same reason.
+//
+// -- GATE 9 / R11 ASSERTION TARGETS, NAMED FOR THE FIDELITY SPEC AUTHOR --
+//
+// Gate 9 obligation 3 requires this override be confirmed to APPLY by asserting a computed
+// style on the targeted core component; declaration alone is insufficient, and an assertion
+// against an absent element must fail rather than skip. `../tests/playwright/fidelity.spec.ts`
+// should bind to these, on the page-history capture (`editing-history-1440-light-auth`), where
+// all three are densely rendered:
+//
+//   1. `span.comment`  -> `font-family` resolves to the Blitzy base stack (Inter)
+//   2. `span.comment`  -> `color` resolves to the Blitzy muted text colour
+//   3. `.mw-userlink`  -> `font-weight` resolves to 700
+//
+// Targets 2 and 3, plus `line-height` on `span.comment`, are properties CORE SETS NOWHERE on
+// these selectors, so asserting them proves this file is in effect rather than merely proving
+// inheritance. Target 1 is named because the brief names it and because it keeps the assertion
+// self-contained if the inherited body family ever changes.
+//
+// -- TERRITORY, SHARED WITH TWO SIBLING FILES IN THIS FOLDER --
+//
+// Grepping all of core's `resources/src` shows only three core files style these classes:
+// this module's two, and `mediawiki.special.changeslist`, which claims
+// `.mw-changeslist .mw-tag-marker`, `.mw-title` and the `.mw-plusminus-*` family. The split is
+// therefore: the LINK, COMMENT and FLAG helpers are this file's; the changes-list ROW and LIST
+// layout and the `.mw-plusminus-*` colours belong to `mediawiki.special.changeslist.less`, and
+// history row layout to `mediawiki.action.history.styles.less`. Duplicating a declaration
+// across two of the three is a cascade-order bug waiting to happen, so nothing below names a
+// `.mw-plusminus-*`, `.mw-changeslist-line*`, `.mw-title` or `.diff*` table selector.
+//   Nor does anything below name parser output (`.mw-parser-output` descendants, `.wikitable`,
+// `.infobox`, `.hatnote`, `.references`, `.catlinks`), a Blitzy `.blitzy-*` hook, an
+// `.oo-ui-*` or a `.cdx-*` selector. The `.mw-diff-edit`, `.mw-diff-undo`, `.mw-diff-tool` and
+// `.mw-diff-bytes` LINK helpers are the documented exception: they are emitted by `Linker` and
+// `ChangesList` and belong to this module, not to `mediawiki.diff.styles`.
+//
+// @see ../skin.json for the additive `+` registration
+// @see ../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less for the colour names
+// @see ../resources/skins.blitzy.tokens/tokens.less for the `@blitzy-*` values
+//
+
+// Resolves through `SkinLessImportPaths.blitzy` to
+// `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less`, which imports core's
+// `mediawiki.skin.defaults.less` first and the Blitzy token module second. This one bare
+// import therefore supplies BOTH the full core variable API and the entire `@blitzy-*` token
+// surface. Never import `customProperties.less`: it is the separate `skins.blitzy.tokens`
+// module's registered entry point and would duplicate the whole palette into this payload.
+@import 'mediawiki.skin.variables.less';
+
+// The shared mixin library. Relative, because it is not on the Less import path. It emits no
+// CSS of its own and re-imports the variables file above, which Less resolves once.
+@import '../resources/skins.blitzy.styles/mixins.less';
+
+// ============================================================================
+// 1. User and attribution links
+//    Rendered in every history row, every diff header and every changes-list line.
+// ============================================================================
+
+// Emitted by `Linker::userLink` / `UserLinkRenderer::userLink`.
+//
+// `font-weight` IS THE WHOLE TREATMENT, AND THE THREE OMISSIONS ARE DELIBERATE.
+//   * NO `color`. The Blitzy link colour is the heading navy, and the variable layer already
+//     delivers it to every `a` through `@color-link`; re-stating it here would be a redundant
+//     byte in six captures' payload for no change on screen.
+//   * NO `text-decoration-line`. The design's inline-link vocabulary pairs bold heading-navy
+//     text with a purple underline, but core sets `a { text-decoration: none }`, so drawing
+//     that underline here would mean DECLARING the line -- and because this file is last in
+//     the cascade at equal specificity, that declaration would overwrite
+//     `.mw-tempuserlink-expired`'s `text-decoration: line-through`, deleting a non-colour
+//     state cue R10 requires be kept. The purple underline stays where it belongs, on prose
+//     links in `../resources/skins.blitzy.styles/components/Prose.less`.
+//   * NO bare `text-decoration-color` / `-thickness` / `text-underline-offset` either: with
+//     no line drawn they would be dead declarations.
+// Bold is the half of the vocabulary that is both safe and visible here, and it is Gate 9
+// assertion target 3.
+.mw-userlink {
+	font-weight: @font-weight-bold;
+}
+
+// The `(talk | contribs | block)` cluster emitted by `Linker::userToolLinks`, which renders it
+// as `class="mw-usertoollinks mw-changeslist-links"`. Core styles the bare class nowhere in
+// this module, so it is unclaimed territory belonging to the Linker-helpers module by
+// definition -- `mediawiki.special`'s only rules for it are compound and scoped to
+// `Special:BlockList`, `Special:ListFiles` and `Special:ProtectedPages`, none of which is a
+// captured surface.
+//
+// WHAT THE MUTED COLOUR ACTUALLY REACHES, MEASURED IN A BROWSER RATHER THAN REASONED ABOUT.
+// It reaches this element's own text and, through inheritance, the pseudo-elements core draws
+// around the cluster: the enclosing parentheses, which core attaches to `::before`/`::after` on
+// this very element because it also carries `.mw-changeslist-links`, and the ` | ` pipes, which
+// core attaches to the child spans. It does NOT reach the `<a>` elements inside, and that is
+// correct and intended -- see the invariant at the top of this file.
+//   THE REASON IS WORTH SPELLING OUT, BECAUSE IT IS THE EASIEST CASCADE MISTAKE TO MAKE HERE.
+//   Specificity only decides between rules matching THE SAME element. Core's `a { color: ... }`
+//   matches the anchor directly, while this rule matches the anchor's PARENT, so what competes
+//   at the anchor is a direct declaration against an inherited value -- and a direct
+//   declaration always wins, however low its specificity. Comparing `.mw-usertoollinks`
+//   (0,1,0) with `a` (0,0,1) and concluding the span wins is simply the wrong comparison.
+//   Confirmed on a real page history: the `talk` link stays red because its target page does
+//   not exist, and `contribs` stays the Blitzy navy, while the parentheses and pipes around
+//   them are muted. That is the de-emphasis the design asks for WITHOUT flattening two
+//   different link states into one grey, so nothing here tries to force it further.
+// Measured 6.47:1 on the light surface and 7.55:1 in night mode against the painted surface,
+// both clear of the 4.5:1 body minimum.
+//
+// The absolute 14px step is read straight from the token module rather than through core's
+// `@font-size-small`, and that is a correctness choice, not a preference: core's value is
+// `0.875em` and `span.mw-revdelundel-link` below is `90%`, so relative steps COMPOUND down the
+// tree wherever two of these helpers nest -- and they do nest, on the very element this rule
+// targets. An absolute length cannot compound. This is also the designated consuming site for
+// the 14px reference step (Gate 12).
+.mw-usertoollinks {
+	color: @color-subtle;
+	font-size: @blitzy-font-size-reference;
+}
+
+// Core's own comment on this class records the intent: it has historically been styled red but
+// ought to be distinguishable from an ordinary red link, because the contributions page it
+// points at does exist -- it is merely empty. Core leaves that unresolved (1.43 paints it
+// `@color-link-new`; 1.47 applies the Codex red-link mixin), so both trees render it identical
+// to a red link.
+//
+// Blitzy resolves it with a NON-COLOUR cue, which satisfies the intent without spending a
+// colour literal (R3) and without weakening the red-link signal itself: italic reads as
+// "this destination exists but holds nothing", and it remains legible to a reader who cannot
+// distinguish the red at all (R10). The red stays core's.
+.mw-usertoollinks-contribs-no-edits {
+	font-style: italic;
+}
+
+// Temporary-account links. Core renders this as a tinted inline chip; Blitzy renders it in the
+// established pill vocabulary, sharing one definition with the category chips through the
+// mixin library.
+//
+// THIS RULE ALSO CLOSES A LATENT DARK-MODE FAILURE, which is the reason it is here at all
+// rather than being left to core. Core fills the chip with `@background-color-interactive`,
+// and `customProperties.less` publishes no `--background-color-interactive`, so that fill
+// cannot follow the page into night mode: it stays a light grey while the chip's own label
+// resolves to the near-white night link colour, pairing at roughly 1.1:1. Repointing the fill
+// at `@background-color-progressive-subtle` -- which IS republished, to the raised dark
+// surface -- takes the same pair to 14.72:1 and removes the failure before it can reach a
+// capture. Light mode measures 16.39:1.
+//
+// The label is passed `@color-link` rather than the mixin's default progressive purple, so the
+// chip obeys the design's most easily violated rule: link text is the heading navy and never
+// the brand purple.
+.mw-tempuserlink {
+	.blitzy-mixin-pill-surface( @background-color-progressive-subtle; @color-link );
+
+	// On 1.47 core draws this chip's inline breathing room as an `outline` in the same colour
+	// as its fill, because an outline occupies no layout space in an inline flow; the fill and
+	// the outline must therefore agree or the chip gains a visible ring. Repointed at the
+	// Blitzy fill so they agree in BOTH modes. On the 1.43 LTS target core sets real `padding`
+	// and no outline, where this longhand is inert because `outline-style` remains `none` --
+	// harmless on the runtime target, correct on the newer one.
+	outline-color: @background-color-progressive-subtle;
+}
+
+// `.mw-tempuserlink-expired` and `.mw-tempuserlink-expired--tooltip` are deliberately NOT
+// styled. Core gives the expired variant `text-decoration: line-through`, which is a
+// non-colour state cue R10 requires be preserved, and preserving it means declaring nothing
+// against it -- this file is last in the cascade, so any `text-decoration` here would erase it.
+// The tooltip part is a hover-only affordance on an expired temporary account: it exists only
+// on 1.47, temporary accounts are not enabled on the verification instance, and it appears on
+// none of the four delivered surfaces, so styling it would be scope expansion (R12).
+
+// ============================================================================
+// 2. Edit summaries
+// ============================================================================
+
+// Emitted by `CommentFormatter`. Core supplies the italic, the bidi isolation and the
+// long-comment breaking; Blitzy supplies the typography. Type properties are safe on this
+// selector precisely because a link inside a summary SHOULD inherit the summary's family,
+// size and rhythm.
+//
+// `line-height` is the design's prose rhythm rather than a metadata leading, because a summary
+// is the one piece of human-written prose in an otherwise mechanical row and core explicitly
+// expects it to wrap. `font-size` is the prose step for the same reason -- the 14px metadata
+// step belongs to the chrome AROUND the summary, not to the summary itself.
+//
+// `font-family` is Gate 9 assertion target 1; `line-height` is a property core sets nowhere on
+// this selector, so it is independent proof this file is in effect.
+span.comment {
+	font-family: @font-family-base;
+	font-size: @blitzy-font-size-prose;
+	line-height: @line-height-content;
+}
+
+// THE MUTED COLOUR IS APPLIED AT ZERO SPECIFICITY, AND THAT IS THE POINT OF THIS RULE.
+//
+// `:where()` contributes nothing to specificity, so this declaration still beats inheritance
+// -- any declaration on an element beats an inherited value regardless of weight -- while
+// losing to every selector that actually targets the content inside. Written as a plain
+// `span.comment` the rule would score (0,1,1) and therefore outrank core's `a` at (0,0,1),
+// repainting every wiki link inside an edit summary in the same muted grey as the prose around
+// it and leaving it with no colour, no underline and no way to be recognised as a link. It
+// would also outrank `.autocomment a` at (0,1,1) and override core's deliberate treatment of
+// the auto-generated `-> Section:` prefix. At zero specificity both keep their own colour and
+// the summary text alone is muted, which is the intended result and the substrate's documented
+// low-specificity link pattern.
+//
+// This is Gate 9 assertion target 2: core sets no colour on `span.comment`, so a computed
+// muted colour here can only have come from this file. Measured 6.47:1 light, 7.75:1 night.
+:where( span.comment ) {
+	color: @color-subtle;
+}
+
+// `.autocomment`, `.autocomment a` and `.autocomment a:visited` are deliberately NOT declared.
+// Core already colours all three `@color-subtle`, and the variable layer has already remapped
+// that name to the Blitzy muted colour, so they are muted on arrival. Re-declaring them would
+// add three selectors to six captures' payload and change not one pixel. This is the variable
+// layer doing the job AAP 0.4.2.3 describes, and it is why this file can be as short as it is.
+
+// ============================================================================
+// 3. Revision-deletion markers and links
+// ============================================================================
+
+// The `(show/hide)` revision-deletion control. Core sizes it `90%`, a relative step that
+// compounds against any ancestor that has already reduced the size -- and on a history row it
+// often has. The absolute 14px metadata step replaces it with the design's specified value and
+// cannot compound. The muted colour applies to the surrounding brackets; the control's own
+// link keeps its colour from the variable layer.
+span.mw-revdelundel-link,
+strong.mw-revdelundel-link {
+	color: @color-subtle;
+	font-size: @blitzy-font-size-reference;
+}
+
+// `li span.deleted`, `span.history-deleted` and `span.mw-history-suppressed` are deliberately
+// NOT declared. Core marks them with `text-decoration: line-through` and
+// `text-decoration-style: double` respectively -- non-colour cues for deleted and suppressed
+// revisions that R10 requires be preserved -- and their colours are already Blitzy's, arriving
+// through `@color-subtle` and `@color-base` on the variable layer. Because this file is last
+// in the cascade, ANY `text-decoration` or `color` declared against them could only subtract.
+// Preserving a cue means declaring nothing.
+
+// ============================================================================
+// 4. Changes-list flags
+// ============================================================================
+
+// `.unpatrolled`, `.newpage`, `.minoredit` and `.botedit` are deliberately NOT declared.
+// Core already bolds all four, and bold is the non-colour cue that keeps the flags meaningful
+// to a reader who cannot distinguish their colour; re-declaring `font-weight` would duplicate
+// core for no gain.
+//
+// BLITZY [A11Y]: core colours `.unpatrolled` with `@color-destructive`, which the variable
+//   layer remaps to the Blitzy error red. Measured against the light page surface that pair is
+//   4.08:1 -- below the 4.5:1 body-text minimum, above the 3:1 large-text and non-text
+//   minimum. It is NOT auto-corrected here. The value is design-specified and the token module
+//   already records it as measuring below the body minimum on light while specifying it for
+//   icons, borders and large labels, so the design source governs and the finding is raised
+//   for designer review rather than silently darkened. It is mitigated rather than ignored:
+//   the flag is bold, so its meaning never rests on colour alone, and in night mode the same
+//   pair measures 4.71:1 and passes. Carry this flag into `../DELIVERY.md`.
+//   Declaring a different colour here is precisely what would break the specified design, so
+//   nothing is declared.
+
+// ============================================================================
+// 5. Change-tool and log-event link clusters
+//    Mostly 1.47 additions. `.mw-diff-tool` is the exception -- it is already in the 1.43
+//    parenthesised-helper group, so its rule applies on the LTS runtime target too; the other
+//    four match nothing there and are inert until the target moves.
+// ============================================================================
+
+// The compact tool clusters core groups together and gives the Codex base-link treatment:
+// log-event action links, log-event tools, the diff tool cluster, the pager tools on a history
+// page and the change tools on a changes list.
+//
+// SIZE ONLY, AND THE ABSENCE OF A COLOUR IS THE DECISION HERE. These clusters hold ACTIONS --
+// rollback, thank, tag management -- and core deliberately gives them a link colour. Muting an
+// action link strips the affordance that tells a reader it can be operated, so the compacting
+// is taken from the type step and the colour is left to the variable layer, which has already
+// remapped it to the Blitzy navy. That is the principled difference from `.mw-usertoollinks`
+// above, which is identity NAVIGATION rather than action and is muted on purpose.
+.mw-logevent-actionlink,
+.mw-logevent-tool,
+.mw-diff-tool,
+.mw-pager-tools,
+.mw-change-tools {
+	font-size: @blitzy-font-size-reference;
+}
+
+// `ul.mw-logevent-footer` and its `li` are deliberately NOT styled. Core gives them an inline
+// list-item layout, and that layout is preserved by declaring nothing against it. The footer
+// is rendered by `LogEventsList` at the end of a log listing -- `Special:Log` -- which is not
+// one of this module's four delivered surfaces and appears in none of the twenty-one captures,
+// so a rule existing only for it would be scope expansion (R12).
+
+// ============================================================================
+// 6. Separator scaffolding -- presentation only, never content
+// ============================================================================
+
+// Pure punctuation and status markers: the `. .` and semicolon separators between changes-list
+// fields, the comma-separated change tags, and the `mw-uctop` current-revision marker. None of
+// these carries an action, so the muted metadata treatment applies to them wholesale.
+// Their `content` values are core's and are untouched -- see the `+` prefix note at the top.
+.mw-changeslist-separator,
+.mw-changeslist-separator--semicolon,
+.mw-tag-marker,
+.mw-tag-markers,
+.mw-uctop {
+	color: @color-subtle;
+	font-size: @blitzy-font-size-reference;
+}
+
+// The wrappers that hold a row's action links: the changes-list link group, the rollback
+// control, and the `(edit)`/`(undo)` helpers.
+//
+// SIZE ONLY, DELIBERATELY -- for the same reason as the tool clusters above, and one more
+// besides: `.mw-rollback-link` wraps a destructive action whose affordance must not be
+// weakened, and `.mw-changeslist-links` wraps the `diff` and `hist` links that are a history
+// row's primary navigation. Compacting them is in scope; muting them is not. The parentheses
+// and pipes core draws around them inherit the muted colour from their own rules above where
+// the same element carries `.mw-usertoollinks`.
+.mw-changeslist-links,
+.mw-rollback-link,
+.mw-diff-edit,
+.mw-diff-undo {
+	font-size: @blitzy-font-size-reference;
+}
+
+// The byte-count helper, and THE ONE SELECTOR IN THIS FILE THAT MUST NEVER RECEIVE A COLOUR.
+//
+// `ChangesList::showCharacterDifference` builds this element's class attribute as
+// `mw-plusminus-pos`, `mw-plusminus-neg` or `mw-plusminus-null` and THEN appends
+// ` mw-diff-bytes` -- so on a changes list the byte count and its direction class are THE SAME
+// ELEMENT. Those direction colours are declared in a different module,
+// `mediawiki.special.changeslist`, at the same specificity as this selector, so a `color` here
+// would be racing them on module order and, when it won, would erase the only signal that
+// tells a reader whether a revision added or removed content. That is colour-carried meaning,
+// and deleting it would fail R2, R10 and the data-driven-completeness requirement at once.
+// (On a history page `Linker::formatRevisionSize` emits `history-size mw-diff-bytes` with no
+// direction class, which is why the trap is invisible if only the history capture is checked.)
+// The type step is safe because no module sizes the direction classes.
+// DO NOT ADD A COLOUR DECLARATION TO THIS RULE.
+//
+// FORWARD REFERENCE FOR WHOEVER AUTHORS `mediawiki.special.changeslist.less`, recorded here
+// because this is the file a reader lands on when asking why the byte counts look wrong.
+// Measured on a real page history: core paints those direction classes
+// `var( --color-content-added, ... )` and `var( --color-content-removed, ... )`, and
+// `../resources/skins.blitzy.tokens/customProperties.less` publishes NEITHER property, in the
+// light block or the night one. The literal fallbacks therefore paint in both modes, and the
+// added-content green measures 2.5:1 against the night surface -- below both the body and the
+// non-text minimum. The remedy is to publish those two properties with night values in the
+// token module, NOT to colour `.mw-diff-bytes` from here: this selector cannot distinguish an
+// addition from a removal, so a colour here could only replace two meanings with one. Leaving
+// this rule colourless is what keeps that fix available.
+.mw-diff-bytes {
+	font-size: @blitzy-font-size-reference;
+}
+
+// `.comment--without-parentheses` is deliberately NOT declared. It is a variant of
+// `span.comment` and is always carried alongside it, so `span.comment` above -- at (0,1,1)
+// against this class's (0,1,0) -- already governs its typography; a rule here would be
+// permanently overridden dead weight. Its only distinct behaviour is the suppression of the
+// surrounding parentheses, which is core's `content` and is untouched.
+
+// `.mw-comment-none` is deliberately NOT declared. Core applies the substrate's single
+// approved visually-hidden mixin to it. R10 requires that mixin rather than a bespoke
+// equivalent, so the correct action is to leave core's call in place.

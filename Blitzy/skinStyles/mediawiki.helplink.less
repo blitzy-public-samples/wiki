@@ -1,0 +1,251 @@
+//
+// == Blitzy skinStyles override for core's `mediawiki.helplink` module ==
+//
+// Registered in `../skin.json` as `ResourceModuleSkinStyles.blitzy["+mediawiki.helplink"]`,
+// which is the only lawful way to restyle a core-owned module's CSS (R7) and therefore the
+// only way to do it without touching a core file (R1).
+//
+// -- WHY EVERY COMMENT IN THIS FILE IS A `//` LINE COMMENT --
+//
+// Less strips line comments and preserves block comments, so a block comment here would be
+// emitted verbatim into the `mediawiki.helplink` payload -- a CORE module's payload, not the
+// skin's own. Measured rather than assumed: an earlier draft of this header in `/*! ... */`
+// form compiled to 13810 bytes of module output against 6255 bytes of actual rule text, the
+// difference being the comment. `Wikimedia\Minify\CSSMin::minify()` does strip it in
+// production -- verified in its source, where a single unconditional expression removes every
+// block comment and grants the `/*!` bang form NO exemption -- but the debug delivery path is
+// unminified and shipped it in full. Line comments cost zero bytes down BOTH paths.
+//   This is the convention `../resources/skins.blitzy.tokens/tokens.less` states for the same
+//   reason, down to keeping its accessibility flags in line form rather than the block form
+//   used elsewhere in the package. The `BLITZY [LAYOUT]` flag near the end of this file
+//   follows that precedent. Do not convert any comment here to block form.
+//
+// -- THE SURFACE, WHICH IS WHY THIS FILE IS SHORT --
+//
+// Core's `resources/src/mediawiki.helplink/helplink.less` is eleven lines and declares
+// exactly two selectors: `#mw-indicator-mw-helplink a` and the nested `.mw-helplink-icon`.
+// There is nothing else in the module. This file owns those same two selectors and nothing
+// further. Six declarations is the correct size here; padding it out would breach R12.
+//   THE ID SELECTOR IS CORE'S, NOT A CHOICE, so a reviewer applying the general
+//   "no id selectors for styling" guideline should not read it as a violation. `#mw-indicator-mw-helplink`
+//   is the id core generates for this indicator and the selector core's own stylesheet
+//   declares; restyling the module through a skinStyles entry (R7) is impossible without
+//   naming it, and the id is itself a preserved DOM contract (R2). The package encodes that
+//   resolution in `../.stylelintrc.json`, which sets `selector-max-id: 1` rather than
+//   forbidding ids outright. Both selectors below sit inside the configured
+//   `selector-max-specificity` ceiling and neither nests deeper than core does.
+//
+// -- WHERE THIS FILE IS DELIVERED --
+//
+// `OutputPage::addHelpLink()` calls `addModuleStyles( 'mediawiki.helplink' )` and renders the
+// link as a page indicator, so the module ships as a stylesheet in the document head and is
+// fully present with scripting disabled (R4). Core calls that method from `HistoryAction`,
+// `SpecialPreferences` and `SpecialRecentChanges`, which puts this file in four of the
+// twenty-one captures:
+//
+//     capture  9  editing-history-1440-light-auth          page history
+//     capture 11  special-preferences-1440-light-auth      Special:Preferences
+//     capture 12  special-recent-changes-1440-light-auth   Special:RecentChanges
+//     capture 16  dark-preferences-1440-dark-auth          Special:Preferences, night
+//
+// -- NAMED FIDELITY ASSERTION TARGET (R11 / Gate 9 obligation 3) --
+//
+// Gate 9 treats a declared-but-unconfirmed override as a failure regardless of size, so the
+// assertion site is named here rather than left to be inferred.
+// `../tests/playwright/fidelity.spec.ts` must assert the computed `color`, `font-family` and
+// `font-size` of `#mw-indicator-mw-helplink a` on the page-history surface of capture 9,
+// comparing against the resolved values of `@color-subtle` in the active mode,
+// `@font-family-base` and `@font-size-small`. Do not hard-code a length or a colour in the
+// spec: each is a token that may legitimately move, and the point of the assertion is that
+// this file is applied, not that a particular literal survives.
+//
+// `color` is the property that PROVES delivery. Without this file the link resolves to
+// `@color-link`, which the variable layer points at the Blitzy heading colour; with it the
+// link resolves to `@color-subtle`, the muted colour. Those are visibly different values, so
+// the assertion cannot pass vacuously if the skinStyles entry ever stops applying. Confirmed
+// end to end on a provisioned instance: the module built for `skin=blitzy` carries the four
+// rules below, and the same module built for the reference skin carries none of them.
+//
+// Capture 9 is nominated rather than any of the other three because it is the only one of the
+// four where the indicator is unconditional. Measured rather than inferred: the history view
+// and `Special:RecentChanges` render it for an anonymous request, while `Special:Preferences`
+// adds its help link only AFTER the login gate, so the element is simply absent from an
+// unauthenticated request. Since R11 requires an assertion against an absent element to FAIL
+// and never skip, an assertion aimed at captures 11 or 16 must run in the authenticated state
+// those captures are taken in.
+//
+// -- DELIBERATE ABSENCES, EACH ONE A DECISION RATHER THAN AN OVERSIGHT --
+//
+// Core's flex display and centred alignment keep the icon and label on one baseline, and they
+// are NOT restated. Verified in `ResourceLoader\FileModule::getStyleFiles()`, which returns
+// `array_merge_recursive( styles, skinStyles[ skin ] )`: core's stylesheet and this file
+// compile into the SAME module payload, core's first. Core's declarations therefore survive
+// untouched, and every declaration below wins over core's at equal specificity by source
+// order alone -- no specificity escalation is needed anywhere here. "Preserve" means "do not
+// override", not "repeat".
+//
+// The icon stays entirely core's. Core builds it from a Codex CSS-icon mixin, a mask-image
+// construction wired to an icon token; re-declaring any part of that is the one edit that
+// would visibly break this file, so only the icon's inline spacing is touched. Its colour is
+// a variable-layer concern and needs nothing here.
+//
+// The indicator REGION and its positioning are not named: that belongs to
+// `../resources/skins.blitzy.styles/layouts/screen.less`, and reaching into it from here
+// would put a layout decision in the wrong file. Neither is any other indicator id, any Codex
+// selector (`codex.less`), any bare OOUI selector (`ooui.less`), any parser-output selector,
+// or any Blitzy class hook (R7 boundary).
+//
+// The link is never hidden, collapsed or removed. It is a navigational affordance, so
+// suppressing it would be a functional regression and would drop it out of the accessibility
+// tree (R2).
+//
+// No motion is introduced (R9). `../tests/playwright/support/determinism.ts` forces durations
+// to `0ms` exactly, but a hover fade on a link is precisely what produces a mid-flight
+// capture, so none is added.
+//
+// No subresource of any kind is referenced (R5): no image, no font, no external stylesheet.
+// The icon is drawn from core's own tokens and there is no image directory under
+// `skinStyles/` to point at. Note that the help link's own `href` targets mediawiki.org in a
+// new tab. That is an editorial hyperlink, which R5 explicitly does not scope, and
+// `../tests/playwright/externalOrigins.spec.ts` distinguishes subresource requests from
+// content links for exactly this reason. Do not "fix" the target.
+//
+// No night-mode selector and no colour-scheme media query appear below, and core's
+// dark-mode-override mixin is never called -- the `wikimedia/no-darkmode-override` suppression
+// it requires is prohibited by the zero-warning build (Gate 2). Night mode arrives on its
+// own; see the next section.
+//
+// -- WHY EVERY COLOUR IS A CORE VARIABLE NAME AND NOT A `@blitzy-*` TOKEN --
+//
+// No colour literal appears in this file (R3); the one file exempted from that prohibition is
+// `../resources/skins.blitzy.tokens/tokens.less`, in a different folder. Each colour below is
+// spelled with the CORE name that
+// `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less` remaps, not with the
+// Blitzy token behind it, because those remaps are written as a custom-property reference with
+// the token as its fallback, and `../resources/skins.blitzy.tokens/customProperties.less`
+// republishes the same properties under the night root class and under the dark colour-scheme
+// query -- three declarations of each, verified in the compiled tokens payload. Reading the
+// core name is what makes this file mode-aware for free, which is what capture 16 depends on;
+// read as a raw token it would keep its light value on the night surface.
+//
+// Contrast is measured rather than assumed, from `../screenshots/audits/contrast.json`: the
+// muted text colour reports 6.47:1 on the light page surface and 7.75:1 on the night surface,
+// and the progressive accent reports 6.32:1 and 7.61:1. All four clear the 4.5:1 body-text
+// minimum in both modes, so the blocking accessibility gate (R10) is satisfied by construction
+// and no `BLITZY [A11Y]` flag is required.
+//
+// @see ../skin.json for the `+mediawiki.helplink` registration and `SkinLessImportPaths`
+// @see ../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less for the core-name remapping
+// @see ../resources/skins.blitzy.styles/mixins.less for `.blitzy-mixin-focus-ring()`
+//
+
+// Resolves through `SkinLessImportPaths.blitzy` to
+// `../resources/mediawiki.less/blitzy/mediawiki.skin.variables.less`, which imports core's
+// `mediawiki.skin.defaults.less` first and the Blitzy token surface second. One bare import
+// therefore supplies BOTH the full core variable API and every `@blitzy-*` token. Core's own
+// `helplink.less` opens with exactly this line.
+@import 'mediawiki.skin.variables.less';
+
+// The Blitzy mixin library, reached relatively because it is not on the Less import path.
+// Two mixins are consumed below: `.blitzy-mixin-focus-ring()` directly, and core's
+// `.padding-inline()`, which that file re-exports by importing `mediawiki.mixins.less`. Both
+// are in use, so this import is load-bearing and must not be dropped as dead weight.
+@import '../resources/skins.blitzy.styles/mixins.less';
+
+#mw-indicator-mw-helplink a {
+	// The Blitzy vocabulary for a small utility affordance: the muted text colour rather than
+	// the link colour, because this is chrome beside the page title and not content. Set at
+	// id-level specificity it also, deliberately, outranks the `a:visited` rule the `elements`
+	// skin feature supplies, so a chrome affordance never renders as a visited link once the
+	// reader has followed it.
+	color: @color-subtle;
+	// Consumed by its core name, which the variable layer points at the Blitzy body typeface.
+	// Declared rather than left to inherit so the Gate 9 assertion named above has a property
+	// this file actually owns.
+	font-family: @font-family-base;
+	// The substrate's small step, which resolves to the smallest size in the Blitzy type
+	// scale. Deliberately core's relative token rather than the Blitzy reference-size token:
+	// that token is role-named for reference lists and footnotes, and a relative unit also
+	// scales with the reader's font-size preference where a pixel value would not.
+	//   VERSION NUANCE, MEASURED ON BOTH TREES AND RECORDED SO THE UNIT IS NOT MISREAD AS A
+	//   MISTAKE. The runtime target defines this token in `em` and the newer reference
+	//   checkout defines it in `rem`, so the served declaration differs by tree. Consuming the
+	//   token by NAME is what lets this file be correct on either without knowing which it
+	//   compiles on, and it is why the assertion named above compares against the resolved
+	//   token rather than a hard-coded length.
+	//   THE `em` FORM COMPOUNDS, AND THAT IS A REAL EFFECT RATHER THAN A THEORETICAL ONE --
+	//   MEASURED BOTH WAYS IN A BROWSER, SO WHOEVER OWNS THE INDICATOR REGION SHOULD KNOW.
+	//   With nothing on the ancestor chain setting a size, the link resolved to 14px, which is
+	//   the intended smallest step of the design's type scale. With the reference skin's CSS
+	//   also present -- and that skin sets 14px on the indicator region -- the very same
+	//   declaration resolved to 12.25px instead, because `em` multiplies the parent rather
+	//   than replacing it. Neither number is a defect here: relative sizing is exactly what
+	//   the substrate's scale is for, and the design specifies no size for this affordance.
+	//   But `../resources/skins.blitzy.styles/layouts/screen.less` owns the indicator region,
+	//   and if it sets a font size there, this link will scale against it. That is the
+	//   intended relationship; it is recorded so it is a decision rather than a surprise.
+	font-size: @font-size-small;
+
+	// `@color-progressive`, NOT `@color-progressive--hover`. Only the base member of the
+	// progressive family is remapped by the variable layer; the `--hover` and `--active`
+	// members are untouched and still resolve to core's own accent, so the obvious-looking
+	// choice would paint a foreign colour on hover while reading as correct in the source.
+	//   Core's `elements` feature already underlines a hovered link, so this adds colour to an
+	//   affordance that exists rather than inventing a state, and it puts the hover and focus
+	//   colours in the same family as the focus ring below.
+	//   DELIBERATELY NOT WRAPPED IN A HOVER-CAPABILITY MEDIA QUERY, and that is the safer
+	//   choice rather than the lazier one. `:hover` and `:focus` share one selector list here,
+	//   exactly as core's `elements` feature pairs them, so gating the pair behind
+	//   `@media ( hover: hover )` would take the FOCUS colour away on touch devices -- an
+	//   accessibility regression -- and avoiding that would mean splitting one rule into two
+	//   for no gain. It is also not the house convention: a hover-capability query appears zero
+	//   times across core's `resources/src`, zero times in the reference skin, and zero times
+	//   elsewhere in this package. Sticky hover is in any case immaterial on a link that opens
+	//   in a new tab.
+	&:hover,
+	&:focus {
+		color: @color-progressive;
+	}
+
+	// `:focus` and not `:focus-visible`, which is a decision and not an oversight.
+	// `:focus-visible` raises `plugin/no-unsupported-browser-features` for the Safari 12 to
+	// 15.3 range still inside the project's browser matrix, and `lint:styles` runs with
+	// `--max-warnings 0` while Gate 2 prohibits inline suppression, so the token cannot be
+	// used without breaking the build. It is also not the house convention: it appears zero
+	// times in the whole of core's `resources/src` and zero times in the entire reference
+	// skin, both of which pair `&:hover, &:focus` exactly as above. The accessibility
+	// consequence is favourable rather than adverse -- the ring shows on pointer press as well
+	// as on keyboard focus, so it is more visible, never less -- and no capture focuses this
+	// link, so R9 determinism is untouched.
+	//   The ring itself is the shared 2px accent ring at 2px offset, taken from the mixin so
+	//   this override cannot drift from the focus treatment of every other Blitzy control. The
+	//   mixin never emits an outline reset, with or without a replacement (R10).
+	&:focus {
+		.blitzy-mixin-focus-ring();
+	}
+
+	.mw-helplink-icon {
+		// BLITZY [LAYOUT]: core spaces this icon from its label with a 10px trailing pad, a
+		// value absent from the substrate spacing scale. Snapped to `@spacing-50`, the nearer
+		// coherent step now that the label is set at the small type step above; the next step
+		// up would widen the gap as the type shrank.
+		//
+		// THE ONE DIRECTIONAL DECLARATION IN THIS FILE, AND IT MUST FLIP.
+		// In a right-to-left interface the icon sits on the other side of its label, so the
+		// gap belongs on the inline-end side in both directions. `.padding-inline()` is the
+		// flip-aware emitter R6 prefers: it writes the physical longhands, which the
+		// direction-flipping stage of the style pipeline rewrites, AND the logical longhands,
+		// which resolve natively and win by source order. The gap is therefore correct whether
+		// or not the flipping stage runs, and correct on the older browsers that predate
+		// logical properties -- the runtime target's copy of the mixin also emits the prefixed
+		// forms, which a bare logical property would not have given. The mixin carries its own
+		// lint exemption for the redundant longhands.
+		//   There is deliberately NO flip-suppression annotation here: flipping is the CORRECT
+		//   behaviour, so suppressing it would be the bug. Were an exception ever genuinely
+		//   needed anywhere, it would have to be written as a CSS block comment, because a
+		//   line comment is stripped before the flipping stage ever sees it and the annotation
+		//   would silently vanish while the rule flipped anyway. There is no right-to-left
+		//   capture, so the directional lint rules are the only guard on this line.
+		.padding-inline( 0, @spacing-50 );
+	}
+}
