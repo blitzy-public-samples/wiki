@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.0.0
@@ -28,13 +28,15 @@ use MediaWiki\Skins\Notion\FeatureManagement\Requirement;
 /**
  * A requirement that reads a single configuration variable, lazily, every time it is asked.
  *
- * Some application state changes throughout the lifetime of the application, e.g. `wgSitename` or
- * `wgFullyInitialised`, which signals whether the application boot process has finished and
- * critical resources like database connections are available. `$wgFullyInitialised` is the reason
- * this class exists: core sets it in `mediawiki/includes/Setup.php` once all service wiring has
- * executed, so it is false during part of the very request in which a feature manager may be
- * built, and a requirement that read it eagerly would answer for a boot state that has since
- * moved on.
+ * Some application state changes throughout the lifetime of a single request. `wgFullyInitialised`
+ * is the motivating example, and the reason this class exists: it signals whether the boot process
+ * has finished and critical resources like database connections are available, and core assigns it
+ * part-way through `mediawiki/includes/Setup.php` (`$wgFullyInitialised = true;`) once all service
+ * wiring has executed. It is therefore false during part of the very request in which a feature
+ * manager may be built, and a requirement that read it eagerly would answer for a boot state that
+ * has since moved on. Most configuration is not like this — a settings value fixed in
+ * `LocalSettings.php` cannot change mid-request — which is why the eager form below is the right
+ * default and this class the exception.
  *
  * The `DynamicConfigRequirement` allows us to define requirements that lazily evaluate the
  * application state, e.g.

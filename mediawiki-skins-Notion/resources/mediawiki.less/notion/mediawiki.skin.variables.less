@@ -8,9 +8,25 @@
  * defaults, so misnaming the folder or the file still compiles cleanly while silently
  * dropping the entire Notion palette.
  *
- * It is the single source of visual truth for the skin. Every colour, surface, border,
- * radius, font family and line-height decision is made here and consumed by name everywhere
- * else; no other stylesheet in the skin may hardcode one of these values.
+ * It is the base layer of the skin's visual truth, not the whole of it. The skin's palette is
+ * built in three parts, and knowing which part a value belongs in is what keeps literals out
+ * of the component stylesheets:
+ *
+ *   1. This file. Every value that has a Codex token name -- colour, surface, border, the one
+ *      permitted radius, font family, line-height -- is decided here by overriding that token,
+ *      and consumed by name everywhere else.
+ *   2. 'resources/skins.notion.styles/variables.less'. Values Notion needs that Codex exposes
+ *      no token for are declared there as skin-scoped variables DERIVED from the tokens above:
+ *      the 6px surface and 8px panel radii (gap G1), the layered shadow composites (G4), and
+ *      the layout constants. They belong there precisely because they cannot be expressed here.
+ *   3. One documented exception. The frozen jQuery UI theme under 'skinStyles/jquery.ui/' is
+ *      plain CSS recoloured by hand and carries hex literals by necessity, since a CSS file
+ *      cannot read a Less variable. That exception is recorded in that directory's own PATCHES
+ *      and DEPRECATED notes and is the only place in the skin where a colour literal is
+ *      sanctioned.
+ *
+ * So: no Less stylesheet in the skin may hardcode a value this file or (2) can name, and (3) is
+ * the single carve-out.
  *
  * Companion file: 'resources/skins.notion.styles/CSSCustomProperties.less', which mirrors
  * these values as CSS custom properties and carries the night-mode palette. The two must be
@@ -19,6 +35,12 @@
  * Provenance: the Notion values come from Notion's published design language via secondary
  * sources, not from live measurement of the product. Because every one of them lives in this
  * file, a correction is a single-file edit that propagates to every component.
+ *
+ * Where a published value cannot meet the contrast its token's role requires, it is corrected
+ * along its own hue and saturation rather than shipped as published. The rule, the affected
+ * tokens, their published origins and the measured ratios are all recorded beside the
+ * assignments below, under "Contrast rule for every colour below". Design fidelity is expressed
+ * within that constraint, never at its expense: a value a reader cannot read is not fidelity.
  */
 
 @import 'mediawiki.skin.defaults.less';
@@ -36,15 +58,18 @@
 // companion file exists for:
 //
 // 1. Colour, background, border, box-shadow, opacity, filter, outline and accent tokens are
-//    `var()`-backed, and their 185 custom properties are emitted by `.cdx-mode-light()` and
-//    `.cdx-mode-dark()`. Shipped Codex component CSS reads those properties at runtime, not
-//    these variables, so every value below must also be assigned as a custom property in the
-//    companion after its `.cdx-mode-light()` call, or Notion chrome ends up framing a
-//    Wikimedia-blue search box. Plain values are pinned to the light palette, so the companion
-//    owns night mode for the rules this skin compiles itself too. Note that
-//    `.cdx-mode-light()` *defines* fourteen `--color-link*` properties as aliases of
-//    `--color-progressive`: the companion must override those explicitly, since a `var()`
-//    fallback can never win against a defined alias.
+//    `var()`-backed. `.cdx-mode-light()` DEFINES the full set of 185 custom properties;
+//    `.cdx-mode-dark()` OVERRIDES 109 of them, so the two mixins are not symmetrical and the
+//    dark palette is a subset that leans on the light one for everything it does not restate.
+//    Shipped Codex component CSS reads those properties at runtime, not these variables, so
+//    every value below must also be assigned as a custom property in the companion after its
+//    `.cdx-mode-light()` call, or Notion chrome ends up framing a Wikimedia-blue search box.
+//    Plain values are pinned to the light palette, so the companion owns night mode for the
+//    rules this skin compiles itself too. Note that `.cdx-mode-light()` *defines* fourteen
+//    `--color-link*` properties as aliases of `--color-progressive` -- and `.cdx-mode-dark()`
+//    defines none of them, so the light aliases survive into night mode unless overridden. The
+//    companion must override all fourteen explicitly, since a `var()` fallback can never win
+//    against a defined alias.
 // 2. Font family, border radius, spacing, breakpoint and interaction-minimum tokens have no
 //    custom property at all, so there is nothing to mirror. Some Codex values are baked into
 //    the shipped component CSS regardless -- CdxSearchInput.css literally contains
@@ -65,6 +90,23 @@
 // box notice/warning/error/success, destructive and red links, disabled fills, and the pale
 // `-progressive-subtle` tints, for which Notion publishes no equivalent.
 
+// == Contrast rule for every colour below ==
+//
+// A published Notion value is used exactly as published wherever it meets the contrast its role
+// requires. Where it does not, it is not replaced by an unrelated colour: its hue and saturation
+// are held and only its lightness is lowered, until it clears 4.5:1 (WCAG 2.2 SC 1.4.3, normal
+// text) on all four surfaces this skin paints -- the `#fff` canvas, the `#f7f6f3` paper surface,
+// the `#efefee` hover fill and the `#e8e7e4` active fill -- or 3:1 (SC 1.4.11) where the token
+// only ever carries a non-text indicator. Each such value records its published origin, the
+// derivation and the measured ratios beside it, in that order, so the published palette stays
+// traceable and the arithmetic is checkable without a tool. Ratios are quoted
+// canvas / paper / hover / active.
+//
+// The rule exists because a token is a global: this file cannot know whether a component will put
+// `@color-subtle` on the canvas at 13px or inside a hovered menu row, so a value that is legible
+// in only some of those places is not a value this file may hold. Contrast that depends on where
+// a component happens to use a token is not contrast.
+
 // Text hierarchy. Notion's text palette is warm-neutral rather than grey.
 @color-base: #37352f; // Body text: a warm dark brown, softer than pure black for long reading.
 // Codex documents each `-fixed` token as "the same in light mode, but does not change in dark
@@ -72,17 +114,31 @@
 // content-media features read it, and those features are enabled for this skin.
 @color-base-fixed: #37352f;
 @color-emphasized: #000; // Reserved for the strongest headings.
-@color-subtle: #787774; // Secondary text.
-// Notion publishes a single tertiary grey where Codex holds two distinct values (`#72777d`
-// for placeholders, `#a2a9b1` for disabled). Collapsing both onto it is deliberate rather
-// than a copy-paste slip: Notion draws no visual distinction between the two states.
-@color-placeholder: #9b9a97;
+// Secondary text. Notion publishes #787774, which measures 4.48:1 / 4.14:1 / 3.89:1 / 3.62:1 --
+// short of AA on every one of the four surfaces, the canvas included. Holding its hue (45deg) and
+// saturation (1.7%) and dropping lightness from 46.3% to 40.5% gives 5.57:1 / 5.15:1 / 4.84:1 /
+// 4.50:1. The shift is a shade of warm grey; the legibility it buys is not optional. Accessibility
+// outranks visual fidelity in this skin's precedence order, and the departure is deliberately the
+// smallest one that clears the threshold rather than a jump to a Codex grey.
+@color-subtle: #696866;
+// Notion publishes a single tertiary grey, #9b9a97, where Codex holds two distinct values
+// (`#72777d` for placeholders, `#a2a9b1` for disabled). The two are deliberately NOT collapsed
+// onto it here, because WCAG treats them differently and so must this file:
+//
+// - Placeholder text sits in an enabled input, so it is normal text and gets no exemption.
+//   #9b9a97 measures 2.81:1 / 2.60:1 / 2.45:1 / 2.28:1 and is nowhere near AA. Darkening the
+//   tertiary alone does not close the gap on every surface either -- `darken( #9b9a97, 16% )` =
+//   #72716e reaches only 4.88:1 / 4.52:1 on the canvas and the paper tone and falls to 4.24:1 /
+//   3.95:1 on the row fills -- and a token is a global this file cannot scope to inputs, so the
+//   placeholder takes the corrected secondary value above, which clears AA everywhere. Notion's
+//   three-step text hierarchy therefore renders as two steps in an input; that is the cost of a
+//   readable placeholder, and it is the right trade.
+// - Disabled controls are inactive user-interface components, which SC 1.4.3 and SC 1.4.11
+//   explicitly exempt, so the published tertiary is kept there and reads as unmistakably
+//   unavailable next to the corrected placeholder. It is also already stronger than the Codex
+//   default it replaces (2.81:1 against 2.37:1 for `#a2a9b1`), so nothing is traded away.
+@color-placeholder: @color-subtle;
 @color-disabled: #9b9a97;
-// BLITZY [A11Y]: measured against the `#fff` canvas and the `#f7f6f3` surface below,
-// `@color-subtle` is 4.48:1 / 4.14:1, marginally under the WCAG AA 4.5:1 minimum for normal
-// text, and `#9b9a97` is 2.81:1 / 2.60:1 (WCAG exempts the inactive controls those two tokens
-// style). Implemented exactly as published and flagged for designer review rather than
-// silently darkened.
 
 // Surfaces. `@background-color-base` is already `#fff`, exactly Notion's canvas, so it is
 // deliberately not restated.
@@ -90,7 +146,8 @@
 // Notion has a single off-white surface where Codex layers two greys (`#eaecf0` strong and
 // `#f8f9fa` subtle), so all four surface tokens collapse onto the paper tone -- one deliberate
 // decision, not four coincidences. Two of them are load-bearing rather than cosmetic:
-// `@background-color-neutral` is what `mediawiki.pager.styles/DataTable.less` paints
+// `@background-color-neutral` is what core's
+// `mediawiki/resources/src/mediawiki.pager.styles/DataTable.less` paints
 // `.mw-datatable th` with, and a paper-toned header row is the table treatment the plan calls
 // for; `@background-color-interactive` has to stay lighter than its own hover, or a Codex
 // neutral button would move from a cool grey to a lighter warm grey when pointed at. Anything
@@ -128,9 +185,26 @@
 // theme aliases `@color-link: @color-progressive`. The link family therefore has to be
 // assigned independently, and after both imports above, or every link on the wiki silently
 // follows the accent. Legacy Vector's own link block sets the same precedent (T213778).
-@color-progressive: #2eaadc; // Notion Blue.
-@color-progressive--hover: #1f8cb8; // `darken( #2eaadc, 10% )`.
-@color-progressive--active: #186b8c; // `darken( #2eaadc, 20% )`.
+// The accent is Notion Blue, #2eaadc, but not at its published lightness. These three tokens are
+// semantic roles, not decoration: `@color-progressive` colours text and icons, it is aliased below
+// to `@background-color-progressive` where it becomes a fill carrying a white label, and to
+// `@border-color-progressive` where it becomes a non-text control boundary. Published Notion Blue
+// measures 2.66:1 / 2.46:1 / 2.31:1 / 2.15:1 -- under AA 1.4.3's 4.5:1 for text, under 1.4.11's
+// 3:1 for non-text UI, and equally under both for a white label sitting on it, since contrast is
+// symmetric, so one value has to clear AA in both directions.
+//
+// Holding Notion Blue's hue (197.2deg) and saturation (71.3%) and dropping lightness from 52.2% to
+// 33.5% gives 5.63:1 / 5.21:1 / 4.89:1 / 4.56:1, and a white label on the rest-state fill is the
+// same 5.63:1. The accent stays Notion Blue's hue and lands slightly stronger than the Codex accent
+// it replaces (#36c, 5.37:1 on the canvas), so nothing that relied on the Wikimedia accent being
+// legible loses out. The hover and active steps are darkenings of it rather than published values,
+// because Notion publishes no second and third accent step; each stays perceptibly darker than the
+// step before it. Published Notion Blue keeps no semantic role in this skin; a component that
+// genuinely needs the brand hue for decoration should derive it in
+// 'resources/skins.notion.styles/variables.less' and must not use it behind text.
+@color-progressive: #196f92;
+@color-progressive--hover: #13556f; // `darken( #196f92, 8% )`: 8.21:1 / 7.60:1 / 7.14:1 / 6.64:1.
+@color-progressive--active: #0e3d51; // `darken( #196f92, 15% )`: 11.63:1 / 10.77:1 / 10.11:1 / 9.41:1.
 @color-progressive--focus: @color-progressive; // Codex keeps focus in the accent family.
 // Codex carries one accent across three token families with identical values, and so does
 // this skin: progressive fills and borders are aliased to the colour family above so the
@@ -144,19 +218,31 @@
 @border-color-progressive--active: @color-progressive--active;
 // `@border-color-progressive--focus` is part of the focus ring, so it is set with the rest of
 // that ring below rather than aliased to the accent here.
-@color-link: #487ca5; // Notion's in-app light-mode link blue.
-@color-link--hover: #337ea9; // Notion's published icon blue, one deliberate step darker.
-@color-link--active: #276182; // `darken( #337ea9, 10% )`; Notion publishes no third blue.
+// Links. Notion's in-app light-mode link blue is published as #487ca5, which measures 4.47:1 /
+// 4.13:1 / 3.88:1 / 3.61:1 -- under AA on the canvas by a hair and under it everywhere else, and
+// link text lands on all four surfaces because every dropdown and menu row in this skin is a link
+// on a fill that changes under the pointer. Holding its hue (206.5deg) and saturation (39.2%) and
+// dropping lightness from 46.5% to 40.5% gives 5.59:1 / 5.17:1 / 4.86:1 / 4.52:1. The hover and
+// active steps continue in that same family, each perceptibly darker than the one before it;
+// Notion's published icon blue #337ea9 is not used for the hover step, because at 4.47:1 it would
+// be a *lower*-contrast hover than the rest state it follows. The family therefore stays visibly
+// distinct from the accent above, which is the distinction Notion draws and Codex does not.
+@color-link: #3f6c90;
+@color-link--hover: #365d7c; // `darken( #3f6c90, 6% )`: 6.97:1 / 6.45:1 / 6.06:1 / 5.63:1.
+@color-link--active: #2c4d66; // `darken( #3f6c90, 12% )`: 8.90:1 / 8.23:1 / 7.73:1 / 7.19:1.
 @color-link--focus: @color-link;
 // Focus indicators. The ring is one visual object drawn from three tokens at once -- an
 // outline, a border and an inset shadow -- so all three move together or a focused control
 // shows a ring in one hue against a border in another. They take the darkest accent step
-// rather than the accent itself: measured against the canvas, the paper surface and the hover
-// grey, `#186b8c` is 5.96:1 / 5.52:1 / 5.18:1 where the accent is only 2.66:1 / 2.46:1 /
-// 2.31:1, so this stays comfortably above the 3:1 WCAG 2.2 minimum for a focus indicator --
-// and above Codex's own `#36c` on every one of those surfaces. Quietness never buys a weaker
-// focus ring. The destructive `--focus` members are untouched and keep Codex's strong blue:
-// nothing set here contradicts them, and a focused destructive control is rare.
+// rather than the accent itself, so that a focused control still reads as focused when the ring is
+// drawn around a progressive-filled button: `#0e3d51` measures 11.63:1 / 10.77:1 / 10.11:1 /
+// 9.41:1 against the canvas, the paper surface, the hover fill and the active fill, far above the
+// 3:1 WCAG 2.2 SC 1.4.11 minimum for a non-text indicator, and above Codex's own `#36c`
+// (5.37:1 / 4.97:1 / 4.66:1 / 4.34:1) on every one of them. The accent itself would now clear that
+// minimum too, so this is deliberately a margin rather than a necessity: quietness never buys a
+// weaker focus ring, and this is the one indicator a keyboard user has. The destructive `--focus`
+// members are untouched and keep Codex's strong blue: nothing set here contradicts them, and a
+// focused destructive control is rare.
 @border-color-progressive--focus: @color-progressive--active;
 @box-shadow-color-progressive--focus: @color-progressive--active;
 @outline-color-progressive--focus: @color-progressive--active;
@@ -166,17 +252,45 @@
 // readers rely on; the destructive and red-link families because they are semantic; and the
 // `-progressive-subtle` tints and `@accent-color-base` because Notion's enumerated palette
 // has no pale-accent equivalent, so a component needing one should derive it in
-// 'resources/skins.notion.styles/variables.less'.
-// BLITZY [A11Y]: `@color-progressive` is 2.66:1 on the canvas, under AA 4.5:1 for text and
-// under 3:1 for non-text UI, `@color-link` is 4.47:1, marginally under 4.5:1, and white label
-// text on the accent fill is 2.66:1. All are implemented exactly as published and flagged for
-// designer review; component stylesheets should reach for the darker steps above (3.82:1 and
-// 5.96:1 against white) wherever the accent has to carry small text.
+// 'resources/skins.notion.styles/variables.less'. Each of those Codex values already meets the
+// contrast its role requires, so leaving them alone costs nothing.
+//
+// Contrast, resolved rather than deferred. Every semantic role assigned in this file has been
+// measured against all four surfaces this skin paints -- the `#fff` canvas, the `#f7f6f3` paper
+// tone, the `#efefee` hover fill and the `#e8e7e4` active fill -- and each one meets AA 1.4.3
+// (4.5:1 for normal text) on every surface it can appear on, with non-text roles well past
+// 1.4.11's 3:1. Ratios are canvas / paper / hover / active:
+//
+//   @color-base         12.26 / 11.35 / 10.66 / 9.92     @color-link          5.59 / 5.17 / 4.86 / 4.52
+//   @color-emphasized   21.00 / 19.43 / 18.25 / 16.98    @color-link--hover   6.97 / 6.45 / 6.06 / 5.63
+//   @color-subtle        5.57 /  5.15 /  4.84 / 4.50     @color-link--active  8.90 / 8.23 / 7.73 / 7.19
+//   @color-placeholder   5.57 /  5.15 /  4.84 / 4.50     @color-progressive   5.63 / 5.21 / 4.89 / 4.56
+//
+// Two values sit below 4.5:1 on purpose, and neither is a deferral:
+//
+// - `@color-disabled` (2.81:1) styles inactive controls, which 1.4.3 exempts by name, and it is
+//   already stronger than the Codex default it replaces.
+// - `@color-link--visited` keeps the Codex value `#6a60b0` (5.37:1 canvas, 4.97:1 paper). Body
+//   links sit on those two surfaces, so it passes where it is used; it is a Codex default this
+//   skin does not retarget, for the reason given above.
+//
+// One consequence for the component stylesheets: every accent and link token in this file now
+// clears AA on all four surfaces by itself, so a component never needs to reach past the token it
+// wants for a darker one, and it must not reintroduce a published-but-failing value as a literal to
+// "get the brand colour back". Notion Blue #2eaadc, the published link #487ca5 and the published
+// tertiary #9b9a97 appear nowhere in this skin's stylesheets except as the provenance notes above.
+//
+// The companion 'resources/skins.notion.styles/CSSCustomProperties.less' must mirror these values,
+// not the published Notion hues, or Codex-rendered components will keep reading the inaccessible
+// originals through their `var()` fallbacks -- and its night-mode palette owes the same measurement
+// against the dark surfaces it introduces.
 
 // Geometry. `@border-radius-base` is the only radius this file may set: Codex exposes just
 // `-base`, `-sharp`, `-pill` and `-circle`. Notion's 6px surface and 8px panel radii (gap G1)
-// are skin-scoped and belong in 'resources/skins.notion.styles/variables.less', never as
-// literals in a component stylesheet.
+// have no token to override, so they are declared as skin-scoped variables in
+// 'resources/skins.notion.styles/variables.less' -- part 2 of the three-part layering described
+// at the top of this file -- and are referenced by name from there. Never as literals in a
+// component stylesheet.
 @border-radius-base: 3px;
 
 // Typography. One decision, aliased everywhere it is consumed.

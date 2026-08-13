@@ -39,9 +39,13 @@
 			"@phpcs",
 			"minus-x check ."
 		],
-		"test:size": "@composer -d ../../ phpunit skins/Notion/tests/phpunit/structure/BundleSizeTest.php",
+		"@test:size": "Runs the bundle-size assertions in tests/phpunit/structure/BundleSizeTest.php, which is an integration test and therefore has to run from a MediaWiki core checkout with this skin loaded. The command resolves core itself rather than hardcoding one layout: it probes ../.. first (the conventional install where this skin sits at $IP/skins/Notion) and then ../mediawiki (this repository, where the skin and core are siblings), reports which one it used, and exits with a message when neither exists. The test file is then passed as an absolute path, so it is found whichever layout matched. Core still needs a skins/Notion entry pointing here - in this repository that is a symlink, `ln -s ../../mediawiki-skins-Notion mediawiki/skins/Notion`, which is also what makes the skin's assets resolve under the remoteSkinPath declared in skin.json. Without the skin actually loaded in LocalSettings.php the modules named in bundlesize.config.json are not registered, and the test errors out on the first one it cannot resolve instead of reporting sizes.",
+		"test:size": "core=; for d in ../.. ../mediawiki; do if [ -f \"$d/maintenance/run.php\" ]; then core=$d; break; fi; done; if [ -z \"$core\" ]; then echo \"test:size: no MediaWiki core checkout found at ../.. (installed skin layout) or ../mediawiki (superproject source layout)\" >&2; exit 1; fi; echo \"test:size: resolved MediaWiki core to $core\"; \"${COMPOSER_BINARY:-composer}\" -d \"$core\" phpunit \"$(pwd)/tests/phpunit/structure/BundleSizeTest.php\"",
 		"phan": "phan -d . --long-progress-bar",
 		"phpcs": "phpcs -sp --cache"
+	},
+	"scripts-descriptions": {
+		"test:size": "Assert every ResourceLoader module against its cap in bundlesize.config.json, by running the skin's BundleSizeTest from the MediaWiki core checkout. The -d target is the sibling core directory, because this skin's source root is mediawiki-skins-Notion/ beside mediawiki/ rather than a directory inside it; core is reached at ../mediawiki from either entry path, since PHP resolves the mediawiki/skins/Notion symlink to that same physical directory. Requires that symlink to exist, so that skins/Notion/tests/... resolves inside core."
 	},
 	"config": {
 		"allow-plugins": {

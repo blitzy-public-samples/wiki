@@ -26,28 +26,57 @@
 		below.
 
 	Where this data comes from, which is worth reading before renaming any key. These are
-	core's own portlet link records, built by
-	MediaWiki\Skin\Components\SkinComponentLink::makeLink() and delivered to the skin as
-	data-portlets.*.array-items[].array-links[]. NotionComponentMenu passes each record
-	through untouched apart from overriding icon and, where a menu asks for button
-	styling, swapping the whole record for a data-button one; it never rewrites a record
-	into the shape NotionComponentLink returns. That class emits a pre-serialised
-	html-attributes string alongside a separate href and has no call site in the rendering
-	path - it exists for parity with Vector and for unit-test coverage - so interpolating
-	html-attributes here would render nothing on a real page while silently dropping the
-	href. This partial is deliberately written against the core record shape, exactly as
+	core's own portlet link records. MediaWiki\Skin\Components\SkinComponentListItem
+	assembles each list item's array-links by constructing a
+	MediaWiki\Skin\Components\SkinComponentLink per link and collecting its template data;
+	the records reach the skin as data-portlets.*.array-items[].array-links[]. (Do not
+	expect to call SkinComponentLink::makeLink() yourself - it is private to that class.)
+	That record shape - array-attributes plus text and icon - is the skin's ONE canonical
+	link shape, and this partial is written against it, exactly as
 	mediawiki-skins-Vector/includes/templates/Link.mustache is.
 
+	Two producers speak that shape and both may be rendered here. NotionComponentMenu passes
+	each core record through untouched apart from overriding icon and, where a menu asks for
+	button styling, swapping the whole record for a data-button one. NotionComponentLink
+	builds the links the skin invents rather than receives, and emits the same three keys:
+	its attributes are assembled into array-attributes records rather than a pre-serialised
+	attribute string, which is what lets either producer be rendered here without losing an
+	attribute on the way in - the reason the two shapes were unified rather than left to be
+	reconciled at each call site, since the attribute most easily lost is href.
+
+	NotionComponentLink nevertheless has no call site in today's rendering path: no template
+	includes >Link yet, because MenuListItem.mustache and MenuContents.mustache are later
+	deliverables, and the class is currently exercised only through NotionComponentMenuListItem
+	and its unit tests. It is kept faithful to the reference skin's component set for when
+	those partials land, and unifying its shape with core's is what makes that landing a
+	no-op rather than a repair.
+
+
 	DO NOT REMOVE data-mw-interface, and do not make it conditional. Core's own client
-	modules test for its PRESENCE, not its value, to decide that a link is trusted skin
-	chrome rather than user-generated content: mediawiki.page.watch.ajax matches
-	.mw-watchlink a[data-mw-interface] to upgrade the watchstar into an AJAX toggle,
-	mediawiki.misc-authed-curate matches the patrol and rollback links the same way, and
-	mediawiki.page.ready's selectorLogoutLink matches #pt-logout a[data-mw-interface].
-	Every anchor this partial renders is chrome, so the attribute is emitted
-	unconditionally and without a value; where core additionally supplies it through
-	array-attributes - it does for the logout and watch links - the repetition is inert,
-	because presence is all any of those selectors tests.
+	modules test for its PRESENCE, not its value, to decide that an element is trusted skin
+	chrome rather than user-generated content. The selectors differ in where they expect the
+	attribute, which is why it is emitted on the anchor here and why none of them may be
+	assumed to be interchangeable:
+
+	  - mediawiki.page.watch.ajax matches .mw-watchlink a[data-mw-interface] to upgrade the
+	    watchstar into an AJAX toggle - attribute on the anchor.
+	  - mediawiki.misc-authed-curate's rollback.js delegates on
+	    .mw-rollback-link a[data-mw-interface] - attribute on the anchor.
+	  - the same module's patrol.js matches .patrollink[data-mw-interface] a instead, with
+	    the attribute on the CONTAINING element and the anchor as its descendant. It is not
+	    "the same way" as rollback, and a change that moved the attribute off a container
+	    would break patrolling while leaving rollback working.
+	  - mediawiki.page.ready binds the logout link through config.selectorLogoutLink, which
+	    is supplied per skin through the SkinPageReadyConfig hook; core's own default in that
+	    module's config.json is only a placeholder, so the working selector is whatever the
+	    skin sets, not a fixed #pt-logout a[data-mw-interface].
+	  - the attribute is not exclusive to chrome anchors either: the same module tests
+	    .catlinks[data-mw-interface] and table.diff[data-mw-interface] on content containers.
+
+	Every anchor this partial renders is chrome, so the attribute is emitted unconditionally
+	and without a value; where core additionally supplies it through array-attributes - it
+	does for the logout and watch links - the repetition is inert, because presence is all
+	any of those selectors tests.
 
 	Appearance is owned entirely by the stylesheet. This partial writes no class of its
 	own, not even a notion- one, and no inline style: anchors are styled by

@@ -5,11 +5,19 @@ namespace MediaWiki\Skins\Notion\Components;
 /**
  * NotionComponentButton component
  *
- * Server-rendered view model for every button the Notion skin emits, and the single place in the
- * skin where the Codex `cdx-button` class family is composed. `Button.mustache` renders the data
- * this class returns as either a `<button>` element (no `href`) or an `<a>` element styled as a
- * button (`href` present), so callers describe a button semantically -- label, icon, weight,
+ * Server-rendered view model for the skin's reusable, component-backed buttons: the sticky header's
+ * icon and labelled buttons, the collapsed search toggle, the add-topic button, and any menu entry
+ * whose component asked to be drawn as a button rather than as a link. `Button.mustache` renders the
+ * data this class returns as either a `<button>` element (no `href`) or an `<a>` element styled as a
+ * button (`href` present), so those callers describe a button semantically -- label, icon, weight,
  * action -- and never hand-write a class string.
+ *
+ * It is not the only button in the skin, and the surrounding documentation should not be read as
+ * saying so. `PinnableHeader.mustache` writes its pin and unpin `<button>` elements inline with
+ * `notion-pinnable-header-*` classes and no Codex composition at all, and `Dropdown/Open.mustache`
+ * composes its own `cdx-button` class list for the dropdown handle. This class is nevertheless the
+ * single place where the Codex `cdx-button` family is composed *in PHP*, which is the property the
+ * rest of this docblock relies on.
  *
  * Notion's visual language reaches this component exclusively through design tokens. The
  * `cdx-button` classes are styled by Codex, and the skin retargets the Codex token values -- the
@@ -40,10 +48,20 @@ namespace MediaWiki\Skins\Notion\Components;
  * updating every call site: a reordered parameter is a silent behavioural change rather than a
  * fatal error, and a renamed one breaks named-argument callers at runtime.
  *
- * TODO: Update to accept a Notion icon component param instead of an icon name. This skin
- * deliberately ships no icon component class, so `$icon` is a plain string that `Icon.mustache`
- * expands into the mask-image and `cdx-button__icon` classes. Revisit if such a class is ever
- * introduced.
+ * An icon is named, never composed. `$icon` is a plain string -- an icon name from the skin's own
+ * OOUI icon pack, optionally carrying a variant suffix such as `-progressive` -- and that is the
+ * finished contract rather than a stepping stone towards an icon component object. This skin ships
+ * no icon component class by design: an icon carries no data of its own beyond its name, so there
+ * is nothing for a component class to assemble. `Icon.mustache` is the single place an icon name is
+ * expanded into its mask-image and `cdx-button__icon` classes, the mask-image recolours itself from
+ * the token layer, and `skin.json` is the single place the available names are declared, which
+ * leaves nothing for PHP to decide. A component class between the two would add an indirection with
+ * no behaviour in it and a second vocabulary for the same value, and would widen a contract every
+ * call site above already constructs either positionally or by name. A name is also what every
+ * caller already has, because the names come from core's portlet data and from the icon pack rather
+ * than from this skin's own markup. Passing anything other than a declared name -- markup, a path,
+ * an object -- is a caller error: `Icon.mustache` interpolates the name straight into a class, so an
+ * unknown one renders an icon-shaped gap rather than an error.
  *
  * @internal
  */
@@ -52,8 +70,15 @@ class NotionComponentButton implements NotionComponent {
 	/**
 	 * @param string $label Visible button text, rendered inside a `<span>`. May be an empty
 	 *   string for an icon-only button whose label is populated later by client-side code.
-	 * @param string|null $icon Icon name from the skin's icon pack without any prefix, for
-	 *   example `search` or `speechBubbleAdd-progressive`. Null renders no icon.
+	 * @param string|null $icon Icon name from the skin's icon pack, emitted verbatim by
+	 *   `Icon.mustache`. Two forms are in use and both are supported. The bare name, optionally
+	 *   with a variant suffix -- `search`, `article`, `speechBubbleAdd-progressive` -- and the
+	 *   historical `wikimedia-` prefixed form, which `NotionComponentStickyHeader` passes for every
+	 *   one of its icon descriptors (`wikimedia-history`, `wikimedia-star`,
+	 *   `wikimedia-bookmarkOutline`, `wikimedia-edit`, `wikimedia-wikiText`, `wikimedia-editLock`).
+	 *   Both resolve because the partial emits `mw-ui-icon-{name}` alongside
+	 *   `mw-ui-icon-wikimedia-{name}`, so a prefixed name matches on the first class and a bare one
+	 *   on the second. Null renders no icon.
 	 * @param string|null $id Value of the button's `id` attribute. Null omits the attribute.
 	 * @param string|null $class Additional classes appended verbatim after the Codex classes.
 	 *   This is the only channel through which caller-owned `notion-*` presentational classes
@@ -95,8 +120,10 @@ class NotionComponentButton implements NotionComponent {
 	/**
 	 * Constructs button classes based on the props
 	 *
-	 * The composition order is part of the rendered contract and is asserted by the component's
-	 * snapshots: the base class, then the fake-button pair, then weight, then action, then
+	 * The composition order is part of the rendered contract and is asserted by the inline
+	 * `assertSame()` expectations in `NotionComponentButtonTest`, which compares whole class strings
+	 * directly -- this component keeps no snapshot file: the base class, then the fake-button pair,
+	 * then weight, then action, then
 	 * icon-only, then the caller's own classes. Every modifier carries its own leading space
 	 * while the base class does not, so the pieces concatenate into a valid class attribute
 	 * without any post-processing -- normalising that spacing would change the emitted markup.

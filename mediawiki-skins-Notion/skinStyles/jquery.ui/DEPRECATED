@@ -12,21 +12,40 @@ https://www.mediawiki.org/wiki/Readers/Web/Dev_notes/jQuery_UI
 The rule for Notion is therefore RETHEME, DO NOT REFACTOR. Permitted: recolouring declarations
 to the Notion palette; replacing gradient background-image chrome with a flat background-color;
 reducing the icon sprite set kept in images/; and, where a recolour would otherwise leave a
-control invisible, adding one explicit fill for it. Record every such deviation in PATCHES.
+control invisible or unpositioned, adding an explicit declaration for it. Record every such
+deviation in PATCHES.
 
 Not permitted: restructuring or "modernising" selectors; renaming any .ui-* class (jQuery UI's
 own JavaScript applies those names at runtime, so a rename silently unstyles the widget);
 rewriting these files against a newer upstream release; deleting the deliberate legacy hacks --
 zoom: 1, the IE filter:Alpha(Opacity=...) declarations, the ::-moz-focus-inner resets, the IE6
 .ui-datepicker-cover iframe fix, the vendor-prefixed border-radius properties; reformatting
-wholesale for style. A diff against Vector's copy should show colour, not structure.
+wholesale for style.
+
+Note what "colour, not structure" does and does not mean. It is the rule for how to EDIT these
+files, not a claim that a diff against Vector's copy contains nothing but colour values. It does
+not, and PATCHES enumerates the exceptions: at least one rule set here (.ui-dialog positioning)
+is a local addition with no counterpart in upstream ThemeRoller output, the images/ directory
+holds a deliberately smaller and differently named sprite set than Vector's, and recolouring an
+overlay tone by dropping its image and declaring a flat colour changes what a reader sees, not
+merely which hex is written down. Those are sanctioned deviations, recorded rather than hidden.
+What is forbidden is adding NEW structural change without recording it.
 
 The stakes here are unusually high. Core's jquery.ui module supplies scripts, languageScripts
 and a skinStyles.default array of the bundled smoothness theme, and this skin lists its
 jquery.ui entry in ResourceModuleSkinStyles."notion" as an array with no leading "+", which
 replaces skinStyles.default instead of appending to it (FileModule::setSkinStylesOverride()).
-These 14 stylesheets are therefore the whole jQuery UI theme under Notion: a missing or
+Those 14 stylesheets are therefore the whole jQuery UI theme under Notion: a missing or
 mistyped filename leaves its widget with no CSS at all rather than merely the wrong colours.
+
+STATUS, so that no one reads the paragraph above as a completeness claim. skin.json declares all
+14. Two exist in this folder today -- jquery.ui.core.css and jquery.ui.theme.css -- and the
+remaining twelve (accordion, autocomplete, button, datepicker, dialog, menu, progressbar,
+resizable, selectable, slider, tabs, tooltip) are still to be authored. Until they are, the
+widgets they cover have no CSS under this skin, which is precisely the failure mode described
+above rather than a hypothetical one. Treat the 14-file list as the target and this note as the
+record of how far it has been met; ResourceLoader tolerates the gap silently, so nothing else
+will tell you.
 
 Read PATCHES, in this folder, before editing anything here. It records the per-file deviations
 from upstream jQuery UI 1.9.2 (and from 1.11.2-alpha, the release the button stylesheet was

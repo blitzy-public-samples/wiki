@@ -31,10 +31,24 @@ let /** @type {MwApi} */ api;
  */
 function saveOptions( options ) {
 	api = api || new mw.Api();
-	// `global: 'update'` propagates the change to every wiki the account is attached to where the
-	// GlobalPreferences extension is installed, and is inert where it is not. The ambient `MwApi`
-	// type reached through resources/mw.d.ts declares `saveOptions` as taking the options object
-	// alone, so this second argument has to be excused for `tsc --noEmit` to pass.
+	// `global: 'update'` decides what happens to an option that is ALREADY global, and nothing
+	// more. It does not make a preference global and does not propagate one to other wikis: core
+	// documents the mode as "Update the option globally", and in
+	// `UserOptionsManager::saveOptions()` the branch is taken on the option's existing source. When
+	// that source is the local store, `update` falls through to a plain local write; only when the
+	// option already lives in a global store is the new value written there. `create` is the mode
+	// that would establish a new global preference, and it is deliberately not used here: a skin
+	// toggle must not silently change a reader's settings on every other wiki.
+	//
+	// It is still worth passing, because the parameter defaults to `ignore`, under which a
+	// globally-set preference is left untouched and the write appears to succeed while changing
+	// nothing. `update` is what lets a reader who has made this a global preference actually move
+	// it. Where GlobalPreferences is not installed no option has a global source, so every write
+	// is local and the argument has no effect.
+	//
+	// The ambient `MwApi` type reached through resources/mw.d.ts declares `saveOptions` as taking
+	// the options object alone, so this second argument has to be excused for `tsc --noEmit` to
+	// pass.
 	// @ts-ignore
 	return api.saveOptions( options, {
 		global: 'update'

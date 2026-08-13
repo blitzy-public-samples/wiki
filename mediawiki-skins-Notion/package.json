@@ -39,9 +39,13 @@
 		"oojs-ui": "0.53.0",
 		"pre-commit": "1.2.2",
 		"stylelint-config-wikimedia": "0.18.0",
-		"svgo": "3.2.0",
+		"svgo": "3.3.4",
 		"ts-jest": "27.1.5",
 		"typescript": "4.9.5",
 		"vue": "3.5.13"
+	},
+	"overrides": {
+		"jsdom": "20.0.3",
+		"cross-spawn": "^7.0.6"
 	}
 }

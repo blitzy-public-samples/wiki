@@ -9,7 +9,7 @@
 	no caller-specific key is ever read.
 
 	Data dictionary supplied by NotionComponentDropdown::getTemplateData(), which returns exactly
-	the first nine keys:
+	the first ten keys:
 	string id REQUIRED, unique per page. Emitted as the wrapper id and as the stem of the derived
 		<id>-checkbox and <id>-label ids, the label's `for` target and the `ui.dropdown-` event
 		name, so all five stay in sync from a single value.
@@ -30,6 +30,11 @@
 	string html-notion-menu-label-attributes default empty. Pre-rendered ATTRIBUTE fragment for
 		the label, for example tabindex="-1" inside the sticky header.
 	string html-notion-menu-checkbox-attributes default empty. The same, for the checkbox.
+	bool is-expanded whether this dropdown is open in the markup as delivered; false for every
+		dropdown the skin renders today. Both `checked` and `aria-expanded` are derived from this
+		one key, which is the point of it: the checkbox's state and the state announced to
+		assistive technology cannot drift apart, and neither can be forgotten. See the note on
+		initial state below.
 	string aria-label OPTIONAL, supplied only by NotionComponentVariants; it replaces the
 		label-derived accessible name, which is why both branches below are live.
 	string aria-description OPTIONAL, supplied only by NotionComponentLanguageDropdown.
@@ -41,13 +46,33 @@
 	expected. Those three fragments and core's attributes are the only unescaped values here;
 	everything else is escaped.
 
+	Initial state is rendered, not inferred. The checkbox carries role="button", which suppresses
+	its native checkbox semantics, so `aria-expanded` is the only thing left that tells assistive
+	technology whether the menu is open -- and core's helper only writes that attribute on the
+	first input event, which means a dropdown that has never been touched would have no state at
+	all. Both attributes therefore come from `is-expanded` here, and core's
+	`checkboxHack.bindUpdateAriaExpandedOnInput()` keeps `aria-expanded` in step from the first
+	interaction onwards; the two agree because they describe the same checkbox.
+
+	The state is derived from a data key rather than written as a literal for a reason worth
+	keeping: HTML keeps the FIRST occurrence of a duplicated attribute, so a hardcoded
+	aria-expanded="false" could not be corrected by the html-notion-menu-checkbox-attributes
+	fragment further down -- a caller that server-rendered an open dropdown would be stuck
+	announcing it as closed. Setting `is-expanded` moves `checked` and `aria-expanded` together.
+
 	The order input, label, panel is a runtime contract rather than a preference. The stylesheet
 	reveals the panel with .notion-dropdown-checkbox:checked ~ .notion-dropdown-content, a
 	general sibling combinator that cannot match a panel placed before the checkbox, and the
 	invisible full-size checkbox has to sit beside the label inside this wrapper for a click on
-	the button to toggle it. resources/skins.notion.js builds the same three children in the same
-	order when it turns a portlet into a dropdown. Reordering them breaks disclosure only once
-	JavaScript is unavailable, so nothing would report it.
+	the button to toggle it. The script module that converts a portlet into a dropdown must build
+	the same three children in the same order for the same reason.
+
+	Reordering them breaks disclosure in BOTH modes, not just with scripts off. That CSS rule is
+	the only thing that ever reveals the panel: the skin's dropdown script enhances the checkbox
+	hack -- keeping aria-expanded in step and dismissing on outside click or focus loss, all by
+	changing the checkbox's checked state -- and supplies no alternative way to show the panel. So
+	a reordering would take the menu out with JavaScript enabled too. What is true is that no test
+	would report it, which is why the order is stated here as a contract.
 
 	No dimension, colour, spacing or inline style appears here: the entire popover appearance --
 	surface radius, hairline border, subtle elevation and menu row height -- belongs to
@@ -68,6 +93,8 @@
 		}}id="{{id}}-checkbox" {{!
 		}}role="button" {{!
 		}}aria-haspopup="true" {{!
+		}}{{#is-expanded}}checked aria-expanded="true" {{/is-expanded}}{{!
+		}}{{^is-expanded}}aria-expanded="false" {{/is-expanded}}{{!
 		}}data-event-name="ui.dropdown-{{id}}" {{!
 		}}class="notion-dropdown-checkbox{{#checkbox-class}} {{.}}{{/checkbox-class}}" {{!
 		}}{{#aria-label}}aria-label="{{.}}"{{/aria-label}} {{!
@@ -84,4 +111,3 @@
 		}}<span class="notion-dropdown-label-text">{{label}}</span>
 	</label>
 	<div class="notion-dropdown-content">
-

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  */
@@ -30,9 +30,12 @@ use MediaWiki\Exception\FatalError;
  * The class exists so that the rest of the skin never repeats a magic string. Three families of
  * value live here and each has a distinct contract:
  *
- * - `CONFIG_KEY_*` holds the name of a configuration variable **without** its `$wg` prefix. Every
- *   one of these must have a matching entry in the `config` block of `skin.json`, otherwise
- *   `Config::get()` raises a `ConfigException` the first time the value is read.
+ * - `CONFIG_KEY_*` holds the name of a configuration variable **without** its `$wg` prefix. Any of
+ *   these that the skin actually reads must have a matching entry in the `config` block of
+ *   `skin.json`, otherwise `Config::get()` raises a `ConfigException` the first time the value is
+ *   read. There is one deliberate exception, and it is the reason this is not stated as an
+ *   absolute: `CONFIG_KEY_NAVIGATION_UPDATE` names a variable that is intentionally *not* declared
+ *   in the manifest, and its own documentation below records the contract that keeps that safe.
  * - `PREF_KEY_*` holds the name of a user preference. Every skin-owned preference must have a
  *   matching entry in the `DefaultUserOptions` block of `skin.json` and must be registered by
  *   `Hooks::onGetPreferences()`, otherwise reading it through `UserOptionsLookup` yields no default.
@@ -40,7 +43,9 @@ use MediaWiki\Exception\FatalError;
  *   former with `FeatureManager::registerFeature()` and the latter with
  *   `FeatureManager::registerRequirement()`. A registered feature whose name
  *   `FeatureManager::getFeatureBodyClass()` cannot map raises a `RuntimeException`, so the two sets
- *   must be kept in step with `FeatureManagement\FeatureManagerFactory`.
+ *   must be kept in step with `FeatureManagement\FeatureManagerFactory`. The classes that method
+ *   returns are put on the document element — the `<html>` tag — not on `<body>`; see the note on
+ *   `FeatureManager::getFeatureBodyClass()` for why the method name says otherwise.
  *
  * @package Notion
  * @internal
@@ -176,9 +181,9 @@ final class Constants {
 	// =========================================================================
 
 	/**
-	 * Server-side only flag for rolling out changes to the navigation. It yields an
-	 * `notion-feature-navigation-update-{enabled,disabled}`-style body class and can therefore be
-	 * targeted by stylesheets without any client-side scripting.
+	 * Server-side only flag for rolling out changes to the navigation. It yields a
+	 * `notion-feature-navigation-update-{enabled,disabled}`-style class on the document element and
+	 * can therefore be targeted by stylesheets without any client-side scripting.
 	 *
 	 * @var string
 	 */
@@ -193,12 +198,17 @@ final class Constants {
 	 * Suffixed `Temporary` to advertise that the variable exists only for the duration of the
 	 * roll-out and may be withdrawn once the change is unconditional.
 	 *
-	 * Contract for consumers: this variable is deliberately absent from the `config` block of
-	 * skin.json, which declares only the variables the skin actually reads. `Config::get()` throws a
-	 * `ConfigException` for an undeclared option rather than returning a default, so a requirement
-	 * that consults this key must not be registered until the variable has been declared in the
-	 * manifest. `FEATURE_NAVIGATION_UPDATE` and `REQUIREMENT_NAVIGATION_UPDATE` remain safe to
-	 * register against any requirement that does not read configuration.
+	 * Contract for consumers: the `config` block of skin.json declares this variable as
+	 * `$wgNotionNavigationUpdateTemporary`, an audience map whose default
+	 * `[ 'logged_in' => false, 'logged_out' => false ]` leaves the roll-out switched off, so it is
+	 * always readable through `Config::get()`. That declaration is mandatory rather than decorative
+	 * — `Config::get()` throws a `ConfigException` for an undeclared option instead of returning a
+	 * default — and it is what makes this key safe to consult from an overridable requirement. Read
+	 * it through an `OverridableConfigRequirement`, which additionally honours the per-request
+	 * `?notionnavigationupdate=1` override and the per-audience overrides it layers on top, and keep
+	 * the constant and the manifest key in step: renaming either side alone breaks the lookup. The pairing of every
+	 * skin-owned `CONFIG_KEY_*` constant with its manifest declaration is asserted by
+	 * `MediaWiki\Skins\Notion\Tests\Structure\ConfigurationClosureTest`.
 	 *
 	 * @var string
 	 */
@@ -219,7 +229,7 @@ final class Constants {
 	 * would silently break the analytics pipeline. It is deliberately left unchanged.
 	 *
 	 * See also:
-	 * - https://www.mediawiki.org/wiki/Reading/Web/Desktop_Improvements/Features#Search_1:_Search_widget_move
+	 * - https://www.mediawiki.org/wiki/Reading/Web/Desktop_Improvements/Features/Search
 	 * - https://phabricator.wikimedia.org/T261636 and https://phabricator.wikimedia.org/T256100
 	 * - https://gerrit.wikimedia.org/g/mediawiki/core/+/61d36def2d7adc15c88929c824b444f434a0511a/resources/src/mediawiki.searchSuggest/searchSuggest.js#106
 	 *
@@ -237,8 +247,9 @@ final class Constants {
 
 	// Feature management: pinnable elements.
 	// =========================================================================
-	// Each pinnable element is a triad: a feature name that becomes a body class, a requirement name
-	// that resolves the user's choice, and the preference the choice is stored in. The preference
+	// Each pinnable element is a triad: a feature name that becomes a class on the document element
+	// (the `<html>` tag), a requirement name that resolves the user's choice, and the preference
+	// the choice is stored in. The preference
 	// names below are byte-identical to the keys declared in the `DefaultUserOptions` block of
 	// skin.json; changing one without the other resets every user's layout.
 
@@ -367,8 +378,9 @@ final class Constants {
 	/**
 	 * Deliberately named `CustomFontSize` rather than `FontSize`.
 	 *
-	 * `FeatureManager::getFeatureBodyClass()` derives the emitted body class from this camel-case
-	 * name, and the message catalogue already declares the matching
+	 * `FeatureManager::getFeatureBodyClass()` derives the emitted class from this camel-case name —
+	 * a class the skin puts on the document element (the `<html>` tag) despite the method's
+	 * historical name — and the message catalogue already declares the matching
 	 * `notion-feature-custom-font-size-*` keys, so the two must agree.
 	 *
 	 * @var string
@@ -398,8 +410,10 @@ final class Constants {
 
 	/**
 	 * The feature name registered for night mode. It is spelled `PREF_` rather than `FEATURE_`
-	 * because the body class it produces is a client preference (`skin-theme-clientpref-<value>`)
-	 * shared with other skins so that editors can target one class everywhere.
+	 * because the class it produces is a client preference (`skin-theme-clientpref-<value>`) shared
+	 * with other skins so that editors can target one class everywhere. Core places client
+	 * preference classes on the `<html>` element — see the `<key>-clientpref-<value>` note in
+	 * `MediaWiki\ResourceLoader\ClientHtml` (T339268) — not on `<body>`.
 	 *
 	 * @var string
 	 */
@@ -409,8 +423,13 @@ final class Constants {
 	// =========================================================================
 	// Each value below is the name of a variable declared in the `config` block of skin.json, held
 	// without its `$wg` prefix because that is the form `Config::get()` expects. They are named here
-	// rather than repeated as literals at each call site so that a typo becomes a fatal error at
-	// compile time instead of a `ConfigException` at request time.
+	// rather than repeated as literals at each call site so that a typo is caught by tooling rather
+	// than by a user: a mistyped constant name is reported by phan as
+	// `PhanUndeclaredConstantOfClass` before the code ever runs, and if it does run it raises
+	// `Error: Undefined constant` on the spot. Neither failure is a compile-time one — `php -l`
+	// accepts a reference to a constant that does not exist — but both are louder and earlier than
+	// the alternative, where a mistyped string literal is invisible to every tool and surfaces only
+	// as a `ConfigException` from `Config::get()` on whichever request first reaches that lookup.
 
 	/**
 	 * Temporary switch for the roll-out of horizontally scrollable tables. When enabled, qualifying

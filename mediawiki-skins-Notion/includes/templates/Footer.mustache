@@ -66,15 +66,12 @@
 	emitted with a triple-brace expression because escaping a serialised attribute fragment
 	would turn it into visible text in the footer.
 
-	The element below is the native footer landmark, which is what conveys the contentinfo
-	role to assistive technology without an explicit role attribute, and exactly one such
-	landmark is emitted per page. The note kept immediately above the element records why a
-	redundant role attribute would nonetheless be tolerated; it is carried over verbatim
-	from the Vector implementation this skin mirrors component for component, is the only
-	surviving record of that decision, and must not be tidied away.
+	The element below is the native footer landmark. Because it is not nested inside an
+	article, aside, main, nav or section element, it maps to the contentinfo role on its own,
+	so no role attribute is emitted here and none is needed -- exactly one such landmark is
+	emitted per page. Do not add one back: an explicit role would only restate what the
+	element already conveys.
 }}
-{{! `role` is unnecessary but kept to support selectors in any gadgets or user styles and
-	to mitigate a VoiceOver bug. }}
 <footer id="footer" class="mw-footer" {{{html-user-language-attributes}}}>
 	{{#data-portlets.data-footer-info}}{{>Footer__row}}{{/data-portlets.data-footer-info}}
 	{{#data-portlets.data-footer-places}}{{>Footer__row}}{{/data-portlets.data-footer-places}}

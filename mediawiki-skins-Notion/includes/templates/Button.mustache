@@ -1,11 +1,16 @@
 {{!
 	Notion skin: the button primitive.
 
-	Every button in the skin's chrome is rendered through this one partial -- the sticky
+	The skin's component-backed buttons are rendered through this one partial -- the sticky
 	header's icon buttons, its wider labelled buttons and its leading button, the collapsed
 	search toggle, the add-topic button on a talk page, and any menu entry whose component
 	asked to be drawn as a button rather than as a link -- so a change made here reaches all
 	of them at once. It includes exactly one other partial, the sibling Icon.
+
+	It is not every button in the skin. PinnableHeader.mustache writes its own pin and unpin
+	button elements inline, and Dropdown/Open.mustache composes its own cdx-button class list
+	for the dropdown handle; neither passes through here, so a change made here does not
+	reach them.
 
 	Data dictionary supplied by NotionComponentButton::getTemplateData():
 	string|null href target of the button. A truthy value makes the element an anchor with an
@@ -51,9 +56,18 @@
 	partial inside a context that happens to carry one of the names above lets that outer value
 	through: a list item with an id lends its id to the button nested in it, producing two
 	elements with the same id, and an outer href would go further and turn the button element
-	into an anchor. The remedy is to pass explicit values from the view model, or not to nest
-	the button inside a context carrying those names -- never to weaken the guards below, which
-	are what keep empty attributes out of the markup.
+	into an anchor.
+
+	Passing an explicit null does NOT stop that. LightnCandy treats a key present with the
+	value null exactly as it treats a missing key and walks out to the parent anyway, so
+	`'id' => null` in the view model is no defence against an enclosing id. Only a non-null
+	value shadows the outer one, which is why the components that render this partial inside a
+	menu or list context pass the empty string rather than null for the keys that could
+	collide -- the empty string is falsy, so the guards below still omit the attribute, but it
+	is present enough to block the lookup from escaping. The remedies, in order of preference:
+	pass a non-null value for every colliding name, or do not nest the button inside a context
+	carrying those names. Never weaken the guards below, which are what keep empty attributes
+	out of the markup.
 
 	The element takes HTML's default button type, which is submit. Nothing in this skin's
 	chrome puts a button inside a form, so that default is inert here; a caller that does must

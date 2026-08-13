@@ -10,12 +10,21 @@ use MediaWiki\Title\Title;
  * Evaluates the request- and title-sensitive halves of the skin's configuration.
  *
  * Several Notion features are configurable per page rather than per wiki: the limited content
- * width and the configurable font size are both switched off on pages where they would fight the
- * content instead of helping it — file pages, category listings, diffs, history views and the
- * main page. Those decisions are expressed declaratively in `skin.json` as
- * `$wgNotionMaxWidthOptions` and `$wgNotionFontSizeConfigurableOptions`, and this class is the
- * single place that turns such an options array, the current request and the current title into
- * one boolean answer: should the feature be *disabled* on the page being rendered right now?
+ * width and the configurable font size are each switched off on the pages where they would fight
+ * the content instead of helping it. This class is the single place that turns such an options
+ * array, the current request and the current title into one boolean answer: should the feature be
+ * *disabled* on the page being rendered right now?
+ *
+ * Each feature brings its own rules, declared declaratively in `skin.json` — the width feature as
+ * `$wgNotionMaxWidthOptions`, the font-size feature as `$wgNotionFontSizeConfigurableOptions` —
+ * and those rule sets are genuinely different, so nothing here should be read as one shared list
+ * of excluded pages. As shipped, the width rules exclude the main page, the Special and Category
+ * namespaces, and requests carrying `action=history|edit|submit` or any `diff`, while re-enabling
+ * `Special:Preferences` by name; the font-size rules leave the main page alone, add the File
+ * namespace and the IDs 100 and 710 (which are wiki-specific rather than core namespaces) to the
+ * exclusions, exclude a wider set of `action` values, exclude no `diff`, and re-enable nothing.
+ * Reading either set off the other gets the answer wrong. What the two share is the evaluation
+ * *procedure* below, not the pages it is applied to.
  *
  * Callers reach it as the `Notion.ConfigHelper` service, which `includes/ServiceWiring.php`
  * constructs once per request and injects into the feature-management layer. It is therefore

@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.47
@@ -44,15 +44,19 @@ use MediaWikiUnitTestCase;
  *  2. **Pass-through.** Everything the caller supplies reaches the template unchanged: the label,
  *     the accessible description, the caller's classes, the pre-rendered list items and the two
  *     portlet HTML strings, one of which is Extension:ULS's documented insertion point.
- *  3. **Core-owned and extension-owned names survive the restyle.** This skin renames only its own
- *     presentational classes; every identifier below belongs to MediaWiki core or to
- *     Extension:UniversalLanguageSelector and is therefore asserted verbatim, never under this
- *     skin's `notion-` prefix — the portlet id `p-lang-btn`, the heading classes
- *     `mw-portlet-lang-heading-empty` and `mw-portlet-lang-heading-<count>`, the layout hook
- *     `mw-portlet-lang-icon-only`, and the checkbox classes `mw-interlanguage-selector` and
- *     `mw-interlanguage-selector-empty` that `ext.uls.interface` attaches its click handler to.
- *     A rename of any of them would silently stop ULS, gadgets and user scripts from binding
- *     rather than raise an error, which is precisely what these assertions exist to catch.
+ *  3. **Borrowed names survive the restyle.** This skin renames only its own presentational
+ *     classes; none of the identifiers asserted below is its own, so each is asserted verbatim and
+ *     never under this skin's `notion-` prefix. Their provenance is not uniform, and the
+ *     assertions should not be read as claiming core owns them all:
+ *       - `p-lang-btn`, `mw-portlet-lang-heading-empty`, `mw-portlet-lang-heading-<count>` and
+ *         `mw-portlet-lang-icon-only` originate in the Vector 2022 skin and appear nowhere in
+ *         core. Core's own language portlet id is `p-lang`.
+ *       - `mw-interlanguage-selector` and `mw-interlanguage-selector-empty` belong to
+ *         Extension:UniversalLanguageSelector, whose `ext.uls.interface` module attaches its click
+ *         handler to them.
+ *     What they share is that ULS, gadgets, user scripts and stylesheets select on them today. A
+ *     rename of any one would silently stop those consumers binding rather than raise an error,
+ *     which is precisely what these assertions exist to catch.
  *
  * Titles are always test doubles. `Title::newFromText()` would reach the `TitleParser` service,
  * which `MediaWikiUnitTestCase` forbids, so `createMock()` is used and only the methods the
@@ -82,7 +86,7 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 	/**
 	 * Every key the component is required to emit.
 	 *
-	 * The first nine come from `NotionComponentDropdown`, three of which this component
+	 * The first ten come from `NotionComponentDropdown`, three of which this component
 	 * overrides; `aria-description` and `is-language-selector-empty` are added by this component;
 	 * the last three are the menu contents unioned in from the constructor arguments.
 	 */
@@ -96,6 +100,7 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 		'class',
 		'html-tooltip',
 		'checkbox-class',
+		'is-expanded',
 		'aria-description',
 		'is-language-selector-empty',
 		'html-items',
@@ -104,54 +109,94 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 	];
 
 	/**
-	 * Ordinary pages, covering both variants with and without interlanguage links.
+	 * Every combination of page state the component branches on, with the variant each implies.
 	 *
-	 * `titleExists` drives the mocked title while `isSubjectPage` states the variant expected of
-	 * it. The two coincide in every case here because a mocked `isSpecialPage()` returns false by
-	 * default, so the predicate reduces to "exists and is not a talk page"; they diverge in
-	 * provideSpecialPageData(), which is why both are supplied separately rather than derived.
+	 * The three title predicates are supplied independently and stubbed independently. Deriving
+	 * one from another - `isTalkPage` from `!$titleExists`, say - would make the cases cheaper to
+	 * write and worthless to run: with no case where a page both exists and is a talk page, the
+	 * `!$title->isTalkPage()` conjunct could be deleted from the production predicate and every
+	 * assertion would still pass, because the first conjunct alone would already have decided
+	 * each case. The two existing-talk-page cases below are the ones that make that conjunct
+	 * load-bearing, and they are also the realistic ones: a talk page with interlanguage links is
+	 * ordinary on a multilingual wiki, and its handle must stay quiet (T316559).
 	 *
 	 * @return array[]
 	 */
 	public static function provideLanguageDropdownData(): array {
 		return [
-			'Subject page with languages' => [
-				'label' => 'Languages',
+			'Existing subject page with languages' => [
+				'label' => '5 languages',
 				'ariaLabel' => 'Choose language',
 				'class' => 'some-class',
 				'numLanguages' => 5,
 				'itemHTML' => '<li>Language Mock</li>',
 				'titleExists' => true,
+				'isTalkPage' => false,
+				'isSpecialPage' => false,
 				'expectedIcon' => 'language-progressive',
 				'isSubjectPage' => true,
 			],
-			'Talk page without languages' => [
-				'label' => 'Languages',
+			'Existing subject page without languages' => [
+				'label' => 'Add languages',
 				'ariaLabel' => 'Choose language',
 				'class' => 'some-class',
 				'numLanguages' => 0,
 				'itemHTML' => '',
-				'titleExists' => false,
+				'titleExists' => true,
+				'isTalkPage' => false,
+				'isSpecialPage' => false,
+				'expectedIcon' => 'language-progressive',
+				'isSubjectPage' => true,
+			],
+			// The two cases that keep `!$title->isTalkPage()` alive: the page exists, so the
+			// first half of the conjunction is satisfied and only the talk check can demote it.
+			'Existing talk page with languages' => [
+				'label' => '5 languages',
+				'ariaLabel' => 'Choose language',
+				'class' => 'some-class',
+				'numLanguages' => 5,
+				'itemHTML' => '<li>Language Mock</li>',
+				'titleExists' => true,
+				'isTalkPage' => true,
+				'isSpecialPage' => false,
 				'expectedIcon' => 'language',
 				'isSubjectPage' => false,
 			],
-			'Subject page without languages' => [
-				'label' => 'Languages',
+			'Existing talk page without languages' => [
+				'label' => 'Add languages',
 				'ariaLabel' => 'Choose language',
 				'class' => 'some-class',
 				'numLanguages' => 0,
 				'itemHTML' => '',
 				'titleExists' => true,
-				'expectedIcon' => 'language-progressive',
-				'isSubjectPage' => true,
+				'isTalkPage' => true,
+				'isSpecialPage' => false,
+				'expectedIcon' => 'language',
+				'isSubjectPage' => false,
 			],
-			'Talk page with languages' => [
-				'label' => 'Languages',
+			// A page that does not exist yet: a red-linked article, or a talk page nobody has
+			// started. Neither shows a prominent handle, whatever the language count claims.
+			'Missing subject page with languages' => [
+				'label' => '5 languages',
 				'ariaLabel' => 'Choose language',
 				'class' => 'some-class',
 				'numLanguages' => 5,
 				'itemHTML' => '<li>Language Mock</li>',
 				'titleExists' => false,
+				'isTalkPage' => false,
+				'isSpecialPage' => false,
+				'expectedIcon' => 'language',
+				'isSubjectPage' => false,
+			],
+			'Missing talk page without languages' => [
+				'label' => 'Add languages',
+				'ariaLabel' => 'Choose language',
+				'class' => 'some-class',
+				'numLanguages' => 0,
+				'itemHTML' => '',
+				'titleExists' => false,
+				'isTalkPage' => true,
+				'isSpecialPage' => false,
 				'expectedIcon' => 'language',
 				'isSubjectPage' => false,
 			],
@@ -166,8 +211,10 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 	 * @param string $class Classes core's `data-languages` portlet contributes.
 	 * @param int $numLanguages Number of interlanguage links available for the page.
 	 * @param string $itemHTML Pre-rendered `<li>` list of language links.
-	 * @param bool $titleExists Whether the mocked title exists; a title that does not exist is
-	 *   mocked as a talk page, so one flag drives both stubs.
+	 * @param bool $titleExists Whether the mocked page exists.
+	 * @param bool $isTalkPage Whether the mocked title is a talk page, stubbed independently of
+	 *   whether it exists so that an existing talk page is a case in its own right.
+	 * @param bool $isSpecialPage Whether the mocked title is a special page.
 	 * @param string $expectedIcon Icon name expected for the selected variant.
 	 * @param bool $isSubjectPage Whether the prominent variant is expected.
 	 */
@@ -178,18 +225,20 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 		int $numLanguages,
 		string $itemHTML,
 		bool $titleExists,
+		bool $isTalkPage,
+		bool $isSpecialPage,
 		string $expectedIcon,
 		bool $isSubjectPage
 	): void {
 		// Mock Title. createMock() never runs the real constructor, so no service, no global
 		// configuration and no database is touched — MediaWikiUnitTestCase would refuse all three.
 		$titleMock = $this->createMock( Title::class );
-		// Mock Title methods. Only the two the production code calls on an ordinary page are
-		// stubbed; isSpecialPage() is deliberately left at its default return of false, which is
-		// what keeps these four cases on the "exists and is not a talk page" half of the
-		// predicate. The special-page half is exercised by testGetTemplateDataForSpecialPage().
+		// All three predicates the production code consults are stubbed from their own provider
+		// value. None is derived from another, so no case can satisfy the expected variant by
+		// accident, and each conjunct of the predicate has at least one case that depends on it.
 		$titleMock->method( 'exists' )->willReturn( $titleExists );
-		$titleMock->method( 'isTalkPage' )->willReturn( !$titleExists );
+		$titleMock->method( 'isTalkPage' )->willReturn( $isTalkPage );
+		$titleMock->method( 'isSpecialPage' )->willReturn( $isSpecialPage );
 
 		// Create a new NotionComponentLanguageDropdown object. The two empty strings are the
 		// before- and after-portlet HTML, which testMenuContentsAndPortletHtmlAreForwarded()
@@ -198,21 +247,33 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 			$label, $ariaLabel, $class, $numLanguages, $itemHTML, '', '', $titleMock
 		);
 
-		// Call the getTemplateData method. Called exactly once per instance on purpose: the
-		// component appends to its own `class` property when it selects the quiet variant, so a
-		// second call on the same instance would append the same layout hook twice.
+		// Called twice on the same instance on purpose. The quiet variant adds the
+		// `mw-portlet-lang-icon-only` layout hook to the portlet class, and it does so in a local
+		// variable rather than by appending to the component's own property, so asking twice must
+		// return exactly the same data. An earlier revision mutated the property and could only be
+		// asked once; this assertion is what stops that returning. `assertSame` compares with
+		// `===`, which for arrays is sensitive to key order, value types and contents alike.
+		// A second call is not hypothetical: a caller may assemble the in-page control and its
+		// sticky-header clone from one component.
 		$templateData = $languageDropdown->getTemplateData();
+		$this->assertSame(
+			$templateData,
+			$languageDropdown->getTemplateData(),
+			'getTemplateData() is a pure function of the constructor arguments: calling it again '
+				. 'must not accumulate classes or change anything else.'
+		);
 
 		// Verifying that the template data is constructed as expected. assertSame rather than
 		// assertEquals throughout, because `is-language-selector-empty` must be a real boolean for
 		// the template's `{{#is-language-selector-empty}}` section to behave, and the strings must
 		// not merely be loosely equal.
 		//
-		// The dropdown id is core's own portlet id and is deliberately NOT renamed to a
-		// `notion-` prefix: stylesheets, gadgets and Extension:ULS all select on `p-lang-btn`,
-		// and the dropdown templates derive the checkbox and label ids from it.
+		// The dropdown id is the one Vector 2022 established — core's own language portlet id is
+		// `p-lang` — and it is deliberately NOT renamed to a `notion-` prefix: stylesheets, gadgets
+		// and Extension:ULS all select on `p-lang-btn`, and the dropdown templates derive the
+		// checkbox and label ids from it.
 		$this->assertSame( 'p-lang-btn', $templateData['id'],
-			'The dropdown must keep core\'s portlet id so ULS, gadgets and CSS still match it.' );
+			'The dropdown must keep the established portlet id so ULS, gadgets and CSS still match it.' );
 		$this->assertSame( $label, $templateData['label'],
 			'The already-localised label must reach the template verbatim.' );
 		$this->assertSame( $ariaLabel, $templateData['aria-description'],
@@ -246,6 +307,45 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 		} else {
 			$this->assertQuietVariant( $templateData, $class, $numLanguages );
 		}
+	}
+
+	/**
+	 * Repeated calls on the quiet variant emit the layout hook exactly once.
+	 *
+	 * The quiet variant is the only branch that touches the class list, so it is the branch where
+	 * a mutating implementation shows: `some-class mw-portlet-lang-icon-only` would become
+	 * `some-class mw-portlet-lang-icon-only mw-portlet-lang-icon-only`. A duplicated class is not
+	 * a rendering error, which is exactly why it needs a test - the browser accepts it, the
+	 * stylesheet still matches, and the only visible trace is in the markup.
+	 *
+	 * @covers ::getTemplateData
+	 */
+	public function testQuietVariantIsIdempotent(): void {
+		$titleMock = $this->createMock( Title::class );
+		$titleMock->method( 'exists' )->willReturn( true );
+		$titleMock->method( 'isTalkPage' )->willReturn( true );
+		$titleMock->method( 'isSpecialPage' )->willReturn( false );
+
+		$languageDropdown = new NotionComponentLanguageDropdown(
+			'Add languages', 'Choose language', 'some-class', 0, '', '', '', $titleMock
+		);
+
+		$first = $languageDropdown->getTemplateData();
+		$second = $languageDropdown->getTemplateData();
+		$third = $languageDropdown->getTemplateData();
+
+		$this->assertSame(
+			'some-class mw-portlet-lang-icon-only',
+			$first['class'],
+			'The quiet variant adds the icon-only layout hook once.'
+		);
+		$this->assertSame( $first, $second, 'A second call must emit exactly the same data.' );
+		$this->assertSame( $first, $third, 'And so must a third.' );
+		$this->assertSame(
+			1,
+			substr_count( $third['class'], 'mw-portlet-lang-icon-only' ),
+			'The layout hook must never accumulate across calls.'
+		);
 	}
 
 	/**
@@ -347,8 +447,11 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 			'With no title, the template must render the empty-selector body, not a link list.' );
 		$this->assertQuietVariant( $templateData, $class, $numLanguages );
 
-		// The optional constructor arguments default to empty strings rather than null, so that
-		// >MenuContents renders nothing at all instead of the literal text "null".
+		// The optional constructor arguments default to empty strings rather than null. Not because
+		// null would print — LightnCandy renders a null interpolation as the empty string, never as
+		// the literal text "null" — but because a null value is looked up as though the key were
+		// absent, so the lookup escapes to the enclosing context and an outer key of the same name
+		// would be rendered in its place. The empty string blocks that while still being falsy.
 		$this->assertSame( '', $templateData['html-items'],
 			'An empty item list must be forwarded as an empty string.' );
 		$this->assertSame( '', $templateData['html-before-portal'],
@@ -405,13 +508,16 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 		}
 
 		// Keys this component leaves at the dropdown's defaults. Empty strings rather than null,
-		// again so that nothing can render as the literal text "null".
+		// again so that no lookup can escape to an enclosing context — see the note above.
 		$this->assertSame( '', $templateData['html-tooltip'],
 			'No tooltip is contributed, so the tooltip attribute string must stay empty.' );
 		$this->assertSame( '', $templateData['html-notion-menu-label-attributes'],
 			'No extra label attributes are contributed by this component.' );
 		$this->assertSame( '', $templateData['html-notion-menu-checkbox-attributes'],
 			'No extra checkbox attributes are contributed by this component.' );
+		$this->assertFalse( $templateData['is-expanded'],
+			'The language menu is served closed, so its checkbox renders unchecked and '
+				. 'aria-expanded="false".' );
 	}
 
 	/**
@@ -431,10 +537,11 @@ class NotionComponentLanguageDropdownTest extends MediaWikiUnitTestCase {
 
 		$this->assertStringContainsString( 'cdx-button--action-progressive', $labelClass,
 			'The prominent handle must use the progressive Codex button action.' );
-		// Core's heading class carries the count so that stylesheets and extensions can select on
-		// it. It keeps the `mw-portlet-lang-heading-` prefix rather than gaining a `notion-` one.
+		// The heading class carries the count so that stylesheets and extensions can select on it.
+		// It is Vector's class, not core's, and keeps the `mw-portlet-lang-heading-` prefix rather
+		// than gaining a `notion-` one.
 		$this->assertStringContainsString( "mw-portlet-lang-heading-$numLanguages", $labelClass,
-			'The heading class must carry the language count core and extensions select on.' );
+			'The heading class must carry the language count stylesheets and extensions select on.' );
 		$this->assertStringNotContainsString( 'cdx-button--icon-only', $labelClass,
 			'The prominent handle renders a visible label, so it is not an icon-only button.' );
 		$this->assertStringNotContainsString( 'mw-portlet-lang-heading-empty', $labelClass,

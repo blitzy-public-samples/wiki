@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.47
@@ -26,7 +26,9 @@ use MediaWikiUnitTestCase;
 /**
  * Unit tests for the Notion skin's pinnable element component.
  *
- * NotionComponentPinnableElement is the smallest component in the skin: it is constructed with a
+ * NotionComponentPinnableElement is the smallest component in the skin -- one constructor argument
+ * and one returned key, fewer than any other, NotionComponentLink included -- and it is also one of
+ * the simplest: it is constructed with a
  * single id and hands that id straight to PinnableElement/Open.mustache, which renders it twice,
  * once as the HTML `id` attribute and once as a class. Both halves of that pair are load-bearing.
  * The class is what keeps a pinnable region correctly styled in its pinned and in its unpinned

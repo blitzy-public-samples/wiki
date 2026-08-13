@@ -17,18 +17,31 @@ use MediaWiki\Title\Title;
  *   - a prominent, progressive button that carries the number of available languages as its
  *     visible label. It is used on subject pages that exist, and on special pages that do have
  *     interlanguage links.
- *   - a quiet, icon-only button with no visible label, used everywhere else — most commonly on
- *     talk pages and on pages that do not exist yet.
+ *   - a quiet, icon-only button with no visible label, used everywhere else. "Everywhere else" is
+ *     exactly four cases, taken from the condition in ::getTemplateData(): there is no title at
+ *     all, the page does not exist, the title is a talk page, or the title is a special page with
+ *     no interlanguage links. Note that talk pages take the quiet variant however many languages
+ *     they have, and that a non-existent subject page does too.
  *
- * Every identifier emitted below belongs to MediaWiki core or to
- * Extension:UniversalLanguageSelector, never to this skin, so each one is reproduced verbatim
- * instead of being re-expressed under this skin's own presentational prefix the way purely
- * decorative class names are: the portlet id `p-lang-btn`, the heading classes
- * `mw-portlet-lang-heading-empty` and `mw-portlet-lang-heading-<count>`, the layout hook
- * `mw-portlet-lang-icon-only`, and the checkbox classes `mw-interlanguage-selector` and
- * `mw-interlanguage-selector-empty` that `ext.uls.interface` attaches its click handler to.
- * Renaming any of them would silently break language switching for ULS, for gadgets and for user
- * scripts, which is why this class deliberately contains no skin-prefixed string at all.
+ * No identifier emitted below is owned by this skin, so each is reproduced verbatim instead of
+ * being re-expressed under this skin's own presentational prefix the way purely decorative class
+ * names are. Their provenance differs, though, and it is worth stating exactly, because "core owns
+ * it" is a stronger claim than the evidence supports for most of them:
+ *
+ *   - `p-lang-btn`, the button's id, was introduced by the Vector 2022 skin, not by core. Core's
+ *     own id for the language portlet is `p-lang` (see `BaseTemplate`); the `-btn` form is the one
+ *     Vector emits for the button treatment, and gadgets and user scripts have been written
+ *     against it ever since.
+ *   - `mw-portlet-lang-heading-empty` and `mw-portlet-lang-heading-<count>`, and the layout hook
+ *     `mw-portlet-lang-icon-only`, are likewise Vector's. They appear nowhere in core.
+ *   - `mw-interlanguage-selector` and `mw-interlanguage-selector-empty` belong to
+ *     Extension:UniversalLanguageSelector, whose `ext.uls.interface` module attaches its click
+ *     handler to them. These are the genuinely external ones.
+ *
+ * What all of them share is the reason they are kept: each is a de facto compatibility contract
+ * that ULS, gadgets and user scripts select on today. Renaming any one would silently break
+ * language switching for those consumers, which is why this class deliberately contains no
+ * skin-prefixed string at all.
  *
  * Notion's appearance is contributed entirely by the Codex `cdx-button` classes emitted below,
  * resolved through the skin's design-token layer and refined by the skin's own
@@ -62,18 +75,23 @@ class NotionComponentLanguageDropdown implements NotionComponent {
 	 *   `aria-description` and, for the quiet icon-only variant which renders no visible label,
 	 *   it is the only description assistive technology has to work with.
 	 * @param string $class of the dropdown component, taken from core's `data-languages`
-	 *   portlet. It is appended to rather than replaced when the quiet variant is selected,
-	 *   which is precisely why this promoted property is not declared readonly.
+	 *   portlet. The quiet variant adds the `mw-portlet-lang-icon-only` layout hook to it, and that
+	 *   addition is made on a local copy inside `getTemplateData()` rather than on this property:
+	 *   appending to the property itself would make the method non-idempotent, so a second call --
+	 *   which a caller assembling both the in-page control and its sticky-header clone from one
+	 *   component would make -- would emit the hook twice, and the component's snapshot would
+	 *   depend on how many times it had been asked. The property is therefore readonly, and the
+	 *   method is a pure function of the constructor arguments.
 	 * @param int $numLanguages number of interlanguage links available for the page. Used twice
 	 *   and for two different purposes: as the guard deciding whether a special page shows its
 	 *   links, and as the count baked into the `mw-portlet-lang-heading-<count>` class that
 	 *   stylesheets and extensions select on.
 	 * @param string $itemHTML the HTML of the list e.g. `<li>...</li>`. Emitted unescaped by
-	 *   `>MenuContents`, so the caller owns its escaping.
-	 *   The `@todo` below records an upstream API shape inherited from the component set this
-	 *   skin mirrors, not work deferred from this class: passing pre-rendered HTML is what
-	 *   core's `data-languages` portlet hands over today, and replacing it with a menu-contents
-	 *   class would change the eight-argument positional contract `SkinNotion` calls through.
+	 *   `>MenuContents`, so the caller owns its escaping. Pre-rendered HTML is the finished
+	 *   contract here, not a placeholder for a menu-contents class: it is exactly what core's
+	 *   `data-languages` portlet hands over, so interposing a menu-contents component would
+	 *   re-parse markup core has already assembled and would change the eight-argument positional
+	 *   contract `SkinNotion` calls through, for no gain in what reaches the template.
 	 * @param string $beforePortlet no known usages. Perhaps can be removed in future; the
 	 *   parameter is retained because removing it would renumber the positional arguments that
 	 *   `SkinNotion` supplies.
@@ -84,9 +102,9 @@ class NotionComponentLanguageDropdown implements NotionComponent {
 	public function __construct(
 		private readonly string $label,
 		private readonly string $ariaLabel,
-		private string $class,
+		private readonly string $class,
 		private readonly int $numLanguages,
-		// @todo: replace with >MenuContents class.
+		// Pre-rendered list HTML, for the reason given in the parameter documentation above.
 		string $itemHTML,
 		string $beforePortlet = '',
 		string $afterPortlet = '',
@@ -113,29 +131,50 @@ class NotionComponentLanguageDropdown implements NotionComponent {
 		//
 		// However, if it is a special page and has interlanguage links, those
 		// should be displayed. (T389192)
-		$buttonClasses = 'cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet';
+		// The portlet class is composed locally rather than by appending to the promoted property.
+		// `getTemplateData()` has to be a pure function of the constructor arguments: it is called
+		// once per render today, but a component that rewrote its own state would append the
+		// icon-only class again on a second call, and its snapshot test would depend on how many
+		// times it had been asked. The property is `readonly` so the language enforces that.
+		$class = $this->class;
 		if ( !$isSubjectPage ) {
 			$icon = 'language';
-			$this->class .= ' mw-portlet-lang-icon-only';
-			$labelClass = $buttonClasses . ' cdx-button--icon-only mw-portlet-lang-heading-empty';
+			$class .= ' mw-portlet-lang-icon-only';
+			// Genuinely icon-only here: there is no visible label to sit beside the glyph.
+			$iconOnly = true;
+			$labelClass = 'mw-portlet-lang-heading-empty';
 			$checkboxClass = 'mw-interlanguage-selector-empty';
 		} else {
 			$icon = 'language-progressive';
-			$labelClass = $buttonClasses . ' cdx-button--action-progressive'
+			// An icon AND a visible language-count label, so explicitly not icon-only. Saying so
+			// at construction is what removed the old post-construction `label-class` rewrite.
+			$iconOnly = false;
+			$labelClass = 'cdx-button--action-progressive'
 				. ' mw-portlet-lang-heading-' . strval( $this->numLanguages );
 			$checkboxClass = 'mw-interlanguage-selector';
 		}
-		// The dropdown is constructed without an icon on purpose. Passing one would make
-		// NotionComponentDropdown treat this control as icon-only, and the icon it selects is
-		// overwritten below anyway because only this class knows which of the two language
-		// glyphs the page context calls for.
-		$dropdown = new NotionComponentDropdown( 'p-lang-btn', $this->label, $this->class );
+		// Everything this control needs is declared at construction, so nothing has to be patched
+		// onto the returned array afterwards. This class is the only one that knows which of the
+		// two language glyphs the page context calls for and whether the resulting control carries
+		// a visible label beside it, so it says both here. The Codex `cdx-button …` composition is
+		// no longer restated by this class either: `$labelClass` contributes only the classes this
+		// control owns -- the progressive action and the `mw-portlet-lang-heading-<count>` hook --
+		// and NotionComponentDropdown appends them to its own handle classes. The `checkbox-class`
+		// value is core/extension-owned -- ext.uls.interface binds its click handler to that
+		// selector -- so it is passed through verbatim rather than renamed.
+		$dropdown = new NotionComponentDropdown(
+			'p-lang-btn',
+			$this->label,
+			$class,
+			$icon,
+			'',
+			$iconOnly,
+			$labelClass,
+			$checkboxClass
+		);
 		$dropdownData = $dropdown->getTemplateData();
-		// override default heading class.
-		$dropdownData['label-class'] = $labelClass;
-		// ext.uls.interface attaches click handler to this selector.
-		$dropdownData['checkbox-class'] = $checkboxClass;
-		$dropdownData['icon'] = $icon;
+		// `aria-description` is not part of the dropdown's ten-key contract, so it stays an
+		// addition by this consumer rather than a widening of that contract for every other one.
 		$dropdownData['aria-description'] = $this->ariaLabel;
 		$dropdownData['is-language-selector-empty'] = !$isSubjectPage;
 

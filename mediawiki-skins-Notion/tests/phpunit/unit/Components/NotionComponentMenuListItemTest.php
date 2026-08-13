@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.47
@@ -29,42 +29,49 @@ use MediaWikiUnitTestCase;
 /**
  * Unit tests for the Notion skin's menu list item component.
  *
- * `NotionComponentMenuListItem` is an adapter rather than a builder: it decorates an
- * already-constructed `NotionComponentLink` with the class and the id belonging to the `<li>`
- * element that wraps it, and hands the template one flat array. Because it owns no logic
- * beyond a single array union, the only thing worth locking is the exact shape of that array,
- * which is what the assertions below do instead of merely proving that an array came back.
+ * `NotionComponentMenuListItem` is an adapter rather than a builder, and a parity-only one: it
+ * decorates an already-constructed `NotionComponentLink` with the class and the id describing an
+ * `<li>` element and returns one flat array. It has no call site in the rendering path -- rendered
+ * menus are built from core's own `SkinComponentLink` records, which `MenuListItem.mustache` is
+ * written against -- so what these tests protect is the component set's fidelity to the reference
+ * skin, not a live template contract. Because the class owns no logic beyond a single array union,
+ * the only thing worth locking is the exact shape of that array, which is what the assertions
+ * below do instead of merely proving that an array came back.
  *
  * Three properties of the emitted contract are load-bearing:
  *
- *   - The key set is exactly six, and the two groups inside it are kept apart by the `item-`
- *     prefix. `icon`, `text`, `href` and `html-attributes` describe the anchor and arrive from
- *     the wrapped link; `item-class` and `item-id` describe the surrounding list item and are
+ *   - The key set is exactly five, and the two groups inside it are kept apart by the `item-`
+ *     prefix. `icon`, `text` and `array-attributes` describe the anchor and arrive from the
+ *     wrapped link -- they are the skin's canonical link shape, the same one core's portlet
+ *     records use; `item-class` and `item-id` describe the surrounding list item and are
  *     contributed here. A key added on either side without a matching template change, or a
  *     key quietly dropped, would surface as an empty hole in a rendered menu rather than as an
  *     error, so it has to fail here instead.
  *   - The link's data is the LEFT operand of the union. PHP's `+` operator is left-biased, so
  *     on a collision the anchor's value wins and an item-level key can never shadow it. The
- *     observable consequence of that choice is key order - the four link keys first, the two
+ *     observable consequence of that choice is key order - the three link keys first, the two
  *     item keys last - which is why the assertions use assertSame(): it compares arrays with
  *     `===`, and that is sensitive to key order and to value types as well as to contents.
  *   - Both `item-class` and `item-id` default to the empty string rather than to null, because
- *     each value is interpolated straight into an attribute. Null would render the literal
- *     word "null" into every menu row built without an explicit class or id.
+ *     each value is interpolated straight into an attribute. Not because null would print -- a
+ *     null interpolation renders as the empty string under LightnCandy, never as the literal word
+ *     "null" -- but because a key holding null is resolved as though it were missing, so the
+ *     lookup escapes to the enclosing context. A menu row nested in a list that carries its own
+ *     `item-id` would then borrow it and emit a duplicate id. The empty string is falsy enough for
+ *     the template's guards and present enough to stop the walk.
  *
  * The wrapped link is a real `NotionComponentLink` in every test rather than a test double.
  * That is cheaper than a mock and strictly stronger: it proves the two classes agree on the
- * four key names the union depends on, which a mock would happily fake. It is also safe under
+ * three key names the union depends on, which a mock would happily fake. It is also safe under
  * `MediaWikiUnitTestCase`, which calls
  * `MediaWikiServices::disallowGlobalInstanceInUnitTests()`: a link constructed without a
- * localizer short-circuits its own `html-attributes` to the empty string, so it never reaches
- * `Linker::tooltipAndAccesskeyAttribs()` or `Html::expandAttributes()` and no service
- * container is touched. Keep it that way - handing this component a localized link would drag
- * these tests into the container for nothing, since the link's localized paths already have
- * their own coverage in NotionComponentLinkTest.
+ * localizer emits its href and nothing else, so it never reaches
+ * `Linker::tooltipAndAccesskeyAttribs()` and no service container is touched. Keep it that way -
+ * handing this component a localized link would drag these tests into the container for nothing,
+ * since the link's localized paths already have their own coverage in NotionComponentLinkTest.
  *
  * This class extends MediaWikiUnitTestCase directly rather than the skin's
- * NotionComponentSnapshotTestCase, because the component emits six scalar values that are all
+ * NotionComponentSnapshotTestCase, because the component emits five values that are all
  * asserted inline here and therefore owns no JSON fixture.
  *
  * @group Notion
@@ -75,13 +82,12 @@ class NotionComponentMenuListItemTest extends MediaWikiUnitTestCase {
 
 	/**
 	 * The complete set of keys `getTemplateData()` is allowed to emit, in the order the array
-	 * union produces them: the wrapped link's four keys, then the two item keys.
+	 * union produces them: the wrapped link's three keys, then the two item keys.
 	 */
 	private const EXPECTED_TEMPLATE_DATA_KEYS = [
 		'icon',
 		'text',
-		'href',
-		'html-attributes',
+		'array-attributes',
 		'item-class',
 		'item-id',
 	];
@@ -132,13 +138,12 @@ class NotionComponentMenuListItemTest extends MediaWikiUnitTestCase {
 			[
 				'icon' => $icon,
 				'text' => $text,
-				'href' => $href,
-				'html-attributes' => '',
+				'array-attributes' => [ [ 'key' => 'href', 'value' => $href ] ],
 				'item-class' => $itemClass,
 				'item-id' => $itemId,
 			],
 			$actual,
-			'The component emits the wrapped link\'s four keys followed by item-class and '
+			'The component emits the wrapped link\'s three keys followed by item-class and '
 				. 'item-id, every value carried through verbatim and nothing else added.'
 		);
 		$this->assertSame(
@@ -177,7 +182,7 @@ class NotionComponentMenuListItemTest extends MediaWikiUnitTestCase {
 			self::EXPECTED_TEMPLATE_DATA_KEYS,
 			array_keys( $actual ),
 			'Omitting both optional arguments leaves the key set unchanged: the item keys are '
-				. 'always present, so the template never has to guard against a missing key.'
+				. 'always present, so no consumer would have to guard against a missing key.'
 		);
 		$this->assertSame(
 			'',
@@ -189,18 +194,19 @@ class NotionComponentMenuListItemTest extends MediaWikiUnitTestCase {
 			'',
 			$actual['item-id'],
 			'item-id defaults to the empty string for the same reason: the value reaches an '
-				. 'id attribute directly, and null would leak the word "null" into the markup.'
+				. 'id attribute directly, and a null would be looked up as an absent key and '
+				. 'resolve against the enclosing context instead.'
 		);
 		$this->assertNull(
 			$actual['icon'],
 			'An icon-less link keeps its null icon here rather than gaining an empty string, '
-				. 'so the template skips the icon instead of rendering an empty one.'
+				. 'which is the falsy value a Mustache section skips on.'
 		);
 		$this->assertSame(
-			'',
-			$actual['html-attributes'],
-			'A link built without a localizer contributes no attributes, and the adapter '
-				. 'passes that empty fragment through untouched rather than substituting null.'
+			[ [ 'key' => 'href', 'value' => $href ] ],
+			$actual['array-attributes'],
+			'A link built without a localizer contributes no attribute beyond its href, and '
+				. 'the adapter passes that list through untouched.'
 		);
 	}
 }

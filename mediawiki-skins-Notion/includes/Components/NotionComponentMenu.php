@@ -193,7 +193,27 @@ class NotionComponentMenu implements NotionComponent, Countable {
 					];
 				}
 
-				// TODO: Use NotionComponentLink instead of mutating link data directly
+				// The plain-link branch augments core's own record in place instead of rebuilding
+				// it, and that is the intended contract rather than a shortcut. What arrives here
+				// is a portlet link record built by
+				// MediaWiki\Skin\Components\SkinComponentLink::makeLink() and delivered as
+				// data-portlets.*.array-items[].array-links[]: `array-attributes` (a list of
+				// key/value records, href and class among them) plus `text` and `icon`. That is
+				// the skin's canonical link shape and exactly what `Link.mustache` is authored
+				// against, expanding `array-attributes` one record at a time, which is how href,
+				// class, title, accesskey, rel and every aria-* and data-* name core chose to emit
+				// reach the anchor. This closure is the one boundary at which menu links are
+				// normalised, and it normalises by *preserving* the shape: every attribute core
+				// chose survives because nothing rewrites the record, and the only thing this skin
+				// decides about a plain link is its icon, so the icon is the only thing set.
+				// `NotionComponentLink` emits the same canonical three keys for links the skin
+				// invents rather than receives, so either producer may be handed to
+				// `Link.mustache`; what must never happen here is rebuilding core's record from
+				// its parts, which is how an attribute -- most easily href -- gets lost.
+				//
+				// The button branch above is the opposite case and replaces the record outright,
+				// because a button's classes and attribute layout genuinely are this skin's to
+				// compose.
 				$link['icon'] = $icon;
 				return $link;
 			}, $item['array-links'] ?? [] );

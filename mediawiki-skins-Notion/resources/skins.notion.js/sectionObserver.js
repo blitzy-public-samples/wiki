@@ -39,9 +39,12 @@
  * Because sectionObserver uses a scroll event listener (in combination with
  * IntersectionObserver), the changes are throttled to a default maximum rate of
  * 200ms so that the main thread is not excessively blocked.
- * IntersectionObserver is used to asynchronously calculate the positions of the
- * observed tags off the main thread and in a manner that does not cause
- * expensive forced synchronous layouts.
+ * IntersectionObserver is used because it delivers the positions of the observed
+ * tags asynchronously: entries are queued by the browser and handed to the
+ * callback during the rendering steps, so this module never reads a geometry
+ * property itself and therefore never triggers an expensive forced synchronous
+ * layout. That is the guarantee the API makes. It says nothing about which
+ * thread performs the calculation, and none is assumed here.
  *
  * Note that the throttled scroll listener, not IntersectionObserver, is what
  * drives the calculation here. The question this module answers is *which* of
@@ -132,9 +135,9 @@ module.exports = function sectionObserver( props ) {
 		// wrapper element around our content headings and their children, we can't
 		// rely on IntersectionObserver (which is optimized to detect intersecting
 		// elements *within* the viewport) to reliably fire this callback without
-		// this manual step. Instead, we offload the work of calculating the
-		// position of each element in an efficient manner to IntersectionObserver,
-		// but do not use it to detect when a new element has entered the viewport.
+		// this manual step. Instead, we let IntersectionObserver report the position
+		// of each element, which it does without us reading geometry directly, but
+		// do not use it to detect when a new element has entered the viewport.
 		observer.disconnect();
 	} );
 
@@ -142,8 +145,10 @@ module.exports = function sectionObserver( props ) {
 	 * Calculate the intersection of each observed element.
 	 */
 	function calcIntersection() {
-		// IntersectionObserver will asynchronously calculate the boundingClientRect
-		// of each observed element off the main thread after `observe` is called.
+		// IntersectionObserver reports the boundingClientRect of each observed
+		// element asynchronously once `observe` is called: the entry is delivered to
+		// the callback rather than read here, so no geometry access on this line
+		// forces a synchronous layout.
 		props.elements.forEach( ( element ) => {
 			if ( !element.parentNode ) {
 				mw.log.warn( 'Element being observed is not in DOM', element );

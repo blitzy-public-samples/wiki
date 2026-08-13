@@ -48,8 +48,12 @@ function firePageTitleScrollHook( direction ) {
 	 *
 	 * @event notion.page_title_scroll
 	 * @internal
-	 * @property {string} context
-	 * @property {string} action
+	 * @property {string} context Always present. `'scrolled-below-page-title'` when the viewport
+	 *  has travelled past the bottom edge of the page title, `'scrolled-above-page-title'` when it
+	 *  has come back up.
+	 * @property {string} [action] Present on the upward payload only, where it is always
+	 *  `'scroll-to-top'`. The downward payload omits the key entirely, so a subscriber must not
+	 *  assume it is there.
 	 */
 	if ( direction === 'down' ) {
 		mw.hook( SCROLL_TITLE_HOOK ).fire( {

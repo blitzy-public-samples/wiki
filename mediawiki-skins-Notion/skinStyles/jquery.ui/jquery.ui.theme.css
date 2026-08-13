@@ -49,7 +49,9 @@
    .ui-progressbar-value" and ".ui-slider .ui-slider-range" by adding the ui-widget-header class
    to them at runtime, and upstream gives neither a background of its own. Now that this surface
    is #f7f6f3, both fills would disappear against the white .ui-widget-content track, so each is
-   given one explicit #2eaadc accent fill in its own stylesheet -- jquery.ui.progressbar.css and
+   given one explicit #196f92 accent fill -- the skin's corrected accent, 5.63:1 against that
+   white track where Notion's published #2eaadc reaches 2.66:1 and so would fail the 3:1 WCAG AA
+   asks of a graphical object -- in its own stylesheet, jquery.ui.progressbar.css and
    jquery.ui.slider.css. Both are recorded in PATCHES. Do not special-case those two selectors
    here: this file is the generic surface layer. */
 .ui-widget-header { border: 1px solid #e3e2de; background-color: #f7f6f3; color: #37352f; font-weight: bold; }
@@ -66,10 +68,12 @@
 /* Notion: the .ui-state-* anchor rules take the text hierarchy, not a link blue. These
    selectors style control labels -- button, tab and menu-item text -- and Notion renders those
    in dark text, letting the fill change carry the affordance and reserving blue for genuine
-   links. It is also the contrast-safe reading: on the #f7f6f3 fill above, Notion's link blue
-   #487ca5 reaches only 4.13:1 and its icon blue #337ea9 only 4.14:1, short of the 4.5:1 WCAG AA
-   asks of normal-size text, and .ui-widget text is just 0.8em. #37352f reaches 11.3:1 on the
-   same fill. Upstream's "text-decoration: none" is kept. */
+   links. It is also the contrast-safe reading, and by a wide margin: .ui-widget text is 0.8em,
+   #37352f reaches 11.3:1 on the #f7f6f3 fill above, and the blues Notion publishes reach only
+   4.13:1 (#487ca5) and 4.14:1 (#337ea9) there, short of the 4.5:1 WCAG AA asks of normal-size
+   text. This skin's own link colour is corrected for exactly that reason and would pass here,
+   but a control label is not a link and does not borrow its colour. Upstream's
+   "text-decoration: none" is kept. */
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #37352f; text-decoration: none; }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #d3d1cb; background-color: #efefee; font-weight: normal; color: #37352f; }
 /* Notion, additive: focus has to stay visible. Upstream shares the rule above between hover and
@@ -88,18 +92,31 @@
    keyboard visibility. */
 .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border-color: #337ea9; outline: 1px solid #337ea9; outline-offset: 1px; }
 .ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited { color: #37352f; text-decoration: none; }
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #d3d1cb; background-color: #e8e7e4; font-weight: normal; color: #37352f; }
+/* Notion: selected/active takes a border dark enough to be seen, not merely to be there. The
+   #e8e7e4 fill is the palette's active surface and stays, but it is only 1.12:1 against the white
+   .ui-widget-content it sits in, so the boundary is the whole indicator -- and this state is
+   persistent, not transient: it marks the selected tab, the chosen date, the current menu row.
+   The neutral #d3d1cb hairline used for the rest and hover states reaches just 1.53:1 against
+   white and 1.23:1 against this fill, far below the 3:1 WCAG 2.2 SC 1.4.11 asks of the visual
+   information that identifies a component's state. #696866, the skin's corrected secondary text
+   colour, measures 5.57:1 against white and 4.50:1 against this fill, so the selected control is
+   unmistakable and cannot be confused with the hover state one line above. */
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #696866; background-color: #e8e7e4; font-weight: normal; color: #37352f; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #37352f; text-decoration: none; }
 
 /* Interaction Cues
 ----------------------------------*/
-/* Notion: highlight stays a yellow cue rather than being folded into the neutral palette,
-   because the state is semantic. The background is Notion's published yellow tint; the border is
-   derived from that tint by holding its hue (45deg) and saturation (80%) and dropping lightness
-   from 92% to 72%, which keeps the cue yellow where a plain channel-scaled darkening would turn
-   it beige. It lands at 1.45:1 against white -- the same order of presence as the neutral
-   #d3d1cb hairline -- and #37352f reads at 11.1:1 on the tint. */
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #f1d47e; background-color: #fbf3db; color: #37352f; }
+/* Notion: highlight stays a yellow cue rather than being folded into the neutral palette, because
+   the state is semantic. The background is Notion's published yellow tint #fbf3db, which keeps
+   #37352f text at 11.1:1 -- but the tint alone is 1.11:1 against the white .ui-widget-content it
+   sits in, so a reader who cannot pick out a pale wash has nothing to go on and the cue has to be
+   carried by the border. That border is derived from the tint by holding its hue (45deg) and
+   saturation (80%) and dropping lightness from 92% to 36%, which keeps the cue yellow where a
+   plain channel-scaled darkening would turn it beige, and lands at 3.65:1 against white and
+   3.30:1 against the tint it encloses -- clear of the 3:1 WCAG 2.2 SC 1.4.11 minimum on both
+   sides, where the earlier #f1d47e reached only 1.45:1 and 1.34:1. Like #d3d1cb it is a derived
+   value rather than a published Notion colour, which is why the derivation is stated here. */
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #a58112; background-color: #fbf3db; color: #37352f; }
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a { color: #37352f; }
 /* Notion: error keeps a solid, saturated red with white text and is deliberately NOT softened
    to a light tint. Its icons come from ui-icons_ffffff_256x240.png, so a pale background would
@@ -110,8 +127,12 @@
    that class is meant for text sitting on an error surface. Know the consequence, which is
    inherited rather than introduced here and is identical in the copy this file was adapted from
    -- placed on any lighter background that text is white on white, and so invisible, which is
-   why callers must keep it inside an error surface. Correcting it would take a fifth, dark
-   sprite for the error-text icon rule below, and that is deliberately not added. */
+   why callers must keep it inside an error surface. Correcting the icon half of that would mean
+   pointing the error-text icon rule below at a dark sprite instead of the white one. No new
+   sprite would be needed: images/ui-icons_37352f_256x240.png is already carried for the active
+   and highlight states and would serve. The rule is nevertheless left pointing at the white
+   sprite, so that the icon keeps matching the white label it sits beside on the error surface --
+   a deliberate choice, not a missing asset. */
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {border: 1px solid #b3352f; background-color: #b3352f; color: #ffffff; }
 .ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a { color: #ffffff; }
 .ui-state-error-text, .ui-widget-content .ui-state-error-text, .ui-widget-header .ui-state-error-text { color: #ffffff; }
@@ -344,13 +365,21 @@
    the alpha lives in the colour, so the element itself must not be faded a second time.
    Recorded in PATCHES, which the adapted copy did not do. */
 .ui-widget-overlay { background: rgba(247, 246, 243, 0.6); opacity: 1; filter: none; }
-/* Notion: the shadow loses its background image and becomes a flat low-alpha fill. Upstream
-   painted it with a 40x100 tile of solid 70%-black composited at opacity .2, so a flat fill is
-   visually identical and the tile is not carried -- its image reference and the embed annotation
-   that went with it are gone too, which is why this rule now declares a colour only.
-   The colour is Notion's warm shadow base. Geometry, the legacy filter:Alpha(Opacity=20) and the
-   vendor-prefixed radii are upstream's and stay; 8px is also exactly Notion's panel radius, so
-   the radius needs no change either. */
+/* Notion: the shadow loses its background image and becomes a flat low-alpha fill. Two separate
+   changes are folded into that, and only the first is colour-neutral.
+   (1) Dropping the tile. Upstream painted this with a 40x100 PNG whose pixels are all one value,
+   so replacing the image with a flat background-color of the SAME colour would render the same
+   thing. That is what makes losing the url() and its embed annotation safe: the tile carried no
+   gradient or texture to lose.
+   (2) Changing the colour. This is a visual change, not a wash. Despite its ThemeRoller filename
+   ui-bg_flat_70_000000_40x100.png, that tile is not 70% black: it is 1-bit greyscale with no
+   alpha channel and no tRNS chunk, every one of its 4000 pixels black, i.e. fully opaque
+   #000000. The 70 records the opacity ThemeRoller was set to when it generated the file, not the
+   pixel alpha, and the actual fade comes from the opacity: .2 below. So the veil moves from
+   neutral black to #0f0f0f, Notion's warm shadow base, and at 20% that difference in hue is the
+   point of the change rather than a side effect of it.
+   Geometry, the legacy filter:Alpha(Opacity=20) and the vendor-prefixed radii are upstream's and
+   stay; 8px is also exactly Notion's panel radius, so the radius needs no change either. */
 .ui-widget-shadow { margin: -7px 0 0 -7px; padding: 7px; background-color: #0f0f0f; opacity: .2;filter:Alpha(Opacity=20); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
 /* Notion: this .ui-dialog rule is not in jQuery UI's ThemeRoller output at all -- it is a local
    addition inherited from the copy this file was adapted from, and it is now recorded in

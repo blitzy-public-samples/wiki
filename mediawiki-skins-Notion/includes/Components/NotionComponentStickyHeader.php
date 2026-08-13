@@ -25,12 +25,25 @@ use MediaWiki\Message\Message;
  * failed to emit. That is what keeps the bar correct with scripts disabled, and it is why every
  * button is constructed here rather than in the browser.
  *
- * **Every `ca-*` id below is owned by MediaWiki core, not by this skin.** Core, gadgets,
- * extensions and the skin's own script all locate these controls by id, so each id is reproduced
- * exactly as the reference skin emits it and is deliberately *not* given a `notion-` prefix. The
- * same holds for the `mw-watchlink` class, which is core's, and `reading-lists-bookmark`, which
- * belongs to Extension:ReadingLists. Exactly one genuinely skin-owned presentational name
- * appears here, and it alone carries the prefix: `notion-sticky-header-search-toggle`.
+ * **Every borrowed name below is reproduced exactly, and their ownership is not uniform.** Getting
+ * this right matters, because the wrong attribution invites the wrong kind of edit.
+ *
+ *   - The `ca-` prefix is core's convention: `SkinTemplate` builds a content-navigation id by
+ *     prepending it, which is where the base ids `ca-talk`, `ca-history`, `ca-edit` and
+ *     `ca-viewsource` come from. Core emits those on the page itself.
+ *   - The `-sticky-header` suffixed ids this class emits are NOT core's. They are clones this bar
+ *     creates -- following the reference skin, which introduced them -- so that a duplicated
+ *     control does not collide with the original id it copies. No `-sticky-header` id appears
+ *     anywhere in core.
+ *   - `mw-watchlink` genuinely is core's: `SkinTemplate` composes it for the watch link, and
+ *     core's `mediawiki.page.watch.ajax` module selects on it.
+ *   - `reading-lists-bookmark` belongs to Extension:ReadingLists and appears nowhere in core.
+ *
+ * All of them are reproduced verbatim and deliberately *not* given a `notion-` prefix, because
+ * gadgets, extensions and the skin's own script locate these controls by exactly these names --
+ * the clones included, since scripts written for the reference skin already target them. Exactly
+ * one genuinely skin-owned presentational name appears here, and it alone carries the prefix:
+ * `notion-sticky-header-search-toggle`.
  *
  * **Every button is removed from sequential keyboard navigation with `tabindex="-1"`.** This is a
  * deliberate accessibility decision, not an oversight: the bar is a duplicate of controls that

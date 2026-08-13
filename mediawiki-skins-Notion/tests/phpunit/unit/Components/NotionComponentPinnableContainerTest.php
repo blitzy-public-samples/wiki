@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.47
@@ -45,10 +45,15 @@ use MediaWikiUnitTestCase;
  *     only report one state would break pinning outright wherever JavaScript is unavailable,
  *     which is why the pinned and the unpinned case are both exercised here rather than being
  *     treated as the same code path with a different argument.
- *   - `is-pinned` must be a genuine boolean. Mustache sections test truthiness, not identity, so a
- *     string `'0'` or `'false'`, or an integer, would still open the `{{#is-pinned}}` branch and
- *     silently render the region in the wrong container. The failure would never surface as an
- *     error — only as a sidebar region appearing in a dropdown, or the reverse.
+ *   - `is-pinned` must be a genuine boolean, and the reason is more permissive than general
+ *     Mustache intuition suggests. Under LightnCandy, the compiler core renders these templates
+ *     with, a section is closed by exactly three values: `null`, `false` and the empty array
+ *     (`Runtime::isec()`); everything else opens it. So the string `'0'`, the string `'false'`,
+ *     the empty string, and every integer including `0` would all open the `{{#is-pinned}}` branch
+ *     and silently render the region in the wrong container. Notably `0` is NOT falsy here, which
+ *     is why a truthy/falsy argument is not good enough and the type is asserted instead. The
+ *     failure would never surface as an error — only as a sidebar region appearing in a dropdown,
+ *     or the reverse.
  *
  * Every assertion therefore uses assertSame(), which compares arrays with `===`. That is
  * deliberately strict on three axes at once: it fails if a value changes type, if a key is

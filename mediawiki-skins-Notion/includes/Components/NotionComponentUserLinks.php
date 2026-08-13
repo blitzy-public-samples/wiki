@@ -84,8 +84,17 @@ class NotionComponentUserLinks implements NotionComponent {
 	/**
 	 * Names of the user-menu items promoted into the overflow menu for every viewer.
 	 *
-	 * Core owns these names too. `sitesupport` is the donate link, whose overflow copy is
-	 * additionally stripped of its button and icon further down (T425721).
+	 * Unlike the account keys above, these three do not all come from core, and the list is matched
+	 * by name against whatever the personal-tools portlet actually contains, so a name that nothing
+	 * contributes simply never matches:
+	 *
+	 *   - `watchlist` is core's own personal tool.
+	 *   - `readinglists` is contributed by Extension:ReadingLists and appears nowhere in core, so
+	 *     this entry is inert on a wiki without that extension.
+	 *   - `sitesupport` is the donate link. It is not defined by core either -- neither the message
+	 *     nor the key exists in a plain install -- and reaches the portlet from the sidebar
+	 *     configuration or from an extension that supplies it, typically on Wikimedia wikis. Its
+	 *     overflow copy is additionally stripped of its button and icon further down (T425721).
 	 */
 	private const OVERFLOW_MENU_ITEM_KEYS = [
 		'readinglists',
@@ -175,8 +184,17 @@ class NotionComponentUserLinks implements NotionComponent {
 			$tooltip = Linker::tooltip( 'notion-anon-user-menu-title' ) ?? '';
 		}
 
+		// `iconOnly: true` is declared rather than inferred. This handle really is icon-only -- the
+		// avatar or user glyph stands alone and the "personaltools" text is there for assistive
+		// technology -- so the value matches what the old icon-presence inference produced, and
+		// stating it keeps the control's styling independent of whether an icon is ever omitted.
 		return new NotionComponentDropdown(
-			'notion-user-links-dropdown', $this->msg( 'personaltools' )->text(), $class, $icon, $tooltip
+			'notion-user-links-dropdown',
+			$this->msg( 'personaltools' )->text(),
+			$class,
+			$icon,
+			$tooltip,
+			true
 		);
 	}
 

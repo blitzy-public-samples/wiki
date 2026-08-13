@@ -4,7 +4,7 @@
 	},
 	"skinname-notion": "Notion",
 	"notion-specialversion-name": "Notion",
-	"notion-skin-desc": "Re-expresses the modern MediaWiki reading experience in Notion's visual language, built entirely on the Codex design tokens.",
+	"notion-skin-desc": "Re-expresses the modern MediaWiki reading experience in Notion's visual language, built on the Codex design tokens.",
 	"notion.css": "/* All CSS here will be loaded for users of the Notion skin */",
 	"notion.js": "/* All JavaScript here will be loaded for users of the Notion skin */",
 	"notion-jumptocontent": "Jump to content",

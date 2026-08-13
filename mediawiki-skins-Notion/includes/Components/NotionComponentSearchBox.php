@@ -53,11 +53,16 @@ use MediaWiki\Title\Title;
  * untouched, which is what keeps the skin's tooltip and access-key behaviour identical to every
  * other MediaWiki skin.
  *
- * Exactly one message key is resolved here and it is MediaWiki core's own, reproduced verbatim:
- * `search`. It is used twice -- once for the button's label and once, through
- * `Linker::tooltipAndAccesskeyAttribs()`, for its tooltip and access key. It is deliberately not
- * renamed to a `notion-` key and deliberately not added to the skin's `i18n/en.json`, because
- * core already defines it and duplicating it would only risk the two drifting apart.
+ * Three of core's own messages end up resolved here, and only one of them is named directly.
+ * `search` is looked up by name for the button's visible label ("Search"). The literal `'search'`
+ * handed to `Linker::tooltipAndAccesskeyAttribs()` is not that message: it is a key *stem* from
+ * which the Linker derives two further keys, prefixing it to reach `tooltip-search` for the
+ * `title` attribute ("Search {{SITENAME}}") and `accesskey-search` for the access key ("f").
+ * Neither derived key appears anywhere in this file, and neither needs declaring in the `messages`
+ * array of skin.json, because they are resolved server-side by the Linker rather than exposed to a
+ * template as `msg-*`. All three are deliberately left under their core names and deliberately kept
+ * out of the skin's `i18n/en.json`: core already defines them and duplicating any of them would
+ * only risk the two drifting apart.
  *
  * The returned structure is plain data -- arrays, strings and booleans only, never a component
  * object -- because Mustache can traverse nothing else and because the component snapshots are
@@ -144,13 +149,23 @@ class NotionComponentSearchBox implements NotionComponent {
 		$isPrimary = $this->isPrimary;
 		$formId = $this->formId;
 
-		$searchClass = 'notion-search-box-vue ';
-		$searchClass .= $isCollapsible ? ' ' . self::SEARCH_COLLAPSIBLE_CLASS : '';
-		$searchClass .= $isThumbnail ? ' ' . self::SEARCH_SHOW_THUMBNAIL_CLASS : '';
-		$searchClass .= $isAutoExpand ? ' ' . self::SEARCH_AUTO_EXPAND_WIDTH_CLASS : '';
+		// Built as a list of tokens and joined once, so exactly one space separates any two
+		// classes however many of the three optional ones apply. Concatenating fragments that
+		// each carry their own separator is what puts doubled spaces in the class attribute of
+		// every rendered page, and a `trim()` at the end only hides the ones at the edges.
+		$searchClasses = [ 'notion-search-box-vue' ];
+		if ( $isCollapsible ) {
+			$searchClasses[] = self::SEARCH_COLLAPSIBLE_CLASS;
+		}
+		if ( $isThumbnail ) {
+			$searchClasses[] = self::SEARCH_SHOW_THUMBNAIL_CLASS;
+		}
+		if ( $isAutoExpand ) {
+			$searchClasses[] = self::SEARCH_AUTO_EXPAND_WIDTH_CLASS;
+		}
 
 		// Annotate search box with a component class.
-		$searchBoxData['class'] = trim( $searchClass );
+		$searchBoxData['class'] = implode( ' ', $searchClasses );
 		$searchBoxData['is-collapsible'] = $isCollapsible;
 		$searchBoxData['is-thumbnail'] = $isThumbnail;
 		$searchBoxData['is-auto-expand'] = $isAutoExpand;

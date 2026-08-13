@@ -7,10 +7,17 @@
 	partial takes no named key of its own.
 
 	string . the Codex/OOUI icon name to paint, for example `menu`, `search`,
-		`userAvatar`, `appearance` or `listBullet`. The name must be declared in the
-		`skins.notion.icons` pack in skin.json, or in `skins.notion.icons.js` for the
-		icons only needed once the script module has loaded; an undeclared name matches
-		no mask rule and paints no glyph. The value is emitted verbatim, so it may
+		`userAvatar`, `appearance` or `listBullet`. A name paints a glyph only if some
+		module has generated a matching mask rule for it; an unmatched name paints
+		nothing at all, silently. This skin's own two packs are the usual providers -
+		`skins.notion.icons` in skin.json, and `skins.notion.icons.js` for the icons
+		only needed once the script module has loaded - but they are not the only ones.
+		Extensions and gadgets ship their own icon modules against the same
+		`mw-ui-icon-*` selectors, so a name absent from both of this skin's packs may
+		still resolve where such a module is loaded: `wikimedia-bookmarkOutline`, which
+		NotionComponentStickyHeader passes for the reading-lists control, comes from
+		Extension:ReadingLists rather than from either pack here. Do not conclude from a
+		name's absence in skin.json that it is dead. The value is emitted verbatim, so it may
 		arrive already carrying the historical `wikimedia-` prefix that some components
 		pass, and it may carry a variant suffix such as `-progressive` matching the
 		pack's selectorWithVariant declaration. A falsy icon never reaches this partial

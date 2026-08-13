@@ -460,11 +460,18 @@
 					"Special:Preferences"
 				]
 			},
-			"description": "@var array options for configuring where max-width should and should not apply. More details can be found in the Hooks::shouldDisableMaxWidth PHP documentation."
+			"description": "@var array options for configuring where max-width should and should not apply. The array shape, and the order in which its exclusions and inclusions are applied, are documented on ConfigHelper::shouldDisable() in includes/ConfigHelper.php; the requirement that reads this key and inverts that answer is LimitedWidthContentRequirement in includes/FeatureManagement/Requirements/."
+		},
+		"NotionNavigationUpdateTemporary": {
+			"value": {
+				"logged_in": false,
+				"logged_out": false
+			},
+			"description": "@var array temporary config variable gating the updated, more responsive arrangement of the page tools, keyed by audience so the roll-out can be staged for logged-in and logged-out readers independently. Both default to false, which keeps the current arrangement. Read through Constants::CONFIG_KEY_NAVIGATION_UPDATE as an OverridableConfigRequirement, which also honours a per-request `?notionnavigationupdate=1` override, and which is why the key must stay declared here: Config::get() throws for an undeclared option rather than returning a default. Suffixed Temporary because the variable is withdrawn once the change is unconditional."
 		},
 		"NotionResponsive": {
-			"value": false,
-			"description": "@var bool turns the Notion skin into a responsive skin by applying a viewport and disabling the min-width."
+			"value": true,
+			"description": "@var bool turns the Notion skin into a responsive skin by applying a viewport and disabling the min-width. Defaults to true because this skin is responsive by design: its registration declares `responsive: true`, its body classes carry `skin--responsive`, and its grid is authored down to the mobile breakpoint. Vector ships the same setting defaulting to false only because its viewport is additionally driven by MobileFrontend, which this skin deliberately does not integrate with; the setting is retained so an administrator can still opt a wiki out."
 		},
 		"NotionLanguageInMainMenu": {
 			"value": {

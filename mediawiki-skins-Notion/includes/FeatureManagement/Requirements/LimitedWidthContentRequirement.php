@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.0.0
@@ -30,15 +30,21 @@ use MediaWiki\Skins\Notion\FeatureManagement\Requirement;
 use MediaWiki\Title\Title;
 
 /**
- * The `MaxWidthRequirement` for content.
+ * The page-level half of the limited-width decision.
+ *
+ * There is no `MaxWidthRequirement` class; this is it, and it is registered under
+ * `Constants::REQUIREMENT_LIMITED_WIDTH_CONTENT`.
  *
  * This requirement answers one question: may the page currently being rendered have its content
  * column constrained to a comfortable reading measure at all? It is a decision about the *page*,
  * taken on the server from configuration, and it is deliberately separate from the reader's own
  * choice, which lives in `Constants::REQUIREMENT_LIMITED_WIDTH` and is backed by a user
  * preference. The feature manager combines the two, so a page that opts out here stays full width
- * however the reader has set their preference. Diffs, history views, category listings and the
- * main page are the usual opt-outs: each needs the whole viewport rather than a narrow measure.
+ * however the reader has set their preference. The authoritative opt-out list is the configuration
+ * itself, not this comment; as shipped it covers the main page, the Special and Category
+ * namespaces, and requests carrying `action=history|edit|submit` or any `diff`, while re-enabling
+ * `Special:Preferences` by name. Each of those needs the whole viewport rather than a narrow
+ * measure.
  *
  * The rules themselves are configuration rather than code. They are declared as
  * `$wgNotionMaxWidthOptions` in `skin.json` and evaluated by {@see ConfigHelper::shouldDisable},
@@ -52,8 +58,14 @@ use MediaWiki\Title\Title;
 final class LimitedWidthContentRequirement implements Requirement {
 
 	/**
-	 * This constructor accepts all dependencies needed to determine whether
-	 * the overridable config is enabled for the current user and request.
+	 * This constructor accepts everything needed to decide whether the configured rules allow a
+	 * constrained content column on the page being rendered: the `Config` the rules are read from,
+	 * the shared helper that evaluates them, and the request and title they are evaluated against.
+	 *
+	 * Note what is absent. No user, `User` or `UserOptionsLookup` is injected, and none is wanted:
+	 * this requirement is about the page, not the reader, so it cannot be and is not overridden by
+	 * a user preference. The reader's own choice is a separate requirement registered under
+	 * `Constants::REQUIREMENT_LIMITED_WIDTH`, and the feature manager is what combines the two.
 	 *
 	 * @param Config $config
 	 * @param ConfigHelper $configHelper
@@ -90,13 +102,13 @@ final class LimitedWidthContentRequirement implements Requirement {
 	 *
 	 * None of that evaluation lives here: it belongs to {@see ConfigHelper::shouldDisable}, which
 	 * the whole skin shares with the other page-sensitive features, and duplicating it would let
-	 * the two drift apart. This method exists purely to give the delegation one named seam that a
-	 * test can drive directly.
+	 * the two drift apart. This method is the production delegation seam — {@see self::isMet} calls
+	 * it on every evaluation — and it exists to give that hand-off one named, documented place
+	 * rather than inlining the argument transposition below into the requirement's public answer.
 	 *
 	 * Note that the helper takes the request before the title, so the two are handed on in the
 	 * opposite order to the one they arrive in. The transposition is deliberate; preserve it.
 	 *
-	 * @internal only for use inside tests.
 	 * @param array $options
 	 * @param Title $title
 	 * @param WebRequest $request

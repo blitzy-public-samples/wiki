@@ -28,8 +28,13 @@
 # authored ADR and configuration tree is doc/, and that one is deliberately left linted.
 /docs/
 
-# JSON message catalogues. Checked by `npm run lint:i18n` (banana-checker) and
-# maintained upstream by translatewiki.net, so ESLint has no business in here.
+# JSON message catalogues, checked by `npm run lint:i18n` (banana-checker) instead. Two
+# of the files in here are authored in this repository and are the source the rest derive
+# from: en.json holds the English strings and qqq.json documents every one of them. The
+# translated catalogues that would join them are the ones maintained by translators
+# through translatewiki.net, which is why the whole directory is excluded rather than
+# just the imported files - banana-checker is the tool that understands this content, and
+# a JSON formatter has nothing useful to say about it either way.
 /i18n/
 
 # Installed by `npm install` / `npm ci`.

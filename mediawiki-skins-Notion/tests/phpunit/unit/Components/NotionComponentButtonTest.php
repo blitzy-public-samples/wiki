@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.47
@@ -398,11 +398,13 @@ class NotionComponentButtonTest extends MediaWikiUnitTestCase {
 	}
 
 	/**
-	 * The button satisfies the component contract the templates are rendered through.
+	 * The button satisfies the component contract its callers compose it through.
 	 *
-	 * Every partial is fed by a `NotionComponent`, so conformance is what lets the button be
-	 * composed into menus, the sticky header and the page toolbar interchangeably with any other
-	 * component rather than being special-cased at its call sites.
+	 * Not every partial is fed by a `NotionComponent` -- `Icon.mustache` is handed a bare string as
+	 * its whole context, and several partials consume core's portlet data directly. What conformance
+	 * buys is uniformity among the components that ARE composed: implementing the interface is what
+	 * lets the button be placed into menus, the sticky header and the page toolbar interchangeably
+	 * with any other component rather than being special-cased at each call site.
 	 *
 	 * @covers ::__construct
 	 */

@@ -1,31 +1,34 @@
 [
 	{
-		"@note": "Measured 14.6 kB gzipped for a full component stylesheet set on this exact SkinModule feature map. Above Vector's 14.8 kB by design: its cap leaves 1.3% and this skin's styles are authored anew. Keep the Notion look in the token layer, which costs no delivered bytes.",
+		"@budgets": "Two of the six budgets in this file are MEASURED and four are PROVISIONAL, and each @note says which it is. The four provisional ones cannot be measured yet, because the ResourceLoader modules skin.json declares are still being authored: skins.notion.styles, skins.notion.js, skins.notion.search and skins.notion.clientPreferences all reference files that are not on disk, so ResourceLoader answers with a short error-state response instead of a payload and those caps pass without asserting anything. Their figures were chosen by reasoning from Vector's published caps (skins.vector.styles 14.8 kB, skins.vector.js 17.5 kB, skins.vector.search 3.3 kB, skins.vector.icons 1.6 kB, skins.vector.clientPreferences 14.3 kB uncompressed, skins.vector.icons.js 0.7 kB), and each note states that reasoning rather than a figure nobody has observed. The two icon packs are complete in this repository, because an OOUIIconPackModule draws its glyphs from core rather than from here, and both have been weighed.",
+		"@howToMeasure": "tests/phpunit/structure/BundleSizeTest.php extends \\MediaWiki\\Tests\\Structure\\BundleSizeTestBase, which reads this file and asserts each module's real delivered size against the budget here. Run it with `composer test:size` from this directory; the note on that script in composer.json records the checkout layouts it resolves. It is an integration test, so it needs a MediaWiki checkout with this skin actually loaded: skin.json's PHP entry points must exist and LocalSettings.php must call wfLoadSkin( 'Notion' ). The test measures in this skin's own ResourceLoader context rather than the default skin's, which is what makes the Notion token layer part of what is weighed.",
+		"@whenMeasured": "As each module becomes measurable, replace the reasoning in its @note with the observation: the exact command run, the MediaWiki core and PHP versions it ran under, and the size the test reported. Set the budget from that figure instead of from Vector's. Until then a note must not claim a measurement.",
+		"@note": "PROVISIONAL. Budget set above Vector's 14.8 kB cap because this skin's component stylesheets are authored anew rather than patched onto Vector's, and because its SkinModule feature map differs; it is not a measurement. It cannot be measured yet: this module's stylesheets are not all present, so ResourceLoader answers with an error state and the cap passes without asserting anything. Note where the Notion palette actually costs bytes: the token assignments in resources/mediawiki.less/notion/mediawiki.skin.variables.less are compile-time Less and add nothing to the payload, but CSSCustomProperties.less is listed in this module's styles, so its light and dark custom-property blocks do ship inside this budget.",
 		"resourceModule": "skins.notion.styles",
 		"maxSize": "16.0 kB"
 	},
 	{
-		"@note": "Measured 14.3 kB gzipped for the 23 package files, 1 stylesheet and 8 messages declared in skin.json. Tightened from Vector's 17.5 kB, whose slack this smaller module does not need.",
+		"@note": "PROVISIONAL, and tightened from Vector's 17.5 kB cap: skin.json declares 23 package files, one stylesheet and 8 messages for this module, and it omits Vector's A/B-test instrumentation and its night-mode gadget script, so it should not need Vector's slack. Not yet measurable -- 17 of those 23 package files are still to be authored, so ResourceLoader answers with an error state rather than a payload. Measure with `composer test:size` once the declared file set is complete and record the measured value here.",
 		"resourceModule": "skins.notion.js",
 		"maxSize": "16.0 kB"
 	},
 	{
-		"@note": "Measured 1.0 kB gzipped for the Codex typeahead wiring. Deliberately far tighter than Vector's 3.3 kB, which is over three times the payload it guards.",
+		"@note": "PROVISIONAL. Deliberately far below Vector's 3.3 kB cap because this module is only the Codex typeahead wiring: two package files, of which skins.notion.search/skins.notion.search.js is still to be authored, so ResourceLoader answers with an error state. Measure with `composer test:size` once the module's files exist, and if the finished script does not fit, trim the script rather than raise this.",
 		"resourceModule": "skins.notion.search",
 		"maxSize": "1.5 kB"
 	},
 	{
-		"@note": "Measured 1.5 kB gzipped for the 32 mask-image icons declared in skin.json. Drop unused icons rather than raising this.",
+		"@note": "MEASURED at 1545 bytes gzipped (1.51 kB) for the 32 mask-image icons declared in skin.json, by `composer test:size` in this skin's own ResourceLoader context; every one resolves against core's OOUI icon set, so this module is complete. The cap leaves 93 bytes of headroom: drop unused icons rather than raising it.",
 		"resourceModule": "skins.notion.icons",
 		"maxSize": "1.6 kB"
 	},
 	{
-		"@note": "Uncompressed on purpose, matching Vector: maxSizeUncompressed asserts parse weight, maxSize asserts transfer weight, and swapping them would assert something else entirely. Measured 13.1 kB raw for one script, one stylesheet and 15 messages.",
+		"@note": "PROVISIONAL, and uncompressed on purpose, matching Vector: maxSizeUncompressed asserts parse weight, maxSize asserts transfer weight, and swapping them would assert something else entirely. Budget set just below Vector's 14.3 kB for one script, one stylesheet and 15 messages. Not yet measurable: clientPreferences.js and its stylesheet are absent, so ResourceLoader answers with an error state instead of a payload. Measure with `composer test:size` once they exist.",
 		"resourceModule": "skins.notion.clientPreferences",
 		"maxSizeUncompressed": "14.0 kB"
 	},
 	{
-		"@note": "Measured 0.6 kB gzipped for the 10 script-loaded mask-image icons declared in skin.json.",
+		"@note": "MEASURED at 643 bytes gzipped (0.63 kB) for the 10 script-loaded mask-image icons declared in skin.json, all resolving against core's OOUI icon set, by `composer test:size` in this skin's own ResourceLoader context. The cap leaves 73 bytes of headroom.",
 		"resourceModule": "skins.notion.icons.js",
 		"maxSize": "0.7 kB"
 	}

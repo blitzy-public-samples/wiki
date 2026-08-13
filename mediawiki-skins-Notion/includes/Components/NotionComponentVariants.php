@@ -60,26 +60,23 @@ use MediaWiki\StubObject\StubUserLang;
  */
 class NotionComponentVariants implements NotionComponent {
 	/**
-	 * Language of the page whose variants are being offered.
-	 *
-	 * Declared here with a union annotation instead of being promoted in the constructor: the
-	 * value may be a fully realised Language or the StubUserLang placeholder that stands in for
-	 * the user language until it is first touched, and PHP cannot express that union as a native
-	 * property type. Narrowing it to Language would break the lazy-initialisation path rather
-	 * than tidy it up.
-	 *
-	 * @var Language|StubUserLang
-	 */
-	private $pageLang;
-
-	/**
 	 * @param LanguageConverterFactory $languageConverterFactory supplies the converter for
 	 *   $pageLang, which is what knows the reader's currently preferred variant.
 	 * @param array $menuData core's `data-variants` portlet data. Not readonly because
 	 *   ::getMenuDropdownData() suppresses the menu heading in place before handing the data to
 	 *   NotionComponentMenu.
-	 * @param Language|StubUserLang $pageLang language of the page being rendered, normally
-	 *   `Title::getPageLanguage()`. Untyped and not promoted on purpose; see ::$pageLang.
+	 * @param Language|StubUserLang $pageLang language of the page whose variants are being
+	 *   offered, normally `Title::getPageLanguage()`, which returns a Language. The native union
+	 *   type also admits the StubUserLang placeholder that stands in for the user language until
+	 *   it is first touched, so a caller passing `$wgLang` before it has been realised is still
+	 *   accepted; the stub materialises itself on the first method call. Typing it natively rather
+	 *   than by annotation alone is what makes an unusable value fail at construction, where the
+	 *   caller can see it, instead of several calls later inside ::getDropdownLabel(). The union
+	 *   keeps `StubUserLang` because the stub is not a `Language`: it declares only a constructor
+	 *   and `_newObject()` and forwards every other call through `StubObject::__call()`, unstubbing
+	 *   itself on the way, which is also why core's own
+	 *   `LanguageConverterFactory::getLanguageConverter()` -- the method this value is handed to --
+	 *   documents its parameter as `Language|StubUserLang|null`.
 	 * @param string $ariaLabel accessible name for the dropdown, already localised by
 	 *   `SkinNotion` from `notion-language-variant-switcher-label`. It is what assistive
 	 *   technology announces, since the visible handle text is a bare variant name that carries
@@ -88,10 +85,9 @@ class NotionComponentVariants implements NotionComponent {
 	public function __construct(
 		private readonly LanguageConverterFactory $languageConverterFactory,
 		private array $menuData,
-		$pageLang,
+		private readonly Language|StubUserLang $pageLang,
 		private readonly string $ariaLabel,
 	) {
-		$this->pageLang = $pageLang;
 	}
 
 	/**
@@ -125,7 +121,13 @@ class NotionComponentVariants implements NotionComponent {
 			'notion-variants-dropdown',
 			$this->getDropdownLabel(),
 			// Hide dropdown if menu is empty
-			$this->menuData[ 'is-empty' ] ? 'emptyPortlet' : ''
+			$this->menuData[ 'is-empty' ] ? 'emptyPortlet' : '',
+			null,
+			'',
+			// The handle is the current variant's name and nothing else, so it is not icon-only.
+			// Declared rather than left to inference: this control carries no icon today, and the
+			// class must not appear if one is ever added for the disclosure chevron.
+			false
 		);
 		$dropdownData = $dropdown->getTemplateData();
 		$dropdownData['aria-label'] = $this->ariaLabel;

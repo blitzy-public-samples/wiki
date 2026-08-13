@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.47
@@ -21,10 +21,12 @@
 
 namespace MediaWiki\Skins\Notion\Tests\Unit\Components;
 
+use InvalidArgumentException;
 use MediaWiki\Language\MessageLocalizer;
 use MediaWiki\Message\Message;
 use MediaWiki\Skins\Notion\Components\NotionComponentPinnableHeader;
 use MediaWikiUnitTestCase;
+use TypeError;
 
 /**
  * Isolated unit tests for the Notion skin's pinnable header component.
@@ -96,6 +98,18 @@ class NotionComponentPinnableHeaderTest extends MediaWikiUnitTestCase {
 		'notion-pin-element-aria-label',
 		'notion-unpin-element-aria-label',
 	];
+
+	/**
+	 * Every `msg()` call the mocked localizer received in the current test, with all arguments.
+	 *
+	 * @var array[]
+	 */
+	private array $messageCalls = [];
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->messageCalls = [];
+	}
 
 	/**
 	 * This method provides different sets of parameters for tests, simulating different scenarios.
@@ -221,6 +235,66 @@ class NotionComponentPinnableHeaderTest extends MediaWikiUnitTestCase {
 			$templateData['unpin-aria-label'],
 			'The unpin aria-label must come from the caller supplied key.'
 		);
+
+		// Both aria messages must additionally receive the resolved region label as their $1,
+		// which the emitted data cannot show and only the recorded calls can.
+		$this->assertAriaMessagesCarryTheRegionLabel( $id, $pinAriaLabel, $unpinAriaLabel );
+	}
+
+	/**
+	 * The two element types production uses reach the template verbatim.
+	 *
+	 * `label-tag-name` is interpolated as an element name in both the opening and the closing
+	 * tag, so it is the one value in this component that cannot be wrong in a merely cosmetic
+	 * way: anything other than a real tag name produces markup no parser will accept.
+	 *
+	 * @covers ::__construct
+	 * @covers ::getTemplateData
+	 */
+	public function testLabelTagNameIsForwardedForBothProductionTags() {
+		foreach ( [ 'div', 'h2' ] as $tagName ) {
+			$pinnableHeader = new NotionComponentPinnableHeader(
+				$this->createMessageLocalizerMock(),
+				true,
+				'notion-example',
+				'example-pinned',
+				self::BUTTON_ARIA_LABEL_KEYS[1],
+				self::BUTTON_ARIA_LABEL_KEYS[0],
+				$tagName
+			);
+
+			$this->assertSame(
+				$tagName,
+				$pinnableHeader->getTemplateData()['label-tag-name'],
+				"A label tag of $tagName must reach the template unchanged."
+			);
+		}
+	}
+
+	/**
+	 * A null label tag is rejected at construction rather than rendered as an empty element.
+	 *
+	 * The parameter is typed `string` rather than `?string` precisely so this happens: a null
+	 * would reach `PinnableHeader.mustache` and emit the malformed pair `<></>` around the region
+	 * label, breaking the sidebar heading and any assistive technology reading it, with no PHP
+	 * error anywhere to point at the cause. Locking the rejection here is what stops the type
+	 * from being widened back "for symmetry" with the component this one mirrors.
+	 *
+	 * @covers ::__construct
+	 */
+	public function testNullLabelTagNameIsRejected() {
+		$this->expectException( TypeError::class );
+
+		new NotionComponentPinnableHeader(
+			$this->createMessageLocalizerMock(),
+			true,
+			'notion-example',
+			'example-pinned',
+			self::BUTTON_ARIA_LABEL_KEYS[1],
+			self::BUTTON_ARIA_LABEL_KEYS[0],
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Asserting the rejection.
+			null
+		);
 	}
 
 	/**
@@ -244,6 +318,74 @@ class NotionComponentPinnableHeaderTest extends MediaWikiUnitTestCase {
 			$pinnableHeader->getTemplateData()['label-tag-name'],
 			'Omitting the label tag name must yield a div.'
 		);
+	}
+
+	/**
+	 * Tag names the component must refuse.
+	 *
+	 * `PinnableHeader.mustache` interpolates the label tag name into both an opening and a
+	 * closing tag position, where Mustache's escaping is no defence: the first three cases below
+	 * would each break out of the tag context and inject markup, the empty string would emit
+	 * `<></>`, and `span` is simply not a label element this component supports. Rejecting them
+	 * in the constructor is what lets the template stay a plain interpolation.
+	 *
+	 * @return array[]
+	 */
+	public static function provideRejectedLabelTagNames(): array {
+		return [
+			'attribute injected after the tag name' => [ 'div onclick="x()"' ],
+			'tag closed early' => [ 'div><script>alert(1)</script' ],
+			'leading whitespace' => [ ' h2' ],
+			'empty string' => [ '' ],
+			'unsupported element' => [ 'span' ],
+			'wrong case' => [ 'DIV' ],
+		];
+	}
+
+	/**
+	 * The label tag name is validated against an allowlist rather than trusted.
+	 * @covers ::__construct
+	 * @dataProvider provideRejectedLabelTagNames
+	 * @param string $labelTagName A tag name outside the permitted set.
+	 */
+	public function testInvalidLabelTagNameIsRejected( string $labelTagName ) {
+		$this->expectException( InvalidArgumentException::class );
+		$this->expectExceptionMessage( '$labelTagName must be one of div, h2' );
+
+		new NotionComponentPinnableHeader(
+			$this->createMessageLocalizerMock(),
+			true,
+			'notion-example',
+			'example-pinned',
+			self::BUTTON_ARIA_LABEL_KEYS[1],
+			self::BUTTON_ARIA_LABEL_KEYS[0],
+			$labelTagName
+		);
+	}
+
+	/**
+	 * Both permitted tag names are accepted and reach the template unchanged.
+	 * @covers ::__construct
+	 * @covers ::getTemplateData
+	 */
+	public function testPermittedLabelTagNamesAreAccepted() {
+		foreach ( [ 'div', 'h2' ] as $labelTagName ) {
+			$pinnableHeader = new NotionComponentPinnableHeader(
+				$this->createMessageLocalizerMock(),
+				true,
+				'notion-example',
+				'example-pinned',
+				self::BUTTON_ARIA_LABEL_KEYS[1],
+				self::BUTTON_ARIA_LABEL_KEYS[0],
+				$labelTagName
+			);
+
+			$this->assertSame(
+				$labelTagName,
+				$pinnableHeader->getTemplateData()['label-tag-name'],
+				"A '$labelTagName' label must reach the template unchanged."
+			);
+		}
 	}
 
 	/**
@@ -324,6 +466,14 @@ class NotionComponentPinnableHeaderTest extends MediaWikiUnitTestCase {
 		$this->assertSame( $id . '-unpinned-container', $templateData['data-unpinned-container-id'] );
 		$this->assertSame( $id . '-pinned-container', $templateData['data-pinned-container-id'] );
 
+		// Each production region must also announce itself: the aria messages carry this
+		// region's own resolved label as their parameter, not a generic phrase.
+		$this->assertAriaMessagesCarryTheRegionLabel(
+			$id,
+			self::BUTTON_ARIA_LABEL_KEYS[0],
+			self::BUTTON_ARIA_LABEL_KEYS[1]
+		);
+
 		$declaredKeys = $this->getDeclaredMessageKeys();
 		$expectedKeys = array_merge(
 			[ $id . '-label' ],
@@ -340,7 +490,7 @@ class NotionComponentPinnableHeaderTest extends MediaWikiUnitTestCase {
 	}
 
 	/**
-	 * A MessageLocalizer that echoes back whichever key it is handed.
+	 * A MessageLocalizer that echoes back whichever key it is handed and records every call.
 	 *
 	 * The component only ever calls `Message::text()` on what it receives - message
 	 * parameters are passed to `MessageLocalizer::msg()` as further arguments rather than
@@ -348,12 +498,22 @@ class NotionComponentPinnableHeaderTest extends MediaWikiUnitTestCase {
 	 * value. `__toString()` is configured alongside it so that a stringified message can
 	 * never leak a bare mock into an assertion.
 	 *
+	 * The callback is variadic and stores the whole argument list in ::$messageCalls, which is
+	 * what lets the tests assert the message *parameters* rather than only the keys. A callback
+	 * that accepted `$key` alone would ignore the region label passed as `$1` to the two aria
+	 * messages, so dropping or corrupting that parameter - and with it the difference between
+	 * announcing "Move Tools to sidebar" and announcing a bare "Move to sidebar" - would leave
+	 * the suite green.
+	 *
 	 * @return MessageLocalizer
 	 */
 	private function createMessageLocalizerMock(): MessageLocalizer {
 		// Mocking the MessageLocalizer to provide predictable responses for given message keys.
 		$localizer = $this->createMock( MessageLocalizer::class );
-		$localizer->method( 'msg' )->willReturnCallback( function ( $key ) {
+		$localizer->method( 'msg' )->willReturnCallback( function ( ...$args ) {
+			$this->messageCalls[] = $args;
+			$key = $args[0];
+
 			return $this->createConfiguredMock( Message::class, [
 				// Simulated localization output.
 				'text' => $key . self::MOCK_SUFFIX,
@@ -362,6 +522,52 @@ class NotionComponentPinnableHeaderTest extends MediaWikiUnitTestCase {
 		} );
 
 		return $localizer;
+	}
+
+	/**
+	 * Assert that both aria-label messages were resolved with the region label as their `$1`.
+	 *
+	 * The component resolves `<id>-label` a second time and hands the resulting text to the pin
+	 * and unpin aria messages, so that assistive technology announces which region the button
+	 * moves. That parameter is the whole point of those two messages - their English text is
+	 * "Move $1 to sidebar" and "Hide $1" - and it is invisible in the emitted template data,
+	 * which carries only the mocked resolution of the outer message. Recording the raw calls is
+	 * the only way to see it.
+	 *
+	 * @param string $id Pinnable element id the component was constructed with.
+	 * @param string $pinAriaLabel Key the caller supplied for the pin button.
+	 * @param string $unpinAriaLabel Key the caller supplied for the unpin button.
+	 */
+	private function assertAriaMessagesCarryTheRegionLabel(
+		string $id,
+		string $pinAriaLabel,
+		string $unpinAriaLabel
+	): void {
+		$resolvedLabel = $id . '-label' . self::MOCK_SUFFIX;
+
+		$this->assertContains(
+			[ $pinAriaLabel, $resolvedLabel ],
+			$this->messageCalls,
+			"The pin aria-label must be resolved as $pinAriaLabel with the region label as \$1."
+		);
+		$this->assertContains(
+			[ $unpinAriaLabel, $resolvedLabel ],
+			$this->messageCalls,
+			"The unpin aria-label must be resolved as $unpinAriaLabel with the region label as \$1."
+		);
+
+		// The label message is resolved three times in total - once for the visible label and
+		// once for each aria parameter - and asserting the count is what stops a change from
+		// satisfying the two assertions above by passing a literal instead of the resolution.
+		$labelCalls = array_filter(
+			$this->messageCalls,
+			static fn ( $call ) => $call === [ $id . '-label' ]
+		);
+		$this->assertCount(
+			3,
+			$labelCalls,
+			'The region label is resolved once for the heading and once per aria message.'
+		);
 	}
 
 	/**

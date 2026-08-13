@@ -8,16 +8,25 @@
 	Data dictionary supplied by NotionComponentPinnableHeader::getTemplateData():
 	bool is-pinned whether the region currently sits in its pinned placement. It selects the
 		third wrapper class -- notion-pinnable-header-pinned or notion-pinnable-header-unpinned --
-		and nothing else. Both buttons are always emitted so the header is complete and correct
-		before any script runs, and components/PinnableHeader.less keys off that state class to
-		reveal exactly one of them: never both, never neither.
+		and nothing else. Both buttons are always emitted so the header is complete and correctly
+		drawn before any script runs, and components/PinnableHeader.less keys off that state class
+		to reveal exactly one of them: never both, never neither. Complete and correctly drawn is
+		the whole of the claim: the two buttons below are bare button elements with no form and no
+		href, so with scripts unavailable the header reads right in whichever placement the server
+		chose but neither affordance does anything. Relocating a region is an enhancement the
+		client script adds, not behaviour this markup provides.
 	string label the region's human readable name, already resolved from the id-derived
 		message, e.g. `Contents`.
-	string label-tag-name element name for the label, `div` by default and a heading where the
-		label is semantically a heading (the pinnable table of contents promotes it). It is
-		interpolated into BOTH the opening and the closing tag so the two can never disagree. A
-		non-empty tag name is the component's contract -- its constructor defaults to `div` --
-		because a dynamic tag name cannot be guarded without duplicating the whole element.
+	string label-tag-name element name for the label: `div` by default, or `h2` where the label
+		is semantically a heading, which is what the pinnable table of contents promotes it to.
+		Those two names are the whole permitted set, and this partial can rely on that because
+		NotionComponentPinnableHeader validates the value against an allowlist in its constructor
+		and refuses anything else. That guarantee is load-bearing rather than decorative: the
+		value is interpolated into BOTH the opening and the closing tag position, where Mustache
+		escaping does not help -- a name carrying whitespace or attribute syntax would escape the
+		tag context and inject markup, and an empty one would emit `<></>`. The component is
+		therefore the only place that decision may be made, and no caller may pass this value
+		through from a request, a message or page content.
 	string pin-label visible text of the pin button, e.g. `move to sidebar`.
 	string unpin-label visible text of the unpin button, e.g. `hide`.
 	string pin-aria-label accessible name of the pin button: the parameterised form that names

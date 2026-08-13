@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.0.0
@@ -47,12 +47,14 @@ use Wikimedia\Assert\Assert;
  *   so registering a cheap requirement ahead of an expensive one is a real saving rather than a
  *   stylistic choice.
  * - Presentation. {@see self::getFeatureBodyClass} turns the evaluated state of every registered
- *   feature into the list of classes the skin puts on the `<body>` element. Those strings are a
- *   contract, not a naming preference: the stylesheets under `resources/skins.notion.styles/`
- *   select on them, and the client-preference scripts under `resources/skins.notion.js/` toggle
- *   the very same classes at runtime. A one-character change here silently breaks styling without
- *   raising an error anywhere, which is why the string construction below is reproduced exactly
- *   and never "tidied up".
+ *   feature into the list of classes the skin puts on the document element — the `<html>` tag —
+ *   not on `<body>`, despite what the method name suggests; that method's own documentation
+ *   records why the name is kept. Those strings are a contract, not a naming preference: the
+ *   stylesheets under `resources/skins.notion.styles/` select on them, and the client-preference
+ *   scripts under `resources/skins.notion.js/` rewrite the very same classes on
+ *   `document.documentElement.classList` at runtime. A one-character change here silently breaks
+ *   styling without raising an error anywhere, which is why the string construction below is
+ *   reproduced exactly and never "tidied up".
  *
  * Nothing is memoised. Requirements that consult configuration deliberately re-interrogate their
  * `Config` on every call because the answer can change during the request lifecycle, and caching
@@ -201,7 +203,16 @@ class FeatureManager {
 	}
 
 	/**
-	 * Return a list of classes that should be added to the body tag
+	 * Return a list of classes that should be added to the document element.
+	 *
+	 * The method name says "body" and the classes do not go there. They are placed on the `<html>`
+	 * tag, and every consumer of them treats them that way: core's client-preference bootstrap
+	 * assigns `document.documentElement.className` and describes the pattern as an `<html>` class
+	 * (see `MediaWiki\ResourceLoader\ClientHtml`, T339268), and this skin's
+	 * `resources/skins.notion.js/features.js` mutates `document.documentElement.classList`. The
+	 * name is nevertheless kept, because it is the name the feature-management layer this skin is
+	 * modelled on publishes, and renaming it here would fork a shared vocabulary for no behavioural
+	 * gain. Read "body class" anywhere in this class as "document-element class".
 	 *
 	 * One class is emitted per registered feature, in registration order, and each is built from
 	 * three parts: the `notion-feature-` namespace, the feature name converted from camel case to
@@ -230,7 +241,11 @@ class FeatureManager {
 
 			// Client side preferences
 			switch ( $featureName ) {
-				// This feature has 3 possible states: 0, 1, 2 and -excluded.
+				// This feature has 4 possible states, emitted as clientpref-0, clientpref-1,
+				// clientpref-2 and clientpref--excluded. The first three are the stored preference
+				// values, whose labels are declared as notion-feature-custom-font-size-{0,1,2}-label
+				// in i18n/en.json; the fourth is not a preference at all but the answer ConfigHelper
+				// gives for a page the feature is switched off on.
 				// It persists for all users.
 				case Constants::FEATURE_FONT_SIZE:
 					if ( $this->configHelper->shouldDisable(
@@ -241,16 +256,28 @@ class FeatureManager {
 					$suffixEnabled = 'clientpref-' . $this->getUserPreferenceValue( Constants::PREF_KEY_FONT_SIZE );
 					$suffixDisabled = 'clientpref-0';
 					break;
-				// This feature has 3 possible states: day, night, os.
-				// A 4th state (-excluded) may be applied client-side by
-				// disableNightModeIfGadget.js when a conflicting gadget is active.
+				// This feature has exactly 3 possible states: day, night, os. There is no fourth,
+				// exclusion state: this skin ships no client-side gadget-conflict check, and none
+				// is planned, so nothing ever appends an `-excluded` suffix here and whichever of
+				// the three states is resolved here is the one that reaches the page.
 				// It persists for all users.
 				case Constants::PREF_NIGHT_MODE:
 					$prefix = '';
 					$valueRequest = $request->getRawVal( 'notionnightmode' );
-					// If night mode query string is used, hardcode pref value to the night mode value
-					// NOTE: The query string parameter only works for logged in users.
-					// IF you have set a cookie locally this will be overriden.
+					// If the night mode query string is present, it wins over the stored preference
+					// for this response.
+					//
+					// There is deliberately no authentication check on that: the parameter is
+					// honoured for every request, anonymous or not, and an unrecognised value
+					// resolves to 'day' rather than being rejected (see resolveNightModeQueryValue).
+					// What differs between users is how long the override survives, and that is
+					// decided client-side rather than here. Core's inline client-preference script
+					// reassigns the document element's classes from the `mwclientpreferences`
+					// cookie, rewriting any `<key>-clientpref-<value>` class whose key it already
+					// finds — so a reader who has stored a theme locally sees the cookie value, not
+					// the one this parameter asked for. For a logged-in reader the stored value
+					// arrives through user options instead, which is why the parameter is a useful
+					// override there and effectively cosmetic for a visitor carrying the cookie.
 					$value = $valueRequest !== null ? self::resolveNightModeQueryValue( $valueRequest ) :
 						$this->getUserPreferenceValue( Constants::PREF_KEY_NIGHT_MODE );
 					$suffixEnabled = 'clientpref-' . $value;
@@ -372,10 +399,12 @@ class FeatureManager {
 	}
 
 	/**
-	 * Converts "1", "2", and "0" to equivalent values.
+	 * Resolves a raw `notionnightmode` query-string value to a theme name.
 	 *
-	 * Anything unrecognised falls back to the light theme rather than raising, because the value
-	 * arrives from a query string and an unusable one must not be able to break a page render.
+	 * `day`, `night` and `os` pass through unchanged; the numeric shorthands `1` and `2` map to
+	 * `night` and `os` respectively. Everything else — including `0` and any typo — falls back to
+	 * the light theme rather than raising, because the value arrives from a query string and an
+	 * unusable one must not be able to break a page render. `0` therefore needs no case of its own.
 	 *
 	 * @param string $value
 	 * @return string

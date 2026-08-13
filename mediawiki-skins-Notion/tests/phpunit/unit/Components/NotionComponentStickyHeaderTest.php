@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
- * http://www.gnu.org/copyleft/gpl.html
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @file
  * @since 1.47
@@ -41,9 +41,13 @@ use MediaWikiUnitTestCase;
  *     `#ca-watchstar-sticky-header`, `#ca-bookmark-sticky-header`, `#ca-ve-edit-sticky-header`,
  *     `#ca-edit-sticky-header`, `#ca-viewsource-sticky-header` and
  *     `#ca-addsection-sticky-header`, and finds the search toggle by the
- *     `.notion-sticky-header-search-toggle` class. Those ids are owned by MediaWiki core, and the
- *     `mw-watchlink` and `reading-lists-bookmark` classes are owned by core and by
- *     Extension:ReadingLists respectively, so none of them may be given a `notion-` prefix. The
+ *     `.notion-sticky-header-search-toggle` class. Those `-sticky-header` ids are not core's: the
+ *     `ca-` prefix is core's content-navigation convention and core emits the base ids such as
+ *     `ca-talk` and `ca-history`, but the suffixed clones are created by this bar, following the
+ *     reference skin that introduced them, so a duplicated control does not collide with the id it
+ *     copies. `mw-watchlink` genuinely is core's, and `reading-lists-bookmark` belongs to
+ *     Extension:ReadingLists. None of them may be given a `notion-` prefix, whoever owns them,
+ *     because scripts written for the reference skin already target these exact names. The
  *     assertions below are byte-exact on purpose: they are what turns a well-intentioned rename
  *     into a failing test instead of a dead button.
  *   - The instrumentation pipeline consumes `data-event-name`, which is why each one is asserted
@@ -601,7 +605,8 @@ class NotionComponentStickyHeaderTest extends MediaWikiUnitTestCase {
 		$this->assertSame(
 			'ca-addsection-sticky-header',
 			$addSection['id'],
-			'stickyHeader.js locates the add section button by exactly this core-owned id.'
+			'stickyHeader.js locates the add section button by exactly this id, a clone the bar ' .
+				'creates rather than one core emits.'
 		);
 		$this->assertSame(
 			'cdx-button cdx-button--fake-button cdx-button--fake-button--enabled ' .
@@ -613,6 +618,18 @@ class NotionComponentStickyHeaderTest extends MediaWikiUnitTestCase {
 			'speechBubbleAdd-progressive',
 			$addSection['icon'],
 			'Add section uses the progressive variant of the speech bubble icon.'
+		);
+		// The href is what makes this an anchor rather than a button, and `#` is what makes it a
+		// no-op until stickyHeader.js rebinds it to the real add-topic action of the page below.
+		// It also decides the styling: NotionComponentButton only adds the fake-button pair for a
+		// truthy href, so the classes asserted above are only correct while this is non-empty. A
+		// real URL here would navigate away from the article on click, and an empty one would
+		// silently drop those two classes, so the exact value is pinned rather than merely
+		// asserted to be present.
+		$this->assertSame(
+			'#',
+			$addSection['href'],
+			'Add section links to the fragment placeholder the sticky-header script rebinds.'
 		);
 		$attributes = $this->indexAttributes( $addSection['array-attributes'] );
 		$this->assertSame(
