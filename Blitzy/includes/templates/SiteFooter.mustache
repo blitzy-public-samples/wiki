@@ -1,0 +1,213 @@
+{{!--
+	Blitzy site footer.
+
+	Renders the wiki's own footer -- the information row, the site-links row and the icons
+	row -- inside Blitzy chrome. Every string, link and image inside it is built by
+	MediaWiki core. This partial contributes structure and class hooks and nothing else:
+	there is no newsletter form, no social-media list, no sitemap, no language switcher and
+	no Blitzy-authored link anywhere in it, because rule R12 confines the footer to core's
+	own footer data.
+
+	This block comment uses the `--` delimited form on purpose. The plain form ends at the
+	first `}}` it meets, so a comment that quotes a template expression -- as the lookup
+	note below has to -- terminates early and the rest of the prose is compiled as markup.
+	That fails the build with "Unclosed token", which is a good failure, but only after
+	someone has spent a while looking for it. Bundled Vector's Logo.mustache and
+	Dropdown/Open.mustache use this same delimited form for the same reason.
+
+	CONSUMED TEMPLATE DATA
+
+	  string|null  html-user-language-attributes  Raw attribute string from
+	                                              Skin::prepareUserLanguageAttributes().
+	  footerRow    data-footer.data-info          The information row.
+	  footerRow    data-footer.data-places        The site-links row.
+	  footerRow    data-footer.data-icons         The icons row.
+
+	Nothing else is read. Those four names are the complete input surface of this file.
+
+	@typedef object footerRow
+	@prop string       id           Element id. Always supplied; emitted verbatim (R2).
+	@prop bool         is-empty     True when core supplied the row with no items in it.
+	@prop string|null  className    'noprint' on the icons row, null on the other two.
+	@prop footerItem[] array-items  The row's items, in the order core built them.
+
+	@typedef object footerItem
+	@prop string      id           Element id. Emitted verbatim (R2).
+	@prop string      html         Core-built inner HTML for the item.
+	@prop string      class        Core's class list for the item. Always carries at least
+	                               'mw-list-item'; the icons item also carries 'noprint'.
+	@prop string      name         Core's key for the item. Not consumed here.
+	@prop array|null  array-links  Structured link data. Not consumed here, because core
+	                               has already rendered the same links into 'html'.
+
+	The item ids core supplies, all of which reach the page through this file:
+	footer-info-lastmod, footer-info-credits, footer-info-renderedwith,
+	footer-info-copyright, footer-places-privacy, footer-places-about,
+	footer-places-disclaimers, and footer-<block>ico for each $wgFooterIcons block
+	(footer-poweredbyico and footer-copyrightico in a default configuration). The row ids
+	are footer-info, footer-places and footer-icons, with no 'p-' prefix, because
+	SkinComponentMenu keeps the bare name for any menu whose name starts with 'footer'.
+
+	THREE CORRECTIONS THIS FILE ENCODES
+
+	Each was checked against MediaWiki 1.43.9 -- the release skin.json requires and the
+	digest-pinned image the harness runs -- as well as against the 1.47 tree checked out
+	beside this package as an API reference. Do not "fix" any of the three into the shape
+	the Vector skin on MediaWiki's main branch uses. Every one of those changes leaves a
+	footer that still looks plausible in a browser, which is why they are recorded here
+	rather than left to be rediscovered.
+
+	  1. The footer rows are read from the footer component, under the `data-footer` key
+	     used below, and never from the portlet data. Vector on MediaWiki's main branch
+	     reads them from the portlet data instead, through the `footer-info`,
+	     `footer-places` and `footer-icons` content-navigation buckets. Those buckets were
+	     added in MediaWiki 1.47 (SkinTemplate::buildContentNavigationUrlsInternal(),
+	     commented "Added in 1.47: footer menus", T318376; SkinComponentFooter::addItem()
+	     is @since 1.47, T426358), and grepping 1.43.9 for their names finds nothing. On
+	     the target release Vector's paths therefore resolve to nothing at all: no error,
+	     no warning, just an empty footer while every other assertion still passes.
+	     `data-footer`, produced by SkinComponentFooter and mapped onto that key by
+	     Skin::getTemplateData(), is the contract that is stable on both releases, and it
+	     is the documented SkinMustache footer specification. Core's own
+	     authentication-popup skin and the Vector build bundled with 1.43 both consume it.
+
+	  2. Each row is assembled by iterating `array-items`, because
+	     SkinComponentFooter::formatFooterDataForCurrentSpec() is deliberately lossy: read
+	     that method before reaching for any other key. It removes six keys from every row
+	     -- the tooltip HTML, the concatenated single-string rendering of the items, the
+	     after-portal and before-portal HTML, the menu label and the row's own class -- and
+	     removes the pre-rendered list-item HTML from every item, then adds `className`.
+	     Only the four row properties and five item properties typed above survive. So the
+	     generic portlet shortcuts are unavailable here: there is no one-shot string of
+	     items to emit, and no row class, which is exactly why `className` is what carries
+	     'noprint' onto the icons row. That same removal is what makes the item-level
+	     `{{#class}}` idiom below safe -- see the lookup note further down.
+
+	  3. The copyright and last-modified strings are not read from the `copyright` or
+	     `last-modified` components, and the `rendered-with` component is not read at all.
+	     Core already places all three strings inside `data-footer.data-info`, as the items
+	     footer-info-copyright, footer-info-lastmod and footer-info-renderedwith. Reading
+	     the components as well would print each string twice and, worse, emit each of
+	     those ids twice. There is in any case no `rendered-with` component to read:
+	     SkinComponentRegistry::registerComponents() registers exactly copyright,
+	     last-modified, logos, toc, search-box and footer, so asking for it yields silence
+	     rather than an error.
+
+	WHY EACH ROW IS GUARDED THREE TIMES
+
+	Every row goes through the same three gates, and each one exists because a measured data
+	shape gets past the other two.
+
+	  a. `{{#data-footer.data-<row>.id}}` asks whether core supplied a real row at all. It
+	     has to be a gate on the id rather than on the row object, because a row object that
+	     describes nothing is still truthy. When $wgFooterIcons holds no usable icon,
+	     SkinComponentFooter::getFooterIcons() returns an empty array -- but
+	     formatFooterDataForCurrentSpec() then walks every key it was handed and adds
+	     `className` regardless, so what actually reaches the template is the single-key
+	     object { className: 'noprint' }: no id, no is-empty, no items. A gate on the row
+	     object passes it straight through and the row renders as <ul id="">, an empty list
+	     with a meaningless id. That was reproduced on a live 1.43.9 instance by emptying
+	     $wgFooterIcons, not deduced.
+
+	  b. `{{#data-footer.data-<row>}}` then pushes the row so that everything below reads
+	     with relative keys, exactly as core's own footer template does. The gate above
+	     cannot double as this push: entering a section on the id makes a bare string the
+	     current context, and from inside a string the row's own sibling keys stop
+	     resolving -- `className` and `array-items` both come back empty, which silently
+	     costs the icons row its `noprint` and every row its items. Also measured.
+
+	  c. `{{^is-empty}}` asks whether the row core supplied holds any items. The information
+	     and site-links rows always arrive as fully populated objects, so this is the gate
+	     that matters for them: on an edit form, a history list, a diff or a special page
+	     there is no revision to date and OutputPage::showsCopyright() is false, so the
+	     information row is real but has nothing in it. The Vector build bundled with 1.43
+	     renders "<ul id=\"footer-info\">\n</ul>" on all of those pages; this file renders
+	     nothing there instead.
+
+	Between them, an absent, placeholder or itemless row emits nothing at all rather than an
+	empty <ul>. The three rows then appear in a fixed, unconditional order, so consecutive
+	capture runs are byte-identical (R9) and the footer renders at every viewport with
+	nothing else conditional anywhere in the file (R11).
+
+	A NOTE ON MUSTACHE LOOKUP, WHICH IS WHY `id` IS INTERPOLATED PLAINLY
+
+	MediaWiki compiles templates with LightnCandy's FLAG_MUSTACHELOOKUP, so a name missing
+	from the current frame is searched for in enclosing frames. Inside `array-items` the
+	current frame is the item, so `{{id}}` is the item's own id and `{{{html}}}` its own HTML.
+
+	Writing `{{#id}} id="{{id}}"{{/id}}` to make that attribute conditional looks safer and
+	is not. Measured against this compiler, it stamps the ROW's id onto every <li>: the
+	section makes a bare string the context, the search for `id` skips the frame it came from
+	and lands on the row. `{{#id}} id="{{.}}"{{/id}}` fixes that particular mis-resolution
+	but not the premise -- an item with no id would still make the section fall back to the
+	row's id and duplicate an id the <ul> already carries -- and Mustache mode offers no
+	dot-prefixed or `this.`-prefixed form that suppresses the search. So the item id is
+	interpolated plainly, the way core's own footer template and Vector both do it, and it is
+	correct on every path that supplies footer items on the target release.
+
+	The same string-context behaviour is why the row gate above is a dotted path followed by
+	a re-push of the row rather than a `{{#id}}` wrapper around the markup, and why the <ul>
+	id is a relative `{{id}}` read from the pushed row rather than a `{{.}}` read from a
+	string. The item-level `{{#class}}` carries no risk of its own, because correction 2
+	removed the class from the row and no enclosing frame defines one either, so an item
+	without a class simply contributes nothing.
+
+	SCOPE OF THIS FILE
+
+	Appearance is entirely the stylesheet's business. There is no `style` attribute, no
+	colour value, no directional attribute, no dimension and no message key here: the hooks
+	`blitzy-footer`, `blitzy-footer__inner`, `blitzy-footer__row` with its `--info`,
+	`--places` and `--icons` modifiers, and `blitzy-footer__item` are the whole contract
+	that resources/skins.blitzy.styles/components/Footer.less styles against the tokens
+	(R3, R6). The per-row modifiers exist so that stylesheet can reach one row without an id
+	selector. Every Blitzy class sits alongside core's ids and classes rather than replacing
+	them, and core's item HTML -- including the fake-Codex-button classes core puts on
+	footer icon links, which skinStyles/codex.less restyles -- passes through untouched
+	(R2, R7). No subresource is requested from here, so the only requests this footer makes
+	are the same-origin icon images core builds (R5). The last-edited date inside
+	footer-info-lastmod is the single time-bearing string on the page; it is core's own and
+	is passed through unreformatted (R9).
+--}}
+{{!--
+	`role` is redundant on <footer> but kept so that gadget and user-style selectors keep
+	working and to sidestep a VoiceOver bug. This is the page's only footer, so the landmark
+	needs no accessible name, and no heading is introduced here because the page has exactly
+	one, core's #firstHeading (R10).
+--}}
+<footer id="footer" class="mw-footer blitzy-footer" role="contentinfo" {{{html-user-language-attributes}}}>
+	<div class="blitzy-footer__inner">
+		{{#data-footer.data-info.id}}
+		{{#data-footer.data-info}}
+		{{^is-empty}}
+		<ul id="{{id}}" class="blitzy-footer__row blitzy-footer__row--info{{#className}} {{.}}{{/className}}">
+			{{#array-items}}
+			<li id="{{id}}" class="blitzy-footer__item{{#class}} {{.}}{{/class}}">{{{html}}}</li>
+			{{/array-items}}
+		</ul>
+		{{/is-empty}}
+		{{/data-footer.data-info}}
+		{{/data-footer.data-info.id}}
+		{{#data-footer.data-places.id}}
+		{{#data-footer.data-places}}
+		{{^is-empty}}
+		<ul id="{{id}}" class="blitzy-footer__row blitzy-footer__row--places{{#className}} {{.}}{{/className}}">
+			{{#array-items}}
+			<li id="{{id}}" class="blitzy-footer__item{{#class}} {{.}}{{/class}}">{{{html}}}</li>
+			{{/array-items}}
+		</ul>
+		{{/is-empty}}
+		{{/data-footer.data-places}}
+		{{/data-footer.data-places.id}}
+		{{#data-footer.data-icons.id}}
+		{{#data-footer.data-icons}}
+		{{^is-empty}}
+		<ul id="{{id}}" class="blitzy-footer__row blitzy-footer__row--icons{{#className}} {{.}}{{/className}}">
+			{{#array-items}}
+			<li id="{{id}}" class="blitzy-footer__item{{#class}} {{.}}{{/class}}">{{{html}}}</li>
+			{{/array-items}}
+		</ul>
+		{{/is-empty}}
+		{{/data-footer.data-icons}}
+		{{/data-footer.data-icons.id}}
+	</div>
+</footer>

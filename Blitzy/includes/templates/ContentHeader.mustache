@@ -1,0 +1,234 @@
+{{!
+	ContentHeader.mustache -- the page title at hero scale, the site tagline, core's
+	indicators, and the page-tab cluster.
+
+	Reached from skin.mustache as a partial named ContentHeader. It renders on every one of
+	the twenty-one captured surfaces, so anything volatile in here would break byte-identity
+	(R9) across the whole capture matrix at once, not just on one page. There is nothing
+	generated, timed or randomised below, and the four tab groups are emitted in a fixed
+	order that does not depend on the data.
+
+	TEMPLATE DATA CONSUMED
+
+	Every key is core's; this partial reads nothing Blitzy-specific and nothing from
+	BlitzyViewModel.
+
+	  html-title-heading   Skin::getTemplateData(). The complete h1 element, built by core
+	                       with id="firstHeading", class="firstHeading mw-first-heading",
+	                       the user-language lang and dir attributes, and
+	                       style="display: none" when the heading has been deliberately
+	                       blanked. Interpolated raw -- the one lawful raw interpolation of
+	                       markup in this file. See NOT EMITTED HERE below for why it is
+	                       never rebuilt from html-title.
+	  msg-tagline          Core message `tagline`, whose English value is "From " followed by
+	                       the site name. SkinMustache::getTemplateData() folds it in through
+	                       Message::text(), so it arrives as plain text with magic words
+	                       already expanded and must be interpolated escaped.
+	  msg-namespaces       Core message `namespaces` ("Namespaces"). Accessible name of the
+	                       associated-pages group -- see ACCESSIBLE NAMES.
+	  msg-views            Core message `views` ("Views").
+	  msg-actions          Core message `actions` ("Actions").
+	  msg-variants         Core message `variants` ("Variants").
+	  array-indicators     Skin::getIndicatorsData(). Each entry carries exactly three keys:
+	                       id (already escaped by core as mw-indicator- plus the indicator
+	                       name), class (always the single class mw-indicator) and html.
+	  data-portlets        SkinTemplate::getPortletsTemplateData(). Four members are read, in
+	                       this order: data-associated-pages, data-views, data-actions,
+	                       data-variants. Per portlet this partial uses id, class,
+	                       html-tooltip, is-empty, html-before-portal, html-after-portal and
+	                       array-items; per item it uses html-item.
+
+	The five message keys above exist only because skin.json lists them in the `messages`
+	array of ValidSkinNames.blitzy -- that array is what makes SkinMustache produce the
+	msg- prefixed keys. All five are core keys, so this file introduces no new blitzy-
+	message and adds nothing for the banana checker to document (Gate 2).
+
+	FIDELITY CONTRACT -- the agreement with ContentHeader.less and fidelity.spec.ts
+
+	Core owns the h1 markup, so the hero type cannot hang off a Blitzy class on the heading
+	element itself. The assertion selectors are therefore:
+
+	  .blitzy-content-header .mw-first-heading   88px at 1440px, 56px at 768px, 40px at 390px
+	  .blitzy-content-header__tagline            19px at 1440px and at 768px, 17px at 390px
+
+	ContentHeader.less must reach the heading through that descendant selector, and resolve
+	the values from tokens.less: @blitzy-font-size-display-wide, -mid and -narrow for the
+	heading; @blitzy-font-size-subhead-wide and -narrow for the tagline;
+	@blitzy-line-height-display (0.98), @blitzy-font-family-display and
+	@blitzy-color-text-primary for the heading treatment -- switched on
+	@blitzy-min-width-breakpoint-tablet (768px) and @blitzy-min-width-breakpoint-desktop
+	(1024px). No length, colour or font is declared here: this file carries no style
+	attribute and no colour literal (R3).
+
+	768px is the trap width. The middle display band spans 768px to 1023px, so the heading is
+	the only value in the entire skin that changes at exactly 768px -- the navigation card is
+	still its full 76px because that disclosure applies below 768px, and the card grid is
+	still two columns because that applies at and above 768px. Nothing below is conditionally
+	omitted on viewport or on state, because a computed-style assertion against an absent
+	element fails rather than skips (R11).
+
+	Component 11's hook is .blitzy-tabs, nested as the last child of .blitzy-content-header
+	so that this partial has a single root element and one predictable insertion point.
+
+	The 2.5px active-tab underline resolves in Cards.less against the class core puts on the
+	current item, and that class is `selected`, NOT `active`. Verified by rendering
+	Ada Lovelace on MediaWiki 1.43.9: the current tab arrives as
+	class="selected mw-list-item". SkinTemplate::tabAction() and the content-navigation
+	builders set 'class' => 'selected' on the current tab, whereas the 'active' flag that
+	SkinComponentListItem turns into an `active` class is used by the personal and user
+	menus, not by these four. Styling only .active here would silently produce no underline
+	at all, which is why the distinction is recorded rather than left to be discovered. Both
+	are cheap to cover, so Cards.less should accept either.
+
+	NOT EMITTED HERE, DELIBERATELY
+
+	  A hand-rolled h1. Rebuilding the heading from html-title would leave the
+	  aria-labelledby="firstHeading" reference on #bodyContent pointing at a second element,
+	  put two h1 elements or two id="firstHeading" attributes on the page -- a blocking R10
+	  failure on all twenty-one captures -- and lose core's blanked-heading and
+	  user-language handling. Core's style="display: none" arrives inside the raw string and
+	  is core's to emit; it is not stripped.
+
+	  #contentSub, #contentSub2, html-subtitle and html-undelete-link. Those belong to
+	  ContentBody.mustache and are emitted exactly once, there. The requirement that this
+	  header sit over the tagline, indicator and subtitle regions is met by visual stacking,
+	  not by duplicating elements; a second #contentSub would be a duplicate id and would
+	  break the editor-facing contract core annotates on it.
+
+	  The message `sitesubtitle`. It does not exist in core's message file, so referencing it
+	  would fail the banana checker and render nothing.
+
+	  html-user-language-attributes. It emits a dir attribute, and this file carries no
+	  directional attribute and makes no markup-order assumption; tab alignment and the
+	  current-tab underline are flip-aware stylesheet concerns (R6).
+
+	  Anything beyond the title, the tagline, the indicators and the four tab groups. No
+	  breadcrumb, no byline, no share control, no reading-time estimate (R12).
+
+	ACCESSIBLE NAMES
+
+	Four nav landmarks appear here and the page carries more elsewhere, so each one is named
+	(R10). The names come from core messages rather than from each portlet's own `label`,
+	because SkinComponentMenu::getMenuLabel() falls back to the raw menu name when no message
+	exists: `associated-pages` has no core message, so `label` would render the literal
+	string "associated-pages" as that landmark's accessible name -- clean to an automated
+	scan, meaningless to a screen-reader user. The core message `namespaces` is used instead,
+	which is also what this region has historically been called. The other three groups use
+	msg-views, msg-actions and msg-variants for symmetry and so that skin.json's message list
+	documents the whole set. Note that `label` would read "More" for the actions group, since
+	getMenuLabel() runs after the rename described next.
+
+	THE p-cactions RENAME
+
+	SkinComponentMenu renames the `actions` menu to `cactions` before deriving its id, so the
+	data member data-actions yields id="p-cactions" and class "mw-portlet mw-portlet-cactions".
+	Core does this on purpose, for compatibility with gadgets that have targeted #p-cactions
+	since MonoBook. Both values are re-emitted verbatim and neither is "corrected" to
+	p-actions (R2, R7). Every portlet id and class is re-emitted as core supplied it, with the
+	Blitzy class placed alongside rather than instead of it, and every item is emitted through
+	html-item so that core's mw-list-item class, its `selected` class on the current tab, its
+	per-item id, title and accesskey attributes and any extra class such as mw-watchlink all
+	survive untouched. html-item is used rather than rebuilding the list item around the inner
+	html, which is the alternative core allows but which would mean re-declaring every one of
+	those attributes by hand.
+
+	The space before html-tooltip is deliberate. Linker::tooltip() returns an attribute
+	fragment produced by Xml::expandAttributes(), which prefixes every attribute with its own
+	space, so the tag is well formed either way; keeping the space means the tag stays well
+	formed even if that fragment ever arrives unprefixed. When a portlet has no tooltip the
+	only consequence is one space before the closing angle bracket, which is valid and
+	byte-stable.
+
+	THE TWO-LAYER GUARD ON EACH GROUP
+
+	The section on the dotted path suppresses a group whose menu core did not supply at all.
+	It cannot suppress an empty menu, because a portlet is always a non-empty hash -- it has
+	an id and a class even with no items -- so the inverted section on is-empty does that
+	second job. Both layers are needed: on a monolingual wiki data-variants exists with
+	is-empty true, and it must produce nothing at all rather than a named landmark wrapped
+	around an empty list. html-before-portal and html-after-portal are passed through for the
+	same reason they are counted in is-empty: they carry SkinAfterPortlet output, so dropping
+	them would discard extension content from a menu that the guard had already decided was
+	worth rendering.
+
+	NOTES FOR ContentHeader.less
+
+	The indicators wrapper carries core's mw-indicators class alongside the Blitzy one, so
+	gadgets and extensions that append into .mw-indicators keep working and core's
+	interface-indicators feature -- declared in skin.json and consisting of a single
+	float rule on that class -- is not defeated by the re-wrap (R8). Because indicators are
+	emitted after the heading here rather than before it, that inherited float has to be
+	dealt with explicitly in the stylesheet rather than relied upon. The wrapper itself is
+	unconditional, which keeps the DOM stable across pages with and without indicators and
+	gives those gadgets a node to append to either way.
+
+	Each group also carries a modifier class so the namespace tabs, the view tabs, the
+	actions menu and the variants selector can be laid out differently without the stylesheet
+	having to reach for core's mw-portlet- classes.
+
+	One measured warning about the tab links, recorded because it is invisible in the markup.
+	The tab cluster is the only closely spaced interactive group this partial produces, and
+	with no stylesheet present its links render at the browser's default inline line box:
+	17px tall with roughly 12px between neighbours. Both axe-core 4.13.0 and Lighthouse
+	13.4.0 report that as a serious target-size finding on eight nodes, which R10 treats as
+	blocking. Nothing in the markup causes it and no markup change can fix it -- the size and
+	spacing are the stylesheet's to set, and core's @min-size-interactive-touch (44px, the
+	same figure the design gives the navigation call-to-action pills) is the floor to reach
+	for. If the design deliberately specifies a smaller target, implement the design and flag
+	it for review; what must not happen is the defaults being left as they are.
+
+	Both wrappers can legitimately render empty and still have to be there, because R11's
+	assertions fail rather than skip against an absent element. Verified on the 1.43.9
+	instance: Special:RecentChanges produces no tabs and no indicators, so both come out as
+	empty elements, while an article produces three groups as an anonymous user and four only
+	where language variants exist. Any border, underline or padding on .blitzy-tabs or on
+	.mw-indicators therefore needs an :empty guard, or a stray rule will appear on the special
+	pages in the capture matrix.
+}}
+<div class="blitzy-content-header">
+	<div class="blitzy-content-header__title">{{{html-title-heading}}}</div>
+	<p class="blitzy-content-header__tagline">{{msg-tagline}}</p>
+	<div class="mw-indicators blitzy-content-header__indicators">
+{{#array-indicators}}
+		<div id="{{id}}" class="{{class}}">{{{html}}}</div>
+{{/array-indicators}}
+	</div>
+	<div class="blitzy-tabs">
+{{#data-portlets.data-associated-pages}}
+{{^is-empty}}
+		<nav class="blitzy-tabs__group blitzy-tabs__group--associated-pages" aria-label="{{msg-namespaces}}">
+			<div id="{{id}}" class="blitzy-tabs__portlet{{#class}} {{.}}{{/class}}" {{{html-tooltip}}}>
+				{{{html-before-portal}}}<ul class="blitzy-tabs__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{{html-after-portal}}}
+			</div>
+		</nav>
+{{/is-empty}}
+{{/data-portlets.data-associated-pages}}
+{{#data-portlets.data-views}}
+{{^is-empty}}
+		<nav class="blitzy-tabs__group blitzy-tabs__group--views" aria-label="{{msg-views}}">
+			<div id="{{id}}" class="blitzy-tabs__portlet{{#class}} {{.}}{{/class}}" {{{html-tooltip}}}>
+				{{{html-before-portal}}}<ul class="blitzy-tabs__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{{html-after-portal}}}
+			</div>
+		</nav>
+{{/is-empty}}
+{{/data-portlets.data-views}}
+{{#data-portlets.data-actions}}
+{{^is-empty}}
+		<nav class="blitzy-tabs__group blitzy-tabs__group--actions" aria-label="{{msg-actions}}">
+			<div id="{{id}}" class="blitzy-tabs__portlet{{#class}} {{.}}{{/class}}" {{{html-tooltip}}}>
+				{{{html-before-portal}}}<ul class="blitzy-tabs__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{{html-after-portal}}}
+			</div>
+		</nav>
+{{/is-empty}}
+{{/data-portlets.data-actions}}
+{{#data-portlets.data-variants}}
+{{^is-empty}}
+		<nav class="blitzy-tabs__group blitzy-tabs__group--variants" aria-label="{{msg-variants}}">
+			<div id="{{id}}" class="blitzy-tabs__portlet{{#class}} {{.}}{{/class}}" {{{html-tooltip}}}>
+				{{{html-before-portal}}}<ul class="blitzy-tabs__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{{html-after-portal}}}
+			</div>
+		</nav>
+{{/is-empty}}
+{{/data-portlets.data-variants}}
+	</div>
+</div>

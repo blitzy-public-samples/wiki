@@ -1,0 +1,130 @@
+{{!
+	Category links footer: the pill-chip treatment of a page's category list.
+
+	One element deep, on purpose. Core has already built this entire region, so the only
+	thing this partial adds is a class for the stylesheet to hang the treatment on.
+
+	No literal doubled braces appear anywhere in this comment. A Mustache comment ends at
+	the first doubled closing brace it meets, so an inlined tag example would terminate
+	the comment early and leak the remainder of it onto the page as text. Tags are
+	therefore described in prose below rather than quoted.
+
+	DATA CONSUMED
+
+	string html-categories
+		The page's finished category block, produced by Skin::getCategories() and placed
+		at the root of the template data by SkinMustache::getTemplateData(). Finished
+		HTML, not a list of names. It already contains, and this partial therefore never
+		authors:
+
+		  div#catlinks.catlinks      the outer block. Also carries .catlinks-allhidden
+		                             when nothing inside it is visible to this user.
+		  div#mw-normal-catlinks     core's own label for the region, a link built from
+		                             the pagecategories message, then a colon separator,
+		                             then a ul holding one li per category.
+		  div#mw-hidden-catlinks     present only when the page carries hidden
+		                             categories. Also carries exactly one of
+		                             .mw-hidden-cats-user-shown,
+		                             .mw-hidden-cats-ns-shown or
+		                             .mw-hidden-cats-hidden.
+
+	Rebuilding that list from parts is the one mistake this partial exists to prevent.
+	Hand-rolling a ul here would silently drop both #mw-hidden-catlinks and core's label
+	along with it, and those are selectors rule R2 requires to survive the redesign with
+	their semantics unchanged. There is nothing here to iterate and nothing to name: emit
+	the string whole and unaltered.
+
+	WHY THE SECTION GUARD, AND WHAT IT ACTUALLY GUARDS
+
+	Wrapping the emission in a section on html-categories is the idiom core-conformant
+	skins use for a raw-HTML key that may be absent, the same shape the root template
+	uses for html-undelete-link, so a missing value yields no wrapper at all rather than
+	an empty one.
+
+	The guard's reach is worth stating exactly, because the obvious reading of it is
+	wrong in two places and both are easy to trip over later.
+
+	First, this key is never actually absent. Skin::getCategories() wraps its inner
+	content unconditionally on every release the manifest supports, so a page with no
+	categories still yields div#catlinks.catlinks.catlinks-allhidden with nothing inside
+	it. Only the inner Skin::getCategoryLinks() returns an empty string. The guard is
+	therefore defensive rather than load-bearing: it costs one line, and it keeps this
+	partial correct if the key is ever null, false, or simply not supplied.
+
+	Second, the guard does not fire on an empty string. MediaWiki compiles Mustache with
+	LightnCandy, whose sections treat an empty string, and the string zero, and the
+	integer zero, as truthy, and skip only on null, false, an empty array, or an absent
+	key. That is exactly why SkinMustache normalises its genuinely optional HTML keys to
+	null before handing them over, and why html-categories, never being empty, receives
+	no such normalisation.
+
+	The empty-region case is consequently handled where it belongs, in CSS rather than in
+	markup: core's interface.category.less gives .catlinks-allhidden a display of none,
+	and that rule reaches the page because skin.json enables the interface-category skin
+	feature.
+
+	That leaves one constraint on the stylesheet, which is the main reason this note
+	exists. components/Footer.less must hang the region's box chrome, meaning its fill,
+	border, radius, padding and margin, on the chips and on .catlinks, and never on
+	.blitzy-category-footer itself. Core's rule reaches only div#catlinks and says
+	nothing about this wrapper, which stays a normal-flow block even when its only child
+	generates no box at all. Chrome placed on .catlinks therefore inherits that display
+	of none for free and disappears along with the content, whereas chrome placed on the
+	wrapper outlives it and paints.
+
+	There are two distinct failure modes here, and both were measured in a browser
+	against this exact markup rather than reasoned about. A wrapper carrying background,
+	border, radius and padding renders a visibly empty box on every all-hidden page: its
+	content box is zero pixels high, so every rendered pixel is padding and border, and
+	it announces a region that has no content while contributing nothing to the
+	accessibility tree. A wrapper carrying only a margin paints no box but still injects
+	an invisible gap. Carrying no chrome at all, which is how it computes today, the
+	wrapper collapses to zero height and becomes indistinguishable from not being there.
+
+	WHAT THIS PARTIAL DELIBERATELY DOES NOT GROW
+
+	The wrapper is a plain div carrying exactly one class. Every omission is deliberate:
+
+	  no id            ids must be unique page-wide and this region renders on every
+	                   content page, so carrying none is the cheapest guarantee against
+	                   a collision, and the cheapest way to emit nothing that could
+	                   differ between two identical requests (R9, R10).
+	  no nav landmark  core puts no landmark here. Adding one would introduce a region
+	                   that then has to be named, for no navigational gain (R10).
+	  no heading       div#mw-normal-catlinks already opens with core's pagecategories
+	                   link, which is this region's label. A second one would duplicate
+	                   it and disturb heading order (R10).
+	  no message key   nothing here is worded by this skin, so no key is referenced and
+	                   none is added to i18n/en.json, i18n/qqq.json or the manifest's
+	                   messages list, where banana-checker would then require it to be
+	                   documented (Gate 2).
+	  no style attr    every visual decision, meaning the brand-tinted chip fill, the
+	                   purple labels and the pill radius, resolves in
+	                   components/Footer.less against skins.blitzy.tokens, the only
+	                   module permitted a colour literal (R3).
+	  no direction     no left-or-right ordering and no directional attribute, so
+	                   direction-sensitive rules stay in the flip-aware stylesheet that
+	                   core's style pipeline can flip and where noflip is available (R6).
+	  no behaviour     no collapse, no counter, no affordance for showing more. The
+	                   chips are presentation only (R12).
+
+	Renaming, dropping or wrapping away any core id or class is out of the question for
+	the same reason. Footer.less is allowed to style this region directly only because
+	the category block is skin output rather than a core ResourceLoader module, and that
+	licence holds only while the selectors reaching the page are the ones core produced
+	(R7).
+
+	INVOCATION
+
+	ContentBody.mustache includes this file as a bare CategoryFooter partial reference,
+	immediately after the body-content key and inside div#bodyContent, at the same
+	context level as that key. No parent section pushes a context, so html-categories is
+	resolved from the root template data and this file must not assume otherwise.
+	Partials resolve by filename, so the exact name CategoryFooter.mustache is part of
+	the contract.
+
+	Rendered output, in full: one div.blitzy-category-footer wrapping core's block.
+}}
+{{#html-categories}}
+<div class="blitzy-category-footer">{{{.}}}</div>
+{{/html-categories}}

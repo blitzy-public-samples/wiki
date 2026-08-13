@@ -46,16 +46,23 @@
 						"skins.blitzy.js"
 					],
 					"messages": [
+						"blitzy-announcement-dismiss",
 						"blitzy-jumptocontent",
 						"tooltip-p-logo",
 						"navigation-heading",
 						"personaltools",
+						"blitzy-personal-toggle",
 						"search",
 						"searchbutton",
 						"searcharticle",
 						"searchsuggest-search",
 						"tagline",
+						"namespaces",
+						"views",
+						"actions",
+						"variants",
 						"toc",
+						"blitzy-toc-toggle",
 						"categories",
 						"hide"
 					]

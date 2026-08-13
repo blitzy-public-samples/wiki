@@ -1,0 +1,231 @@
+//
+// == Blitzy design language -- core Less variable overrides ==
+//
+// This file is the Less import match for `mediawiki.skin.variables.less` when Blitzy is the
+// active skin. It is reached through one manifest registration,
+//
+//     "SkinLessImportPaths": { "blitzy": "resources/mediawiki.less/blitzy" }
+//
+// in `skin.json`, which places this directory at the head of the Less import path for every
+// stylesheet ResourceLoader compiles while Blitzy is active. Core and extension module
+// stylesheets all open by importing `mediawiki.skin.variables.less` by that name, so the
+// assignments below are the values *their* CSS is compiled against.
+//
+// That is the whole mechanism, and it is why this is the highest-leverage file in the package:
+// the edit form, the diff, the page history and its pagers, `Special:Preferences`, the changes
+// lists, and every OOUI and Codex widget adopt the Blitzy palette and typography from here,
+// with not one core stylesheet edited anywhere. Core immutability (R1) is satisfied for the
+// entire style layer by variable override alone. Where an override cannot express a treatment,
+// the lawful next step is a `skinStyles/` entry -- never an edit to core.
+//
+// -- BOTH NAMES ARE FIXED, AND A MISTAKE IN EITHER FAILS SILENTLY --
+//
+// The directory must be exactly `blitzy`, lower case, matching the registered skin name, and
+// the file must be exactly `mediawiki.skin.variables.less`, plural. Core ships
+// `resources/src/mediawiki.less/mediawiki.skin.variables.less` as a fallback match for skins
+// that do not define this file themselves, and its entire body is an import of the defaults.
+// A mis-spelled directory or filename therefore raises NO error of any kind: the import
+// quietly matches core's fallback, every surface renders in core's neutral defaults, and every
+// fidelity and contrast assertion downstream fails with nothing pointing at the cause. If
+// Blitzy values are ever absent at run time, verify this path against `skin.json` before
+// suspecting any value below.
+//
+// -- WHAT THIS FILE MAY CONTAIN --
+//
+// Two imports, variable assignments, and comments. Not one selector, not one property
+// declaration, not one mixin, not one media query, and so no CSS output of its own. A selector
+// here would restyle a core-owned component from a skin-owned stylesheet, which is exactly
+// what the skinStyles rule (R7) forbids; core components are restyled through the twelve
+// `skinStyles/` entries instead. And because nothing here is a property declaration, nothing
+// here is directional: the flip-safe requirement (R6) is satisfied vacuously and no `@noflip`
+// annotation is needed anywhere. Keep it that way.
+//   No colour literal appears below either. Every colour resolves to a `@blitzy-*` token from
+//   `resources/skins.blitzy.tokens/tokens.less`, which is the one file `.stylelintrc.json`
+//   exempts from the colour-literal prohibition (R3). Token indirection scopes to colour, so
+//   the font stacks and the line height at the end are lawful as plain values.
+//
+// -- EVERY COMMENT HERE IS A `//` LINE COMMENT, AND THAT IS LOAD-BEARING --
+//
+// Less strips line comments and preserves block comments, emitting a preserved comment into
+// the compiled output of every file that imports it. Measured rather than assumed: a probe
+// file holding one block comment and one line comment, imported by a single consumer,
+// compiled to output carrying the block comment and not the line comment. This file is
+// imported by name by *every* core and extension module stylesheet the wiki serves, so one
+// block comment here would be duplicated into each of those payloads and counted against the
+// 60KB gzipped CSS budget `tools/perf-baseline.js` measures. Core's own
+// `mediawiki.skin.defaults.less`, which sits in exactly this position, uses line comments
+// throughout for the same reason. Do not convert any comment in this file to block form.
+//
+// -- THE `var()` FORM, AND WHY IT IS A COMPLIANCE REQUIREMENT RATHER THAN A STYLE --
+//
+// Every mode-varying override below is written `var( --<core-name>, <blitzy token> )`. The
+// custom property is published by `../../skins.blitzy.tokens/customProperties.less` at `:root`
+// and remapped under `html.skin-theme-clientpref-night` and under
+// `@media ( prefers-color-scheme: dark ) html.skin-theme-clientpref-os`. That indirection is
+// the ONLY channel through which the night palette reaches unmodified core CSS: written as a
+// plain value, a core-owned surface would keep its light colour on the night page surface, and
+// the blocking accessibility gate (R10) measures precisely that on the five dark captures.
+// Core proves the idiom itself at `mediawiki.skin.defaults.less` L421-427, and the Codex theme
+// vendored inside core declares this very family the same way -- 103 such declarations on the
+// LTS runtime target, `@color-base`, `@color-emphasized`, `@color-subtle`, `@color-progressive`,
+// `@background-color-base` and `@border-color-base` among them. That is also the evidence that
+// core module Less tolerates a `var()`-valued token: the reference skin imports that theme, so
+// every core module already compiles against one in production.
+//
+// CONSEQUENCE FOR EVERY CONSUMER OF THIS API. A `var()`-valued Less variable is an opaque
+// string to Less. It cannot be passed to a Less colour function -- `fade()`, `darken()`,
+// `lighten()`, `mix()` -- and it cannot be used in a media-query condition. A stylesheet
+// needing either must read the raw `@blitzy-*` token from `tokens.less` instead. Core wraps no
+// overridden variable below in a colour function and uses none in a media query, verified by
+// grep over `mediawiki/resources/**/*.less`; the only uses are mixin arguments, which assign
+// the value straight to a property.
+//
+// -- TWO CORE TREES, AND WHAT THE LINE CITATIONS BELOW REFER TO --
+//
+// Every `L<n>` citation in this file points at the reference checkout,
+// `mediawiki/resources/src/mediawiki.less/mediawiki.skin.defaults.less` (488 lines), which is
+// the tree read for API conformance. The runtime target is the 1.43 LTS line, whose copy of
+// that file is shorter, so THE NAMES AND VALUES GOVERN AND THE LINE NUMBERS DO NOT: if a
+// citation stops matching, correct the number rather than the assignment. Every override below
+// was checked against both trees. Twenty-two of the twenty-three names are declared exactly
+// once on the LTS target with the same value the citation gives; the twenty-third,
+// `@line-height-content`, is noted at its own assignment.
+//
+// @see resources/skins.blitzy.tokens/tokens.less for every value referenced below and its provenance
+// @see resources/skins.blitzy.tokens/customProperties.less for the properties these values fall back from
+// @see skin.json for the `SkinLessImportPaths` registration that makes this file the import match
+//
+
+// Core's variable API -- every variable core and extensions may use in their style modules --
+// together with the public Codex mixins core imports at its own L29. The filename is plural,
+// `defaults`; core's instruction block spells it singular at L22 and that spelling resolves to
+// nothing.
+@import 'mediawiki.skin.defaults.less';
+
+// The Blitzy token surface. The path resolves out of `blitzy/`, up through `mediawiki.less/`
+// to `resources/`, and into `skins.blitzy.tokens/`. That file imports nothing and emits no
+// CSS, so this can neither close a cycle nor add a byte to any payload.
+//
+// DELIBERATELY ABSENT HERE, and the single likeliest mistake in this file: core's instruction
+// block (L23-24) tells skins to import a Codex design-token theme at this exact point, and
+// both reference-skin copies of this file do precisely that. Blitzy does not. The package
+// takes no component-library dependency -- core and the reference skin pin different major
+// versions of that token package, so a skin carrying its own would have to choose one and
+// drift from the other -- and an implicit unpinned dependency would cut against exact
+// dependency pinning (R15). The import would silently succeed, layering a second set of values
+// over this one and changing the meaning of every override below it. The public Codex *mixins*
+// are a separate matter and arrive automatically through the defaults import above.
+@import '../../skins.blitzy.tokens/tokens.less';
+
+// Overrides follow both imports, always. Core declares two of these names twice -- `@color-link`
+// at L39 and again at L154, `@color-link--visited` at L40 and again at L158 -- and Less
+// resolution is last-wins, so an assignment placed above the defaults import would be silently
+// overwritten by core's second declaration.
+
+// -- Text --
+// Body copy and secondary text on every core-owned surface: the edit form's labels and help
+// text, the diff's metadata, the history and changes lists, the preferences panes.
+@color-base: var( --color-base, @blitzy-color-text-secondary );
+@color-subtle: var( --color-subtle, @blitzy-color-text-muted );
+// DEVIATION, DELIBERATE AND JUSTIFIED: this is not one of the enumerated overrides, and it is
+// recorded here so it reads as decided rather than smuggled in. It must also be entered in
+// `DELIVERY.md` as a deviation from the enumerated count.
+//   The authoritative token mapping classes core's `@color-emphasized` (L127) an exact match
+//   to the Blitzy primary text colour and therefore omits it. That is true of the LIGHT
+//   value, and the line below consequently changes nothing in light mode. It is added for the
+//   night mode, because the property IS mode-varying -- `customProperties.less` remaps it in
+//   both night blocks -- and because `mediawiki.skinning/elements.less` colours every `h1`-`h6`
+//   and every `code` block with it under the `elements` skin feature this skin declares, with
+//   `Special:Preferences`, the Codex table pager, the message boxes and the changes-list
+//   filters doing the same. Left at core's plain literal, those surfaces would paint the
+//   darkest type on the night page surface at roughly 1.05:1, which the blocking accessibility
+//   gate (R10) would fail on four of the five dark captures. Zero cost in light mode,
+//   correctness in night mode.
+//   No colour literal is spelled in this note, deliberately: this file is not the exempted
+//   token module, so the colour-literal sweep must stay a plain grep over the whole file with
+//   no risk of this very paragraph raising a false positive.
+@color-emphasized: var( --color-emphasized, @blitzy-color-text-primary );
+
+// -- Links --
+// THE DESIGN'S MOST EASILY VIOLATED RULE: link text is the heading navy and NEVER the brand
+// purple. The purple belongs to the 2px underline at 2px offset, authored in
+// `components/Prose.less`. Do not repoint the first line below at `@blitzy-color-purple`.
+@color-link: var( --color-link, @blitzy-color-link );
+@color-link--visited: var( --color-link--visited, @blitzy-color-link--visited );
+// Written in the `var()` form even though `customProperties.less` publishes no
+// `--color-link-external`: an unpublished property falls through to the fallback, which is the
+// correct light value, and the indirection is then already in place if the property is ever
+// published. Deliberate, not an oversight -- do not simplify it to a plain value.
+//   MEASURED CONSEQUENCE, so the trap is documented rather than latent. Because the property is
+//   unpublished, this is the one colour below that CANNOT change in night mode: a browser reading
+//   core's compiled `mediawiki.skinning.interface` CSS on a night page was observed resolving it
+//   to the light teal in both modes. Fixing that is not this file's business and must not be
+//   attempted here -- publishing a property emits CSS, which this file may never do. The remedy
+//   is a night value in `tokens.less` plus a `--color-link-external` declaration in the night
+//   blocks of `customProperties.less`; the line below then picks it up with no edit.
+@color-link-external: var( --color-link-external, @blitzy-color-link-external );
+
+// -- Progressive --
+// One family, four names, two jobs at once: every progressive affordance core renders -- widget
+// links, primary buttons, selected and checked states -- and the edit form's 2px purple focus
+// ring, which core draws from the outline and box-shadow members. All four stay on the one
+// token; splitting them would break the focus ring while leaving the buttons looking correct.
+@color-progressive: var( --color-progressive, @blitzy-color-purple );
+@border-color-progressive: var( --border-color-progressive, @blitzy-color-purple );
+@outline-color-progressive--focus: var( --outline-color-progressive--focus, @blitzy-color-purple );
+@box-shadow-color-progressive--focus: var( --box-shadow-color-progressive--focus, @blitzy-color-purple );
+
+// -- Surfaces and state fills --
+// The page surface, and the fills core paints state with. The progressive-subtle tint is one
+// value carrying four treatments -- the infobox header row, the wikitable header row, the
+// hatnote and message-box fill, and the category chips -- so a wrong value here breaks four
+// surfaces at once. The success and error fills are the diff's added and removed rows.
+@background-color-base: var( --background-color-base, @blitzy-color-surface-base );
+@background-color-progressive-subtle: var( --background-color-progressive-subtle, @blitzy-color-brand-50 );
+@background-color-success-subtle: var( --background-color-success-subtle, @blitzy-color-success-bg );
+@background-color-error-subtle: var( --background-color-error-subtle, @blitzy-color-error-bg );
+@background-color-warning-subtle: var( --background-color-warning-subtle, @blitzy-color-warning-bg );
+
+// -- Destructive --
+// Rollback, delete and undo affordances, and the error text core renders on a failed form
+// submission. `tokens.less` flags this value as measuring below the body-text contrast minimum
+// on the light page surface and specifies it for icons, borders and large labels; it is
+// implemented at the specified value there and carried through unchanged here.
+@color-destructive: var( --color-destructive, @blitzy-color-error );
+
+// -- Borders --
+// Form-control boundaries take the light border. The hairline serves both of core's subtle and
+// muted members, because the design draws a single hairline weight on cards, tables and
+// infoboxes rather than core's two-step scale. This is what puts a Blitzy hairline on the diff
+// table, the history rows, the pagers and the preferences fieldsets.
+@border-color-base: var( --border-color-base, @blitzy-color-border-light );
+@border-color-subtle: var( --border-color-subtle, @blitzy-color-border-hairline );
+@border-color-muted: var( --border-color-muted, @blitzy-color-border-hairline );
+
+// -- Typography --
+// PLAIN VALUES, NOT `var()`, AND THAT IS CORRECT: not one of the four varies by mode, and core
+// declares all four as plain literals -- `@line-height-content` sits immediately below core's
+// seven `var()`-backed line heights and is itself plain -- so there is no indirection to
+// preserve. Each family ends in a generic CSS family, so a surface degrades predictably if a
+// woff2 fails to load, and no host-resolved platform stack appears in any of them, because
+// those resolve to a different typeface on every machine and would defeat byte-identical
+// capture.
+//   These three family lines are the highest-leverage change in the whole style layer, and the
+//   claim is verified rather than asserted: core's own diff stylesheet reads
+//   `@font-family-monospace` directly and compiles to the Blitzy monospace stack, while the edit
+//   form, the page history and the preferences panes set no family of their own and inherit the
+//   body family this API supplies. No stylesheet of theirs is edited to achieve either.
+@font-family-base: @blitzy-font-family-base;
+@font-family-heading-main: @blitzy-font-family-display;
+@font-family-monospace: @blitzy-font-family-monospace;
+// The prose reading rhythm, a remap of core's `1.6` rather than a match to it. Agrees with the
+// `--line-height-content` value `customProperties.less` publishes as its `:root` anchor.
+//   VERSION NUANCE, VERIFIED ON BOTH TREES AND RECORDED SO IT IS NOT MISREAD AS A TYPO. On the
+//   reference checkout core declares this variable (L428) and core stylesheets read it, so the
+//   line below is an override. On the 1.43 LTS runtime target core declares it nowhere -- not in
+//   its defaults and not in its vendored Codex theme -- and no core stylesheet there reads it,
+//   so the line below simply defines it. Both outcomes are correct and neither can fail: Less
+//   permits the definition, the value is identical either way, and defining it means Blitzy's
+//   own stylesheets can read the reading rhythm from this API on both trees. Keep the
+//   assignment.
+@line-height-content: @blitzy-line-height-prose;

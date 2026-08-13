@@ -1,0 +1,2001 @@
+{
+	"artifact": "contrast-report",
+	"inputs": [
+		"resources/skins.blitzy.tokens/tokens.less",
+		"resources/skins.blitzy.tokens/customProperties.less"
+	],
+	"output": "screenshots/audits/contrast.json",
+	"modes": [
+		"light",
+		"dark"
+	],
+	"thresholds": {
+		"body": 4.5,
+		"large": 3
+	},
+	"interpretation": "Each pairing is measured against the minimum its text class requires: 4.5:1 for body text, 3:1 for large text and for non-text affordances. Automated measurement covers only part of accessibility, so this report is a blocking floor and not a claim of conformance to any accessibility standard.",
+	"summary": {
+		"totalPairs": 68,
+		"passingPairs": 68,
+		"failingPairs": 0,
+		"declaredPairingsMeasured": 28,
+		"declaredPairingsAddedByReconciliation": 1,
+		"darkPaletteValuesExpected": 10,
+		"darkPaletteValuesMeasured": 10,
+		"darkPurpleAssertionVerdict": "pass",
+		"accessibilityFindingsCarried": 5,
+		"violationCount": 0,
+		"verdict": "pass",
+		"light": {
+			"pairs": 36,
+			"passing": 36,
+			"failing": 0,
+			"minimumRatio": 4.08,
+			"minimumRatioRole": "Destructive accent on the page surface",
+			"minimumRatioPair": "@blitzy-color-error on @blitzy-color-surface-base"
+		},
+		"dark": {
+			"pairs": 32,
+			"passing": 32,
+			"failing": 0,
+			"minimumRatio": 4.71,
+			"minimumRatioRole": "Destructive accent on the page surface",
+			"minimumRatioPair": "@blitzy-color-error on @blitzy-color-dark-surface"
+		}
+	},
+	"pairs": [
+		{
+			"mode": "light",
+			"role": "Destructive accent on the page surface",
+			"foregroundToken": "@blitzy-color-error",
+			"foregroundHex": "#ec3636",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 4.08,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": null,
+			"fontWeight": null,
+			"justification": "Non-text affordance and large labels only: icons, borders and large labels. The declaration flags that this value does not clear the body minimum and records that it must never carry body-size text.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Inline link text",
+			"foregroundToken": "@blitzy-color-link",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 18.43,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700. An inline link is bold heading-coloured text; the purple lives in the underline, which is measured separately.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-link",
+					"@blitzy-color-text-heading"
+				]
+			},
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Visited inline link text",
+			"foregroundToken": "@blitzy-color-link--visited",
+			"foregroundHex": "#4c307e",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 10.34,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700, the visited state of body-size inline link text.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "External link text",
+			"foregroundToken": "@blitzy-color-link-external",
+			"foregroundHex": "#157f75",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 4.86,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700, the external-link colour on body-size inline link text.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-link-external",
+					"@blitzy-color-teal"
+				]
+			},
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Inline link underline",
+			"foregroundToken": "@blitzy-color-link-underline",
+			"foregroundHex": "#5b39f3",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 6.32,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": null,
+			"fontWeight": null,
+			"justification": "Non-text affordance: a 2px underline. The 3:1 floor for user-interface components and graphical objects applies rather than a text minimum.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-link-underline",
+					"@blitzy-color-purple"
+				]
+			},
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Category chip label, hover state",
+			"foregroundToken": "@blitzy-color-purple",
+			"foregroundHex": "#5b39f3",
+			"backgroundToken": "@blitzy-color-brand-100",
+			"backgroundHex": "#e2defd",
+			"ratio": 4.84,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 700,
+			"justification": "14px at weight 700 on the deeper brand tint a hovered chip takes. Tighter than the resting state, which is why it is measured rather than assumed to follow from it.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Category chip label",
+			"foregroundToken": "@blitzy-color-purple",
+			"foregroundHex": "#5b39f3",
+			"backgroundToken": "@blitzy-color-brand-50",
+			"backgroundHex": "#f2f0fe",
+			"ratio": 5.62,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 700,
+			"justification": "14px at weight 700 on the brand tint that fills the chip.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Progressive label on the page surface",
+			"foregroundToken": "@blitzy-color-purple",
+			"foregroundHex": "#5b39f3",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 6.32,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700, the progressive colour used as label text on the page surface.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Focus ring on the page surface",
+			"foregroundToken": "@blitzy-color-purple",
+			"foregroundHex": "#5b39f3",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 6.32,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": null,
+			"fontWeight": null,
+			"justification": "Non-text affordance: a 2px outline at 2px offset. The 3:1 floor for user-interface components applies rather than a text minimum.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Outline call-to-action label on its pill fill",
+			"foregroundToken": "@blitzy-color-purple",
+			"foregroundHex": "#5b39f3",
+			"backgroundToken": "@blitzy-color-surface-card",
+			"backgroundHex": "#ffffff",
+			"ratio": 6.32,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 700,
+			"justification": "17px at weight 700 on the white pill fill. Below the bold large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Table-of-contents active-section label",
+			"foregroundToken": "@blitzy-color-purple",
+			"foregroundHex": "#5b39f3",
+			"backgroundToken": "@blitzy-color-surface-card",
+			"backgroundHex": "#ffffff",
+			"ratio": 6.32,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 700,
+			"justification": "14px at weight 700, the active-section label on the table-of-contents card fill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Progressive label on the page surface, active state",
+			"foregroundToken": "@blitzy-color-purple--active",
+			"foregroundHex": "#310dd4",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 9.82,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700, the pressed state of a progressive label.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Progressive label on the page surface, hover state",
+			"foregroundToken": "@blitzy-color-purple--hover",
+			"foregroundHex": "#4822f2",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 7.54,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700. The hover state darkens rather than lightens, so on a light surface it can only measure higher than the resting state; it is measured anyway rather than argued about.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Infobox and wikitable header-row text",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-brand-50",
+			"backgroundHex": "#f2f0fe",
+			"ratio": 16.39,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700 on the brand-tinted header row shared by the infobox and the wikitable.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Lavender-band body-size label",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-lavender-band",
+			"backgroundHex": "#d8d2f9",
+			"ratio": 12.73,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400 on the lavender band.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Lavender-band heading",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-lavender-band",
+			"backgroundHex": "#d8d2f9",
+			"ratio": 12.73,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 30,
+			"fontWeight": 700,
+			"justification": "30px at weight 700 on the lavender band.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Declared pairing with no derived role at this text class",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 18.43,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": null,
+			"fontWeight": null,
+			"justification": "Declared in the token module at the body class and measured at that class. No derived role covers this pair of tokens at this class, so the declaration alone carries it; the annotation states no size or weight, so none is recorded.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Section heading, second level",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 18.43,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 30,
+			"fontWeight": 700,
+			"justification": "30px at weight 700, above the large-text floor at both weights.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Section heading, third level",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 18.43,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 22,
+			"fontWeight": 700,
+			"justification": "22px at weight 700, above the bold large-text floor of 18.66px.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Navigation link text on the navigation card",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-surface-card",
+			"backgroundHex": "#ffffff",
+			"ratio": 18.43,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 600,
+			"justification": "17px at weight 600. Below the bold large-text floor of 18.66px, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Table-of-contents section link text",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"foregroundHex": "#12102e",
+			"backgroundToken": "@blitzy-color-surface-card",
+			"backgroundHex": "#ffffff",
+			"ratio": 18.43,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px at weight 400 on the table-of-contents card fill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Announcement bar call-to-action label",
+			"foregroundToken": "@blitzy-color-text-inverse",
+			"foregroundHex": "#ffffff",
+			"backgroundToken": "@blitzy-color-announce-bg",
+			"backgroundHex": "#301a93",
+			"ratio": 12.39,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 700,
+			"justification": "17px at weight 700 on the announcement fill, inside the outlined pill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Announcement bar text",
+			"foregroundToken": "@blitzy-color-text-inverse",
+			"foregroundHex": "#ffffff",
+			"backgroundToken": "@blitzy-color-announce-bg",
+			"backgroundHex": "#301a93",
+			"ratio": 12.39,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 18,
+			"fontWeight": 400,
+			"justification": "18px at weight 400. Below the 24px regular large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Gradient call-to-action label on its fill",
+			"foregroundToken": "@blitzy-color-text-inverse",
+			"foregroundHex": "#ffffff",
+			"backgroundToken": "@blitzy-color-purple",
+			"backgroundHex": "#5b39f3",
+			"ratio": 6.32,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 700,
+			"justification": "17px at weight 700 on the gradient fill, measured against the gradient anchor stop that the token module declares as this label backdrop. The lighter stop is a decorative stop that carries no text and is flagged at its declaration.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Hero sub-headline, narrow band",
+			"foregroundToken": "@blitzy-color-text-muted",
+			"foregroundHex": "#5f5b76",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 6.47,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 400,
+			"justification": "17px at weight 400. Below the large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Reference list and footnotes",
+			"foregroundToken": "@blitzy-color-text-muted",
+			"foregroundHex": "#5f5b76",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 6.47,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px at weight 400. Well below the large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Hero sub-headline, wide band",
+			"foregroundToken": "@blitzy-color-text-muted",
+			"foregroundHex": "#5f5b76",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 6.47,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 19,
+			"fontWeight": 400,
+			"justification": "19px at weight 400, the sub-headline band the design specifies as large type. The same pair of tokens is also measured at the stricter body class by the narrow-band and reference-list roles, so no false pass can arise from this classification.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Emphasised prose text",
+			"foregroundToken": "@blitzy-color-text-primary",
+			"foregroundHex": "#000000",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 21,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700. Below the large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Hero and page-title display type",
+			"foregroundToken": "@blitzy-color-text-primary",
+			"foregroundHex": "#000000",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 21,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 40,
+			"fontWeight": 700,
+			"justification": "Display type. Classified by its narrowest band, 40px at weight 700, which is the binding case; the wider bands set 56px and 88px at the same weight.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Hatnote and message-box text",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"foregroundHex": "#333333",
+			"backgroundToken": "@blitzy-color-brand-50",
+			"backgroundHex": "#f2f0fe",
+			"ratio": 11.23,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400 on the brand-tinted hatnote and message-box fill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Diff removed-row text on the error fill",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"foregroundHex": "#333333",
+			"backgroundToken": "@blitzy-color-error-bg",
+			"backgroundHex": "#ffdfdf",
+			"ratio": 10.15,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px monospace at weight 400 on the error fill of a removed diff row.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Diff added-row text on the success fill",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"foregroundHex": "#333333",
+			"backgroundToken": "@blitzy-color-success-bg",
+			"backgroundHex": "#c9fcea",
+			"ratio": 11.19,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px monospace at weight 400 on the success fill of an added diff row.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Body prose on the page surface",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"foregroundHex": "#333333",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 12.63,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400. Prose is body text and is held to the body minimum.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Monospace edit and diff text",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"foregroundHex": "#333333",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"backgroundHex": "#ffffff",
+			"ratio": 12.63,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px at weight 400. Monospace content is body text and is held to the body minimum, not to the large-text floor.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Body prose on a card surface",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"foregroundHex": "#333333",
+			"backgroundToken": "@blitzy-color-surface-card",
+			"backgroundHex": "#ffffff",
+			"ratio": 12.63,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400 on the card fill rather than the page surface.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "light",
+			"role": "Warning-surface text",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"foregroundHex": "#333333",
+			"backgroundToken": "@blitzy-color-warning-bg",
+			"backgroundHex": "#fffbeb",
+			"ratio": 12.18,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400 on the warning fill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Progressive label on the page surface",
+			"foregroundToken": "@blitzy-color-dark-purple",
+			"foregroundHex": "#a795f9",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 7.61,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700, the night progressive colour used as label text on the night page surface.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-dark-purple",
+					"@blitzy-color-purple-lighter"
+				]
+			},
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Focus ring on the page surface",
+			"foregroundToken": "@blitzy-color-dark-purple",
+			"foregroundHex": "#a795f9",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 7.61,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": null,
+			"fontWeight": null,
+			"justification": "Non-text affordance: a 2px outline at 2px offset. The 3:1 floor for user-interface components applies rather than a text minimum.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-dark-purple",
+					"@blitzy-color-purple-lighter"
+				]
+			},
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Inline link underline",
+			"foregroundToken": "@blitzy-color-dark-purple",
+			"foregroundHex": "#a795f9",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 7.61,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": null,
+			"fontWeight": null,
+			"justification": "Non-text affordance: a 2px underline. The 3:1 floor for user-interface components and graphical objects applies rather than a text minimum.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-dark-purple",
+					"@blitzy-color-purple-lighter"
+				]
+			},
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Category chip label",
+			"foregroundToken": "@blitzy-color-dark-purple",
+			"foregroundHex": "#a795f9",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"backgroundHex": "#1c1839",
+			"ratio": 6.71,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 700,
+			"justification": "14px at weight 700. The night palette publishes the raised surface where light mode publishes the brand tint, so the chip fill follows it.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-dark-purple",
+					"@blitzy-color-purple-lighter"
+				]
+			},
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Outline call-to-action label on its pill fill",
+			"foregroundToken": "@blitzy-color-dark-purple",
+			"foregroundHex": "#a795f9",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"backgroundHex": "#1c1839",
+			"ratio": 6.71,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 700,
+			"justification": "17px at weight 700 on the raised night surface that fills the outline pill.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-dark-purple",
+					"@blitzy-color-purple-lighter"
+				]
+			},
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Table-of-contents active-section label",
+			"foregroundToken": "@blitzy-color-dark-purple",
+			"foregroundHex": "#a795f9",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"backgroundHex": "#1c1839",
+			"ratio": 6.71,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 700,
+			"justification": "14px at weight 700, the active-section label on the raised night surface.",
+			"composited": null,
+			"indirection": {
+				"foreground": [
+					"@blitzy-color-dark-purple",
+					"@blitzy-color-purple-lighter"
+				]
+			},
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "External link text",
+			"foregroundToken": "@blitzy-color-dark-text-muted",
+			"foregroundHex": "#a5a2b9",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 7.75,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700, the external-link colour the night palette publishes.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Hero sub-headline, narrow band",
+			"foregroundToken": "@blitzy-color-dark-text-muted",
+			"foregroundHex": "#a5a2b9",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 7.75,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 400,
+			"justification": "17px at weight 400. Below the large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Reference list and footnotes",
+			"foregroundToken": "@blitzy-color-dark-text-muted",
+			"foregroundHex": "#a5a2b9",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 7.75,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px at weight 400. Well below the large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Visited inline link text",
+			"foregroundToken": "@blitzy-color-dark-text-muted",
+			"foregroundHex": "#a5a2b9",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 7.75,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700, the visited state the night palette publishes.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Hero sub-headline, wide band",
+			"foregroundToken": "@blitzy-color-dark-text-muted",
+			"foregroundHex": "#a5a2b9",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 7.75,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 19,
+			"fontWeight": 400,
+			"justification": "19px at weight 400, the sub-headline band the design specifies as large type. The same pair of tokens is also measured at the stricter body class by the narrow-band and reference-list roles, so no false pass can arise from this classification.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Lavender-band body-size label",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-border",
+			"backgroundHex": "#353154",
+			"ratio": 10.61,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400 on the night band fill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Lavender-band heading",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-border",
+			"backgroundHex": "#353154",
+			"ratio": 10.61,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 30,
+			"fontWeight": 700,
+			"justification": "30px at weight 700. The night palette publishes the night border colour where light mode publishes the lavender band.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Diff removed-row text on the error fill",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-error-bg",
+			"backgroundHex": "#592322",
+			"ratio": 10.81,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px monospace at weight 400 on the night error fill of a removed diff row.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Diff added-row text on the success fill",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-success-bg",
+			"backgroundHex": "#1c5441",
+			"ratio": 7.62,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px monospace at weight 400 on the night success fill of an added diff row.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Emphasised prose text",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 16.71,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700. Below the large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Inline link text",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 16.71,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700. The night palette publishes the emphasised night text colour as the link colour; the purple stays in the underline.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Hero and page-title display type",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 16.71,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 40,
+			"fontWeight": 700,
+			"justification": "Display type. Classified by its narrowest band, 40px at weight 700, which is the binding case; the wider bands set 56px and 88px at the same weight.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Section heading, second level",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 16.71,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 30,
+			"fontWeight": 700,
+			"justification": "30px at weight 700. Headings take the emphasised night text colour, which the night palette publishes for the core emphasised-text property.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Section heading, third level",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 16.71,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": 22,
+			"fontWeight": 700,
+			"justification": "22px at weight 700, above the bold large-text floor of 18.66px.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Infobox and wikitable header-row text",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"backgroundHex": "#1c1839",
+			"ratio": 14.72,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 700,
+			"justification": "16px at weight 700 on the raised night surface that replaces the brand-tinted header row.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Navigation link text on the navigation card",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"backgroundHex": "#1c1839",
+			"ratio": 14.72,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 600,
+			"justification": "17px at weight 600 on the raised night surface. Below the bold large-text floor, so the body minimum applies.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Table-of-contents section link text",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"backgroundHex": "#1c1839",
+			"ratio": 14.72,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px at weight 400 on the raised night surface of the table-of-contents card.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Warning-surface text",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"foregroundHex": "#efeef7",
+			"backgroundToken": "@blitzy-color-dark-warning-bg",
+			"backgroundHex": "#5c491f",
+			"ratio": 7.51,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400 on the night warning fill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Body prose on the page surface",
+			"foregroundToken": "@blitzy-color-dark-text-secondary",
+			"foregroundHex": "#d1cfe2",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 12.58,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400. Prose is body text and is held to the body minimum.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Monospace edit and diff text",
+			"foregroundToken": "@blitzy-color-dark-text-secondary",
+			"foregroundHex": "#d1cfe2",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 12.58,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 14,
+			"fontWeight": 400,
+			"justification": "14px at weight 400. Monospace content is body text and is held to the body minimum, not to the large-text floor.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Body prose on a card surface",
+			"foregroundToken": "@blitzy-color-dark-text-secondary",
+			"foregroundHex": "#d1cfe2",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"backgroundHex": "#1c1839",
+			"ratio": 11.08,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400 on the raised night surface that fills a card.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Hatnote and message-box text",
+			"foregroundToken": "@blitzy-color-dark-text-secondary",
+			"foregroundHex": "#d1cfe2",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"backgroundHex": "#1c1839",
+			"ratio": 11.08,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 16,
+			"fontWeight": 400,
+			"justification": "16px at weight 400 on the raised night surface that replaces the brand-tinted fill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table",
+				"tokens.less @contrast-pair"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Destructive accent on the page surface",
+			"foregroundToken": "@blitzy-color-error",
+			"foregroundHex": "#ec3636",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"backgroundHex": "#0e0b24",
+			"ratio": 4.71,
+			"threshold": 3,
+			"textClass": "large",
+			"fontSizePx": null,
+			"fontWeight": null,
+			"justification": "Non-text affordance and large labels only. The destructive property is published in the light block alone, so the night mode renders the same accent against the night page surface.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Announcement bar call-to-action label",
+			"foregroundToken": "@blitzy-color-text-inverse",
+			"foregroundHex": "#ffffff",
+			"backgroundToken": "@blitzy-color-purple",
+			"backgroundHex": "#5b39f3",
+			"ratio": 6.32,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 700,
+			"justification": "17px at weight 700 on the night announcement fill, inside the outlined pill.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Announcement bar text",
+			"foregroundToken": "@blitzy-color-text-inverse",
+			"foregroundHex": "#ffffff",
+			"backgroundToken": "@blitzy-color-purple",
+			"backgroundHex": "#5b39f3",
+			"ratio": 6.32,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 18,
+			"fontWeight": 400,
+			"justification": "18px at weight 400. The night palette publishes the light brand purple as the announcement fill, and the inverse text colour does not vary by mode.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		},
+		{
+			"mode": "dark",
+			"role": "Gradient call-to-action label on its fill",
+			"foregroundToken": "@blitzy-color-text-inverse",
+			"foregroundHex": "#ffffff",
+			"backgroundToken": "@blitzy-color-purple",
+			"backgroundHex": "#5b39f3",
+			"ratio": 6.32,
+			"threshold": 4.5,
+			"textClass": "body",
+			"fontSizePx": 17,
+			"fontWeight": 700,
+			"justification": "17px at weight 700. The gradient stops are not remapped for night mode, so the label is measured against the same anchor stop as in light mode.",
+			"composited": null,
+			"indirection": null,
+			"sources": [
+				"derived pairing table"
+			],
+			"verdict": "pass"
+		}
+	],
+	"declaredPairingReconciliation": [
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-purple",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"coveredByDerivedRoles": [
+				"Outline call-to-action label on its pill fill",
+				"Category chip label",
+				"Table-of-contents active-section label"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-purple",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"coveredByDerivedRoles": [
+				"Progressive label on the page surface"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-text-muted",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"coveredByDerivedRoles": [
+				"Hero sub-headline, narrow band",
+				"Reference list and footnotes",
+				"Visited inline link text",
+				"External link text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"backgroundToken": "@blitzy-color-dark-error-bg",
+			"coveredByDerivedRoles": [
+				"Diff removed-row text on the error fill"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"backgroundToken": "@blitzy-color-dark-success-bg",
+			"coveredByDerivedRoles": [
+				"Diff added-row text on the success fill"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"coveredByDerivedRoles": [
+				"Navigation link text on the navigation card",
+				"Infobox and wikitable header-row text",
+				"Table-of-contents section link text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"coveredByDerivedRoles": [
+				"Emphasised prose text",
+				"Inline link text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-text-primary",
+			"backgroundToken": "@blitzy-color-dark-warning-bg",
+			"coveredByDerivedRoles": [
+				"Warning-surface text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-text-secondary",
+			"backgroundToken": "@blitzy-color-dark-surface-raised",
+			"coveredByDerivedRoles": [
+				"Body prose on a card surface",
+				"Hatnote and message-box text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "dark",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-dark-text-secondary",
+			"backgroundToken": "@blitzy-color-dark-surface",
+			"coveredByDerivedRoles": [
+				"Body prose on the page surface",
+				"Monospace edit and diff text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "large",
+			"foregroundToken": "@blitzy-color-error",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [
+				"Destructive accent on the page surface"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-link--visited",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [
+				"Visited inline link text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-link-external",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [
+				"External link text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "large",
+			"foregroundToken": "@blitzy-color-link-underline",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [
+				"Inline link underline"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-link",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [
+				"Inline link text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-purple",
+			"backgroundToken": "@blitzy-color-brand-50",
+			"coveredByDerivedRoles": [
+				"Category chip label"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"backgroundToken": "@blitzy-color-brand-50",
+			"coveredByDerivedRoles": [
+				"Infobox and wikitable header-row text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"backgroundToken": "@blitzy-color-lavender-band",
+			"coveredByDerivedRoles": [
+				"Lavender-band body-size label"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-heading",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [],
+			"addedByReconciliation": true
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-inverse",
+			"backgroundToken": "@blitzy-color-announce-bg",
+			"coveredByDerivedRoles": [
+				"Announcement bar text",
+				"Announcement bar call-to-action label"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-inverse",
+			"backgroundToken": "@blitzy-color-purple",
+			"coveredByDerivedRoles": [
+				"Gradient call-to-action label on its fill"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-muted",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [
+				"Hero sub-headline, narrow band",
+				"Reference list and footnotes"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-primary",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [
+				"Emphasised prose text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"backgroundToken": "@blitzy-color-error-bg",
+			"coveredByDerivedRoles": [
+				"Diff removed-row text on the error fill"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"backgroundToken": "@blitzy-color-success-bg",
+			"coveredByDerivedRoles": [
+				"Diff added-row text on the success fill"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"backgroundToken": "@blitzy-color-surface-base",
+			"coveredByDerivedRoles": [
+				"Body prose on the page surface",
+				"Monospace edit and diff text"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"backgroundToken": "@blitzy-color-surface-card",
+			"coveredByDerivedRoles": [
+				"Body prose on a card surface"
+			],
+			"addedByReconciliation": false
+		},
+		{
+			"mode": "light",
+			"textClass": "body",
+			"foregroundToken": "@blitzy-color-text-secondary",
+			"backgroundToken": "@blitzy-color-warning-bg",
+			"coveredByDerivedRoles": [
+				"Warning-surface text"
+			],
+			"addedByReconciliation": false
+		}
+	],
+	"darkPurpleAssertion": {
+		"requirement": "The night purple must be strictly lighter than the light-mode purple, because the light-mode purple does not clear the body-text minimum against the night page surface.",
+		"lightToken": "@blitzy-color-purple",
+		"lightHex": "#5b39f3",
+		"lightRelativeLuminance": 0.116215,
+		"nightToken": "@blitzy-color-dark-purple",
+		"nightHex": "#a795f9",
+		"nightRelativeLuminance": 0.365499,
+		"nightIsLighter": true,
+		"lightPurpleOnNightSurface": {
+			"ratio": 3.04,
+			"threshold": 4.5,
+			"textClass": "body",
+			"verdict": "below-threshold"
+		},
+		"nightPurpleOnNightSurface": {
+			"ratio": 7.61,
+			"threshold": 4.5,
+			"textClass": "body",
+			"verdict": "pass"
+		},
+		"verdict": "pass"
+	},
+	"darkPaletteCoverage": {
+		"expectedValueCount": 10,
+		"presentValueCount": 10,
+		"missingValues": [],
+		"values": [
+			{
+				"token": "@blitzy-color-dark-surface",
+				"hex": "#0e0b24",
+				"role": "surface",
+				"measuredAgainst": "@blitzy-color-dark-text-primary",
+				"measuredAgainstHex": "#efeef7",
+				"ratio": 16.71,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 16,
+				"declaredAccessibilityFinding": null
+			},
+			{
+				"token": "@blitzy-color-dark-surface-raised",
+				"hex": "#1c1839",
+				"role": "surface",
+				"measuredAgainst": "@blitzy-color-dark-text-primary",
+				"measuredAgainstHex": "#efeef7",
+				"ratio": 14.72,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 8,
+				"declaredAccessibilityFinding": null
+			},
+			{
+				"token": "@blitzy-color-dark-text-primary",
+				"hex": "#efeef7",
+				"role": "foreground",
+				"measuredAgainst": "@blitzy-color-dark-surface",
+				"measuredAgainstHex": "#0e0b24",
+				"ratio": 16.71,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 13,
+				"declaredAccessibilityFinding": null
+			},
+			{
+				"token": "@blitzy-color-dark-text-secondary",
+				"hex": "#d1cfe2",
+				"role": "foreground",
+				"measuredAgainst": "@blitzy-color-dark-surface",
+				"measuredAgainstHex": "#0e0b24",
+				"ratio": 12.58,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 4,
+				"declaredAccessibilityFinding": null
+			},
+			{
+				"token": "@blitzy-color-dark-text-muted",
+				"hex": "#a5a2b9",
+				"role": "foreground",
+				"measuredAgainst": "@blitzy-color-dark-surface",
+				"measuredAgainstHex": "#0e0b24",
+				"ratio": 7.75,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 5,
+				"declaredAccessibilityFinding": null
+			},
+			{
+				"token": "@blitzy-color-dark-purple",
+				"hex": "#a795f9",
+				"role": "foreground",
+				"measuredAgainst": "@blitzy-color-dark-surface",
+				"measuredAgainstHex": "#0e0b24",
+				"ratio": 7.61,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 6,
+				"declaredAccessibilityFinding": null
+			},
+			{
+				"token": "@blitzy-color-dark-border",
+				"hex": "#353154",
+				"role": "separator",
+				"measuredAgainst": "@blitzy-color-dark-surface",
+				"measuredAgainstHex": "#0e0b24",
+				"ratio": 1.57,
+				"threshold": 3,
+				"textClass": "large",
+				"verdict": "below-threshold",
+				"auditedPairCount": 2,
+				"declaredAccessibilityFinding": "measures below the 3:1 non-text minimum against both night surfaces. Like its light-mode counterparts this is a decorative separator between surfaces already distinguished by fill, not a user-interface component boundary, so it is implemented at the specified value and excluded from the pairing set. Recorded rather than silent; this is the one night value with no text pairing, and it is annotated here precisely so that all ten remain accounted for."
+			},
+			{
+				"token": "@blitzy-color-dark-success-bg",
+				"hex": "#1c5441",
+				"role": "fill",
+				"measuredAgainst": "@blitzy-color-dark-text-primary",
+				"measuredAgainstHex": "#efeef7",
+				"ratio": 7.62,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 1,
+				"declaredAccessibilityFinding": null
+			},
+			{
+				"token": "@blitzy-color-dark-error-bg",
+				"hex": "#592322",
+				"role": "fill",
+				"measuredAgainst": "@blitzy-color-dark-text-primary",
+				"measuredAgainstHex": "#efeef7",
+				"ratio": 10.81,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 1,
+				"declaredAccessibilityFinding": null
+			},
+			{
+				"token": "@blitzy-color-dark-warning-bg",
+				"hex": "#5c491f",
+				"role": "fill",
+				"measuredAgainst": "@blitzy-color-dark-text-primary",
+				"measuredAgainstHex": "#efeef7",
+				"ratio": 7.51,
+				"threshold": 4.5,
+				"textClass": "body",
+				"verdict": "pass",
+				"auditedPairCount": 1,
+				"declaredAccessibilityFinding": null
+			}
+		]
+	},
+	"palettePublication": {
+		"light": {
+			"publishedTokenCount": 20,
+			"backgroundTokensChecked": 10,
+			"backgroundTokensPublishedByThisPalette": 9,
+			"modeInvariantBackgroundTokens": [
+				"@blitzy-color-brand-100"
+			],
+			"foreignPaletteBackgroundTokens": []
+		},
+		"dark": {
+			"publishedTokenCount": 12,
+			"backgroundTokensChecked": 7,
+			"backgroundTokensPublishedByThisPalette": 7,
+			"modeInvariantBackgroundTokens": [],
+			"foreignPaletteBackgroundTokens": []
+		}
+	},
+	"tokenSurface": {
+		"declaredTokenCount": 71,
+		"measuredColourTokenCount": 38,
+		"gradientTokens": [
+			"@blitzy-color-gradient-cta",
+			"@blitzy-color-gradient-hero"
+		],
+		"unresolvedColourTokens": []
+	},
+	"accessibilityFindings": [
+		{
+			"token": "@blitzy-color-border-hairline",
+			"sourceLine": 375,
+			"finding": "roughly 1.15:1 against the light page surface. These hairlines are decorative separators -- the surfaces they divide are distinguished by fill and by the navigation shadow, never by the rule alone -- so they are not user-interface component boundaries and are excluded from the pairing set. Recorded rather than silent."
+		},
+		{
+			"token": "@blitzy-color-border-light",
+			"sourceLine": 364,
+			"finding": "core applies `@border-color-base` to form-control boundaries, and this value measures roughly 1.5:1 against the light page surface -- below the 3:1 minimum for a non-text user-interface boundary. It is implemented at the specified value and raised for designer review rather than silently darkened. The edit form remains identifiable without it: its focus ring is a 2px purple outline at 2px offset, which is entered in the pairing set. Excluded from the pairing set itself because listing it would fail the blocking gate on a value the design specifies; the exclusion is recorded here rather than left silent."
+		},
+		{
+			"token": "@blitzy-color-dark-border",
+			"sourceLine": 423,
+			"finding": "measures below the 3:1 non-text minimum against both night surfaces. Like its light-mode counterparts this is a decorative separator between surfaces already distinguished by fill, not a user-interface component boundary, so it is implemented at the specified value and excluded from the pairing set. Recorded rather than silent; this is the one night value with no text pairing, and it is annotated here precisely so that all ten remain accounted for."
+		},
+		{
+			"token": "@blitzy-color-error",
+			"sourceLine": 348,
+			"finding": "this value measures 4.08:1 on the light page surface, below the 4.5:1 body-text minimum though above the 3:1 large-text and non-text minimum. It is specified for icons, borders and large labels and is implemented at the specified value; it must never carry body-size text. Raised for designer review rather than corrected, and entered in the pairing set below at the `large` class only."
+		},
+		{
+			"token": "@blitzy-color-purple-light",
+			"sourceLine": 272,
+			"finding": "`@blitzy-color-purple-light` measures 4.11:1 on the light page surface, below the 4.5:1 body-text minimum. It is specified as a decorative gradient stop and is implemented at the specified value; it must never carry text. Raised for designer review rather than corrected, and deliberately absent from the pairing set below."
+		}
+	],
+	"violations": []
+}

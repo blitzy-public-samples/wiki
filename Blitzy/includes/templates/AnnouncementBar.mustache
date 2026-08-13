@@ -1,0 +1,86 @@
+{{!
+	AnnouncementBar.mustache — Blitzy component 4, the dismissible announcement band that
+	sits above the floating navigation card.
+
+	Nothing in this comment may contain a closing mustache delimiter: a comment tag ends at
+	the first one, so a tag written out in full here would silently reopen the template and
+	be compiled. Tags are therefore named without their braces throughout, the way the
+	reference skin names them, and "the escaping form" means the ordinary double-brace
+	interpolation while "the raw form" means the triple-brace one.
+
+	INVOCATION. This partial is reached only from skin.mustache, and only from inside a
+	section on data-blitzy-announcement. That enclosing section is the enable gate, and
+	there is deliberately no is- flag to test in here.
+	MediaWiki\Skins\Blitzy\BlitzyViewModel omits data-blitzy-announcement altogether when
+	$wgBlitzyAnnounceEnable is false and when $wgBlitzyAnnounceText is empty; an absent key
+	is falsy, and a falsy section renders nothing at all. A disabled bar is therefore absent
+	from the document's flow rather than hidden, which is the requirement: display: none
+	would leave the band in the DOM and would not comply.
+
+	TEMPLATE DATA CONSUMED. The context inside this file is the announcement object itself,
+	so its own keys are referenced unqualified rather than through a dotted path.
+
+		string    text   Announcement body text, from $wgBlitzyAnnounceText. Always present
+		                 and never empty — the view model suppresses the whole bar instead
+		                 of rendering an empty band.
+		string    label  Label of the action affordance, from $wgBlitzyAnnounceLabel.
+		                 Always present; may be an empty string.
+		string|-  href   Action target, from $wgBlitzyAnnounceLink, already accepted by
+		                 MediaWiki\Skins\Blitzy\BlitzyUrlValidator. The key is ABSENT when
+		                 no target was configured and when the allowlist rejected the one
+		                 that was, so every use of it below sits inside a section on it.
+		string    msg-blitzy-announcement-dismiss
+		                 Accessible name of the dismiss control, found at the root of the
+		                 template data by the parent-context walk. Declared in the messages
+		                 argument of skin.json, which is what creates the key at all.
+
+	FIXED IDENTIFIERS DEFINED HERE. resources/skins.blitzy.js/announcement.js reads both of
+	them, and dismissal is a two-sided contract: the control records the dismissal, and a
+	subsequent page load reads that record back and removes the band. Neither id is derived,
+	suffixed or varied between renders, and the DOM order below never changes either, which
+	is what keeps this band identical across every byte-compared capture.
+
+		blitzy-announcement           the band, the element a stored dismissal removes
+		blitzy-announcement-dismiss   the control that records the dismissal
+
+	ESCAPING. This template is the single escaping site for all three configuration-sourced
+	values. The view model normalises them but deliberately does not escape them: escaping
+	twice would render an injected payload visibly as an entity-encoded script tag while
+	still passing a naive "the payload is escaped" assertion. Every interpolation below uses
+	the escaping form, and the raw form must never appear in this file.
+
+	WHY THE ACTION AFFORDANCE SPLITS ITS TAGS. MediaWiki compiles Mustache through
+	LightnCandy with FLAG_MUSTACHELOOKUP and without FLAG_PARENT, and a section opened on a
+	scalar value replaces the context with that scalar without leaving the enclosing object
+	on the scope stack. Two consequences shape the markup:
+
+	  * A parent path such as ../label does not compile at all, and inside a section on href
+	    a bare label or a bare href resolves to nothing. The tags are therefore split around
+	    the label, so that label is read in the announcement context while the target is
+	    read as the current context inside its own section. Interpolating href by name in
+	    there would emit an empty href attribute on every page: a link back to the page it
+	    sits on, and a defect the blocking accessibility gate would report.
+	  * An empty string is truthy for a section, so no section can tell an unconfigured
+	    label from a configured one. A wiki that configures a target but no label therefore
+	    gets an affordance with no text; the shipped default disables the bar outright and
+	    the verification instance fixes a label, so no rendered page reaches that state.
+
+	STYLING. Every colour, radius, size and edge placement belongs to
+	resources/skins.blitzy.styles/components/NavCard.less, resolved against the token
+	module. This file carries class hooks only: no style attribute, no colour literal and no
+	directional attribute, so the stylesheet stays free to flip for right-to-left. Two notes
+	for it. The text element is a paragraph and needs its margin reset there. And the
+	affordance keeps a hook of its own rather than borrowing blitzy-cta--outline from the
+	navigation card, whose border differs, so that each component's computed-style assertion
+	names exactly one element.
+}}
+<div id="blitzy-announcement" class="blitzy-announcement">
+	<div class="blitzy-announcement__inner">
+		<p class="blitzy-announcement__text">{{text}}</p>
+		{{#href}}<a class="blitzy-announcement__action" href="{{.}}">{{/href}}{{!
+		}}{{^href}}<span class="blitzy-announcement__action">{{/href}}{{!
+		}}{{label}}{{!
+		}}{{#href}}</a>{{/href}}{{^href}}</span>{{/href}}
+		<button type="button" id="blitzy-announcement-dismiss" class="blitzy-announcement__dismiss">{{msg-blitzy-announcement-dismiss}}</button>
+	</div>
+</div>

@@ -1,0 +1,66 @@
+<!--
+Blitzy skin verification fixture. harness/provision.sh authors this page with
+core's maintenance/edit.php, which reads the content from standard input:
+
+    php maintenance/edit.php 'Main Page' \
+        --user "$BLITZY_TEST_USER" \
+        --summary 'Blitzy fixture: seed revision for the history and diff captures' \
+        < skins/Blitzy/fixtures/history-seed.wikitext
+
+The provisioning contract, recorded here so that it travels with the file:
+
+* The target title is exactly "Main Page", and this revision is saved directly
+  before fixtures/main-page.wikitext. Reversing the two would leave this draft
+  as the current revision, and the lavender band and the card grid that belong
+  on the main page would vanish from its captures.
+* Do NOT pass --createonly. MediaWiki's installer has already created Main Page
+  (includes/Installer/Task/InitialContentTask.php), so edit.php would stop with
+  "Page already exists" instead of saving.
+* Never pass --bot or --no-rc, here or on any other authored fixture edit. They
+  set EDIT_FORCE_BOT and EDIT_SUPPRESS_RC, and a bot edit is hidden from the
+  default Special:RecentChanges view while a suppressed one never reaches it at
+  all. Special:RecentChanges is itself a captured surface, so either flag would
+  empty the very list that capture exists to show. --minor is unnecessary as
+  well: leave it off so that both authored history rows read the same way.
+* Saving this pair is not idempotent. A second provisioning run appends another
+  seed revision and another main page revision, which lengthens the history and
+  changes the history capture, so provision.sh must either start from a fresh
+  database volume or skip this step when Main Page already holds more than the
+  installer's single revision. Re-saving the talk page and the category page is
+  a null edit that stores no revision, so only this pair needs the guard.
+* No capture URL may hardcode a revision id. Imported revisions do not keep the
+  ids recorded in the XML (see ImportableOldRevisionImporter), and the ids of
+  these two edits are assigned when they are saved, so the diff URL has to be
+  resolved at capture time from the history page or the API, and the resolved
+  URL recorded in DELIVERY.md.
+* --user must be BLITZY_TEST_USER, the ordinary preferences-populated account,
+  and never MW_ADMIN_USER, because no capture may display the administrator
+  name. The installer's own revision belongs to the system user
+  "MediaWiki default", so the page history stays clear of the administrator too.
+* The markup below is fixed on purpose: no signature tildes, nothing the
+  pre-save transform can expand, and no time-varying magic word. edit.php saves
+  through PageUpdater, and DerivedPageDataUpdater::prepareContent() applies
+  preSaveTransform, so anything expandable would be rewritten at provision time
+  and consecutive capture runs would stop being byte-identical.
+-->
+This wiki is the dedicated verification instance for the '''Blitzy''' skin. It holds a small,
+unchanging set of reference articles imported from Wikipedia, together with the talk, category
+and history pages needed to exercise every surface the skin styles. Nothing on it is generated
+at view time, so each page renders the same way on every run, and ordinary MediaWiki behaviour
+is left untouched: [[Special:RecentChanges|recent changes]], page histories, diffs, searching
+and the edit form all work exactly as they do under any other skin.
+
+== Reference articles ==
+
+Four articles are imported together with their templates, so that every content treatment the
+skin styles has a real instance to render.
+
+Between them they cover the content treatments the skin has to style: an infobox, a wikitable,
+a code sample, a hatnote, a reference list and a deep heading tree.
+
+* [[Ada Lovelace]] - a biography, carrying a floated infobox, images and a dense reference list.
+* [[Python (programming language)]] - a software article, carrying an infobox, syntax-highlighted code samples and nested lists.
+* [[List of countries by GDP (nominal)]] - a large sortable wikitable, and the widest layout on the wiki: the horizontal overflow test.
+* [[Photosynthesis]] - deep heading nesting, chemical notation, diagrams and hatnotes.
+
+[[Category:Blitzy verification fixtures]]

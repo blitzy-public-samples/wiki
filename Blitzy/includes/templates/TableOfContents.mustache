@@ -1,0 +1,194 @@
+{{!--
+	Blitzy table of contents: one DOM instance, two presentations, rendered by
+	self-recursion.
+
+	Invoked from skin.mustache and, for every nesting level below the first, from
+	itself. Self-recursion is sanctioned rather than tolerated: SkinMustache's
+	template parser calls enableRecursivePartials( true ) and the comment on that
+	call in includes/Skin/SkinMustache.php reads "For table of contents
+	rendering." Blitzy ships exactly nine templates (rule R12), so there is no
+	TableOfContents__list / __line pair to delegate to the way Vector has.
+
+	================================================================
+	INVOCATION CONTRACT -- this partial must be entered with the
+	`data-toc` object as the context, never with the top-level
+	template data:
+
+	    {{#is-blitzy-toc-available}}
+	        {{#data-toc}}{{>TableOfContents}}{{/data-toc}}
+	    {{/is-blitzy-toc-available}}
+
+	`array-sections` lives inside `data-toc`, so entering at the top level would
+	render an empty list. Worse, the leaf branch below keys on `array-sections`
+	being empty, and at the top level that key is absent rather than empty, so a
+	stray empty <li> would be emitted -- an anchor with no accessible name, which
+	is a blocking rule R10 failure. This was measured, not assumed: a top-level
+	invocation produces one more <li> than there are sections. No Mustache
+	construct that is safe to use here (see DISPATCH) can tell a deep leaf section
+	apart from the top-level context, so this is a genuine contract and not a
+	preference.
+
+	`is-blitzy-toc-available` comes from BlitzyViewModel and is true only when
+	`data-toc` reports at least one section, so this partial is never entered for a
+	page with no headings or for one carrying __NOTOC__.
+	================================================================
+
+	DISPATCH -- three mutually exclusive branches, none of which pushes a scalar
+	context. Two obvious discriminators are both wrong, and both failure modes are
+	silent, so they are recorded here to stop a future simplification from
+	reintroducing them.
+
+	1. NOT `number-section-count`. It looks ideal because core sets it on the
+	   `data-toc` root and never on a section. But MediaWiki compiles templates
+	   with LightnCandy's FLAG_MUSTACHELOOKUP, which resolves a missing key by
+	   walking UP the context stack, so from inside `array-sections` the parent
+	   `data-toc` is still visible and the key still resolves. Measured: it
+	   returns the root's count from inside a section. Dispatching on it repeats
+	   the whole card -- nav, checkbox and label -- at every nesting level, which
+	   duplicates three fixed ids per level.
+
+	2. NOT `{{#anchor}}` for the section branch, even though `{{^anchor}}` is
+	   correct for the root branch. `anchor` holds a STRING, and a Mustache
+	   section over a truthy scalar makes that scalar the new context. Inside a
+	   runtime partial the walk-up out of a scalar context skips the section hash
+	   it came from and lands on the root, so every sibling key -- `anchor`,
+	   `toclevel`, `number`, `linkAnchor`, `line` -- resolves to nothing.
+	   Measured: every entry renders as
+	       <li id="blitzy-toc-" class="blitzy-toc__item blitzy-toc__item--level-">
+	   with an empty number, empty text and href="#". Inverted sections and
+	   sections over booleans do not push a context, so all three branches below
+	   are built from those two forms only. For the same reason {{../key}} is not
+	   an escape route: MediaWiki does not enable LightnCandy's FLAG_PARENT and
+	   compilation fails outright if it is used.
+
+	   {{^anchor}}            root      `anchor` is absent from `data-toc` and
+	                                    from the top-level data, and present on
+	                                    every section.
+	   {{#is-parent-section}} branch    a section that has children.
+	   {{^array-sections}}    leaf      a section that has none.
+
+	   Exhaustive and exclusive, because core derives the flag as
+	   'is-parent-section' => $childSections !== [], making it the exact
+	   complement of `array-sections` being empty. The leaf branch keys on
+	   `array-sections` rather than on {{^is-parent-section}} deliberately: the two
+	   are equivalent on a section, but at the `data-toc` context
+	   `is-parent-section` is absent and therefore falsy, which would emit a stray
+	   <li> beside the card, whereas `array-sections` is non-empty there and
+	   correctly suppresses the branch.
+
+	   The <li> and its link are spelled out in both section branches. That
+	   repetition is forced: no key is truthy on every section AND safe to open a
+	   section over, so there is no single guard the shared markup could sit under.
+
+	DATA CONSUMED -- every key below is supplied by core, none is invented.
+	`data-toc` is built by Skin\Components\SkinComponentTableOfContents; each
+	section is Parsoid's SectionMetadata::toLegacy() merged with the two flags.
+
+	    array-sections       nested child sections; always present on a section,
+	                         empty on a leaf.
+	    is-parent-section    true when the section has children.
+	    anchor               heading id fragment. Used ONLY to derive our ids.
+	    linkAnchor           heading link fragment. Used ONLY for href.
+	    toclevel             nesting depth, 1-based. Drives the level modifier.
+	    number               section number, e.g. "2.1".
+	    line                 heading text as RAW parser HTML.
+	    msg-toc              core message `toc`, "Contents". Escaped text, because
+	                         SkinMustache builds msg- keys with ->text().
+	    msg-blitzy-toc-toggle  accessible name of the disclosure. Requires
+	                         `blitzy-toc-toggle` in skin.json's `messages` list,
+	                         or it renders empty and the toggle loses its name.
+
+	ESCAPING -- `line` is the only value emitted raw, and it is raw because it is
+	parser output that legitimately carries inline formatting such as <i> and <b>;
+	rule R2 requires it to pass through untouched, and escaping it would print the
+	tags as visible text. Everything else uses {{ }}. `anchor` and `linkAnchor` are
+	attribute values, not markup, so they are escaped even though core derives them
+	from the same headings.
+
+	Why it is safe to place `line` INSIDE the entry's <a>, even though nesting one
+	anchor in another is invalid HTML: core strips anchors out of `line` before it
+	reaches a skin. Measured against MediaWiki 1.43.9 -- "== See [[Main Page]] for
+	more ==" arrives as "See Main Page for more" and
+	"== External [https://example.org site] link ==" as "External site link", while
+	"== Mixed ''italic'' and [[Photosynthesis|linked]] ==" arrives as
+	"Mixed <i>italic</i> and linked". Inline formatting survives; links do not.
+	Vector relies on exactly the same guarantee in production. So do not "defend"
+	against a link here: stripping or re-escaping `line` would break rule R2 and
+	would corrupt the italics that legitimately do arrive.
+
+	IDS -- `blitzy-toc-checkbox` and `blitzy-toc-button` are fixed literals that
+	TableOfContents.less and resources/skins.blitzy.js/tableOfContents.js key
+	against; per-entry ids are `blitzy-toc-<anchor>` and, for a sublist,
+	`blitzy-toc-<anchor>-sublist`. Every id is either a literal or a pure function
+	of core-supplied data, so two renders of one revision are identical, which is
+	what rule R9's byte-identical captures need. Nothing here is generated,
+	random or time-derived.
+
+	DELIBERATELY ABSENT
+	  * Any <h1>-<h6>. The page carries exactly one <h1>, core's #firstHeading;
+	    a heading here would break heading order for no gain (rule R10). The
+	    card's visible title is a <span> and its accessible name is the <nav>
+	    landmark's aria-label.
+	  * Any active or current class. There is no server-side notion of the
+	    section being read, so inventing one would make the markup vary between
+	    identical requests and break rule R9. tableOfContents.js adds the active
+	    class at runtime and TableOfContents.less draws the purple rule.
+	  * Any width test. The sticky card at 1024px and up and the inline
+	    disclosure below it are the SAME markup styled two ways, so the checkbox,
+	    the label and the target are unconditional. Emitting the list twice would
+	    duplicate every id on the page, and omitting either presentation would
+	    make a rule R11 assertion fail against a missing element rather than
+	    report a difference.
+	  * Any style attribute, colour or dimension. Rule R3 keeps every value in
+	    tokens.less, reached through TableOfContents.less.
+	  * Any directional attribute. The card's inherently directional details --
+	    the active section's leading border, the indentation of nested levels --
+	    are the stylesheet's to author flip-aware under rule R6.
+	  * aria-haspopup. Core documents it as optional and specifically for popup
+	    and menu elements; this is a disclosure, so aria-expanded alone is the
+	    accurate promise.
+
+	The disclosure is core's documented checkbox hack: a visually hidden checkbox
+	followed by its label and then its target, all siblings, with `aria-expanded`
+	on the CHECKBOX rather than the label because core's updateAriaExpanded()
+	deprecated the label form in 1.38. Core binds nothing by these class names, so
+	the :checked sibling rule in TableOfContents.less is the entire mechanism and it
+	keeps working with scripting disabled, as rule R4 requires.
+
+	`role="button"` is part of that documented contract, and core is explicit that
+	the attributes and the script together are what "give the checkbox the
+	behavior and semantics of a button". Two consequences belong to the script
+	rather than to this file, and both were confirmed by measurement with scripting
+	switched off: `aria-expanded` stays "false" while the list is open, and Enter
+	does not activate the control, because a native checkbox toggles on Space
+	alone. Opening and closing still work unaided, which is all rule R4 requires;
+	tableOfContents.js owns keeping aria-expanded in step and, if it is wanted,
+	Enter activation. The checkbox must therefore stay merely visually hidden --
+	never `display: none`, never `hidden`, never a negative tabindex -- or it
+	leaves the focus order and the disclosure stops being keyboard operable.
+--}}
+{{^anchor}}
+<nav class="blitzy-toc" aria-label="{{msg-toc}}">
+	<span class="blitzy-toc__title">{{msg-toc}}</span>
+	<input type="checkbox" id="blitzy-toc-checkbox" class="blitzy-toc__checkbox mw-checkbox-hack-checkbox" role="button" aria-labelledby="blitzy-toc-button" aria-expanded="false">
+	<label id="blitzy-toc-button" class="blitzy-toc__toggle mw-checkbox-hack-button" for="blitzy-toc-checkbox" aria-hidden="true">{{msg-blitzy-toc-toggle}}</label>
+	<div class="blitzy-toc__content mw-checkbox-hack-target">
+		<ul class="blitzy-toc__list">
+			{{#array-sections}}{{>TableOfContents}}{{/array-sections}}
+		</ul>
+	</div>
+</nav>
+{{/anchor}}
+{{#is-parent-section}}
+<li id="blitzy-toc-{{anchor}}" class="blitzy-toc__item blitzy-toc__item--level-{{toclevel}}">
+	<a class="blitzy-toc__link" href="#{{linkAnchor}}"><span class="blitzy-toc__number">{{number}}</span> <span class="blitzy-toc__text">{{{line}}}</span></a>
+	<ul id="blitzy-toc-{{anchor}}-sublist" class="blitzy-toc__list">
+		{{#array-sections}}{{>TableOfContents}}{{/array-sections}}
+	</ul>
+</li>
+{{/is-parent-section}}
+{{^array-sections}}
+<li id="blitzy-toc-{{anchor}}" class="blitzy-toc__item blitzy-toc__item--level-{{toclevel}}">
+	<a class="blitzy-toc__link" href="#{{linkAnchor}}"><span class="blitzy-toc__number">{{number}}</span> <span class="blitzy-toc__text">{{{line}}}</span></a>
+</li>
+{{/array-sections}}

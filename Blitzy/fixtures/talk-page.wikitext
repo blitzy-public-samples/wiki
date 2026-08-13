@@ -1,0 +1,91 @@
+<!--
+Blitzy skin verification fixture. harness/provision.sh authors this page with core's
+maintenance/edit.php, which takes the title as its positional argument and reads the content
+from standard input:
+
+    php maintenance/edit.php 'Talk:Ada Lovelace' \
+        --user "$BLITZY_TEST_USER" \
+        --summary 'Blitzy fixture: talk page discussion threads' \
+        < skins/Blitzy/fixtures/talk-page.wikitext
+
+The provisioning contract, recorded here so that it travels with the file:
+
+* The target title is exactly "Talk:Ada Lovelace", the talk page of the article imported from
+  fixtures/ada-lovelace.xml, so author this page after importDump.php has run and never before.
+  The pairing is the point: SkinTemplate::tabAction() gives an unselected namespace tab whose
+  page is unknown the class "new" and sends it to action=edit&redlink=1, so for as long as this
+  page is absent every article capture shows a red Talk tab and the talk capture has no page to
+  take. With both pages present the namespace tab pair renders as two real tabs, which is what
+  the tab treatment is captured against, here and on the article.
+* Do NOT pass --createonly. maintenance/edit.php stops with "Page already exists" when the page
+  is there already, whereas a plain re-save of identical content is a null edit that stores no
+  new revision, so re-provisioning this page stays safe and repeatable.
+* --user must be BLITZY_TEST_USER, the ordinary preferences-populated account, and never
+  MW_ADMIN_USER, because no capture may display the administrator name. The signatures in the
+  threads below are page content and say nothing about who saves the revision.
+* The wikitext below is fixed on purpose: no signature marker, no substitution call, no template
+  call of any kind, no style attribute and no magic word that varies with the clock. edit.php
+  saves through PageUpdater, DerivedPageDataUpdater::prepareContent() applies preSaveTransform,
+  and Parser::pstPass2() rewrites the three-, four- and five-tilde signature markers using the
+  clock at save time, so one real signature would rewrite the stored wikitext, and the capture,
+  on every run. Each signature below is written out instead in the shape core's "signature"
+  message produces, followed by a hand-written timestamp.
+* This comment names those constructs in words instead of showing their characters. Core would
+  tolerate the characters here, because PPFrame_Hash::expand() swaps an HTML comment for a strip
+  marker in PST mode so that pstPass2() never sees inside it and preSaveTransform() unstrips it
+  again unchanged. The audit that guards this file is a plain grep, though, and a grep cannot
+  tell an explanation apart from the thing it explains, so the characters stay out of the file.
+* Comparing the stored wikitext against this file: compare against the file with its trailing
+  newline removed. preSaveTransform() runs TextContent::normalizeLineEndings(), which rtrims the
+  text before it is stored.
+* Every indented reply is one physical line. A wrapped continuation line without the leading
+  ":" would close the definition list, and the remainder of that comment would render
+  unindented.
+* The [[User:...]] and [[User talk:...]] links render red, because the discussion handles are
+  content and no user pages exist. A real talk page reads the same way, the result is
+  deterministic, and post-import verification gates on Template-namespace red links. Do not
+  add user pages to turn them blue.
+-->
+Editorial discussion of the [[Ada Lovelace]] article as it stands on this wiki. The article text
+here is a fixed subset of the imported revision recorded in the attribution notice that ships
+with these fixtures, and it is not edited, so each thread below ends by recording its conclusion
+rather than by changing the page.
+
+== Explanatory notes and citations as separate lists ==
+
+The article keeps its lettered explanatory notes in
+[[Ada Lovelace#Explanatory notes|Explanatory notes]], a section in its own right, while the
+numbered citations sit a level down in [[Ada Lovelace#Citations|Citations]] under References.
+Read from top to bottom the two lists are easy to tell apart, and the lettered markers never
+collide with the numbered ones, but the outline presents them as different kinds of thing. Is
+that asymmetry worth keeping, or should the notes move under References beside the citations?
+[[User:Blitzy Editor|Blitzy Editor]] ([[User talk:Blitzy Editor|talk]]) 09:14, 24 June 2026 (UTC)
+
+: Worth keeping. The notes carry commentary that belongs with the prose, while the citation list is apparatus; collecting both under one heading would invite the reader to skim them together, which is the distinction the lettered and numbered markers exist to draw. Keeping them apart also keeps each list's backlinks pointing into its own sequence. [[User:Blitzy Copyeditor|Blitzy Copyeditor]] ([[User talk:Blitzy Copyeditor|talk]]) 15:02, 24 June 2026 (UTC)
+:: Agreed on both counts. Recording that as the conclusion: both sections stay where the imported revision puts them. [[User:Blitzy Editor|Blitzy Editor]] ([[User talk:Blitzy Editor|talk]]) 08:40, 25 June 2026 (UTC)
+
+== Heading depth of the contribution controversy ==
+
+[[Ada Lovelace#Controversy over contribution|Controversy over contribution]] sits inside
+[[Ada Lovelace#First published computer program|First published computer program]] as a
+fourth-level heading, which places a substantial topic three steps below the page title, and
+three steps in when the table of contents lists it. Would it read better one level up, beside
+its parent rather than inside it?
+[[User:Blitzy Copyeditor|Blitzy Copyeditor]] ([[User talk:Blitzy Copyeditor|talk]]) 11:20, 27 June 2026 (UTC)
+
+: I would keep the nesting. The disagreement is specifically about who wrote the notes to Menabrea's ''Sketch of the Analytical Engine'', so it belongs inside that publication rather than beside it, and promoting it would strip its parent of the only subsection that qualifies it. The outline is contiguous as it stands, every level following its parent with none skipped, which is what keeps a long article navigable. [[Photosynthesis]] nests the same way, with "On land" and "In water" kept under "Carbon concentrating mechanisms". [[User:Blitzy Sourcecheck|Blitzy Sourcecheck]] ([[User talk:Blitzy Sourcecheck|talk]]) 16:55, 27 June 2026 (UTC)
+:: Convincing, particularly the point about the parent section. Withdrawn, and the outline stays as imported. [[User:Blitzy Copyeditor|Blitzy Copyeditor]] ([[User talk:Blitzy Copyeditor|talk]]) 09:05, 28 June 2026 (UTC)
+
+== Enchantress of Number, singular throughout ==
+
+[[Ada Lovelace#Work|Work]] quotes Babbage calling Lovelace "The Enchantress of Number", the
+blockquote beneath it uses the same singular form, and an explanatory note records that some
+writers give "Numbers" instead. Flagging the three together because the plural is the form most
+readers expect: anyone tidying that paragraph could normalise one of them and leave the note
+contradicting the quotation it annotates. All three should stay singular, and the variant should
+stay in the note.
+[[User:Blitzy Sourcecheck|Blitzy Sourcecheck]] ([[User talk:Blitzy Sourcecheck|talk]]) 13:30, 2 July 2026 (UTC)
+
+: Checked all three against the section: the prose, the blockquote and the note agree, and the note is the right place for the variant. Nothing to change here. [[User:Blitzy Editor|Blitzy Editor]] ([[User talk:Blitzy Editor|talk]]) 07:48, 3 July 2026 (UTC)
+
+[[Category:Blitzy verification fixtures]]

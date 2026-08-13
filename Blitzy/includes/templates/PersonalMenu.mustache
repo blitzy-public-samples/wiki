@@ -1,0 +1,215 @@
+{{!
+	PersonalMenu.mustache -- the Blitzy user menu.
+
+	The personal tools MediaWiki provides for whoever is reading, rendered as a
+	disclosure inside the floating navigation card. Reached from skin.mustache
+	through NavCard.mustache, which references this partial bare, at root
+	context, with no enclosing section. No context has therefore been pushed,
+	and every portlet below is addressed by its full dotted path from the root
+	template data.
+
+	A note on the comment style in this file: a Mustache comment ends at the
+	first closing double brace it meets, so a comment can never quote a
+	Mustache tag. Template data is named here in plain prose instead.
+
+	CONSUMED TEMPLATE DATA
+	----------------------
+	Four sibling portlets, each a MediaWiki\Skin\Components\SkinComponentMenu
+	payload reached from data-portlets. All four are rendered, in a fixed order
+	that never varies with the request:
+
+	  1. data-portlets.data-user-page                  -> id p-user-page
+	  2. data-portlets.data-notifications              -> id p-notifications
+	  3. data-portlets.data-user-interface-preferences -> id p-user-interface-preferences
+	  4. data-portlets.data-user-menu                  -> id p-personal
+
+	Per portlet, the keys used are:
+
+	  id                  Element id, emitted verbatim. data-user-menu is the
+	                      one that matters most: SkinComponentMenu renames the
+	                      menu user-menu to personal before deriving the id, so
+	                      this key arrives already spelled p-personal.
+	                      Re-emitting it unaltered is the whole mechanism by
+	                      which the preserved p-personal selector survives a
+	                      complete visual redesign.
+	  class               mw-portlet plus mw-portlet-<name>, gaining a trailing
+	                      emptyPortlet when the menu has no items and no hook
+	                      content. Appended to the Blitzy class rather than
+	                      replacing it, so both the core hooks and the
+	                      empty-state marker pass through untouched.
+	  html-tooltip        Raw attribute string produced by Linker::tooltip. It
+	                      already carries its own leading space, so it is
+	                      emitted with none in front of it; an absent tooltip
+	                      then leaves no stray whitespace in the start tag.
+	  html-before-portal  Raw HTML contributed around the list by the
+	  html-after-portal   SkinAfterPortlet hook. Empty strings unless an
+	                      extension has something to add, and emitted so that
+	                      such content is never silently discarded.
+	  array-items         The list entries. Each carries html-item, the
+	                      complete list item MediaWiki built for it, including
+	                      its id, its mw-list-item class, its active class when
+	                      the entry is current, and the blitzy-menu-item class
+	                      that Hooks\BlitzyHooks added upstream. Emitting
+	                      html-item is what guarantees every entry MediaWiki
+	                      supplies reaches the page: nothing here filters,
+	                      reorders or curates the list.
+
+	Sibling keys deliberately NOT consumed:
+
+	  html-items          Byte for byte the same entries as array-items, only
+	                      pre-concatenated. Emitting both would render every
+	                      entry twice, so exactly one of the two is used.
+	  label               data-user-menu resolves this to the translated
+	                      "Personal tools", but the other three portlets have
+	                      no corresponding message and fall back to their raw
+	                      menu name. Exposing user-page or notifications to a
+	                      screen reader would be worse than leaving the lists
+	                      unnamed, so the landmark below carries the accessible
+	                      name for the whole disclosure and the individual
+	                      lists carry none.
+	  is-empty            Already expressed in class as emptyPortlet, which is
+	                      the marker gadgets and core stylesheets look for.
+	  data-personal       The pre-1.46 combined menu, deprecated, and
+	                      requesting it emits a deprecation warning. It is
+	                      neither requested in skin.json nor read here.
+
+	Messages, both declared in the messages array in skin.json:
+
+	  msg-personaltools           Accessible name of the landmark and the
+	                              visible text of the button.
+	  msg-blitzy-personal-toggle  Fallback accessible name on the checkbox.
+
+	FIXED IDENTIFIERS DEFINED HERE
+	------------------------------
+	  blitzy-personal-checkbox    The disclosure input.
+	  blitzy-personal-button      The disclosure button.
+
+	Both are literals rather than derived values, for two reasons.
+	resources/skins.blitzy.js/dropdown.js binds its listeners to them and
+	tests/qunit/dropdown.test.js dispatches against them, so they have to be
+	predictable; and the two captures of this surface are compared byte for
+	byte across consecutive runs, so nothing here may vary between renders.
+	Because they are literals, this partial must be referenced exactly once per
+	page, which NavCard.mustache does.
+
+	Two consequences for anything that drives this control programmatically,
+	both confirmed in a real browser against this markup. Target the checkbox,
+	not the label: the stylesheet clips the input over the button, so the input
+	is the topmost hit-test target and an automated click aimed at the label is
+	intercepted by it. And Space activates the control natively while Enter does
+	not, because the element really is a checkbox however it announces itself;
+	Enter activation, dismiss on outside click and dismiss on focus loss are all
+	behaviours dropdown.js adds, using the binders MediaWiki's checkboxHack
+	module exports for exactly that purpose.
+
+	WHY A CHECKBOX AND NOT A BUTTON
+	-------------------------------
+	The skin has to stay usable with scripting switched off, so the disclosure
+	is the checkbox hack MediaWiki documents in
+	resources/src/mediawiki.page.ready/checkboxHack.js. Nothing in MediaWiki
+	binds to these class names on its own; opening and closing is done entirely
+	by a checked-state sibling selector in
+	resources/skins.blitzy.styles/components/NavCard.less. That selector is
+	only expressible if the input precedes the button and the target as
+	siblings, which is the order below. dropdown.js then layers
+	dismiss-on-outside-click over it and keeps the expanded state current, but
+	it is an enhancement: with it absent the control still opens, still closes,
+	and every link inside stays reachable by keyboard.
+
+	Appearance is entirely class-driven; this file sets no inline style and
+	names no colour, and it states no direction, leaving both to the flip-aware
+	stylesheet. Nothing here branches on who is reading -- the difference
+	between the anonymous and the logged-in card comes only from MediaWiki
+	supplying different entries in data-user-menu.
+}}
+<nav class="blitzy-personal-menu" aria-label="{{msg-personaltools}}">
+	{{!
+		The input is the real control: it is what receives focus, what the
+		keyboard operates, and what assistive technology announces. The
+		stylesheet clips it out of sight rather than removing it from the
+		layout, so it must not be given a hidden attribute here.
+
+		A button role, a popup hint and an expanded state together make a
+		checkbox behave and announce as a disclosure button. The expanded state
+		is set on the input, not on the label: since MediaWiki 1.38 the label
+		form is deprecated. Its server-rendered value is the closed state,
+		which is correct both for a first paint and for a reader with no
+		scripting at all, and dropdown.js takes over maintaining it from there.
+
+		aria-labelledby points at the label, so the accessible name is the same
+		words a sighted reader sees. aria-label repeats the intent as a
+		fallback for the case where that reference cannot be resolved, which is
+		what Vector settled on for its own dropdowns.
+
+		Two omissions are deliberate. There is no name attribute, so the input
+		is never submitted with a surrounding form. There is no tabindex, so
+		the element keeps its natural place in the tab order.
+
+		autocomplete="off" stops the browser restoring the checked state on
+		reload and on history navigation. Without it the menu could come back
+		open on a page that was captured closed, which is the one way this
+		markup could make a capture unreproducible.
+	}}
+	<input {{!
+		}}type="checkbox" {{!
+		}}id="blitzy-personal-checkbox" {{!
+		}}class="mw-checkbox-hack-checkbox blitzy-personal-menu__checkbox" {{!
+		}}role="button" {{!
+		}}aria-haspopup="true" {{!
+		}}aria-expanded="false" {{!
+		}}aria-labelledby="blitzy-personal-button" {{!
+		}}aria-label="{{msg-blitzy-personal-toggle}}" {{!
+		}}autocomplete="off">
+	{{!
+		The label is the visible affordance. It is hidden from assistive
+		technology because the input above already exposes the same control and
+		announcing both would be a duplicate. It still carries real text: that
+		text is what aria-labelledby resolves to, and it is what a reader sees
+		and clicks. The inner span is a styling hook and nothing more.
+	}}
+	<label {{!
+		}}id="blitzy-personal-button" {{!
+		}}class="mw-checkbox-hack-button blitzy-personal-menu__button" {{!
+		}}for="blitzy-personal-checkbox" {{!
+		}}aria-hidden="true">{{!
+		}}<span class="blitzy-personal-menu__button-text">{{msg-personaltools}}</span>{{!
+	}}</label>
+	{{!
+		The disclosure target. Its four portlets are written out one after
+		another rather than looped, because they are four separate keys in the
+		template data rather than one list, and because their order is part of
+		the contract: the same request must always produce the same document.
+		Each is wrapped in a section on its own path, so a portlet MediaWiki
+		did not supply produces nothing at all rather than an empty shell.
+	}}
+	<div class="blitzy-personal-menu__content mw-checkbox-hack-target">
+		{{#data-portlets.data-user-page}}
+		<div id="{{id}}" class="blitzy-personal-menu__portlet{{#class}} {{.}}{{/class}}"{{{html-tooltip}}}>{{!
+			}}{{{html-before-portal}}}{{!
+			}}<ul class="blitzy-personal-menu__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{!
+			}}{{{html-after-portal}}}{{!
+		}}</div>
+		{{/data-portlets.data-user-page}}
+		{{#data-portlets.data-notifications}}
+		<div id="{{id}}" class="blitzy-personal-menu__portlet{{#class}} {{.}}{{/class}}"{{{html-tooltip}}}>{{!
+			}}{{{html-before-portal}}}{{!
+			}}<ul class="blitzy-personal-menu__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{!
+			}}{{{html-after-portal}}}{{!
+		}}</div>
+		{{/data-portlets.data-notifications}}
+		{{#data-portlets.data-user-interface-preferences}}
+		<div id="{{id}}" class="blitzy-personal-menu__portlet{{#class}} {{.}}{{/class}}"{{{html-tooltip}}}>{{!
+			}}{{{html-before-portal}}}{{!
+			}}<ul class="blitzy-personal-menu__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{!
+			}}{{{html-after-portal}}}{{!
+		}}</div>
+		{{/data-portlets.data-user-interface-preferences}}
+		{{#data-portlets.data-user-menu}}
+		<div id="{{id}}" class="blitzy-personal-menu__portlet{{#class}} {{.}}{{/class}}"{{{html-tooltip}}}>{{!
+			}}{{{html-before-portal}}}{{!
+			}}<ul class="blitzy-personal-menu__list">{{#array-items}}{{{html-item}}}{{/array-items}}</ul>{{!
+			}}{{{html-after-portal}}}{{!
+		}}</div>
+		{{/data-portlets.data-user-menu}}
+	</div>
+</nav>
