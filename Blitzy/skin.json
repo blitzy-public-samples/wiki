@@ -15,7 +15,8 @@
 		"blitzy": {
 			"class": "MediaWiki\\Skins\\Blitzy\\SkinBlitzy",
 			"services": [
-				"MainConfig"
+				"MainConfig",
+				"UrlUtils"
 			],
 			"args": [
 				{

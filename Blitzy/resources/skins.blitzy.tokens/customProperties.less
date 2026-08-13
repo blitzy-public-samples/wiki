@@ -1,0 +1,604 @@
+@import './tokens.less';
+
+/**
+ * == Blitzy design language -- custom-property publication ==
+ *
+ * The only CSS-emitting file of the `skins.blitzy.tokens` ResourceLoader module, and the
+ * whole of the skin's dark-mode mechanism. The module's other entry, `tokens.less`,
+ * compiles to the empty string by design, so everything the module serves is emitted here.
+ *
+ * -- WHAT THIS FILE DOES, AND WHY IT CARRIES THE STYLE LAYER'S HIGHEST LEVERAGE --
+ *
+ * It publishes the Blitzy palette twice, once per mode, as CSS custom properties, under two
+ * strictly separated families:
+ *
+ *   * CORE-NAMED properties -- `--color-base`, `--background-color-base` and their
+ *     relatives -- exist to steer stylesheets this skin does not own. MediaWiki compiles
+ *     every core module's Less against the active skin's `mediawiki.skin.variables.less`,
+ *     and Blitzy's copy of that file declares each override in the form
+ *     `var( --<core-name>, <blitzy value> )` -- the same idiom the Codex token package uses,
+ *     and the reason core's own `mediawiki.skin.defaults.less` values are only fallbacks
+ *     here. Core module CSS therefore reaches the browser as, for example,
+ *
+ *         color: var( --color-base, <light value> );
+ *
+ *     so redefining `--color-base` under a night selector below changes what the edit form,
+ *     the diff, the page history, `Special:Preferences`, the changes lists and every OOUI
+ *     and Codex widget render -- without one core stylesheet being edited. That is the
+ *     entire trick, and it is why the token layer is the feature's single highest-leverage
+ *     integration point.
+ *
+ *   * BLITZY-OWNED properties, every one prefixed `--blitzy-`, exist to steer Blitzy's own
+ *     stylesheets. No core stylesheet reads them.
+ *
+ * The two families are never interleaved inside a block; each has its own banner in each of
+ * the palette blocks below. Keeping them apart is what makes the propagation mechanism
+ * possible to reason about: a value whose job is to change core rendering carries a core
+ * name, and a value whose job is not carries the `--blitzy-` prefix.
+ *
+ * -- THE ONE IMPORT TO MAKE, AND THE ONE THAT WOULD SILENTLY BREAK EVERYTHING --
+ *
+ * `./tokens.less` is imported, and nothing else is. Each entry in a ResourceLoader module's
+ * `styles` array is compiled on its own, so the sibling's variables are not otherwise in
+ * scope; the import is mandatory rather than stylistic.
+ *
+ * `mediawiki.skin.variables.less` must NEVER be imported here. Its core-named Less
+ * variables are not values: they are `var()` references back to the very properties this
+ * file declares. Using one as a value would compile to
+ *
+ *         --color-base: var( --color-base, <fallback> );
+ *
+ * and a custom property may not reference itself -- the declaration resolves to the
+ * guaranteed-invalid value and the property is dropped, in every mode at once. The failure
+ * is silent: the stylesheet compiles, the lint passes, and the page renders unstyled. Every
+ * value published below is consequently a raw `@blitzy-*` token read straight from
+ * `./tokens.less`, never a core-named Less variable.
+ *
+ * -- NOT ONE COLOUR LITERAL MAY APPEAR IN THIS FILE --
+ *
+ * `.stylelintrc.json` denies hexadecimal colours, named colours and the disallowed
+ * colour-function family across the whole package and grants exactly one `overrides`
+ * exemption, to `resources/skins.blitzy.tokens/tokens.less`. THIS FILE IS NOT THAT
+ * EXEMPTION. What may appear as a value here is therefore limited to: an `@blitzy-*`
+ * variable reference; the plain keywords `light`, `dark` and `light dark`; a `var()`
+ * reference; the two filter functions of the inversion path; and the Less compile-time
+ * `fade()` helper, which takes an `@blitzy-*` token plus an alpha and so introduces no
+ * literal of its own. A night value that needs a colour this package does not yet declare is
+ * added to `tokens.less` and referenced from here -- never written inline, and never
+ * exempted by widening the lint configuration.
+ *   No hexadecimal digit string and no colour-function name appears anywhere in this file,
+ *   including in these comments: the constructs the rule forbids are described rather than
+ *   spelled, exactly as `tokens.less` does, so that the colour-literal sweep stays a plain
+ *   grep over the whole file with no need to strip comments first and no risk of this very
+ *   paragraph raising a false positive.
+ *
+ * -- ONLY MODE-VARYING VALUES BELONG HERE --
+ *
+ * A value that is the same in both modes does not need a custom property: the `var()`
+ * fallback that core's compiled CSS already carries resolves it, and a Blitzy stylesheet can
+ * read the Less token directly. Every property published below therefore earns its place by
+ * differing between the light and the night palette. The two deliberate exceptions --
+ * `--color-destructive` and `--line-height-content` -- are declared once, in the light block
+ * only, and each carries the reasoning at its declaration so it reads as decided rather than
+ * overlooked.
+ *
+ * -- ONLY NON-DIRECTIONAL VALUES BELONG HERE --
+ *
+ * The direction-flipping stage of MediaWiki's style pipeline rewrites recognised physical
+ * properties, and a custom property is not one of them, so any one-sided geometry parked in
+ * a custom property would never flip in a right-to-left interface. Everything published
+ * below is consequently side-neutral -- colours, one line height, `color-scheme` and one
+ * `filter`. No one-sided border, margin, padding, offset or shadow geometry is published,
+ * which is also why no declaration here needs a no-flip annotation. The navigation card's
+ * shadow is split accordingly: its offsets and blur stay in the component stylesheet and
+ * only its colour is published.
+ *
+ * -- DETERMINISM --
+ *
+ * Byte-identical screenshot capture forbids any value whose resolution depends on the host,
+ * the operating system or the browser. Every value below resolves to a fixed constant at
+ * compile time. None of the following appears here, as a value or as a name: the
+ * environment-variable function; any CSS system colour keyword, meaning the platform-palette
+ * family that paints the host theme's own surface, text, button, link and accent colours;
+ * the colour-mixing function; the light-and-dark selection function; relative-colour syntax.
+ * `fade()` is a Less built-in evaluated during compilation, so its result is as fixed as any
+ * other value here. There is no asset reference and no reference to any origin outside the
+ * wiki in this file.
+ *
+ * -- ACCESSIBILITY POSTURE --
+ *
+ * Measured ratios are quoted at the declarations where they justify a choice, and the
+ * intended pairings themselves are declared as data in `tokens.less` and measured by
+ * `tools/contrast-report.js`. That gate is a blocking floor and not a conformance proof:
+ * automated tooling detects only a fraction of accessibility issues, so nothing here claims
+ * conformance to any accessibility standard and no comment below should be read as claiming
+ * it.
+ *
+ * @see ./tokens.less for every value published here, its provenance and its A11Y flags
+ * @see ../mediawiki.less/blitzy/mediawiki.skin.variables.less for the core-variable overrides
+ *      whose `var()` fallbacks these properties override
+ */
+
+@media screen {
+	/**
+	 * SITE 1 -- the light palette, published unconditionally.
+	 *
+	 * Three selectors, one declaration list, three distinct jobs:
+	 *
+	 *   * `:root` makes light the skin's baseline. It is deliberately not gated on
+	 *     `prefers-color-scheme`, which is half of what makes the root-element override
+	 *     work in both directions: an explicit day preference resolves to
+	 *     `html.skin-theme-clientpref-day`, that class matches no dark rule anywhere in
+	 *     this file, and so a reader who chose light keeps light even inside an
+	 *     operating system set to dark. No extra selector is needed for the day case, and
+	 *     none should be added.
+	 *
+	 *   * `.skin-invert` and `.notheme` are content contracts, used in templates and in
+	 *     user-generated content. Repeating the whole light palette on them is what makes a
+	 *     forced-light island work: a declaration that matches an element directly always
+	 *     beats a value inherited from an ancestor, whatever the specificities, so a
+	 *     `.notheme` subtree inside a night page reverts to light in one step. That is why
+	 *     this list is the complete palette and not a subset -- any property left out here
+	 *     but redefined in a night block below would leak its night value into these
+	 *     islands.
+	 *
+	 * `:root` also carries the evidence that this module was delivered rather than merely
+	 * declared: reading any property below through `getComputedStyle` on the document
+	 * element returns a Blitzy value. Keep properties on `:root`.
+	 */
+	:root,
+	.skin-invert,
+	.notheme {
+		/**
+		 * Core-named family -- light.
+		 * Steers core-owned CSS. Names are core's; values are Blitzy's.
+		 */
+
+		/* Text. */
+		--color-base: @blitzy-color-text-secondary;
+		--color-subtle: @blitzy-color-text-muted;
+		--color-emphasized: @blitzy-color-text-primary;
+
+		/*
+		 * Links. Link text is the heading navy and never the brand purple -- the purple
+		 * belongs to the underline, published below as `--blitzy-color-link-underline`.
+		 * Codex declares both of these as aliases of its progressive colour; Blitzy does
+		 * not, and that difference is what forces them to be restated in both night blocks.
+		 */
+		--color-link: @blitzy-color-link;
+		--color-link--visited: @blitzy-color-link--visited;
+
+		/*
+		 * Progressive. One value drives the whole family, so every progressive affordance
+		 * core renders -- and the edit form's focus ring, which core draws from the outline
+		 * and box-shadow members -- lands on the brand purple together.
+		 */
+		--color-progressive: @blitzy-color-purple;
+		--border-color-progressive: @blitzy-color-purple;
+		--outline-color-progressive--focus: @blitzy-color-purple;
+		--box-shadow-color-progressive--focus: @blitzy-color-purple;
+
+		/*
+		 * Destructive. Published once, here, and deliberately absent from both night blocks:
+		 * the night palette is exactly ten values and declares no destructive counterpart,
+		 * and the specified accent needs none. It measures 4.08:1 on the light page surface
+		 * -- the shortfall `tokens.less` already flags for designer review -- and 4.71:1 on
+		 * the night page surface, so night is the better of the two without any remap. A
+		 * night redeclaration would be a copy of this line and nothing more.
+		 */
+		--color-destructive: @blitzy-color-error;
+
+		/* Surfaces. */
+		--background-color-base: @blitzy-color-surface-base;
+		/*
+		 * One property, four treatments: the infobox header row, the wikitable header row,
+		 * the hatnote and message-box fill, and the category chips all inherit this tint.
+		 */
+		--background-color-progressive-subtle: @blitzy-color-brand-50;
+
+		/* Feedback fills. The first two are the diff's added and removed rows. */
+		--background-color-success-subtle: @blitzy-color-success-bg;
+		--background-color-error-subtle: @blitzy-color-error-bg;
+		--background-color-warning-subtle: @blitzy-color-warning-bg;
+
+		/*
+		 * Borders. Core's subtle and muted members both resolve to the one hairline value:
+		 * the design draws a single hairline weight on cards, tables and infoboxes rather
+		 * than the two-step scale core assumes.
+		 */
+		--border-color-base: @blitzy-color-border-light;
+		--border-color-subtle: @blitzy-color-border-hairline;
+		--border-color-muted: @blitzy-color-border-hairline;
+
+		/*
+		 * Prose rhythm. The one non-colour core name published here, and the second of the
+		 * two properties that appear in this block only: the reading rhythm is a property of
+		 * the type, not of the mode, so it is identical in night and a night redeclaration
+		 * would be dead weight against this module's bundle cap. It is published rather than
+		 * left to the `var()` fallback because it is a mode-independent anchor on `:root`,
+		 * which is what the delivered-module probe reads. Line height is side-neutral, so it
+		 * is safe in a custom property.
+		 */
+		--line-height-content: @blitzy-line-height-prose;
+
+		/**
+		 * Blitzy-owned family -- light.
+		 * Steers Blitzy's own stylesheets. No core stylesheet reads these.
+		 */
+
+		/*
+		 * Card fill: the floating navigation card, the content cards, the infobox and the
+		 * table-of-contents card. Separate from `--background-color-base` because the two
+		 * share a value in light and diverge in night.
+		 */
+		--blitzy-color-surface-card: @blitzy-color-surface-card;
+
+		/*
+		 * The full-bleed band behind the hero-adjacent card panel. It is also the closing
+		 * stop of the hero wash: `ContentHeader.less` composes that gradient from
+		 * `var( --background-color-base )` through `var( --blitzy-color-lavender-band )`, so
+		 * the gradient follows the mode through two properties that already exist and needs
+		 * no stop properties of its own. The filled call-to-action's gradient is not
+		 * published at all -- it is a saturated purple pill carrying an inverse label in both
+		 * modes, so `NavCard.less` consumes the gradient token directly.
+		 */
+		--blitzy-color-lavender-band: @blitzy-color-lavender-band;
+
+		/* Announcement bar fill. Carries the inverse label at 12.39:1. */
+		--blitzy-color-announce-bg: @blitzy-color-announce-bg;
+
+		/*
+		 * The inline-link underline, and the one place the brand purple touches body text.
+		 * Kept distinct from `--color-progressive` even though the two share a value in both
+		 * modes, because `tokens.less` keeps the underline and the progressive colour apart
+		 * on purpose so that a maintainer cannot collapse the design's most easily violated
+		 * rule by accident.
+		 */
+		--blitzy-color-link-underline: @blitzy-color-purple;
+
+		/*
+		 * External links. Core publishes no property for these in either mode, so the colour
+		 * reaches core-owned surfaces through the Less override alone and only Blitzy's own
+		 * stylesheets can follow the mode -- which is exactly why this one is Blitzy-owned
+		 * rather than core-named.
+		 */
+		--blitzy-color-link-external: @blitzy-color-link-external;
+
+		/*
+		 * Navigation-card shadow colour only. The offsets and the blur stay in
+		 * `NavCard.less`: geometry in a custom property would never flip in a right-to-left
+		 * interface, and this shadow's horizontal offset is zero only by today's
+		 * specification.
+		 */
+		--blitzy-box-shadow-color-nav: fade( @blitzy-color-navy, 6% );
+	}
+
+	/**
+	 * SITE 2 -- forced night.
+	 *
+	 * The night palette applied because the reader asked for it, whatever the operating
+	 * system says. This block is deliberately NOT inside a `prefers-color-scheme` query:
+	 * that is the other half of the both-directions override. Gating it would silently
+	 * remove the ability to force dark inside an operating system set to light.
+	 *
+	 * `BlitzyHooks::onBeforePageDisplay()` puts the class on the document element through
+	 * `OutputPage::addHtmlClasses()`, the only seam a Mustache-based skin has for the
+	 * `<html>` element, from the reader's `blitzy-theme` preference or, for an anonymous
+	 * reader, from the client-preferences value. So the palette below is what the skin's
+	 * five committed night captures actually exercise -- they are taken with the preference
+	 * set, never by emulating an operating-system setting.
+	 *
+	 * THIS PALETTE AND SITE 3'S MUST STAY IDENTICAL. The one permitted difference between
+	 * the two blocks is `color-scheme`, and that difference is itself deliberate; see the
+	 * note at site 3. `color-scheme` repaints form controls, scrollbars and the canvas, so
+	 * any other divergence would make a forced-night capture differ from an
+	 * operating-system-night one at the pixel level.
+	 */
+	html.skin-theme-clientpref-night {
+		/*
+		 * `dark` and not `light dark`: this page is dark because it was asked to be, so the
+		 * user-agent surfaces have exactly one mode to honour and no reason to consult the
+		 * operating system.
+		 */
+		color-scheme: dark;
+
+		/**
+		 * Core-named family -- night.
+		 * Same names and same order as the light block, so the two are diff-comparable.
+		 */
+
+		/* Text. Measured on the night page surface: 12.58:1, 7.75:1 and 16.71:1. */
+		--color-base: @blitzy-color-dark-text-secondary;
+		--color-subtle: @blitzy-color-dark-text-muted;
+		--color-emphasized: @blitzy-color-dark-text-primary;
+
+		/*
+		 * Links -- THE ASYMMETRY. These two, and the focus outline below, are declared by
+		 * Codex in its light mode only, because Codex declares them there as aliases that
+		 * track its progressive colour and so follow dark for free. Blitzy's link colour is
+		 * not an alias: it is a concrete heading navy, chosen so that link text is never
+		 * purple. Following Codex's shape and omitting these from the night blocks would
+		 * therefore leave the light navy in place on the night surface, where it measures
+		 * 1.04:1 -- effectively invisible, and a blocking contrast failure. The visited
+		 * colour fails the same way at 1.86:1.
+		 *   So both are restated here, and the relationship the light block sets up is kept
+		 *   rather than the hue: link text takes the night heading colour, one step brighter
+		 *   than body text at 16.71:1, and the visited colour takes the muted night text --
+		 *   still purple-tinted, still dimmer than an unvisited link, and clear of the body
+		 *   floor at 7.75:1. The affordance itself is carried by the purple underline in
+		 *   both modes, not by hue, so colour is never the sole indicator.
+		 *   DO NOT "SIMPLIFY" THESE BACK INTO ALIASES OF THE PROGRESSIVE COLOUR. That would
+		 *   make link text purple, which the design forbids.
+		 */
+		--color-link: @blitzy-color-dark-text-primary;
+		--color-link--visited: @blitzy-color-dark-text-muted;
+
+		/*
+		 * Progressive. The night purple is deliberately lighter than the brand purple: the
+		 * brand value measures 3.04:1 on the night page surface, below the body floor, while
+		 * this stop measures 7.61:1. Reverting it would look more on-brand and fail the
+		 * blocking gate, so it must not be "fixed" back.
+		 *   The focus outline is restated here for the same reason as the link colours: Codex
+		 *   declares it in light only.
+		 */
+		--color-progressive: @blitzy-color-dark-purple;
+		--border-color-progressive: @blitzy-color-dark-purple;
+		--outline-color-progressive--focus: @blitzy-color-dark-purple;
+		--box-shadow-color-progressive--focus: @blitzy-color-dark-purple;
+
+		/*
+		 * Surfaces. The brand tint becomes the raised surface, which preserves how far the
+		 * tinted rows stand off the page rather than preserving the hue: the light tint
+		 * measures 1.12:1 against the light page and the raised surface measures 1.13:1
+		 * against the night page. The infobox header, the wikitable header, the hatnote fill
+		 * and the category chips therefore keep their relative prominence in both modes.
+		 */
+		--background-color-base: @blitzy-color-dark-surface;
+		--background-color-progressive-subtle: @blitzy-color-dark-surface-raised;
+
+		/*
+		 * Feedback fills. The diff's added and removed rows take the night success and error
+		 * fills, and both halves of each pair move together -- the fill here and the
+		 * foreground through `--color-base` above, which measures 5.74:1 on the added fill,
+		 * 8.14:1 on the removed one and 5.66:1 on the warning fill. The night primary text
+		 * the design calls for on these rows measures 7.62:1, 10.81:1 and 7.51:1.
+		 */
+		--background-color-success-subtle: @blitzy-color-dark-success-bg;
+		--background-color-error-subtle: @blitzy-color-dark-error-bg;
+		--background-color-warning-subtle: @blitzy-color-dark-warning-bg;
+
+		/* Borders. The night palette declares one border value, so all three resolve to it. */
+		--border-color-base: @blitzy-color-dark-border;
+		--border-color-subtle: @blitzy-color-dark-border;
+		--border-color-muted: @blitzy-color-dark-border;
+
+		/**
+		 * Blitzy-owned family -- night.
+		 */
+
+		/*
+		 * Cards lift off the night page instead of matching it. This is the one mapping that
+		 * changes a relationship rather than preserving one, and it is measured: in light the
+		 * card shares the page's fill and is separated by its shadow, which stands 1.134:1
+		 * off the page; in night the raised fill stands 1.135:1 off the page on its own. The
+		 * separation is numerically the same, delivered by fill rather than by shadow --
+		 * which matters because no shadow can do the job on the night surface. See the
+		 * shadow colour below.
+		 */
+		--blitzy-color-surface-card: @blitzy-color-dark-surface-raised;
+
+		/*
+		 * The band. It has to stay distinguishable from both the page it interrupts and the
+		 * card it hosts, and among the night values only the border value sits above the
+		 * raised surface, so it carries the band here. The numbers hold: the light band
+		 * stands 1.45:1 off the light page and this one stands 1.57:1 off the night page,
+		 * while the card-against-band separation goes from 1.45:1 to 1.39:1. Night primary
+		 * text on the band measures 10.61:1. The band is the one large decorative fill in the
+		 * skin, so borrowing a value whose declared role is borders is a deliberate reuse
+		 * rather than an oversight.
+		 */
+		--blitzy-color-lavender-band: @blitzy-color-dark-border;
+
+		/*
+		 * Announcement bar. The light fill is a deep purple that reads as a distinct band
+		 * against a white page at 12.39:1 but collapses into the night page at 1.55:1, so the
+		 * bar would all but disappear. The brand purple replaces it: it stands 3.04:1 off the
+		 * night page and still carries the inverse label at 6.32:1, so the label needs no
+		 * night value of its own and none is published.
+		 */
+		--blitzy-color-announce-bg: @blitzy-color-purple;
+
+		/*
+		 * The inline-link underline follows the progressive colour to the night purple. At the
+		 * brand purple it would measure 3.04:1 against the night surface -- passable for a
+		 * non-text affordance but no better -- against 7.61:1 here.
+		 */
+		--blitzy-color-link-underline: @blitzy-color-dark-purple;
+
+		/*
+		 * External links. The specified teal measures 3.96:1 on the night page surface, short
+		 * of the body floor it clears in light at 4.86:1, and the palette declares no lighter
+		 * teal. The muted night text takes over: 7.75:1 on the page and 6.83:1 on the raised
+		 * surface, distinguishable from the night link colour, and not the progressive purple
+		 * -- which the design reserves for the underline and never for link text.
+		 */
+		--blitzy-color-link-external: @blitzy-color-dark-text-muted;
+
+		/*
+		 * Navigation-card shadow. The brand navy cannot cast a shadow on the night page: it
+		 * is the lighter of the two in the blue channel, so it would wash the edge rather
+		 * than deepen it. The palette's black takes over, at an alpha raised far enough to
+		 * read. Even so the ceiling is low -- black over the night page tops out near 1.08:1
+		 * however opaque it gets -- so in night the shadow is edge definition and the raised
+		 * card fill above carries the separation.
+		 */
+		--blitzy-box-shadow-color-nav: fade( @blitzy-color-text-primary, 50% );
+	}
+
+	/**
+	 * SITE 4a -- forced light inside forced night.
+	 *
+	 * `.notheme` is a content contract: it marks a subtree that must keep its light
+	 * appearance even on a night page, and it is used in templates and in user-generated
+	 * content. Site 1 has already re-declared the whole light palette on it, so the custom
+	 * properties inside such a subtree are light again; this block supplies the two things
+	 * site 1 cannot.
+	 *
+	 * `color-scheme: light` is needed because the document element's `dark` above would
+	 * otherwise still paint the user-agent surfaces inside the island -- form controls,
+	 * scrollbars, the canvas -- in the dark scheme.
+	 *
+	 * The `color` declaration is not decoration. Text inside the island inherits its colour
+	 * from the night ancestor unless something sets it, which would leave near-white text on
+	 * the island's light background. Re-asserting the light body colour through the property
+	 * site 1 has already reverted is what keeps the island readable, and it is why this
+	 * declaration must not be dropped.
+	 */
+	html.skin-theme-clientpref-night .notheme {
+		color-scheme: light;
+		color: var( --color-base );
+	}
+
+	/**
+	 * SITE 5a -- narrow image inversion.
+	 *
+	 * The last resort, for content that cannot follow the palette because its colours are
+	 * baked in -- a diagram on a white plate, say. Inversion is confined to images inside an
+	 * explicitly marked container and to elements explicitly marked for it, and it is never
+	 * applied to a page, a region or a body of text: a whole-page inversion filter degrades
+	 * rendering performance on long articles and destroys colour-carried meaning, so it is
+	 * not used anywhere in this skin.
+	 *
+	 * `.mw-no-invert` is the content contract that opts a subtree out, and it is honoured
+	 * here rather than left to the component stylesheets: an author who marks an element
+	 * `.mw-no-invert` has said it must keep its own colours, and that has to hold even when
+	 * the element also sits in an inverting container.
+	 *
+	 * `color-scheme: light` accompanies the filter because the inverted element's own
+	 * user-agent surfaces are about to be flipped with everything else and must start from
+	 * the light scheme for the result to land in the dark one.
+	 */
+	html.skin-theme-clientpref-night .skin-invert-image img:not( .mw-no-invert ),
+	html.skin-theme-clientpref-night .skin-invert:not( .mw-no-invert ) {
+		color-scheme: light;
+		filter: invert( 1 ) hue-rotate( 180deg );
+	}
+}
+
+/**
+ * SITE 3 -- automatic night, and the default experience.
+ *
+ * The night palette applied because the operating system asked for it. `blitzy-theme`
+ * defaults to `os`, so this is what a reader who has never chosen a theme actually gets --
+ * it is the common path, not a fallback.
+ *
+ * THE SELECTOR IS SCOPED TO `-os` ON PURPOSE, AND MUST STAY THAT WAY.
+ *
+ * Writing this block as a `prefers-color-scheme` query over `:root` would look equivalent
+ * and would break the requirement that the root-element override take precedence in both
+ * directions. Only one of the two directions comes from site 2:
+ *
+ *   * Forced dark inside an operating system set to light works because site 2 is not gated
+ *     on `prefers-color-scheme` at all.
+ *   * Forced light inside an operating system set to dark works because site 1 publishes the
+ *     light palette unconditionally on `:root` while this block matches nothing but
+ *     `html.skin-theme-clientpref-os`. A reader who chose light carries
+ *     `html.skin-theme-clientpref-day`, which matches no dark rule in this file, so light
+ *     survives. Scoping this block to `:root` instead would hand that reader a dark page and
+ *     lose the direction entirely -- and it would do so only on machines set to dark, which
+ *     is exactly the kind of defect that survives review.
+ *
+ * `html.skin-theme-clientpref-day` therefore needs no selector of its own anywhere in this
+ * file, and adding one would be a sign that this scoping had been misunderstood.
+ *
+ * THE DUPLICATION BELOW IS CORRECT AND DELIBERATE. A forced mode and an operating-system
+ * preference are different conditions and cannot be expressed by one selector, so the
+ * mode-varying block is emitted twice. That is precisely the argument for a
+ * custom-property-first palette: this one pair of blocks changes rather than every rule that
+ * uses a colour. Do not collapse them.
+ *
+ * THE INVARIANT A MAINTAINER MUST PRESERVE: every property in this block, and every value,
+ * matches site 2 exactly. The only permitted difference between the two is `color-scheme`.
+ * Diff the two blocks after any edit; a property added to one and not the other is a defect
+ * that shows up only under one of the two ways of reaching night mode.
+ */
+@media screen and ( prefers-color-scheme: dark ) {
+	html.skin-theme-clientpref-os {
+		/*
+		 * `light dark` and not `dark`: this page follows the operating system, so the
+		 * user-agent surfaces are told both modes are supported and left to track the same
+		 * setting this query matched. This is the one intended difference from site 2.
+		 */
+		color-scheme: light dark;
+
+		/**
+		 * Core-named family -- night. Identical to site 2.
+		 */
+
+		/* Text. */
+		--color-base: @blitzy-color-dark-text-secondary;
+		--color-subtle: @blitzy-color-dark-text-muted;
+		--color-emphasized: @blitzy-color-dark-text-primary;
+
+		/*
+		 * Links. Restated for the same reason as in site 2: Blitzy's link colour is a
+		 * concrete heading navy rather than an alias of the progressive colour, so it does
+		 * not follow the night palette by itself and would measure 1.04:1 here if omitted.
+		 */
+		--color-link: @blitzy-color-dark-text-primary;
+		--color-link--visited: @blitzy-color-dark-text-muted;
+
+		/* Progressive, including the focus outline Codex declares in light mode only. */
+		--color-progressive: @blitzy-color-dark-purple;
+		--border-color-progressive: @blitzy-color-dark-purple;
+		--outline-color-progressive--focus: @blitzy-color-dark-purple;
+		--box-shadow-color-progressive--focus: @blitzy-color-dark-purple;
+
+		/* Surfaces. */
+		--background-color-base: @blitzy-color-dark-surface;
+		--background-color-progressive-subtle: @blitzy-color-dark-surface-raised;
+
+		/* Feedback fills, both halves of each pair moving with `--color-base` above. */
+		--background-color-success-subtle: @blitzy-color-dark-success-bg;
+		--background-color-error-subtle: @blitzy-color-dark-error-bg;
+		--background-color-warning-subtle: @blitzy-color-dark-warning-bg;
+
+		/* Borders. */
+		--border-color-base: @blitzy-color-dark-border;
+		--border-color-subtle: @blitzy-color-dark-border;
+		--border-color-muted: @blitzy-color-dark-border;
+
+		/**
+		 * Blitzy-owned family -- night. Identical to site 2.
+		 */
+		--blitzy-color-surface-card: @blitzy-color-dark-surface-raised;
+		--blitzy-color-lavender-band: @blitzy-color-dark-border;
+		--blitzy-color-announce-bg: @blitzy-color-purple;
+		--blitzy-color-link-underline: @blitzy-color-dark-purple;
+		--blitzy-color-link-external: @blitzy-color-dark-text-muted;
+		--blitzy-box-shadow-color-nav: fade( @blitzy-color-text-primary, 50% );
+	}
+
+	/**
+	 * SITE 4b -- forced light inside automatic night.
+	 *
+	 * The site 4a treatment, for the operating-system path. Both are needed: a `.notheme`
+	 * island has to revert whichever way the page arrived at night mode.
+	 */
+	html.skin-theme-clientpref-os .notheme {
+		color-scheme: light;
+		color: var( --color-base );
+	}
+
+	/**
+	 * SITE 5b -- narrow image inversion, for the operating-system path.
+	 *
+	 * Scope, exclusions and reasoning as at site 5a: marked images and marked elements only,
+	 * never a page or a region, and `.mw-no-invert` always opts out.
+	 */
+	html.skin-theme-clientpref-os .skin-invert-image img:not( .mw-no-invert ),
+	html.skin-theme-clientpref-os .skin-invert:not( .mw-no-invert ) {
+		color-scheme: light;
+		filter: invert( 1 ) hue-rotate( 180deg );
+	}
+}

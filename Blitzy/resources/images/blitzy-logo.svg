@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+	<title>
+		Blitzy
+	</title>
+	<desc>
+		The Blitzy mark: a monoline B glyph on a purple-gradient rounded tile, authored from design/reference/blitzy-home-nav-hero-1440.png. It is wired only through $wgLogos, so MediaWiki serves it as a CSS background image on .mw-wiki-logo and never inlines it, which is why nothing here resolves an inherited colour. Colours mirror resources/skins.blitzy.tokens/tokens.less exactly: the tile carries @blitzy-color-gradient-cta, a 135deg ramp from @blitzy-color-purple #5b39f3 to @blitzy-color-purple-light #8065f6, and the glyph is @blitzy-color-text-inverse #fff. That white glyph is what identifies the mark, measuring 4.11:1 to 6.32:1 against the tile in every mode, so both stops stay at their token values instead of being lightened for the tile edge. The square 32 by 32 geometry lets one file serve the 1x, svg and icon keys together, and the tile radius is 8. Only two shapes are drawn, the tile and the stroked glyph, and both are static: no lettering, no typeface dependency and nothing that varies by renderer, so the raster is stable between runs; the SVG namespace is the one external identifier.
+	</desc>
+	<defs>
+		<linearGradient id="blitzy-logo-tile" x1="0" x2="32" y1="0" y2="32" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#5b39f3"/>
+			<stop offset="1" stop-color="#8065f6"/>
+		</linearGradient>
+	</defs>
+	<rect width="32" height="32" fill="url(#blitzy-logo-tile)" rx="8"/>
+	<path fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="3" d="M14 8h3a4 4 0 0 1 0 8 4 4 0 0 1 0 8h-3a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3Zm-3 8h6"/>
+</svg>

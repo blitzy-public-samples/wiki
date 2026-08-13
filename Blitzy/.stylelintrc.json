@@ -43,6 +43,21 @@
 			}
 		},
 		{
+			"files": [ "resources/skins.blitzy.tokens/customProperties.less" ],
+			"rules": {
+				"plugin/no-unsupported-browser-features": [ true, {
+					"browsers": [ "extends browserslist-config-wikimedia/modern" ],
+					"severity": "warning",
+					"ignore": [
+						"mdn-text-decoration-shorthand",
+						"prefers-color-scheme",
+						"text-decoration"
+					],
+					"ignorePartialSupport": true
+				} ]
+			}
+		},
+		{
 			"files": [ "resources/skins.blitzy.styles/components/Prose.less" ],
 			"rules": {
 				"selector-max-specificity": "0,4,2"

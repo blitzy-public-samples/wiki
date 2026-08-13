@@ -1,0 +1,46 @@
+<!--
+Blitzy skin verification fixture. harness/provision.sh authors this page with core's
+maintenance/edit.php, which takes the title as its positional argument and reads the content
+from standard input:
+
+    php maintenance/edit.php 'Category:Blitzy verification fixtures' \
+        --user "$BLITZY_TEST_USER" \
+        --summary 'Blitzy fixture: verification category description' \
+        < skins/Blitzy/fixtures/category-page.wikitext
+
+The provisioning contract, recorded here so that it travels with the file:
+
+* The target title is exactly "Category:Blitzy verification fixtures", byte-identical to the
+  category link carried by fixtures/main-page.wikitext and fixtures/talk-page.wikitext. One
+  character of difference in case or spacing would quietly create a second, empty category,
+  and the category capture would show an empty listing instead of the member pages.
+* Do NOT pass --createonly. maintenance/edit.php stops with "Page already exists" when the
+  page is there already, whereas a plain re-save of identical content is a null edit that
+  stores no new revision, so re-provisioning this page stays safe and repeatable.
+* --user must be BLITZY_TEST_USER, the ordinary preferences-populated account, and never
+  MW_ADMIN_USER, because no capture may display the administrator name.
+* Only the description below is authored here. Core's CategoryViewer builds the listing
+  beneath it, the mw-pages region and the generated mw-category lists, from the category
+  links on the member pages: never list members by hand, and never wrap or restyle that
+  region. Its chrome belongs to skinStyles/mediawiki.special.less, and the category links it
+  is built from to resources/skins.blitzy.styles/components/Footer.less.
+* The wikitext below is fixed on purpose: no signature tildes, no style attribute, nothing
+  the pre-save transform can expand, and no magic word that varies with the clock, the site
+  or the size of the member set. edit.php saves through PageUpdater, and
+  DerivedPageDataUpdater::prepareContent() applies preSaveTransform, so anything expandable
+  would be rewritten at provision time and consecutive capture runs would stop being
+  byte-identical.
+* This page carries no category and no behaviour switch of its own. A category link back to
+  itself would make the category its own subcategory, and hiding the category would strip it
+  from the catlinks footer of every member page, which is the surface the skin styles as pill
+  chips.
+-->
+This category collects the pages that are authored by hand for the '''Blitzy''' skin's
+verification harness, as distinct from the reference articles that are imported from
+Wikipedia. Grouping them keeps the locally written content identifiable, and it gives the
+harness one page whose listing is known before a run begins.
+
+Membership is deliberately narrow, and it is declared by the committed wikitext fixtures
+themselves rather than added afterwards. The imported articles keep the categories they
+arrived with and are never placed here, and nothing in this description or in the pages it
+collects is generated at view time, so the listing below reads the same on every run.
