@@ -1,0 +1,51 @@
+{{!
+	PinnableElement/Open: the opening half of the wrapper every pinnable region of this skin is
+	built from. A pinnable region is a menu-like block the reader can dock into a layout column
+	(pinned) or tuck away inside a dropdown (unpinned). Exactly four regions use this pair and no
+	others: the appearance panel, the main menu, the page tools menu and the table of contents.
+
+	Data dictionary supplied by NotionComponentPinnableElement::getTemplateData(), which returns
+	exactly one entry. Any other key visible here arrives from a caller that unioned another
+	component's data into the same context, and is deliberately not read by this partial:
+	string id the region's identifier, already carrying the `notion-` prefix because each of the
+		four callers injects its own self::ID. The only values are `notion-appearance`,
+		`notion-main-menu`, `notion-page-tools` and `notion-toc`. It is emitted TWICE below, once
+		as the HTML id attribute and again as the FIRST class, and both halves are load-bearing:
+		- the class is the hook the per-region stylesheets target -- .notion-appearance,
+		  .notion-main-menu, .notion-page-tools and .notion-toc -- because a class keeps those
+		  selectors low in specificity and therefore still overridable by gadgets and extensions,
+		  while the literal second class below is the hook for the rules shared by all four;
+		- the id is what resources/skins.notion.js resolves with document.getElementById in order
+		  to relocate the region between its two containers, and it is also the stem of the
+		  region's own `-unpinned-popup` message key.
+		Dropping either half breaks styling or pinning SILENTLY, raising nothing anywhere, so the
+		duplication is deliberate and must survive any later tidying. The value is emitted
+		verbatim for the same reason: NotionComponentPinnableHeader appends `-pinned-container`
+		and `-unpinned-container` to this very string, so decorating or transforming it here
+		would desynchronise a region from its own mount points.
+	object data-pinnable-header OPTIONAL. The NotionComponentPinnableHeader payload. When present,
+		that partial renders the region's label and its pin and unpin buttons inside this wrapper;
+		when absent the region simply has no header row and everything else still works. That
+		partial alone owns the pinned and unpinned state class and the four data-* attributes the
+		pinning script reads, so none of them is repeated here.
+
+	The structure below is a runtime contract rather than a preference. Exactly ONE element is
+	opened, and the header is nested within it:
+	- the pinning script compares the region's parentElement id against the two container ids
+	  before moving it, so the region has to be a DIRECT child of its container; an intervening
+	  wrapper would leave that comparison unable to match either id;
+	- after a toggle the same script looks for the unpin button WITHIN the region, so the header
+	  has to be a descendant of this element rather than a sibling of it.
+	Both containers are emitted by the PinnableContainer partials on every render, so the region
+	is server-rendered into the correct one and stays usable and correctly styled when JavaScript
+	never runs; the script only moves it afterwards.
+
+	This wrapper carries no ARIA and no presentational attribute by design. The surrounding <nav>
+	landmark supplies the accessible region and the header's buttons supply their own labels, so
+	repeating either here would announce the region twice or contradict the landmark. Appearance
+	arrives entirely from resources/skins.notion.styles, which is why there is no inline style and
+	no literal value of any kind to keep out of this file.
+}}
+{{! this template must be used with PinnableElement/Close to avoid unclosed HTML tags }}
+<div id="{{id}}" class="{{id}} notion-pinnable-element">
+	{{#data-pinnable-header}}{{>PinnableHeader}}{{/data-pinnable-header}}

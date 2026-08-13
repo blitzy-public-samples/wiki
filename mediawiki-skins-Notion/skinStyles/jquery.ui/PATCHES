@@ -64,24 +64,74 @@ jquery.ui.theme.css
 * Notion: the surface and interaction-state rules are recoloured -- .ui-widget-content to the
   white canvas #ffffff, .ui-widget-header and .ui-state-default to the warm off-white
   surface #f7f6f3, .ui-state-hover and .ui-state-focus to #efefee, .ui-state-active
-  to #e8e7e4, text to #37352f with #787774 for subdued text and #487ca5 for links. Borders
-  become 1px hairlines in #e3e2de or #e9e9e7. The 3px corner radius is unchanged, vendor
-  prefixes included.
+  to #e8e7e4, and all of their text to #37352f. Borders become 1px hairlines: #e3e2de on the
+  two surfaces and on .ui-state-default, and the derived base border #d3d1cb on the
+  hover/focus and active states, which need to read against their own darker fills. The 3px
+  corner radius is unchanged, vendor prefixes included.
+* Notion: the .ui-state-default / -hover / -active anchor rules take #37352f, the text
+  colour -- NOT a link blue. Those selectors style control labels (button, tab and menu-item
+  text), which Notion renders in dark text and lets the fill change carry, reserving blue for
+  genuine links. It is also the only contrast-safe reading: measured against the #f7f6f3
+  .ui-state-default fill, the link blue #487ca5 reaches 4.13:1 and the icon blue #337ea9
+  4.14:1, both short of the 4.5:1 WCAG AA asks of normal-size text, and .ui-widget text is
+  0.8em. #37352f reaches 11.3:1 on the same fill. There is consequently no #487ca5 and no
+  #2eaadc anywhere in this file. Upstream's "text-decoration: none" is kept.
+* Notion, ADDITIVE RULE: a second
+  ".ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus"
+  rule is appended immediately after the shared hover/focus rule, giving focus a #337ea9
+  border-color plus a matching 1px outline at outline-offset: 1px. Upstream shares one rule
+  between hover and focus, which works while both are a tinted blue but not once hover is a
+  quiet neutral fill -- a keyboard user would be left with no indicator at all, and
+  accessibility is not negotiable here. It is appended rather than merged into the shared
+  rule's selector list, so that rule stays directly comparable with upstream. #337ea9
+  measures 4.47:1 on #ffffff, 4.14:1 on #f7f6f3 and 3.89:1 on the #efefee hover fill, clearing
+  the 3:1 WCAG AA asks of a non-text indicator wherever it can land, while the hover border
+  #d3d1cb sits at 1.33:1 against its own fill -- the two states cannot be confused. The
+  outline is load-bearing, not decoration: .ui-state-active follows with a border shorthand
+  that would otherwise reset the focus border on a control that is both selected and focused,
+  which is exactly the case -- a focused active tab -- where the indicator matters most.
+  Known and accepted: jQuery UI also applies ui-state-focus to the active row of a menu or an
+  autocomplete on mouseenter, so that row draws the ring too.
+* Notion: .ui-state-highlight stays a yellow cue rather than being folded into the neutral
+  palette, because the state is semantic. Background is Notion's published yellow tint
+  #fbf3db with #37352f text (11.1:1). Its border #f1d47e is derived from that tint by holding
+  the tint's hue (45deg) and saturation (80%) and dropping lightness from 92% to 72%, which
+  keeps the cue yellow where a plain channel-scaled darkening turns it beige; it lands at
+  1.45:1 on white, the same order of presence as the neutral #d3d1cb hairline. Like #d3d1cb it
+  is a derived value, not a published Notion colour, and the derivation is stated in the file.
 * Notion: .ui-state-error keeps a solid, saturated red with white text rather than being
   softened to a light tint. Its icons come from ui-icons_ffffff_256x240.png, so a pale
-  background would leave both the text and the icons illegible.
-* Notion: .ui-widget-overlay is a white scrim. Vector's copy had already replaced upstream's
-  black flat tile with "rgba(255, 255, 255, 0.5); opacity: 1; filter: none" without recording
-  it, which is why ui-bg_flat_100_000000_40x100.png sits in Vector's images/ referenced from
-  nowhere at all. It is recorded here, and the tile is not carried.
+  background would leave both the text and the icons illegible. The red is #b3352f: Notion's
+  published #d44c47 carries white text at only 4.26:1, so it is darkened until the pair
+  measures 6.06:1, clear of WCAG AA for normal-size text. Border and background take the same
+  value, as upstream had them. .ui-state-error-text keeps white text, which is upstream's own
+  ThemeRoller output for this theme (fcError=ffffff): that class is meant for text on an error
+  surface. No fifth sprite is introduced for a dark error-text variant.
+* Notion: .ui-widget-overlay is a light veil, recoloured to Notion's warm off-white --
+  "background: rgba(247, 246, 243, 0.6); opacity: 1; filter: none". Stock jQuery UI darkens
+  the page behind a modal; Vector's copy had already replaced that with
+  "rgba(255, 255, 255, 0.5); opacity: 1; filter: none" without recording it, which is why
+  ui-bg_flat_100_000000_40x100.png sits in Vector's images/ referenced from nowhere at all.
+  The light-veil semantic is deliberately preserved here, since Notion separates a modal from
+  the page with the dialog's own hairline and elevation rather than by darkening; the deviation
+  and its recolour are recorded, and the tile is not carried. "opacity: 1; filter: none" must
+  stay: the alpha lives in the colour, so the element must not be faded a second time.
 * Notion: .ui-widget-shadow loses its background image and becomes a flat low-alpha shadow
-  colour. Upstream painted it with ui-bg_flat_70_000000_40x100.png at opacity .2; that tile is
-  not carried, so the url() had to go with it or it would dangle. The legacy
-  filter:Alpha(Opacity=20) declaration and the vendor-prefixed border-radius properties stay.
+  colour, #0f0f0f, Notion's warm shadow base. Upstream painted it with
+  ui-bg_flat_70_000000_40x100.png at opacity .2; that tile is a 40x100 block of solid
+  70%-black composited over the same background-color, so a flat fill is visually identical.
+  The tile is not carried, so the url() had to go with it or it would dangle. The geometry
+  (margin: -7px 0 0 -7px; padding: 7px), the opacity: .2, the legacy filter:Alpha(Opacity=20)
+  declaration and the vendor-prefixed border-radius properties all stay; the 8px radius is
+  additionally an exact match for Notion's panel radius, so it needs no change.
 * Notion: the ".ui-dialog { border: ...; box-shadow: ...; }" rule appended at the end of this
-  file is recoloured to a #e3e2de hairline and Notion's subtle elevation. Vector appended that
+  file is recoloured to a #e3e2de hairline and Notion's subtle elevation,
+  "0 1px 4px rgba(15, 15, 15, 0.1), 0 4px 12px rgba(15, 15, 15, 0.08)", in place of Vector's
+  single hard "0 2px 2px 0 rgba(0, 0, 0, 0.25)" over a #a2a9b1 border. Vector appended that
   rule without recording it either; jQuery UI's own ThemeRoller output contains no .ui-dialog
-  rule in this file at all, so it is a local addition in both skins.
+  rule in this file at all, so it is a local addition in both skins. The two-stop shadow is
+  written as a literal because Codex exposes only single-stop drop shadows and this folder sits
+  outside the token regime; that licenses nothing outside this folder.
 
 jquery.ui.progressbar.css
 * Notion: .ui-progressbar .ui-progressbar-value is given an explicit accent fill, #2eaadc.

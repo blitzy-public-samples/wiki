@@ -1,0 +1,42 @@
+{{!
+	Notion skin: the icon primitive.
+
+	A leaf partial - it includes no other partial and is the smallest unit of markup in
+	the skin. Button.mustache, Link.mustache and Dropdown/Open.mustache each render it
+	from inside an `icon` section, so the current context IS the icon name and this
+	partial takes no named key of its own.
+
+	string . the Codex/OOUI icon name to paint, for example `menu`, `search`,
+		`userAvatar`, `appearance` or `listBullet`. The name must be declared in the
+		`skins.notion.icons` pack in skin.json, or in `skins.notion.icons.js` for the
+		icons only needed once the script module has loaded; an undeclared name matches
+		no mask rule and paints no glyph. The value is emitted verbatim, so it may
+		arrive already carrying the historical `wikimedia-` prefix that some components
+		pass, and it may carry a variant suffix such as `-progressive` matching the
+		pack's selectorWithVariant declaration. A falsy icon never reaches this partial
+		- the calling section then renders nothing at all - which is how an icon-less
+		button, link or dropdown label is expressed.
+
+	The element is deliberately empty: the glyph is painted by the mask-image rule that
+	OOUIIconPackModule generates for this skin's icon selector - the notion-icon class
+	combined with the wikimedia-prefixed name class emitted below - which skin.json
+	declares with useMaskImage true and useDataURI false. A masked glyph takes its
+	colour from the element's own background-color, which is what lets every icon
+	recolour straight from the Notion design-token layer instead of shipping one asset
+	per colour. It is also deliberately unlabelled: at all three call sites the
+	surrounding control already carries the accessible name, so a role or an aria-hidden
+	attribute here would add noise without adding meaning.
+
+	Of the four classes emitted below only the first, the skin's own hook, is renamed
+	for this skin; it is what resources/skins.notion.styles/components/Icon.less and the
+	generated icon-pack CSS are both written against. The other three are load-bearing
+	platform contracts, reproduced byte for byte in their original order: core's plain
+	icon hook, which is the class that matches when a component passes a name that
+	already carries the prefix; the wikimedia-prefixed selector that OOUIIconPackModule
+	actually generates, which if broken makes every icon in the skin silently go blank;
+	and the Codex contract class that sizes and positions an icon inside a Codex button.
+
+	No dimension, colour or inline style appears here: appearance is owned entirely by
+	the stylesheet, which resolves Notion design tokens.
+}}
+<span class="notion-icon mw-ui-icon-{{.}} mw-ui-icon-wikimedia-{{.}} cdx-button__icon"></span>

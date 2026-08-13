@@ -1,0 +1,32 @@
+[
+	{
+		"@note": "Measured 14.6 kB gzipped for a full component stylesheet set on this exact SkinModule feature map. Above Vector's 14.8 kB by design: its cap leaves 1.3% and this skin's styles are authored anew. Keep the Notion look in the token layer, which costs no delivered bytes.",
+		"resourceModule": "skins.notion.styles",
+		"maxSize": "16.0 kB"
+	},
+	{
+		"@note": "Measured 14.3 kB gzipped for the 23 package files, 1 stylesheet and 8 messages declared in skin.json. Tightened from Vector's 17.5 kB, whose slack this smaller module does not need.",
+		"resourceModule": "skins.notion.js",
+		"maxSize": "16.0 kB"
+	},
+	{
+		"@note": "Measured 1.0 kB gzipped for the Codex typeahead wiring. Deliberately far tighter than Vector's 3.3 kB, which is over three times the payload it guards.",
+		"resourceModule": "skins.notion.search",
+		"maxSize": "1.5 kB"
+	},
+	{
+		"@note": "Measured 1.5 kB gzipped for the 32 mask-image icons declared in skin.json. Drop unused icons rather than raising this.",
+		"resourceModule": "skins.notion.icons",
+		"maxSize": "1.6 kB"
+	},
+	{
+		"@note": "Uncompressed on purpose, matching Vector: maxSizeUncompressed asserts parse weight, maxSize asserts transfer weight, and swapping them would assert something else entirely. Measured 13.1 kB raw for one script, one stylesheet and 15 messages.",
+		"resourceModule": "skins.notion.clientPreferences",
+		"maxSizeUncompressed": "14.0 kB"
+	},
+	{
+		"@note": "Measured 0.6 kB gzipped for the 10 script-loaded mask-image icons declared in skin.json.",
+		"resourceModule": "skins.notion.icons.js",
+		"maxSize": "0.7 kB"
+	}
+]
